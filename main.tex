@@ -16,6 +16,34 @@
 \usepackage{epigraph}
 % For nomenclature
 \usepackage[intoc]{nomencl}
+
+% What was additionally imported by MDPI style
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[]{algorithm}
+\usepackage[]{algpseudocode}
+\usepackage{footmisc}
+\usepackage{etoolbox}
+
+\usepackage{letltxmacro}
+\AtBeginDocument{
+  \LetLtxMacro\Oldincludegraphics\includegraphics
+%  \renewcommand{\includegraphics}[2][]{\Oldincludegraphics[width=0.9\textwidth,#1]{#2}}
+  \renewcommand{\includegraphics}[2][]{%
+	\ifstrempty{#1}{%
+	  \Oldincludegraphics[width=0.9\textwidth]{#2}%
+	}{%
+	  \Oldincludegraphics[#1]{#2}%
+	}%
+  }
+%  \renewcommand{\includegraphics}\@ifnextchar[{\@specificincludegraphics}{\@defaultincludegraphics}
+%  \cmd\@specificincludegraphics[#1]#2{{\Oldincludegraphics[#1]{#2}}
+%  \cmd\@defaultincludegraphics#1{{\Oldincludegraphics[width=0.9\textwidth]{#1}}
+}
+%\newcommand{\includefig}[1]{\includegraphics[width=0.9\textwidth]{#1}}
+
 \makenomenclature
 
 %input macros (i.e. write your own macros file called mymacros.tex 

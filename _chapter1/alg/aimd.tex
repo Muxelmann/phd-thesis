@@ -1,0 +1,29 @@
+\singlespacing
+\begin{algorithm}[H]
+ \caption{Compute battery power.}
+ \label{ch1:alg:aimd}
+ \begin{algorithmic}[1]
+ \State $R(t) = (V(t) - V_{thr})/(V_{max} - V_{thr})$ \Comment{Defines the rate for the current voltage reading}\vspace{5pt}
+\If {$V(t) \geq V_{thr}$} \Comment{Given the voltage levels are nominal...}\vspace{5pt}
+ \If {$SOC < SOC_{max}$} \Comment{...and the battery is not fully charged...}\vspace{5pt}
+ \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase the charging power}\vspace{5pt}
+ \Else \Comment{If the battery has fully charged...}\vspace{5pt}
+ \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+ \EndIf\vspace{5pt}
+ \If {$P(t) < 0$} \Comment{If the battery has been discharging...}\vspace{5pt}
+ \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the discharging power by $\beta$}\vspace{5pt}
+ \EndIf \vspace{5pt}
+ \Else \Comment{If voltage levels are not nominal...}\vspace{5pt}
+ \If {$SOC > SOC_{min}$} \Comment{...and battery is charged sufficiently...}\vspace{5pt}
+ \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase discharge power}\vspace{5pt}
+ \Else \Comment{If the battery is not sufficiently charged...}\vspace{5pt}
+ \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+ \EndIf\vspace{5pt}
+ \If {$P(t) > 0$} \Comment{If the battery has been charging...}\vspace{5pt}
+ \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the charging power by $\beta$}\vspace{5pt}
+ \EndIf\vspace{5pt}
+ \EndIf\vspace{5pt}
+ \State $P(t) = \textbf{signum}(P(t)) \times \textbf{min}\{|P(t)|,P_{max}\}$ \Comment{Limit the power to battery specifications}
+ \end{algorithmic}
+\end{algorithm}
+\doublespacing
