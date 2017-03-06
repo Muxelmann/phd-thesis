@@ -44,6 +44,10 @@
 }
 %\newcommand{\includefig}[1]{\includegraphics[width=0.9\textwidth]{#1}}
 
+\setlength\epigraphrule{0pt}
+\renewcommand{\epigraphflush}{center}
+\setlength{\epigraphwidth}{0.95\textwidth}
+
 \makenomenclature
 
 %input macros (i.e. write your own macros file called mymacros.tex 
@@ -51,8 +55,8 @@
 %\include{mymacros}
 
 \title{%
-On-Line Schedule Adjustment for\\[1ex]
-Three-Phase Energy Storage in\\[1ex]
+Schedule Adjustments and Control\\[1ex]
+of Battery Energy Storage in\\[1ex]
 Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 
 \author{Maximilian J. Zangs}             %your name
@@ -77,8 +81,8 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \maketitle                  % create a title page from the preamble info
 \doublespacing
 \begin{romanpages}          % start roman page numbering
-\include{dedication}        % include a dedication.tex file
-\include{acknowlegements}   % include an acknowledgements.tex file
+\include{_dedication/dedication}        % include a dedication.tex file
+\include{_acknowlegements/acknowlegements}   % include an acknowledgements.tex file
 \include{_abstract/abstract}          % include the abstract
 
 \tableofcontents            % generate and include a table of contents
@@ -92,6 +96,7 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \include{_chapter1/chapter1}
 \include{_chapter2/chapter2}
 \include{_chapter3/chapter3}
+\include{_chapter4/chapter4}
 \include{_conclusions/conclusions}
 
 %now enable appendix numbering format and include any appendices
