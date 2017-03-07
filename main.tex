@@ -14,6 +14,8 @@
 \usepackage{setspace}
 % For opening quote
 \usepackage{epigraph}
+% For glossary
+\usepackage[acronym]{glossaries}
 % For nomenclature
 \usepackage[intoc]{nomencl}
 
@@ -48,6 +50,8 @@
 \renewcommand{\epigraphflush}{center}
 \setlength{\epigraphwidth}{0.95\textwidth}
 
+% Generate the glossary and nomenclature
+\makeglossaries
 \makenomenclature
 
 %input macros (i.e. write your own macros file called mymacros.tex 
@@ -81,13 +85,17 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \maketitle                  % create a title page from the preamble info
 \doublespacing
 \begin{romanpages}          % start roman page numbering
-\include{_dedication/dedication}        % include a dedication.tex file
-\include{_acknowlegements/acknowlegements}   % include an acknowledgements.tex file
-\include{_abstract/abstract}          % include the abstract
+\include{abstract}          % include the abstract
+\include{declaration}       % declaration of authenticity
+\include{dedication}        % include a dedication.tex file
+\include{acknowlegements}   % include an acknowledgements.tex file
 
+\addcontentsline{toc}{chapter}{Table of Contents}
 \tableofcontents            % generate and include a table of contents
+\addcontentsline{toc}{chapter}{Table of Figures}
 \listoffigures              % generate and include a list of figures
-\include{_nomenclature/nomenclature}
+\include{glossary}
+\include{nomenclature}
 \end{romanpages}            % end roman page numbering
 
 %now include the files of latex for each of the chapters etc
@@ -103,12 +111,14 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \appendix
 \include{_appendices/appendix1}
 \include{_appendices/appendix2}
+\include{_appendices/appendix3}
+\include{_appendices/appendix4}
 
 %next line adds the Bibliography to the contents page
 \addcontentsline{toc}{chapter}{Bibliography}
 %uncomment next line to change bibliography name to references
 %\renewcommand{\bibname}{References}
 \bibliography{../../Papers/Bibliography/library}        %use a bibtex bibliography file refs.bib
-\bibliographystyle{plain}  %use the plain bibliography style
+\bibliographystyle{ieeetr}  %use the plain bibliography style
 
 \end{document}
