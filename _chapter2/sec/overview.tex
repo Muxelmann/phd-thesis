@@ -1,4 +1,38 @@
 \section{Overview}
 \label{ch2:sec:overview}
 
-In this chapter, real-time compensation for variations in sub-half-hourly power variations is addressed.
+It has been established how the adjustment of a BESS schedule at sub-half-hourly resolution can yield improved network operation.
+Adjusting apparent power on a phase by phase basis, where the summed active power offset is constrained to zero and the total apparent power is constrained to the BESS's power ratings, was proven to be a valid method for adjustment.
+Unlike traditional execution of static schedules, such methods provided more BESS flexibility and allowed the device to respond to otherwise uncompensated variations in demand.
+But just like a traditional execution of a static schedule, such methods also constrain active power offset, resulting in highly predictable charging and discharging of the battery.
+
+This fundamental constraint can be seen in previous research \cite{Rowe2014a, Yunusov2011}, as well as the work presented in Chapter \ref{ch1} \cite{Zangs2016}, and is set by a strict overlying half-hourly schedule that must not be violated.
+To achieve higher BESS flexibility, two options exist:
+
+\begin{enumerate}
+	\item remove the overlying half-hourly schedule and default to a set-point BESS control, or
+	\item loosen the constraint and use the predetermined half-hourly schedule as a BESS guidance instead of static control.
+\end{enumerate}
+
+Many experts would agree that the former approach is easier to implement, since inexpensive feedback mechanisms may be used, yet it also removes control over the device, which could be disadvantageous for DNOs (or whoever aims to yield a profit from the BESS operation).
+In other words, although the BESS may operate using its internal control mechanisms, it cannot receive any external control signals, and therefore cannot be used for other energy dependent functions.
+These functions include DSR actions, arbitrage operation, or any other service for which a predetermined energy volume needs to be made available.
+If there is no schedule that assures this energy volume, then providing these aforementioned functions and exploiting their associated revenue streams is no longer an option; despite the BESS being more flexible.
+
+Therefore, in this chapter, the second option is pursued.
+A high-resolution closed-loop control system is developed that uses both a half-hourly schedule and a model based power forecast.
+The half-hourly schedule is interpolated into a sub-half-hourly set of instructions and, together with the model, forms a MPC.
+The MPC is used to predict the next future network power, therefore allowing the controller to compensate for otherwise unmitigated sub-half-hourly power peaks.
+To apply this MPC two on-line controllers based on Proportional Integral Derivative (PID) control are used.
+PID was chosen due to its simple controller structure that can be realised with ease, and because PID can be tuned for guaranteed system stability, robustness and dynamic performance \cite{Rasoanarivo2013, Jianbo2007, Betin2006, Algaddafi2016}.
+Performance of this novel approach is measured by comparing the resulting power profiles with baseline power profiles.
+Also, to include the effect of erroneous schedules on the control system's performance, realistic half-hourly forecasts are used instead of assuming perfect half-hourly foresight.
+The resulting data is analysed statistically and tested with the following null hypothesis:
+
+\textit{Introducing minimalistic deviation from a BESS schedule yields no significant improvement in network operation.}
+
+Here, the ``\textit{minimalistic deviation}'' is defined in the next section, alongside the MPC models as well as the proposed dual PID controller layout.
+Also, the measure of ``\textit{improvement}'' is explained.
+Then how the half-hourly and sub-half-hourly datasets and forecasts are obtained is explained.
+How they are used in different case studies is detailed in the method section, after which the results are presented and discussed.
+In the end, the key findings and null hypothesis rejection (where $p<5\%$) are summarised.
