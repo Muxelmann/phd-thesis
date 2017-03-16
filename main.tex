@@ -115,18 +115,19 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \include{_chapter4/chapter4}
 \include{_conclusions/conclusions}
 
-%now enable appendix numbering format and include any appendices
-\appendix
-\include{_appendices/appendix1}
-\include{_appendices/appendix2}
-\include{_appendices/appendix3}
-\include{_appendices/appendix4}
-
 %next line adds the Bibliography to the contents page
 \addcontentsline{toc}{chapter}{Bibliography}
 %uncomment next line to change bibliography name to references
 %\renewcommand{\bibname}{References}
 \bibliography{../../Papers/Bibliography/library}        %use a bibtex bibliography file refs.bib
 \bibliographystyle{ieeetr}  %use the plain bibliography style
+
+
+%now enable appendix numbering format and include any appendices
+\appendix
+\include{_appendices/appendix1}
+\include{_appendices/appendix2}
+\include{_appendices/appendix3}
+\include{_appendices/appendix4}
 
 \end{document}
