@@ -29,7 +29,7 @@ In the IEEE LV Test Case, there are 906 three phase buses, resulting in 2718 nod
 This abundance of values means that a lot of additional parameters, that could not easily be measured in reality may also be included in the set of key network parameters; these parameters are from hereon referred to as ``theoretical parameters''.
 To restrict the amount of theoretical parameters, they were chosen based on their importance and impact on actual network operation.
 
-A list of both realistic and theoretical key network parameters\footnote{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form the power flow simulation.} is presented below, before going into detail for each parameter:
+A list of both realistic and theoretical key network parameters\footnote{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form power flow simulations.} is presented below, before going into detail for each parameter:
 
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding
@@ -49,20 +49,68 @@ If the substation transformer was an ideal transformer, then the voltage measure
 In reality however, the internal losses (e.g. conductive losses and magnetic leakage) lead to a drop in voltage with increasing load.
 Therefore, any deviation from the substation's nominal voltage may be a result of suboptimal network operation.
 
-If one defines the substation voltage as a single phase voltage $v_{ss,p}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then a divergence cost can be calculated as $\zeta_\text{substation voltage}(v_{ss,p}(t)) \forall t$.
+If one defines the substation voltage as a single phase voltage $v_{ss,p}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then a divergence cost can be calculated as $\zeta_\text{voltage}(v_{ss,p}(t)) \forall t$.
 This cost is defined as:
 
-\input{_chapter1/equ/substation-voltage-deviation}
-a
+\input{_chapter1/equ/voltage-deviation}
+
+Since voltage levels drop continuously along a purely consumptive feeder, substations may boost the voltage towards the upper threshold.
+The behaviour of boosting $V_{ss}$ on the cost function $\zeta_\text{voltage}(v)$ is shown below.
+
+\input{_chapter1/fig/voltage-deviation}
+
+Here, it is shown that the cost at the high and low voltage thresholds equates to one, and zero at the set substation voltage.
+When boosting this voltage, $V_{ss}$, only the zero point moved, whereas the high and low voltage crossings remain unchanged.
+In Figure \ref{ch1:fig:voltage-deviation}, this behaviour is demonstrated by boosting $V_{ss}$ by +4\% and +8\%.
+
 \subsection{Voltages at ESMU's PCC}
 \label{ch1:subsec:voltages-at-esmu}
 
+The ESMU is connected to all three phases of the feeder at some distance to the substation.
+Where to connect the ESMU, in order to achieve an optimal network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
+Ignoring the exact ESMU location, voltage along the line, i.e. from the substation to its PCC, will change and most likely drop.
+The reason behind this effect is due to resistive losses in the lines, which are caused by the aggregative load currents.
+For purely consumptive loads under heavy load conditions, this voltage may drop below the low-voltage threshold.
+As mentioned in literature, this threshold is an operational constraint of LV networks and must not be violated to assure correct appliance operation.
 
+In order to mitigate this voltage drop, power can be injected into the feeder at the ESMU's PCC.
+Doing so boosts the voltage at that location since the portion of the load current, which would normally be supplied by the substation, is delivered by the ESMU.
+The effect of this power injection is sketched below.
+
+\input{_chapter1/fig/sketch-voltage-esmu}
+
+In Figure \ref{ch1:subfig:sketch-voltage-esmu-normal}, an expected voltage drop along the feeder is sketched, where the trailing feeder section's voltage dropped below $V_l$.
+In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU intervention would alleviate some load and raise the trailing voltage levels to a level above $V_l$.
+
+Since the P2N voltage at the ESMU's PCC can be measured quite easily, this realistic key network parameter is used in a cost function, too.
+In fact, the ESMU's PCC voltage, $v_{ESMU,p}(t)$, is used in with Equation \ref{ch1:equ:voltage-deviation}; the same cost used for the substation transformer's secondary voltage.
+Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(v_{ESMU,p}(t)) \forall t$.
 
 \subsection{Voltages at customer laterals}
 \label{ch1:subsec:voltages-at-customers}
 
+Voltages at the customer are regulated in the UK, yet monitoring them in real-time is costly, and therefore they are not monitored.
+Yet it is those voltages that are regulated and need to be kept within operational bands.
+Ultimately, when it comes to voltage level correction, only substation voltage levels and customer voltage levels need to be controlled.
+This fact is to assure proper transformer operation (e.g. to maximise its operation life) and to prevent penalisation due to customer voltage violation (i.e. fining according to ESQCR).
+As shown in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers, yet these voltage levels cannot be measured in reality.
+In simulations however, extracting load voltages is easy, which is why they are treated as theoretical key network parameters.
 
+To illustrate this load voltage drop, a sample OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to an arbitrary value, i.e. 8kW.
+When plotting the load bus voltage magnitudes against the distance between the load and its feeding substation the following plot is the result:
+
+\input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
+
+In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, it can be seen that phases are significantly imbalanced, and customers further than 200m from the substation would experience low-voltage events (for this particular scenario).
+As already proposed in the previous section, ESMU aims to avoid these voltage violations, but the number of loads adds computational burden on the used solving algorithms.
+
+To address this problem, the previously defined voltage cost function is expanded.
+In fact, rather than including every single customer's voltage deviation cost, only the worst deviations are included.
+By limiting this number, solvers need not consider such a large number of output parameters and only focus on the worst network parameter.
+This focus is of particular need if the impact of the ESMU on some customers voltages is relatively low.
+For this work, the customer (or load) voltage is defined as $v_{load,i,p}(t)$ and used in the new cost function, $\zeta_\text{load voltage}(v_{load,i,p}(t)) \forall t$, as such:
+
+\input{_chapter1/equ/load-voltage-deviation}
 
 \subsection{Total power flow}
 \label{ch1:subsec:total-power-flow}
