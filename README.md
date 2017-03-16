@@ -1,7 +1,5 @@
 # My PhD Thesis
 
-This is the repository for my PhD thesis.
-
 ## Preview
 
 ![](https://github.com/Muxelmann/phd-thesis/raw/master/README/cover.png)
@@ -24,7 +22,7 @@ This is the repository for my PhD thesis.
 12. [ ] Effects of Control Instruction Desynchronisation in a Distributed MAS of Smart-Charging Batteries
 13. [ ] Cooperative Operation of Distributed Batteries without Communications Infrastructure Needs
 14. [ ] Conclusion
-15. [ ] Bibliography
+15. [x] Bibliography
 
 ### Appendices
 
