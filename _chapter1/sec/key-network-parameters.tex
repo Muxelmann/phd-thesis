@@ -101,7 +101,7 @@ When plotting the load bus voltage magnitudes against the distance between the l
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
-In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, it can be seen that phases are significantly imbalanced, and customers further than 200m from the substation would experience low-voltage events (for this particular scenario).
+In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, it can be seen that phases are significantly unbalanced, and customers further than 200m from the substation would experience low-voltage events (for this particular scenario).
 As already proposed in the previous section, ESMU aims to avoid these voltage violations, but the number of loads adds computational burden on the used solving algorithms.
 
 To address this problem, the previously defined voltage cost function is expanded.
@@ -115,12 +115,50 @@ For this work, the customer (or load) voltage is defined as $v_{load,i,p}(t)$ an
 \subsection{Total power flow}
 \label{ch1:subsec:total-power-flow}
 
+As mentioned above, voltage deviation has an immediately perceptible effect on the network operation and violation of the predetermined voltage bands may even lead to financial penalisation.
+Since all possible means of limiting voltage divergence have been addressed (in the scope of this work) further network parameters are put into focus next.
+A not yet considered network parameter, that also impacts the effective network operation, is power flow into the network, or more specifically; the power flow in each of the three phases of the distribution feeder.
+Customers in urban UK distribution networks have a single phase connection to the three-phase feeder line (this is done by connecting their supply cables or ``laterals'' between a phase and the neutral conductor).
+In the UK, the procedure for connecting customers is done in a somewhat arbitrary manner in order to distribute load as evenly as possible across all three phases.
+In theory, this approach assures a balanced network load, yet in reality this is not the case.
+Even if the number of customers per phase was the same for each individual phase, the probability that all customers' load profiles are identical is very low.
+Therefore, the likeliness of LV distribution feeders to be unbalanced is very high.
+Unbalance can be calculated from substation the phase powers, as they are monitored at the substation.
 
+Unlike the aforementioned voltage deviations, unbalance does not directly impact customer.
+Nonetheless, unbalance is a network disturbance that has significant impact on the efficiency and long term reliability of three-phase components (e.g. rotating machines and transformers).
+Phase unbalance itself is unavoidable and has no direct negative impact on network operation, yet reducing the magnitude of the unbalance plays a more important role in network optimisation.
+Therefore a standardised measure of unbalance was developed and is used in the presented work, too \cite{ANSI-MB-1-2011}.
+An Unbalance Factor, $\text{UF}(\textbf{x})$, is therefore defined as:
+
+\input{_chapter1/equ/unbalance-equation}
+
+Substation power readings, $\textbf{s}_{ss}$, are used to calculate the phase unbalance to serve as another key network parameter.
+Therefore, the unbalance factor in Equation \ref{ch1:equ:unbalance-equation} was included in another cost function.
+Since the minimum value of $\text{UF}(\textbf{s}_{ss})$ is 1, an adjustment was required so that a perfectly balance network would result in an $\text{UF}(\textbf{s}_{ss})$ of zero.
+The cost function is defined as follows (here, $s_{ss,p} \in \textbf{s}_{ss}$):
+
+\input{_chapter1/equ/unbalance-cost}
+
+An illustration how this cost function is provided in the figure below.
+
+\input{_chapter1/fig/power-unbalance}
+
+Here, it can be seen how $\zeta_\text{unbalance}$ varies with an increasing separation of the three phases' power values.
 
 \subsection{Line utilisation}
 \label{ch1:subsec:line-utilisation}
 
+Inline with power, total power demand puts strain on the feeding cable, since resistive losses cause cable heating.
+Hence, cables have been assigned a certain thermal rating which must not be exceeded to prevent cable damage and network failures.
+The dissipated power, which leads to the cable's heating and failure, is a function in respect of the entire cable's properties.
+Yet means of measuring those cable properties instantaneously are still being research and not industry ready.
+Therefore, the most common approach to identify the loading of a cable is by comparing its present current flow against the its nominal amperage rating.
 
+For the context of this work, this nominal rating, $i_{nom,l}$, is a fixed value for all cable types.
+A subsequent cost function can therefore be defined, which takes into account the present loading of the cable:
+
+\input{_chapter1/equ/cable-utilisation}
 
 \subsection{Distribution losses}
 \label{ch1:subsec:losses}
