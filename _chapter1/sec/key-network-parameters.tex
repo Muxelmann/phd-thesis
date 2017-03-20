@@ -108,7 +108,7 @@ To address this problem, the previously defined voltage cost function is expande
 In fact, rather than including every single customer's voltage deviation cost, only the worst deviations are included.
 By limiting this number, solvers need not consider such a large number of output parameters and only focus on the worst network parameter.
 This focus is of particular need if the impact of the ESMU on some customers voltages is relatively low.
-For this work, the customer (or load) voltage is defined as $v_{load,i,p}(t)$ and used in the new cost function, $\zeta_\text{load voltage}(v_{load,i,p}(t)) \forall t$, as such:
+For this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{load,i,p} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t)) \forall t$, as such:
 
 \input{_chapter1/equ/load-voltage-deviation}
 
@@ -133,10 +133,10 @@ An Unbalance Factor, $\text{UF}(\textbf{x})$, is therefore defined as:
 
 \input{_chapter1/equ/unbalance-equation}
 
-Substation power readings, $\textbf{s}_{ss}$, are used to calculate the phase unbalance to serve as another key network parameter.
+Substation power readings, $\textbf{s}_{ss}(t)$, are used to calculate the phase unbalance to serve as another key network parameter.
 Therefore, the unbalance factor in Equation \ref{ch1:equ:unbalance-equation} was included in another cost function.
 Since the minimum value of $\text{UF}(\textbf{s}_{ss})$ is 1, an adjustment was required so that a perfectly balance network would result in an $\text{UF}(\textbf{s}_{ss})$ of zero.
-The cost function is defined as follows (here, $s_{ss,p} \in \textbf{s}_{ss}$):
+The cost function is defined as $\zeta_\text{unbalance}(\textbf{s}_{ss}) \forall t$,  where $s_{ss,p} \in \textbf{s}_{ss}$:
 
 \input{_chapter1/equ/unbalance-cost}
 
@@ -155,8 +155,9 @@ The dissipated power, which leads to the cable's heating and failure, is a funct
 Yet means of measuring those cable properties instantaneously are still being research and not industry ready.
 Therefore, the most common approach to identify the loading of a cable is by comparing its present current flow against the its nominal amperage rating.
 
-For the context of this work, this nominal rating, $i_{nom,l}$, is a fixed value for all cable types.
-A subsequent cost function can therefore be defined, which takes into account the present loading of the cable:
+For the context of this work, this nominal rating, $i_{nom,l}$, is a fixed value for each cable type and is the total current that may flow through a cable before its maximum thermal rating is exceeded.
+A subsequent cost function therefore needs to find the total current first, before comparing it to the line's rating.
+This so called utilisation cost function $\zeta_\text{utilisation}(\textbf{i}_{line}(t)) \forall t$ is a function of the three phase line current $\textbf{i}_{line}$ (where $i_{line,l,p} \in \textbf{i}_{line}$) and is defined as:
 
 \input{_chapter1/equ/cable-utilisation}
 
