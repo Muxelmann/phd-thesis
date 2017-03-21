@@ -170,7 +170,7 @@ At substation level, to prevent over-currents, fuses or reclosers are installed 
 To quantify whether the substation fuse is approaching its tripping point, its nominal rating is used as reference.
 
 For the context of this work, this nominal fuse rating, $i_{fuse}$, is a fixed value for the fuse at the substation and must not be exceeded.
-Using the three-phase current vector from substation monitoring, $\textbf{i}_{ss}(t)$ (where $i_{ss,p}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
+Using the three-phase current vector from substation monitoring, $\textbf{i}_{ss}(t)$ (where $i_{ss,p}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
 
 \input{_chapter1/equ/fuse-utilisation}
 
@@ -181,10 +181,23 @@ A sketch has been included below to illustrate how this quadratic cost behaves a
 \subsection{Maximum line utilisation}
 \label{ch1:subsec:maximum-line-utilisation}
 
+Similar how voltage levels at all customers are theoretical key network parameters, currents in all lines are key network parameters, too.
+Optimising the aforementioned current at substation level would prevent unintentional feeder disconnection and equipment damage, yet lines' ratings impose distributed limits, too.
+Moreover, as feeder cables are not of a singly type of cable.
+For instance, the main three-phase wire must to be sufficiently scaled to deliver several 100s of Amperes to a collection of customers, whilst branches with a few loads may only experience 10s of Amperes worth of current.
+Furthermore, as distance to the substation increases, fewer customers are connected down stream, which allows the feeding cables to be down scaled, too.
+This network topology is very common for radial distribution networks, since it saves significant equipment cost without compromising the network integrity.
+Yet with the advent of DG and electrified LTCs, the feeder's branches are going to experience larger current flows.
+
+This is why the previous cost function, as it was defined in Equation \ref{ch1:equ:fuse-utilisation}, ought to be expanded to take all line currents and ratings into account.
+Since this work was based on network simulations, each line current, $i_{line,l,p}(t)$ (where $l$ represents the line number and $p$ the phase in that line), could be extracted with ease.
+Collecting them in $\textbf{i}_{line}(t)$ (where $i_{line,l,p}(t) \in \textbf{i}_{line}(t)$) allows the formulation of an extended line utilisation cost function, $\zeta_\text{line utilisation}(\textbf{i}_{line}(t))$, which is defined as:
+
+\input{_chapter1/equ/line-utilisation}
+
+In this quadratic cost function, $i_{nom,l}$ is the nominal rating of line $l$ in the network.
+Also, and similar to Equation \ref{ch1:equ:load-voltage-deviation}, by considering only the maximum line utilisation, computational burden is reduced whilst parameter dependent sensitivity is increased.
 
 \subsection{Distribution losses}
 \label{ch1:subsec:losses}
-
-
-
 
