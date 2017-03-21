@@ -1,13 +1,14 @@
 \begin{equation}
-	\text{UF}(\textbf{x}) := \frac{\max_n |\bar{\textbf{x}} - x_n|}{\bar{\textbf{x}}}
-	\label{ch1:equ:unbalance-equation}
+\begin{split}	
+	\text{UF}(\textbf{x}) :=& \frac{\max_n |\overline{\textbf{x}} - x_n|}{\overline{\textbf{x}}} \text{ where } x_n \in \textbf{x} \\
+	&\text{ and } n \in [1, \dots, N] \text{ and } N \in \mathbb{N}_{>0}
+\end{split}
+\label{ch1:equ:unbalance-equation}
 \end{equation}
 
-Here, $\textbf{x}$ is a three phase vector, where $x_n \in \textbf{x} \text{ for } n=[1, 2, 3]$.
-$x_n$ may be a voltage, current or power measurement per phase, but for context of this work $x_n$ was chosen to be the power flow into the network.
-For clarity, the notation $\bar{\textbf{s}}$ is used to define the mean of all three phase values.
-The mean's definition is give below:
+Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (e.g. $x_n$ may be voltage, current or power measurement per phase $n$), and for this work, $x_n$ was chosen to be the power flow into one of the network's phases.
+For clarity, the notation of $\overline{\textbf{x}}$ is used to define the mean of the given vector, i.e.:
 
 \begin{equation}
-	\bar{\textbf{x}} := \frac{1}{3}\sum_n^3{x_i}
+	\overline{\textbf{x}} := \frac{1}{N}\sum_n^N{x_i}
 \end{equation}

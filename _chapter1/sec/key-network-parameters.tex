@@ -1,169 +1,189 @@
 \section{Key Network Parameters and Derived Cost Functions}
 \label{ch1:sec:key-network-parameters}
 
-In literature (see Chapter \ref{ch-review}), two distinct approaches have been used to improve performance of a system.
-Either cost is reduced or utility is maximised.
-Both approaches rely on a mathematical explanation of the underlying features that relate to performance of the system.
-To reiterate, utility ought to be maximised, since the benefit of the underlying mechanisms ought to be increased to a maximum, whereas cost should be minimised.
-The choice for this piece of work was to relate key network parameters to associated cost functions, with the reason that a cost can be minimised to a finite value of zero.
-This means that solutions to a cost function, where the resulting cost is zero, are by definition optimal solutions, whereas a utility function can have multiple maxima that need not be the best solution.
-To illustrate this feature, an arbitrary utility function, $\zeta^{*}(x)$, and cost function, $\zeta(x)$, have been plotted in Figures \ref{ch1:subfig:sketch-utility} and \ref{ch1:subfig:sketch-cost}, respectively.
+In literature (see Chapter \ref{ch-review}), two distinct approaches have emerged to quantitatively improve the performance of a system:
+either cost is reduced or utility is maximised.
+Both approaches rely on a mathematical explanation of underlying features that relate to performance of the system.
+To recap; utility functions are maximised since they explain how beneficial a system state is, whereas cost should be minimised since they entail a suboptimal system performance.
+The choice for this piece of work was to associate key network parameters to tailored cost functions, with the reason that a cost can be minimised to a finite value, i.e. zero.
+Utility maximisation on the other hand is a mathematically unbound problem that may reach a maximum, yet this maximum can only be approximated though game theoretic approaches like Pareto- or Nash-Optimality.
+In other words, solutions to a cost function where the resulting cost is zero, are by definition optimal solutions, whereas a utility functions can have multiple maxima where optimality classification of these solutions is inherently more difficult.
+To illustrate this fact, an arbitrary utility function, $\zeta^{*}(x)$, and an arbitrary (and unrelated) cost function, $\zeta(x)$, have been plotted in Figures \ref{ch1:subfig:sketch-utility} and \ref{ch1:subfig:sketch-cost}, respectively.
 
 \input{_chapter1/fig/sketch-utility-vs-cost}
 
-Again, these two figures illustrate how the peaks of the utility function are at different, large values of $y$, whereas the troughs of the cost function always approach zero.
-Depending on the starting condition, i.e. the initial values for $x$, different maxima or minima (i.e. points $A$, $B$ or $C$) may be found.
-Here, the best solution for $\zeta^{*}(x)$ is at point $A$, whereas the best solution for $\zeta(x)$ is at point $C$.
-Whilst point $A$ represents the highest utility, it does not imply optimum system performance, as utility is unbounded, i.e. $\zeta^{*}(x) \in (-\infty, \infty) \forall x$.
-In contrast, for the cost function, point $C$ would represent an absolute minimum, since a cost function's range is greater or equal to zero, i.e. $\zeta(x) \geq 0 \forall x$.
-Therefore, the cost's proximity to zero directly indicates the system performance (whilst the utility's proximity to infinity would not make sense).
+These two figures illustrate how the peaks of the utility function are at different, large values of $y$, and the troughs of the cost function tend towards zero.
+Both peaks or minima are found using solving algorithms; the most common mathematical solvers are the Gradient Descend Method, Newton-Raphson Method, and Active Set Method.
+If the cost or utility function is nonlinear or the system's gradient function can only be approximated more sophisticated algorithms had to be used, e.g. Mixed-Integer Linear Programming, Sequential Quadratic Programming (SQP), Genetic Algorithm, Particle Swarm Optimisation or the Interior Point Method.
+Depending on the starting conditions of those solvers, i.e. the initial values for $x$, different maxima or minima (i.e. points $A$, $B$ or $C$) may be found.
+In the example above, the best solution for $\zeta^{*}(x)$ is at point $A$, whereas the best solution for $\zeta(x)$ is at point $C$.
+Whilst point $A$ represents the highest utility, it is difficult to determine whether this maximum is a most optimal solution since utility is inherently unbounded, i.e. $\zeta^{*}(x) \in (-\infty, \infty) \forall x$.
+For the cost function on the other hand, point $C$ is represents an absolute minimum and optimal solution since the cost function's range is bounded to be greater or equal to zero, i.e. $\zeta(x) \geq 0 \forall x$.
+Therefore, the cost's proximity to zero can directly indicate the system performance (whilst a utility's proximity to infinity would not make sense).
 
-With this in mind, the key network parameters can be explained and the corresponding cost functions can be defined.
-The choice of parameters is virtually inexhaustible since one could treat every single current, voltage or phase angle as a potential network parameter.
-In reality (particularly in the context of NTVV), a power distribution network could only be probed at two points: the substation and the ESMU.
-Therefore, all these possible measurements and the derived parameters are treated as key network parameters; these parameters are from hereon referred to as ``realistic parameters''.
-For the work presented in this chapter, all realistic parameters are extracted from power flow simulations.
+With this in mind, the key network parameters are explained and the corresponding cost functions are defined next.
+The choice of parameters is virtually inexhaustible since one could treat every single current, voltage or phase angle as a potential indicator for network performance.
+In reality however (and particularly in the context of NTVV), a power distribution network can only be observed at a limited number of points.
+Here, these points were at the substation and the ESMU's Point of Common Coupling (PCC).
+Therefore, all derived network parameters that are based on these measurements are treated as ``realistic parameters''.
+It is however worth mentioning, that for the work presented in this chapter, all realistic parameters are extracted from power flow simulations.
 
-In this simulation of a power distribution network (i.e. in OpenDSS), a system of nodal power flow equations is solved.
-In the IEEE LV Test Case, there are 906 three phase buses, resulting in 2718 nodes for which current and voltage can be obtained.
-This abundance of values means that a lot of additional parameters, that could not easily be measured in reality may also be included in the set of key network parameters; these parameters are from hereon referred to as ``theoretical parameters''.
-To restrict the amount of theoretical parameters, they were chosen based on their importance and impact on actual network operation.
+In those simulations of power distribution networks (i.e. in OpenDSS), a system of equations that captures nodal power flow is solved.
+In the IEEE LV Test Case, there are 906 three phase buses, resulting in a total of 2718 nodes, for which complex currents and voltages can be obtained.
+This abundance of values means that a lot of additional parameters can be considered.
+Yet those parameters cannot easily be obtained in reality, which is why they are referred to as ``theoretical parameters''.
+Due to the high abundance of these theoretical parameters, the impact of some of these parameters on network performance is quite limited.
+Therefore the set of theoretical parameters, that were used in this piece of work, was chosen based on their importance and impact on actual network operation.
 
-A list of both realistic and theoretical key network parameters\footnote{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form power flow simulations.} is presented below, before going into detail for each parameter:
+A list of all realistic and theoretical key network parameters\footnote{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form power flow simulations.} is presented below.
 
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding
 	\item Voltages at ESMU's PCC
 	\item Voltages at customer lateral$^{\dagger}$
 	\item Total power flow
-	\item Line utilisation
+	\item Substation line utilisation
+	\item Maximum line utilisation$^{\dagger}$
 	\item Distribution losses$^{\dagger}$
 \end{itemize}
+
+In the following subsections, the formulation of all key network parameters' associated cost functions is presented.
 
 \subsection{Voltages at substation}
 \label{ch1:subsec:voltages-at-substation}
 
-In UK LV distribution networks, the substations supply power to the feeding cable.
-Substations provide the link from MV distribution network, which operates at 11kV P2P, to the LV distribution network, which operates at 230V P2N (i.e. 400V P2P).
-If the substation transformer was an ideal transformer, then the voltage measured at its secondary winding would remain constant.
-In reality however, the internal losses (e.g. conductive losses and magnetic leakage) lead to a drop in voltage with increasing load.
-Therefore, any deviation from the substation's nominal voltage may be a result of suboptimal network operation.
+In UK LV distribution networks, substations supply power to a feeding cable.
+These substations provide the link from MV distribution networks, which operates at 11kV P2P, to the LV distribution network, which operates at nominal 230V P2N (i.e. 400V P2P).
+If the substation transformer was an ideal transformer, then the voltage measured at its secondary winding would remain constant with changing load.
+In reality however, the internal losses (e.g. conductive losses and magnetic leakage) lead to a drop in voltage as load increases.
+Therefore, any deviation from the substation's nominal voltage may be an indicator of suboptimal network operation.
 
-If one defines the substation voltage as a single phase voltage $v_{ss,p}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then a divergence cost can be calculated as $\zeta_\text{voltage}(v_{ss,p}(t)) \forall t$.
-This cost is defined as:
+Let the substation voltage for a single phase voltage be defined as $v_{ss,p}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken.
+Then the resulting substation voltage vector $\textbf{v}_{ss}(t)$ (where $v_{ss,p}(t) \in \textbf{v}_{ss}(t)$) can be fed into a deviation cost $\zeta_\text{voltage}(\textbf{v}_{ss}(t))$ to assess the cost of substation overloading.
+This cost is defined for any voltage vector (here $\textbf{v}(t)$) as:
 
 \input{_chapter1/equ/voltage-deviation}
 
-Since voltage levels drop continuously along a purely consumptive feeder, substations may boost the voltage towards the upper threshold.
-The behaviour of boosting $V_{ss}$ on the cost function $\zeta_\text{voltage}(v)$ is shown below.
+Since voltage levels drop continuously along a purely consumptive feeder, substations may boost the voltage above the nominal LV voltage level, yet keep it below the upper voltage threshold.
+The behaviour of boosting $V_{ss}$ on the cost function $\zeta_\text{voltage}(\textbf{v})$ is shown below (here $P = 1$).
 
 \input{_chapter1/fig/voltage-deviation}
 
-Here, it is shown that the cost at the high and low voltage thresholds equates to one, and zero at the set substation voltage.
-When boosting this voltage, $V_{ss}$, only the zero point moved, whereas the high and low voltage crossings remain unchanged.
+It can be seen that the cost at the high and low voltage thresholds equates to one, and to zero at the set substation voltage.
+When boosting this voltage, $V_{ss}$, only the zero intersection is moved, whereas the high and low voltage crossings remain unchanged.
 In Figure \ref{ch1:fig:voltage-deviation}, this behaviour is demonstrated by boosting $V_{ss}$ by +4\% and +8\%.
 
 \subsection{Voltages at ESMU's PCC}
 \label{ch1:subsec:voltages-at-esmu}
 
-The ESMU is connected to all three phases of the feeder at some distance to the substation.
-Where to connect the ESMU, in order to achieve an optimal network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
+At the ESMU's PCC, it is connected to all three phases of the feeding cable.
+The location of this PCC is at some distance from the substation or simply ``down stream'' the feeder.
+Where to connect the ESMU, in order to achieve a best possible network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
 Ignoring the exact ESMU location, voltage along the line, i.e. from the substation to its PCC, will change and most likely drop.
-The reason behind this effect is due to resistive losses in the lines, which are caused by the aggregative load currents.
-For purely consumptive loads under heavy load conditions, this voltage may drop below the low-voltage threshold.
-As mentioned in literature, this threshold is an operational constraint of LV networks and must not be violated to assure correct appliance operation.
+The reason behind this effect is due to resistive and inductive losses in the distribution lines.
+These losses are amplified with proximity to the substation, since load currents are aggregated.
+For purely consumptive loads, and particularly under heavy load conditions, this voltage may at some stage drop below the low-voltage threshold.
+As mentioned in literature, this threshold is an operational constraint of LV networks and must not be violated to assure correct appliance operation and prevent financial penalisation.
 
-In order to mitigate this voltage drop, power can be injected into the feeder at the ESMU's PCC.
-Doing so boosts the voltage at that location since the portion of the load current, which would normally be supplied by the substation, is delivered by the ESMU.
-The effect of this power injection is sketched below.
+In order to mitigate this voltage drop, power is injected into the feeder at the ESMU's PCC.
+Doing so boosts the voltage at that location since the portion of the load current that would normally be supplied by the substation is now delivered by the ESMU.
+The effect of this power injection is sketched in the figure below.
 
 \input{_chapter1/fig/sketch-voltage-esmu}
 
-In Figure \ref{ch1:subfig:sketch-voltage-esmu-normal}, an expected voltage drop along the feeder is sketched, where the trailing feeder section's voltage dropped below $V_l$.
-In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU intervention would alleviate some load and raise the trailing voltage levels to a level above $V_l$.
+In Figure \ref{ch1:subfig:sketch-voltage-esmu-normal}, an expected voltage drop along the feeder is sketched, where the down stream feeder section's voltage dropped below $V_l$.
+In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU's intervention can alleviate some load and raise the trailing voltage levels to a level above $V_l$.
 
-Since the P2N voltage at the ESMU's PCC can be measured quite easily, this realistic key network parameter is used in a cost function, too.
-In fact, the ESMU's PCC voltage, $v_{ESMU,p}(t)$, is used in with Equation \ref{ch1:equ:voltage-deviation}; the same cost used for the substation transformer's secondary voltage.
-Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(v_{ESMU,p}(t)) \forall t$.
+This realistic key network parameter is translated into a cost function, since the P2N voltage at the ESMU's PCC can be measured quite easily.
+To do so, the three-phase PCC voltage, $\textbf{v}_{ESMU}(t)$ (where $v_{ESMU,p}(t) \in \textbf{v}_{ESMU}(t)$), is used in Equation \ref{ch1:equ:voltage-deviation}; the same cost used for the substation transformer's secondary voltage.
+Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 
 \subsection{Voltages at customer laterals}
 \label{ch1:subsec:voltages-at-customers}
 
-Voltages at the customer are regulated in the UK, yet monitoring them in real-time is costly, and therefore they are not monitored.
-Yet it is those voltages that are regulated and need to be kept within operational bands.
+As mentioned in Chapter \ref{ch-introduction:sec:overview}, the allowable voltage range at customers is defined by the Electricity Safety, Quality and Continuity Regulations (ESQCR).
+Monitoring those voltages in real-time to assure they obey these regulations is costly, and therefore they are left unmonitored.
 Ultimately, when it comes to voltage level correction, only substation voltage levels and customer voltage levels need to be controlled.
-This fact is to assure proper transformer operation (e.g. to maximise its operation life) and to prevent penalisation due to customer voltage violation (i.e. fining according to ESQCR).
-As shown in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers, yet these voltage levels cannot be measured in reality.
-In simulations however, extracting load voltages is easy, which is why they are treated as theoretical key network parameters.
+This fact is to assure proper transformer operation (e.g. to maximise its lifespan) and to prevent penalisation due to customer voltage violation (i.e. fining according to the ESQCR).
+As explained in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers but, as mentioned above, these voltage levels cannot be measured in reality.
+In simulations however, all loads' voltages can be extracted with ease, which is why they are included but treated as theoretical key network parameters.
 
-To illustrate this load voltage drop, a sample OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to an arbitrary value, i.e. 8kW.
-When plotting the load bus voltage magnitudes against the distance between the load and its feeding substation the following plot is the result:
+To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to a high value of 8kW\footnote{Whilst historic and recent loads may reach values of this magnitude quite seldom, future customer demand with the aggregated effect home-charging of EVs may indeed yield extreme scenarios like this.}.
+In the following plot, the magnitude of the load bus voltages against the distance between the corresponding load and its feeding substation was drawn.
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
-In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, it can be seen that phases are significantly unbalanced, and customers further than 200m from the substation would experience low-voltage events (for this particular scenario).
-As already proposed in the previous section, ESMU aims to avoid these voltage violations, but the number of loads adds computational burden on the used solving algorithms.
+In this Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, two observations can be made.
+For one, it can be seen that phases are significantly unbalanced.
+Secondly, customers further than 200m from the substation experience low-voltage events (for this particular scenario).
+As already proposed in the previous section, ESMU aims to avoid these voltage violations, but the number of loads would add significant computational burden on the any used solving algorithm.
 
-To address this problem, the previously defined voltage cost function is expanded.
-In fact, rather than including every single customer's voltage deviation cost, only the worst deviations are included.
-By limiting this number, solvers need not consider such a large number of output parameters and only focus on the worst network parameter.
-This focus is of particular need if the impact of the ESMU on some customers voltages is relatively low.
-For this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{load,i,p} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t)) \forall t$, as such:
+To address this problem, the previously defined voltage cost function (i.e. Equation \ref{ch1:equ:voltage-deviation}) is expanded.
+Rather than including the cost for every single customer's voltage deviation, only the worst deviation is used.
+By limiting this number, solvers need not consider such a large number of parameters and only focus on the worst network parameter.
+This focus is of particular need if the impact of the ESMU on some customers' voltages is relatively low, since the aggregate cost would otherwise cloud the impact on those individual voltages.
+For this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{load,i,p} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t))$, as such:
 
 \input{_chapter1/equ/load-voltage-deviation}
 
 \subsection{Total power flow}
 \label{ch1:subsec:total-power-flow}
 
-As mentioned above, voltage deviation has an immediately perceptible effect on the network operation and violation of the predetermined voltage bands may even lead to financial penalisation.
-Since all possible means of limiting voltage divergence have been addressed (in the scope of this work) further network parameters are put into focus next.
-A not yet considered network parameter, that also impacts the effective network operation, is power flow into the network, or more specifically; the power flow in each of the three phases of the distribution feeder.
-Customers in urban UK distribution networks have a single phase connection to the three-phase feeder line (this is done by connecting their supply cables or ``laterals'' between a phase and the neutral conductor).
-In the UK, the procedure for connecting customers is done in a somewhat arbitrary manner in order to distribute load as evenly as possible across all three phases.
-In theory, this approach assures a balanced network load, yet in reality this is not the case.
-Even if the number of customers per phase was the same for each individual phase, the probability that all customers' load profiles are identical is very low.
-Therefore, the likeliness of LV distribution feeders to be unbalanced is very high.
-Unbalance can be calculated from substation the phase powers, as they are monitored at the substation.
+Beside having to keep voltages within their specified operational boundaries, DNOs want to make sure that the distribution network operates in an efficient and ideal manner.
+Determining how ideal a three-phase network operates can be done by e.g. assessing the balance of the network's phases.
+The frequently neglected disturbance of unbalanced phases may not have an immediately associated impact on the network's customers, but the negative long term effects (e.g. the effects of asymmetric load on transformers and rotating machones) must not be neglected since they weaken the network's infrastructure.
+The choice of how to connect customers to the LV feeder makes phase unbalance a dominant problem in the UK.
+Customers in urban UK distribution networks have a single-phase link to the three-phase feeder line.
+The link is established by connecting their supply cables or ``laterals'' between a phase and the neutral conductor.
+In the UK, the phase allocation for each customer has been random, in order to distribute load as evenly as possible across all three phases.
+In theory, this approach should assure a more or less balanced three-phase load, yet in reality this is not the case.
+Even if the number of customers on each phase was the same for all three phases, the probability that all customers' load profiles are identical is very low.
+Therefore, the likeliness of LV distribution feeders in the UK to be unbalanced is very high.
 
-Unlike the aforementioned voltage deviations, unbalance does not directly impact customer.
-Nonetheless, unbalance is a network disturbance that has significant impact on the efficiency and long term reliability of three-phase components (e.g. rotating machines and transformers).
-Phase unbalance itself is unavoidable and has no direct negative impact on network operation, yet reducing the magnitude of the unbalance plays a more important role in network optimisation.
-Therefore a standardised measure of unbalance was developed and is used in the presented work, too \cite{ANSI-MB-1-2011}.
-An Unbalance Factor, $\text{UF}(\textbf{x})$, is therefore defined as:
+Since substation monitoring is capable of providing three-phase power measurements, they are used as realistic key network parameters, and summarised in a substation power vector $\textbf{s}_{ss}(t)$.
+Deriving phase unbalance from these three-phase sub is done by following the American National Standards Institute (ANSI) definition of phase unbalance \cite{ANSI-MB-1-2011}.
+The standardised Unbalance Factor (UF) is defined as:
 
 \input{_chapter1/equ/unbalance-equation}
 
-Substation power readings, $\textbf{s}_{ss}(t)$, are used to calculate the phase unbalance to serve as another key network parameter.
-Therefore, the unbalance factor in Equation \ref{ch1:equ:unbalance-equation} was included in another cost function.
-Since the minimum value of $\text{UF}(\textbf{s}_{ss})$ is 1, an adjustment was required so that a perfectly balance network would result in an $\text{UF}(\textbf{s}_{ss})$ of zero.
-The cost function is defined as $\zeta_\text{unbalance}(\textbf{s}_{ss}) \forall t$,  where $s_{ss,p} \in \textbf{s}_{ss}$:
+From the substation monitoring, a three-phase substation power vector, $\textbf{s}_{ss}(t)$ (where $s_{ss,p} \in \textbf{s}_{ss}$), is used and the network's phase unbalance can be calculated.
+Since this forms another realistic key network parameter, the UF in Equation \ref{ch1:equ:unbalance-equation} was formulated into a cost function, too.
+The resulting cost function $\zeta_\text{unbalance}(\textbf{s}_{ss})$ is defined as:
 
 \input{_chapter1/equ/unbalance-cost}
 
+The minimum value of $\text{UF}(\textbf{s}_{ss})$ is one.
+Therefore an adjustment was required so that a perfectly balance network would result in an $\text{UF}(\textbf{s}_{ss})$ of zero.
 An illustration how this cost function is provided in the figure below.
 
 \input{_chapter1/fig/power-unbalance}
 
-Here, it can be seen how $\zeta_\text{unbalance}$ varies with an increasing separation of the three phases' power values.
+Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s})$ varies with an increasing separation of the three phases' power values.
 
-\subsection{Line utilisation}
-\label{ch1:subsec:line-utilisation}
+\subsection{Substation line utilisation}
+\label{ch1:subsec:substation-line-utilisation}
 
-Inline with power, total power demand puts strain on the feeding cable, since resistive losses cause cable heating.
-Hence, cables have been assigned a certain thermal rating which must not be exceeded to prevent cable damage and network failures.
-The dissipated power, which leads to the cable's heating and failure, is a function in respect of the entire cable's properties.
-Yet means of measuring those cable properties instantaneously are still being research and not industry ready.
-Therefore, the most common approach to identify the loading of a cable is by comparing its present current flow against the its nominal amperage rating.
+Although phase unbalance deteriorates the efficiency and life expectancy of three-phase network assets, high power demand puts strain on the physical cables themselves.
+This is due dominantly due to resistive and inductive losses heating the cables, and bringing them closer to their operational limits.
+Therefore, cables have an assigned thermal rating which must not be exceeded to prevent permanent cable damage or network failures.
+At substation level, to prevent over-currents, fuses or reclosers are installed that will disconnect the network under fault or high demand conditions.
+To quantify whether the substation fuse is approaching its tripping point, its nominal rating is used as reference.
 
-For the context of this work, this nominal rating, $i_{nom,l}$, is a fixed value for each cable type and is the total current that may flow through a cable before its maximum thermal rating is exceeded.
-A subsequent cost function therefore needs to find the total current first, before comparing it to the line's rating.
-This so called utilisation cost function $\zeta_\text{utilisation}(\textbf{i}_{line}(t)) \forall t$ is a function of the three phase line current $\textbf{i}_{line}$ (where $i_{line,l,p} \in \textbf{i}_{line}$) and is defined as:
+For the context of this work, this nominal fuse rating, $i_{fuse}$, is a fixed value for the fuse at the substation and must not be exceeded.
+Using the three-phase current vector from substation monitoring, $\textbf{i}_{ss}(t)$ (where $i_{ss,p}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
 
-\input{_chapter1/equ/cable-utilisation}
+\input{_chapter1/equ/fuse-utilisation}
+
+A sketch has been included below to illustrate how this quadratic cost behaves as substation current increases.
+
+\input{_chapter1/fig/fuse-utilisation}
+
+\subsection{Maximum line utilisation}
+\label{ch1:subsec:maximum-line-utilisation}
+
 
 \subsection{Distribution losses}
 \label{ch1:subsec:losses}
-
 
 
 

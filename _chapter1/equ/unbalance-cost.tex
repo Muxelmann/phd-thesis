@@ -1,8 +1,9 @@
 \begin{equation}
 	\begin{split}
-		\zeta_\text{unbalance}(\textbf{s}_{ss}):=&\text{UF}(\textbf{s}_{ss}) - 1\\
-		=&\frac{\max_p\left|\bar{\textbf{s}}_{ss} - s_{ss,p}\right|}{\bar{\textbf{s}}_{ss}}\\
-		=&\frac{\max_p\left|\left(\frac{1}{3}\sum_p^3{s_{ss,p}}\right) - s_{ss,p}\right|}{\frac{1}{3}\sum_p^3{s_{ss,p}}}
+		\zeta_\text{unbalance}(\textbf{s}(t)):=&\text{UF}(\textbf{s}(t)) - 1 \forall t\\
+		=&\frac{\max_p\left|\overline{\textbf{s}(t)} - s_{p}(t)\right|}{\overline{\textbf{s}(t)}} \forall t\\
+		=&\frac{\max_p\left|\left(\frac{1}{P}\sum_p^P{s_{p}(t)}\right) - s_{p}(t)\right|}{\frac{1}{P}\sum_p^P{s_{p}(t)}} \forall t\\
+		&\text{where } p \in [1, 2, \dots P]
 	\end{split}
 	\label{ch1:equ:unbalance-cost}
 \end{equation}
