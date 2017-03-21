@@ -201,3 +201,18 @@ Also, and similar to Equation \ref{ch1:equ:load-voltage-deviation}, by consideri
 \subsection{Distribution losses}
 \label{ch1:subsec:losses}
 
+When it comes to profit margins, energy losses in a distribution network are unwanted, since nobody pays for undelivered energy.
+Although the losses a single distribution network are small in comparison to the losses in the entire electricity grid, the aggregate effect of reducing those losses could have a noticeable impact.
+To put this into perspective, the losses in the IEEE LV Test Case network were 58kW, when simulated under the same high demand scenario which was used for voltage drop visualisation in Section \ref{ch1:subsec:voltages-at-customers}.
+This equates to 12\% of the total network demand ($\text{i.e. }\frac{s_{losses}(t)}{\sum_{p=1}^P{s_{ss,p}(t)}} \approx \frac{58kW}{484kW}$).
+Since this is a high network load, losses would be noticeably lower for notmal network operation.
+This is made apparent in Figure \ref{ch1:fig:losses-against-network-demand}, where the uniform network load is varied and the corresponding losses are plotted against it.
+
+\input{_chapter1/fig/losses-against-network-demand}
+
+These preliminary results were found from power flow simulations.
+In reality however, losses cannot be determined this easily.
+Therefore, the network losses, $s_{losses}(t)$, are seen as theoretical key network parameters and used in the final cost function $\zeta_\text{losses}(s_{losses}(t))$, which is simply defined as:
+
+\input{_chapter1/equ/losses}
+

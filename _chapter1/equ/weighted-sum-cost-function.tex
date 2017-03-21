@@ -1,27 +1,27 @@
 %\begin{equation}
 %\begin{split}
-%	\zeta(t) :=&\\
+%	\zeta(v_{ss,p}(t), &v_{ESMU,p}(t), \textbf{v}_{load}(t), \textbf{s}_{ss}(t), \textbf{i}_{line}(t), s_\text{losses}(t)) :=\\
 %	&\alpha_1 \zeta_\text{voltage}(v_{ss,p}(t))\\
-%	&+ \alpha_2 \zeta_\text{voltage}(v_{ESMU,p}(t))\\
-%	&+ \alpha_3 \zeta_\text{load voltage}(\textbf{v}_{load}(t))\\
-%	&+ \alpha_4 \zeta_\text{unbalance}(\textbf{s}_{ss}(t))\\
-%	&+ \alpha_5 \zeta_\text{utilisation}(\textbf{i}_{line}(t))\\
-%	&+ \alpha_6 \zeta_\text{losses}(t)\\
-%	&\forall t \text{ where } p \in [1, 2, 3]
+%	+ &\alpha_2 \zeta_\text{voltage}(v_{ESMU,p}(t))\\
+%	+ &\alpha_3 \zeta_\text{load voltage}(\textbf{v}_{load}(t))\\
+%	+ &\alpha_4 \zeta_\text{unbalance}(\textbf{s}_{ss}(t))\\
+%	+ &\alpha_5 \zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))\\
+%	+ &\alpha_6 \zeta_\text{line utilisation}(\textbf{i}_{line}(t))\\
+%	+ &\alpha_7 \zeta_\text{losses}(s_\text{losses}(t))\\
+%	&\forall t \text{ where } p \in [1, \dots, P] \text{ and } P \in \mathbb{N}_{>0}
 %\end{split}
 %\label{ch1:equ:weighted-sum-cost-function}
 %\end{equation}
 
-
 \begin{multline}
-	\zeta(v_{ss,p}(t), v_{ESMU,p}(t), \textbf{v}_{load}(t), \textbf{s}_{ss}(t), \textbf{i}_{line}(t), t) :=\\
-	\alpha_1 \zeta_\text{voltage}(v_{ss,p}(t))\\
-	+ \alpha_2 \zeta_\text{voltage}(v_{ESMU,p}(t))\\
+	\zeta(v_{ss,p}(t), v_{ESMU,p}(t), \textbf{v}_{load}(t), \textbf{s}_{ss}(t), \textbf{i}_{line}(t), s_\text{losses}(t)) :=\\
+	\alpha_1 \zeta_\text{voltage}(v_{ss,p}(t))%\\
+	+ \alpha_2 \zeta_\text{voltage}(v_{ESMU,p}(t))%\\
 	+ \alpha_3 \zeta_\text{load voltage}(\textbf{v}_{load}(t))\\
-	+ \alpha_4 \zeta_\text{unbalance}(\textbf{s}_{ss}(t))\\
-	+ \alpha_5 \zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))\\
+	+ \alpha_4 \zeta_\text{unbalance}(\textbf{s}_{ss}(t))%\\
+	+ \alpha_5 \zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))%\\
 	+ \alpha_6 \zeta_\text{line utilisation}(\textbf{i}_{line}(t))\\
-	+ \alpha_7 \zeta_\text{losses}(t)\\
-	 \forall t \text{ where } p \in [1, 2, 3]
+	+ \alpha_7 \zeta_\text{losses}(s_\text{losses}(t))%\\
+	 \forall t \text{ where } p \in [1, \dots, P] \text{ and } P \in \mathbb{N}_{>0}
 \label{ch1:equ:weighted-sum-cost-function}
 \end{multline}
