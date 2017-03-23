@@ -22,13 +22,69 @@ There are 55 single-phase households connected to the substation and for this pa
 \subsection{Load Profiles: Minutely and Half-Hourly}
 
 Alongside the LV Test Case, 100 minutely demand profiles were supplied; each being 24h long.
-A series of 1440 snapshot simulations was run, by assigning one load profile to one customer.
-Doing so made it possible to simulate the variation and volatility in demand over a day.
-Since the values given are active power values, a standardised power factor of 95\% was used for all loads.
+Therefore, by assigning one load profile to each customer, a series of 1440 snapshot simulations could be run in OpenDSS in order to simulate the variation and volatility in demand over an entire day.
+Since the provided power values are only of active power, a standardised power factor of 95\% was assumed for all loads to calculate their reactive component.
 This non-unity power factor simulates a certain inductive load, which would otherwise be neglected.
 
-Since the minutely profiles' resolution is too high in order to effectively calculate battery schedules, they had to be down-sampled.
-This down-sampling was achieved by first calculating the daily demand profile at sub-half-hourly resolution.
-Then, the day was split into 48 half-hourly time-slots, and the average power was computed for each.
+Computing the ESMU schedule at minutely resolution, or any sub-half-hourly resolution, is very computationally demanding and highly ineffective since cutting edge power forecasts have only now reached half-hourly resolution.
+Therefore, the sub-half-hourly profile must be down-sampled or extrapolated to a coarser resolution.
+This extrapolation is achieved by first calculating the total daily demand profile at sub-half-hourly resolution, i.e. $s_{network\;\;load}(t)$:
+
+\input{_chapter1/equ/sub-half-hourly-network-load}
+
+Then, the day is split into a number of half-hourly time-slots, $T^*$, and the average power was computed over each of those time-slots.
+It it worth mentioning, that the number of time-slots for the sub-half-hourly load profile, $T$, must be divisible by the number of time-slots for the half-hourly (or coarser) profile $T^*$; i.e. $T \overset{!}{=} \alpha T^* \text{ where } \alpha \in \mathbb{N}$.
+The resulting half-hourly network load, $s_{network\;\;load}(t^*)$, is thus extrapolated as follows:
+
+\input{_chapter1/equ/down-sampling-to-half-hourly}
+
+To illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both are plotted in a figure below.
+
+\input{_chapter1/fig/sub-half-horuly-demand-comparison}
+
+Here, in Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
+When generating the ESMU schedules (which is addressed in Section \ref{ch1:subsec:esmu-schedule-generation}) these variations are neglected and the unwanted peak power demands are hence no longer sufficiently compensated.
 
 \subsection{Battery Model}
+
+The deployed ESMU systems themselves consist of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
+The PMU controls the phase powers converters and links the battery packs to the grid.
+It is rated for a maximum per phase power of 12kVA and, beside battery charging and discharging, can perform filtering functions, e.g. compensating for  harmonic distortion.
+The ESU is a modular container of 12.5kWh of Li-Ion energy storage, that can be aggregated to increase the energy storage capacity.
+All battery monitoring, conditioning and regulation is performed internally and need not be considered for the scope of this work.
+However, control instructions that are sent to the ESMU system itself must not request the device to operate outside its own specifications.
+
+In order to simulate this ESMU system and its energy flow behaviour, a model had to be derived from the given device specifications.
+This model includes both an inversely proportional charge-discharge efficiency, and a standby loss.
+The charge-discharge efficiency is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\%.
+The standby loss on the other hand is associated to the nominal control system's power demand as well as the battery's self-discharge rate.
+It has become common practice to assess an energy storage's charge level as the State of Charge (SOC).
+This SOC is described as:
+
+\input{_chapter1/equ/state-of-charge-definition}
+
+Here, the SOC is defined for any given time $t$, as the actual energy stored in the ESU, $E_{battery}(t)$, divided by the capacity of the system, $C_{battery}$.
+With the conversion efficiency as the factor $\eta$, the battery charge and discharge power, $s_{battery}(t)$ (in kW)\footnote[1]{It is worth mentioning, that $s$ is chosen for apparent power (i.e. active and reactive power in kVA), yet $s_{batery}$ is purely active (i.e. in kW).}, can be calculated for any given ESMU power, $\textbf{s}_{ESMU}(t)$ (where $s_{ESMU,p}(t) \in \textbf{s}_{ESMU}(t)$).
+
+\input{_chapter1/equ/battery-power-definition}
+
+Assuming this charge/discharge power is applied and constant during a sample period of $t_s$, an equation for the optimum change in stored energy can be formulated.
+
+\input{_chapter1/equ/change-in-energy}
+
+As already mentioned, the energy level is however affected by standby losses, which are captured by a self-discharge factor, $\mu$.
+Therefore, when adding the change in energy level to the current energy level, in order to calculate the next energy level, this factor needs to be taken into account.
+
+\input{_chapter1/equ/next-energy}
+
+In an ideal case, $\mu = 1$, where no energy would be lost in the storage system.
+Finally, by adding the current energy level to the change in energy level, and by substituting Equation \ref{ch1:equ:state-of-charge-definition}, the next SOC can be found:
+
+\input{_chapter1/equ/next-state-of-charge}
+
+A flowchart to visually capture the model, as it is explained from Equation \ref{ch1:equ:state-of-charge-definition} to \ref{ch1:equ:next-state-of-charge}, is presented below.
+
+\input{_chapter1/fig/next-soc-flowchart}
+
+Here, all green and blue fields indicate, respectively, model inputs and results.
+The white states represent operations applied onto those inputs and results and in the end yield the output, i.e. the yellow field.

@@ -1,24 +1,36 @@
 \singlespacing
 
 % Constants
-\nomenclature{$T$}{Duration of the entire power flow simulation, here $T \in \mathbb{N}^{>0}$.}
-\nomenclature{$L$}{Number of lines in the network model, here $L \in \mathbb{N}^{>0}$.}
-\nomenclature{$I$}{Number of loads in the network model, here $I \in \mathbb{N}^{>0}$.}
+\nomenclature{$\alpha, \beta, \gamma$}{Three intermediary variables}
+\nomenclature{$T$}{Number of steps of the entire power flow simulation, here $T \in \mathbb{N}$ (i.e. $T=1440$ for one day of minutely simulations).}
+\nomenclature{$T^*$}{Number of coarse simulation steps, here $T^* \in \mathbb{N} \text{ and } T=\alpha T^* \text{ where } \alpha \in \mathbb{N}$ (i.e. $T^*=48$ for one day of half-hourly simulations).}
+\nomenclature{$L$}{Number of lines in the network model, here $L \in \mathbb{N}$.}
+\nomenclature{$I$}{Number of loads in the network model, here $I \in \mathbb{N}$.}
 \nomenclature{$V_n$}{Nominal voltage for a LV network, i.e. 230V P2N ($\approx \frac{400}{\sqrt{3}}\text{V}$).}
 \nomenclature{$V_{ss}$}{Nominal voltage as measured at the substation transformer's secondary winding; for the IEEE LV Test Case the voltage is 254.6V P2N.}
 \nomenclature{$V_l$}{Low-voltage threshold which is calculated from $V_n$,\\i.e. 245.7V P2N ($\approx V_n \times 0.94$)}
 \nomenclature{$V_h$}{High-voltage threshold which is calculated from $V_n$,\\i.e. 254V P2N ($\approx V_n \times 1.1$)}
+\nomenclature{$C_{battery}$}{Capacity of battery.}
+\nomenclature{$\eta$}{Efficiency (e.g. round-trip efficiency of power converters in ESMU's PMU).}
+\nomenclature{$\mu$}{Losses (e.g. self-discharge losses in a battery).}
+\nomenclature{$E_{battery}(t)$}{Energy stored in battery at time $t$.}
+\nomenclature{$\Delta E_{battery}(t)$}{Change in the battery's energy level at time $t$.}
+\nomenclature{$\Delta SOC(t)$}{Change in the ESMU's SOC at time $t$.}
 
 % variables
 \nomenclature{$p$}{Phase number, here $p \in \{1, 2, 3\}$.}
-\nomenclature{$t$}{Time step of the current simulation step, here $t \in [0, 1, \dots, \frac{T}{t_s}-1]$.}
-\nomenclature{$t_s$}{Sample-period or iteration-duration used in the simulations, usually in seconds unless otherwise specified}
+\nomenclature{$t$}{Time-step of the current simulation step, here $t \in [1, \dots, T]$.}
+\nomenclature{$t^*$}{Coarser time-step where one integer increment represents multiple integer increments in $t$, here $t^* \in [1, \dots, T^*] $.}
+\nomenclature{$t_s$}{Sample-period or iteration-duration used in the simulations, usually in seconds unless otherwise specified.}
 \nomenclature{$l$}{Line number of a given line in the network model, here $l \in [1, 2, \dots, L]$.}
 \nomenclature{$i$}{Load number of a given load in the network model, here $i \in [1, 2, \dots, I]$.}
 
 % 1D arrays
 \nomenclature{$SOC(t)$}{Battery's state of charge at time $t$.}
 \nomenclature{$s_{loss}(t)$}{Computed network losses at time $t$.}
+\nomenclature{$s_{battery}(t)$}{The apparent power (with no reactive component) that is charged into or discharged from the battery at time $t$.}
+\nomenclature{$s_{network\;\;load}(t)$}{Sub-half-hourly network load at time $t$.}
+\nomenclature{$s_{network\;\;load}^*(t^*)$}{Half-hourly (or coarse) network load at time $t^*$.}
 
 % nD arrays
 \nomenclature{$v_{ss,p}(t)$}{Single phase voltage measured at the substation transformer's secondary winding for phase $p$ at time $t$.}

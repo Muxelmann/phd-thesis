@@ -35,7 +35,7 @@ Yet those parameters cannot easily be obtained in reality, which is why they are
 Due to the high abundance of these theoretical parameters, the impact of some of these parameters on network performance is quite limited.
 Therefore the set of theoretical parameters, that were used in this piece of work, was chosen based on their importance and impact on actual network operation.
 
-A list of all realistic and theoretical key network parameters\footnote{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form power flow simulations.} is presented below.
+A list of all realistic and theoretical key network parameters\footnote[1]{A key network parameter is marked with a dagger ($\dagger$) if it is a theoretical parameter that can only be extracted form power flow simulations.} is presented below.
 
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding
@@ -108,7 +108,7 @@ This fact is to assure proper transformer operation (e.g. to maximise its lifesp
 As explained in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers but, as mentioned above, these voltage levels cannot be measured in reality.
 In simulations however, all loads' voltages can be extracted with ease, which is why they are included but treated as theoretical key network parameters.
 
-To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to a high value of 8kW\footnote{Whilst historic and recent loads may reach values of this magnitude quite seldom, future customer demand with the aggregated effect home-charging of EVs may indeed yield extreme scenarios like this.}.
+To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to a high value of 8kW\footnote[1]{Whilst historic and recent loads may reach values of this magnitude quite seldom, future customer demand with the aggregated effect home-charging of EVs may indeed yield extreme scenarios like this.}.
 In the following plot, the magnitude of the load bus voltages against the distance between the corresponding load and its feeding substation was drawn.
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}

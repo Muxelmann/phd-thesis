@@ -18,6 +18,9 @@
 \usepackage[acronym]{glossaries}
 % For nomenclature
 \usepackage[intoc]{nomencl}
+% For flowchart
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,automata}
 
 % What was additionally imported by MDPI style
 \usepackage{graphicx}
@@ -56,6 +59,9 @@
 \makeatother
 \setfloatlocations{figure}{htbp}
 \setfloatlocations{table}{htbp}
+
+% New footnote style
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 % Generate the glossary and nomenclature
 \makeglossaries
