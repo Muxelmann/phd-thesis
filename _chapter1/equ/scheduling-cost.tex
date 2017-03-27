@@ -1,0 +1,11 @@
+\begin{equation}
+\begin{split}
+	\min_{\textbf{s}^*_{ESMU}} & \zeta^*_{PAR}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load}) + \zeta^*_{MMD}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load})\\
+	\text{s.t. }& \begin{cases}
+		s_{battery}(t) \leq C_{factor}\times C_{battery} \forall t\\
+		\left|s_{ESMU,p}(t)\right| \leq S_{rating} \forall p \forall t\\
+		0 \leq SOC(t) \leq 1 \forall t
+	\end{cases}
+\end{split}
+\label{ch1:equ:scheduling-cost}
+\end{equation}

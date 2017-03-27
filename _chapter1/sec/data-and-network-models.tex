@@ -38,7 +38,9 @@ The resulting half-hourly network load, $s_{network\;\;load}(t^*)$, is thus extr
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
-To illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both are plotted in a figure below.
+It is worth mentioning, that from here on, all subsequent cost functions that deal with half-hourly profile shapes, are annotated as variations $\zeta^*$, whilst sub-half-hourly or real-time costs are annotated as variations of $\zeta$.
+This difference will become important when differentiating between scheduling costs and the aforementioned network costs (which are based on a set of key network parameters).
+Nonetheless, to illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both are plotted in a figure below.
 
 \input{_chapter1/fig/sub-half-horuly-demand-comparison}
 
@@ -49,7 +51,7 @@ When generating the ESMU schedules (which is addressed in Section \ref{ch1:subse
 
 The deployed ESMU systems themselves consist of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
 The PMU controls the phase powers converters and links the battery packs to the grid.
-It is rated for a maximum per phase power of 12kVA and, beside battery charging and discharging, can perform filtering functions, e.g. compensating for  harmonic distortion.
+Each PMU's power rating, $S_{rating}$, is the maximum phase power of 12kVA and, beside battery charging and discharging, can also perform filtering functions, e.g. compensating for  harmonic distortion.
 The ESU is a modular container of 12.5kWh of Li-Ion energy storage, that can be aggregated to increase the energy storage capacity.
 All battery monitoring, conditioning and regulation is performed internally and need not be considered for the scope of this work.
 However, control instructions that are sent to the ESMU system itself must not request the device to operate outside its own specifications.
@@ -68,6 +70,8 @@ With the conversion efficiency as the factor $\eta$, the battery charge and disc
 
 \input{_chapter1/equ/battery-power-definition}
 
+Although the ESMU's PSU rating, $S_{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$), the charging power is limited based on a charging factor, $C_{factor}$, which was chosen to be the standard value of 1.6.
+This factor is the ratio between the battery's maximum discharge power and its total capacity (i.e. $s_{battery}(t) \leq C_{factor}\times C_{battery} \forall t$).
 Assuming this charge/discharge power is applied and constant during a sample period of $t_s$, an equation for the optimum change in stored energy can be formulated.
 
 \input{_chapter1/equ/change-in-energy}

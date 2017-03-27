@@ -8,7 +8,7 @@ To recap; utility functions are maximised since they explain how beneficial a sy
 The choice for this piece of work was to associate key network parameters to tailored cost functions, with the reason that a cost can be minimised to a finite value, i.e. zero.
 Utility maximisation on the other hand is a mathematically unbound problem that may reach a maximum, yet this maximum can only be approximated though game theoretic approaches like Pareto- or Nash-Optimality.
 In other words, solutions to a cost function where the resulting cost is zero, are by definition optimal solutions, whereas a utility functions can have multiple maxima where optimality classification of these solutions is inherently more difficult.
-To illustrate this fact, an arbitrary utility function, $\zeta^{*}(x)$, and an arbitrary (and unrelated) cost function, $\zeta(x)$, have been plotted in Figures \ref{ch1:subfig:sketch-utility} and \ref{ch1:subfig:sketch-cost}, respectively.
+To illustrate this fact, an arbitrary utility function, $\zeta_{u}(x)$, and an arbitrary (and unrelated) cost function, $\zeta_{c}(x)$, have been plotted in Figures \ref{ch1:subfig:sketch-utility} and \ref{ch1:subfig:sketch-cost}, respectively.
 
 \input{_chapter1/fig/sketch-utility-vs-cost}
 
@@ -16,9 +16,9 @@ These two figures illustrate how the peaks of the utility function are at differ
 Both peaks or minima are found using solving algorithms; the most common mathematical solvers are the Gradient Descend Method, Newton-Raphson Method, and Active Set Method.
 If the cost or utility function is nonlinear or the system's gradient function can only be approximated more sophisticated algorithms had to be used, e.g. Mixed-Integer Linear Programming, Sequential Quadratic Programming (SQP), Genetic Algorithm, Particle Swarm Optimisation or the Interior Point Method.
 Depending on the starting conditions of those solvers, i.e. the initial values for $x$, different maxima or minima (i.e. points $A$, $B$ or $C$) may be found.
-In the example above, the best solution for $\zeta^{*}(x)$ is at point $A$, whereas the best solution for $\zeta(x)$ is at point $C$.
-Whilst point $A$ represents the highest utility, it is difficult to determine whether this maximum is a most optimal solution since utility is inherently unbounded, i.e. $\zeta^{*}(x) \in (-\infty, \infty) \forall x$.
-For the cost function on the other hand, point $C$ is represents an absolute minimum and optimal solution since the cost function's range is bounded to be greater or equal to zero, i.e. $\zeta(x) \geq 0 \forall x$.
+In the example above, the best solution for $\zeta_{c}(x)$ is at point $A$, whereas the best solution for $\zeta_{c}(x)$ is at point $C$.
+Whilst point $A$ represents the highest utility, it is difficult to determine whether this maximum is a most optimal solution since utility is inherently unbounded, i.e. $\zeta_{c}(x) \in (-\infty, \infty) \forall x$.
+For the cost function on the other hand, point $C$ is represents an absolute minimum and optimal solution since the cost function's range is bounded to be greater or equal to zero, i.e. $\zeta_{c}(x) \geq 0 \forall x$.
 Therefore, the cost's proximity to zero can directly indicate the system performance (whilst a utility's proximity to infinity would not make sense).
 
 With this in mind, the key network parameters are explained and the corresponding cost functions are defined next.

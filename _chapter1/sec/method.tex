@@ -1,8 +1,32 @@
 \section{Closed-Loop Optimisation Method}
 \label{ch1:sec:closed-loop-optimisation-method}
 
-\subsection{ESMU Schedule generation}
+In the previous two sections, the key network parameters and associated cost functions have been established.
+Then the used network models, data and battery models were explained.
+Now, the implemented method on generating a traditional ESMU schedules is presented, before presenting the novel approach of adjusting this schedule using on-line readings.
 
+\subsection{ESMU Schedule generation}
+\label{ch1:subsec:esmu-schedule-generation}
+
+As discussed in the literature review in Chapter \ref{ch-review}, the main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
+It has been identified, that both the Peak-to-Average Ratio (PAR) as well as the min-max-difference (MMD) are good indicators of how well the pursued behaviours have been implemented.
+Therefore, a half-hourly PAR scheduling cost, $\zeta^*_{PAR}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load})$, and a half-hourly MMD scheduling cost, $\zeta^*_{MMD}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load})$, are defined as follows:
+
+\input{_chapter1/equ/peak-to-average-definition}
+
+\input{_chapter1/equ/min-max-difference-definition}
+
+Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}^*_{network\;\;load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
+For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve the following minimisation problem.
+Reasons behind this choice are the SQP's robustness and speed, since it is built on the well established Newton-Raphson Method, as well as its ability to cope with nonlinear constraints.
+It is this latter point that is most important, since the battery model's solving constraints are inherently nonlinear; the Newton-Raphson Method by itself is unable to solve with this kind of nonlinear constraints.
+The final minimisation problem that was passe into the SQP solver can be formulated as:
+
+\input{_chapter1/equ/scheduling-cost}
+
+To summarise, this minimisation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, given a certain half-hourly network load (forecast) $\textbf{s}^*_{network\;\;load}$.
+These two costs both capture the PAR and MMD of the resulting power profile, and when minimised to zero, indicate a perfectly flat power curve.
+The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_{battery}(t) \leq C_{factor} \times C_{battery} \forall t$), to not exceed the PMU's phase power rating (i.e. $\left|s_{ESMU,p}(t)\right| \leq S_{rating} \forall p \forall t$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(t) \leq 1 \forall t$).
 
 \subsection{Closed-Loop Schedule Adjustment Method}
 
