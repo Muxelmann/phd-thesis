@@ -24,29 +24,65 @@ The final minimisation problem that was passe into the SQP solver can be formula
 
 \input{_chapter1/equ/scheduling-cost}
 
-To summarise, this minimisation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, given a certain half-hourly network load (or forecast) $\textbf{s}^*_{network\;\;load}$.
+To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}^*_{network\;\;load}$.
 These two costs both capture the PAR and MMD of the resulting power profile, and when minimised to zero, indicate a perfectly flat power curve.
 The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_{battery}(t) \leq C_{factor} \times C_{battery} \forall t$), to not exceed the PMU's phase power rating (i.e. $\left|s_{ESMU,p}(t)\right| \leq S_{rating} \forall p \forall t$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(t) \leq 1 \forall t$).
 
 For the work presented in this chapter, the supplied half-hourly network load (or forecast) was extrapolated from sub-half-hourly data.
 This forecast can be seen as if it had been generated with perfect foresight.
-Doing this does not skew the already imperfect performance that would be obtained when applying the half-hourly schedule.
+Treating it in such a way does not further skew the already imperfect performance that is obtained when applying the resulting half-hourly schedule.
 Therefore, any additional improvement or worsening is the result of the sub-half-hourly schedule adjustments.
-
 In the following figure, a visualisation is provided where the impact of this half-hourly ESMU schedule becomes apparent.
 
 \input{_chapter1/fig/improved-network-power}
 
-It can be seen that the half-hourly profile in Figure \ref{ch1:subfig:improved-half-hourly-network-power} is dominated by an evening peak in demand.
-However, the actual demand, as it is plotted in Figure \ref{ch1:subfig:improved-sub-half-hourly-network-power}, has a much larger demand spike during the morning hours, which is addressed not as strongly as the evening peak.
+Figure \ref{ch1:fig:improved-network-power} shows the original half-hourly network load and the improved network when adding the half-hourly ESMU schedule.
+For this preliminary result, no network simulations have been carried out, as it should show an idea ESMU impact on the network's load.
+This positive impact can be seen, since the half-hourly profile in Figure \ref{ch1:subfig:improved-half-hourly-network-power} is dominated by an evening peak in demand.
+However, the actual sub-half-hourly demand, as it is plotted in Figure \ref{ch1:subfig:improved-sub-half-hourly-network-power}, has a much larger demand spike during the morning hours, which is not addressed as strongly as the evening peak.
 Therefore, the compared peak power shaving dropped from 9.46kW to only 6.36kW, although only 50\% of the battery's discharge capacity is used.
 Nonetheless, the overall improvement yielded by the ESMU schedule is still noticeable (given that it was scheduled using perfect half-hourly foresight). 
 
-In the following section, the underlying closed-loop schedule adjustment method is explained, where it will be shown how individual key network operation can be positively impacted without deviating from this already optimised half-hourly schedule.
+In the following section, the underlying closed-loop schedule adjustment method is explained, where it will be shown how individual key network parameters can be positively impacted without deviating from this already optimised half-hourly schedule.
 The constraint of having to follow this half-hourly ESMU schedule is lifted in Chapter \ref{ch2}, where a real-time schedule adjustment method is proposed and researched.
 
 \subsection{Closed-Loop Schedule Adjustment Method}
 
-From all cost functions defined in Section \ref{ch1:sec:key-network-parameters}, a weighted sum of all costs was generated:
+To quickly summarise, the following key network parameters are used in this chapter:
+
+\begin{itemize}
+	\item substation phase voltages, $v_{ss,p}(t) \in \textbf{v}_{ss}(t)$,
+	\item ESMU phase voltages, $v_{ESMU,p}(t) \in \textbf{v}_{ESMU}(t)$,
+	\item all load voltages, $v_{load,i}(t) \in \textbf{v}_{load}(t)$,
+	\item substation apparent phase power, $s_{ss,p}(t) \in \textbf{s}_{ss}(t)$,
+	\item substation phase currents, $i_{ss,p}(t) \in \textbf{i}_{ss}(t)$,
+	\item all line currents, $i_{line,l,p}(t) \in \textbf{i}_{line}(t)$, and
+	\item all network losses, $s_{losses}(t)$.
+\end{itemize}
+
+Together with these key network parameters, and the cost functions defined in Section \ref{ch1:sec:key-network-parameters}, a weighted sum of all costs is generated and formalised into the following global cost function:
 
 \input{_chapter1/equ/weighted-sum-cost-function}
+
+Here, $\boldsymbol{\alpha}$ is a binary choice vector, with which the weight of the global cost function can easily be adjusted.
+For simpler notations throughout this section, the global cost function is therefore referred to as $\zeta(\boldsymbol{\alpha})$, since all key network parameters are outputs of the power flow simulations.
+
+\input{_chapter1/fig/closed-loop-optimisation}
+
+The underlying method that performs the proposed closed-loop optimisation is captured in the next Figure \ref{ch1:fig:closed-loop-optimisation}.
+Here, for each time slot, $t$, a pre-scheduled ESMU power vector, $\textbf{s}_{ESMU}(t)$, is extracted and adjusted by an offset vector, $\delta \textbf{s}_{ESMU}(t)$.
+This offset vector is found through the aforementioned optimiser that minimises the global cost function, $\zeta(\boldsymbol{\alpha})$, by repetitively running power flow simulations of the IEEE distribution feeder.
+Once the adjusted ESMU schedule (i.e. $\textbf{s}_{ESMU}(t) + \delta \textbf{s}_{ESMU}(t)$) is no longer changed by the optimiser, the closed-loop optimisation process ends and the simulation continues to the next time slot (i.e. $t+1$).
+
+Since $\delta \textbf{s}_{ESMU}(t)$ must not impact the underlying half-hourly ESMU schedule, one more constraint is defined.
+This constraint assures that the sum of all phase powers in the adjustment vector equates to zero, hence keeping the internal battery's dis/charging power the same.
+Including the previously mentioned battery system constraints, which ensure that the ESMU operates within its technical limitations (e.g. to not over- or undercharge the battery), the minimisation problem for the closed-loop optimisation mechanism can be formulated as follows:
+
+\input{_chapter1/equ/closed-loop-minimisation}
+
+\subsection{Method evaluation}
+% a.k.a. Case studies...
+
+
+
+
