@@ -5,7 +5,7 @@ In the previous two sections, the key network parameters and associated cost fun
 Then the used network models, data and battery models were explained.
 Now, the implemented method on generating a traditional ESMU schedules is presented, before presenting the novel approach of adjusting this schedule using on-line readings.
 
-\subsection{ESMU Schedule generation}
+\subsection{ESMU Schedule Generation}
 \label{ch1:subsec:esmu-schedule-generation}
 
 As discussed in the literature review in Chapter \ref{ch-review}, the main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
@@ -46,7 +46,7 @@ Nonetheless, the overall improvement yielded by the ESMU schedule is still notic
 In the following section, the underlying closed-loop schedule adjustment method is explained, where it will be shown how individual key network parameters can be positively impacted without deviating from this already optimised half-hourly schedule.
 The constraint of having to follow this half-hourly ESMU schedule is lifted in Chapter \ref{ch2}, where a real-time schedule adjustment method is proposed and researched.
 
-\subsection{Closed-Loop Schedule Adjustment Method}
+\subsection{Closed-Loop Schedule Adjustment}
 
 To quickly summarise, the following key network parameters are used in this chapter:
 
@@ -65,7 +65,8 @@ Together with these key network parameters, and the cost functions defined in Se
 \input{_chapter1/equ/weighted-sum-cost-function}
 
 Here, $\boldsymbol{\alpha}$ is a binary choice vector, with which the weight of the global cost function can easily be adjusted.
-For simpler notations throughout this section, the global cost function is therefore referred to as $\zeta(\boldsymbol{\alpha})$, since all key network parameters are outputs of the power flow simulations.
+In other words, this vector allows to target the network improvement based by focusing on a specific cost, rather than optimising the network operation based on the complete set of (sometimes contradicting) costs.
+Since all key network parameters are outputs of the power flow simulations and not directly adjustable, and for simpler notations throughout this section, the global cost function is shortened to $\zeta(\boldsymbol{\alpha})$.
 
 \input{_chapter1/fig/closed-loop-optimisation}
 
@@ -80,7 +81,7 @@ Including the previously mentioned battery system constraints, which ensure that
 
 \input{_chapter1/equ/closed-loop-minimisation}
 
-\subsection{Method evaluation}
+\subsection{Method Evaluation}
 % a.k.a. Case studies...
 
 

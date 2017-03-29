@@ -131,8 +131,9 @@ For this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t
 
 Beside having to keep voltages within their specified operational boundaries, DNOs want to make sure that the distribution network operates in an efficient and ideal manner.
 Determining how ideal a three-phase network operates can be done by e.g. assessing the balance of the network's phases.
-The frequently neglected disturbance of unbalanced phases may not have an immediately associated impact on the network's customers, but the negative long term effects (e.g. the effects of asymmetric load on transformers and rotating machones) must not be neglected since they weaken the network's infrastructure.
-The choice of how to connect customers to the LV feeder makes phase unbalance a dominant problem in the UK.
+The frequently neglected disturbance of unbalanced phases may not have an immediately associated impact on the network's customers, but the negative long term effects (e.g. asymmetric load on transformers, rotating machines and increased neutral current) must be addressed since they weaken the network's infrastructure.
+
+The choice of how customers are connected to LV feeders in the UK makes phase unbalance a more dominant problem than one might have thought.
 Customers in urban UK distribution networks have a single-phase link to the three-phase feeder line.
 The link is established by connecting their supply cables or ``laterals'' between a phase and the neutral conductor.
 In the UK, the phase allocation for each customer has been random, in order to distribute load as evenly as possible across all three phases.
@@ -154,11 +155,34 @@ The resulting cost function $\zeta_\text{unbalance}(\textbf{s}_{ss})$ is defined
 
 The minimum value of $\text{UF}(\textbf{s}_{ss})$ is one.
 Therefore an adjustment was required so that a perfectly balance network would result in an $\text{UF}(\textbf{s}_{ss})$ of zero.
-An illustration how this cost function is provided in the figure below.
+An illustration how this cost function is provided in the Figure \ref{ch1:fig:power-unbalance}, as shown below.
 
 \input{_chapter1/fig/power-unbalance}
 
 Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s})$ varies with an increasing separation of the three phases' power values.
+
+Additionally, to assess the effective utilisation of the power distribution network, the Power Factor (PF) divergence is also addressed.
+PF is the ratio between the supplied active and apparent power.
+It therefore gives an indication of how much ``good''\footnote[1]{Reactive power is used to maintain magnetic fields in rotating machines, yet this can be supplied by local reactive power compensators and thus need not occupy otherwise free power transmission resources.} power is being consumed by the system.
+Experts would agree that keeping the PF of a system close to unity indicates that the system only draws active power and therefore is using the least amount of power transmission resources.
+In order to asses the proximity to unity PF a PF cost function, $\zeta_{PF}(\textbf{s}_{ss}(t))$, is defined a power vector as input:
+
+\input{_chapter1/equ/power-factor}
+
+Here, deviating from a unity PF per phase increases the associated cost, whilst achieving a perfect PF for each phase results in a total cost of zero.
+
+Lastly, the already mentioned neutral current is also a result of both three-phase unbalance and non-unity PF.
+Since all three phases are $120^\circ$ out of phase, the sum of instantaneous powers should equate to zero.
+This would result in no neutral current flowing in the system.
+However, in an unbalanced system the power transmitted through the neutral conductor deviates significantly from zero.
+This situation is amplified since power distribution cables often use neutral conductors with significantly smaller diameter than those conductors used for the lines.
+Therefore, any additional power flow in this neutral conductor will deviate neutral voltages from zero volts and it could also exhaust the conductor's power carrying capacity, making the system more prone to failures.
+To address this last point, and before dealing with line utilisation, a final cost function that deals with the neutral loading $\zeta_{neutral\;\;load}(\textbf{s}_{ss}(t))$ is defined as follows:
+
+\input{_chapter1/equ/neutral-load}
+
+It is worth mentioning that, unlike all other cost functions, $\zeta_{neutral\;\;load}(\textbf{s}_{ss}(t))$ is scaled differently.
+Therefore 
 
 \subsection{Substation line utilisation}
 \label{ch1:subsec:substation-line-utilisation}
