@@ -83,6 +83,7 @@ Including the previously mentioned battery system constraints, which ensure that
 
 
 \subsection{Method Execution and Result Assessment Procedure}
+\label{ch1:subsec:method-execution}
 
 After having established what parameters to focus on when trying to improve network operation, and after having established how the closed-loop optimising method aims to achieve this improvement, the performance assessment for the improvement method is introduced now.
 To support the explanation of the evaluation procedure, the entire assessment procedure is captured in Figure \ref{ch1:fig:method-evaluation-flowchart}.
@@ -104,14 +105,14 @@ All eleven datasets are then assessed in the same manner in order to compare the
 This underlying assessment is broken into three parts for each dataset:
 
 \begin{enumerate}
-	\item
+	\item \textbf{Time Series Analysis} - 
 	The underlying raw profiles are plotted and compared against their respective counterpart cases, in order to link the immediate network impacts to their physical meaning.
 	For the same profiles, their corresponding cost profiles are calculated plotted.
 	This is done to to highlight how the profiles are interpreted by the cost-functions in terms of improvement (i.e. lower cost) or worsening (i.e. increased cost).
-	\item
+	\item \textbf{Difference Analysis} - 
 	The difference in cost profiles, compared to the respective \textit{base} or \textit{normal} case, is calculated and boxplots of these differences are presented to show a statistical spread of improvements or worsening.
 	For these plots, a generally positive boxplot skew indicates a general improvement of the underlying network parameters, whilst a generally negative skew does indicate worse performance in regards to the underlying network parameters.
-	\item
+	\item \textbf{Probability Density Analysis} - 
 	A set of Probability Density Functions (PDF) is derived for each cost profile using the well established kernel density estimation.
 	These PDFs indicate the probability that a certain cost value occurs.
 	An improvement is noted when the PDF is shifted towards the lower cost values, whereas a shift towards higher cost values worsened the network performance.
