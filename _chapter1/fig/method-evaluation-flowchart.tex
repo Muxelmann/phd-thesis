@@ -1,0 +1,96 @@
+\begin{figure}\centering
+
+% Define some block styles
+\tikzstyle{data} = [rectangle, draw, inner sep=1em, text centered, rounded corners=5pt, fill=white]
+\tikzstyle{method} = [rectangle, draw, inner sep=1em, text centered, align=center]
+\tikzstyle{output} = [rectangle, draw, minimum height=1cm, minimum width=2.5cm, text centered, rounded corners=5pt, fill=yellow!20]
+
+\scalebox{0.7}{%
+\begin{tikzpicture}[node distance=3cm, shorten >= 1pt, >=stealth', auto, anchor=west]
+	
+	\node (centre) [] {};
+	
+	\node (power_profiles) [data, left of=centre, xshift=1cm] {Power Profiles};
+	\node (battery_model) [data, right of=centre, xshift=-1cm] {Battery Model};
+	
+	\node (inputA) [left of=battery_model, yshift=1cm, xshift=-9cm] {};
+	\node (inputB) [left of=battery_model, yshift=-1cm, xshift=-9cm] {};
+	\draw [decorate,decoration={brace,mirror,amplitude=10pt,raise=4pt},yshift=0pt] (inputA) -- (inputB) node [left,black,midway,align=center,xshift=-10mm,rotate=90,anchor=center] {Input Data};
+	
+	\node (optimisation) [method, below right of=battery_model, yshift=-1.5cm, fill=green!20] {Closed-Loop Optimisation Method};
+	\node (normal_run) [method, left of=optimisation, xshift=-3.5cm, fill=blue!20] {Normal Simulation};
+	\node (base_run) [method, left of=normal_run, xshift=-1.5cm, fill=red!20] {Base Simulation};
+	
+	\node (simA) [left of=battery_model, yshift=-2.2cm, xshift=-9cm] {};
+	\node (simB) [left of=battery_model, yshift=-5.2cm, xshift=-9cm] {};
+	\draw [decorate,decoration={brace,mirror,amplitude=10pt,raise=4pt},yshift=0pt] (simA) -- (simB) node [left,black,midway,align=center,xshift=-10mm,rotate=90,anchor=center] {Simulations};
+	
+	\draw [->, out=270, in=120] (power_profiles.south) to (optimisation.north);
+	\draw [->, out=270, in=90] (power_profiles.south) to (normal_run.north);
+	\draw [->, out=270, in=60] (power_profiles.south) to (base_run.north);
+	\draw [->, out=270, in=120] (battery_model.south) to (optimisation.north);
+	\draw [->, out=270, in=60] (battery_model.south) to (normal_run.north);
+
+	\def\offsetx{-5};
+	\def\offsety{-4};
+	\node (alpha_base) [output, below of=centre, yshift=\offsety cm, xshift=\offsetx cm-3cm, fill=red!20] {$base$};
+	\draw [->, out=270, in=60] (base_run) to (alpha_base);
+	\foreach \i [evaluate=\i as \x using 3*\i/2+\offsetx] in {0,2,...,8}
+	{
+		\foreach \j [evaluate=\j as \y using -1.5*\j] in {0, 1}
+		{
+			\pgfmathtruncatemacro{\k}{\i+1-\j}
+			\if\k0
+				\node (alpha_normal) [output, below of=centre, yshift=\offsety cm+\y cm, xshift=\y cm+\x cm, fill=blue!20] {$normal$};
+				\begin{scope}[on background layer]\draw [->, out=270, in=60] (normal_run) to (alpha_normal);\end{scope}
+			\else
+				\node (alpha_\k) [output, below of=centre, yshift=\offsety cm+\y cm, xshift=\y cm+\x cm] {$\zeta(\alpha_{\k} = 1)$};
+				\begin{scope}[on background layer]
+					\ifnum7>\k
+						\draw [->, out=270, in=60] (optimisation) to (alpha_\k);
+					\else
+						\ifnum7=\k
+							\draw [->, out=270, in=90] (optimisation) to (alpha_\k);
+						\else
+							\draw [->, out=270, in=120] (optimisation) to (alpha_\k);
+						\fi
+					\fi
+				\end{scope}
+			\fi
+		}
+	}
+	
+	
+	\node (dataA) [left of=battery_model, yshift=-6cm, xshift=-9cm] {};
+	\node (dataB) [left of=battery_model, yshift=-9.4cm, xshift=-9cm] {};
+	\draw [decorate,decoration={brace,mirror,amplitude=10pt,raise=4pt},yshift=0pt] (dataA) -- (dataB) node [left,black,midway,align=center,xshift=-10mm,rotate=90,anchor=center] {Results or\\Datasets};
+	
+	\foreach \i [evaluate=\i as \k using int(round(\i-1))] in {0,1,2,...,10}
+	{
+		\pgfmathsetmacro\x{1.5*\i}
+		\pgfmathsetmacro\y{-\i*0.5};
+		
+		\ifnum1>\k
+			\ifnum0=\i
+				\node (assess_base) [method, below of=alpha_base, yshift=\y cm, xshift=\x cm, anchor=north, fill=red!20] {$base$ assessment};
+				\draw [->] (alpha_base) to (assess_base);
+			\else
+				\node (assess_normal) [method, below of=alpha_base, yshift=\y cm, xshift=\x cm, anchor=north, fill=blue!20] {$normal$ assessment};
+				\draw [->] (alpha_normal) to (assess_normal);
+			\fi
+		\else
+			\node (assess_\k) [method, below of=alpha_base, yshift=\y cm, xshift=\x cm, anchor=north, fill=yellow!20] {$\zeta(\alpha_{\k}=1)$ assessment};
+			\draw [->] (alpha_\k) to (assess_\k);
+		\fi
+	}
+
+
+	\node (braceA) [below of=assess_base, yshift=1.5cm, xshift=-1.5cm] {};
+	\node (braceB) [left of=assess_9, yshift=-1.5cm, xshift=1.5cm] {};
+	\draw [decorate,decoration={brace,mirror,amplitude=10pt,raise=4pt},yshift=0pt] (braceA) -- (braceB) node [below,black,midway,yshift=-8mm,anchor={north east},align=right] {Data Assessments\\\footnotesize Each assessment is comparing \\\footnotesize all nine cost-functions};
+	
+\end{tikzpicture}%
+}
+\caption{Method execution and results assessment flowchart}
+\label{ch1:fig:method-evaluation-flowchart}
+\end{figure}
