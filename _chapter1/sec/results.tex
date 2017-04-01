@@ -2,8 +2,8 @@
 \label{ch1:sec:results-and-discussion}
 
 In this section, all results from the three assessment parts that were outlined in Section \ref{ch1:subsec:method-execution} are presented, and they are briefly discussed, too.
-Each assessment focus on improvements in voltage level, power quality, network losses and resource utilisation, in that order.
-For completeness and transparency however, the complete analysis of the entire data for each part of the assessment is included in this Thesis' Appendix, Chapter \ref{appx-a:ch1}.
+Each assessment focus on improvements in voltage level, improvements in network efficiency (i.e. power quality and network losses), and improvements in resource utilisation, in that order.
+For completeness and transparency however, the complete analysis of the entire data for each part of the assessment is included in this Thesis' Appendix, Section \ref{appx-a:ch1}.
 
 \subsection{Time Series Analysis}
 \label{ch1:subsec:time-series-analysis}
@@ -38,11 +38,72 @@ The first power related parameter that to indicate network efficiency is the pha
 
 \input{_chapter1/fig/ts-phase-unbalance}
 
+In Figure \ref{ch1:subfig:ts-phase-unbalance}, the most and least loaded phases' power values are plotted against time.
+At all times, the sub-half-hourly adjustments of the ESMU's schedule could reduce the underlying phase imbalance.
+It did so by alleviate some load from the most loaded phase and utilise the unused capacity on the lighter loaded phases.
+Correspondingly, the associated phase unbalance cost has noticeably lowered in comparison to the normal and base cases.
+It should however be noted, that phase balancing behaviour during the morning hours is predominantly comprised of reactive power injection and absorption, since the ESMU's half-hourly.
+Therefore, the tradeoff between adding additional strain on the network, versus balancing phases has to be taken into account.
+One unnecessary strain on the network is additional neutral power flow, which is inadvertently linked to phase unbalance.
 
+\input{_chapter1/fig/ts-neutral-power}
+
+The results plotted in Figure \ref{ch1:fig:ts-neutral-power} show the network impact when adjusting the ESMU's schedule in order to minimise neutral power flow.
+Incidentally, when applying the normal half-hourly ESMU schedule, neutral power is not affected at all.
+The reason behind this was the choice of evenly assigning the scheduled power to all three phases, instead of taking into account the phases' loadings.
+Power factor on the other hand was impacted just by introducing the half-hourly ESMU schedule, as shown in the following figure.
+
+\input{_chapter1/fig/ts-power-factor}
+
+Here, in Figure \ref{ch1:fig:ts-power-factor}, the power factor cost is successfully reduced during the entire day, in comparison to the normal cases.
+In contrast, the base case had a constant power factor cost, due to aforementioned assignment of a constant power factor of 0.95 to all loads.
+In reality, however, any network's power factor varies over time since the number of inductive machines and their associated inductive load varies constantly.
+Nonetheless, the results would be similar but more variable when applied to a network with varying power factor, since the aim when adjusting the ESMU schedule was to reduce the power factor's deviation from unit power factor.
+The final parameter that indicates system efficiency are the distribution losses.
+
+\input{_chapter1/fig/ts-losses}
+
+Figure \ref{ch1:fig:ts-losses} shows the reduction in distribution losses that were achieved when adjusting the ESMU schedule accordingly.
+Again, the schedule adjustment reduced losses throughout the entire day.
+In fact, an additional 6.42\% of energy savings could be achieved, simply by adjusting the ESMU's power injection and absorption behaviour.
+Whilst this amount of energy may seem insignificant on a small scale, saving this amount of energy on a national level could potentially benefit the entire power network.
+However, losses are difficult to measure and attempting to do so would most likely outweigh the benefits.
+
+Instead, a better way of relieving stress from the power network is to minimise its assets utilisation by mitigating demand spikes.
+Since the ESMU was constraint not to deviate from its underlying half-hourly schedule, only phase related demand differences could be addressed.
+Those differences could however be addressed successfully, as shown in the following figure.
+
+\input{_chapter1/fig/ts-all-line-utilisation}
+
+Whilst the worst line utilisation is predominantly driven by the half-hourly charging and discharging behaviour of the ESMU, a subtle reduction could be achieved throughout the entire day, as shown in Figure \ref{ch1:fig:ts-all-line-utilisation}.
+Yet as mentioned before, the constraint that is imposed due to the underlying half-hourly schedule significantly limits this improvement in network performance.
 
 \subsection{Difference Analysis}
 \label{ch1:subsec:difference-analysis}
 
+In order to gage the whether the is a statistical difference in network performance, a box-plot was generated for each case.
+The underlying data for each box-plot is the difference between the case's cost and the associated cost when letting the ESMU operate normally, i.e. without adjusting its schedule.
+Any improvement would result in a positive difference, and any worsening would result in a negative difference.
+
+Here, the improvements for each individual cost are compared to the normal case and plotted in Figure \ref{ch1:fig:boxplot-overall-improvements}.
+A further set of comparing figure is however included in Appendix Section \ref{appx-a:ch1:additional-difference-analysis}, where the impacts on all costs, when minimising a for only an individual cost are compared.
+Instead of including all these figures in the main body of this Thesis, the sum of all costs is computed and included in a table to give a first indication of the cross-cost improvements.
+
+\input{_chapter1/fig/boxplot-overall-improvements}
+
+It can be seen that the most significant cost related impact on the network was on the improvement of phase unbalance, neutral power and power facto.r
+The suspected reason for this noticeably larger but positive impact is, that the means of adjusting the ESMU schedule have the biggest and most direct impact on those three key network parameters.
+These means of adjustment are the modification of reactive power and the distribution of charging and discharging power across all there phases.
+
+Nonetheless, all key network parameters were impacted positively when they became subject to their associated cost-function minimisation.
+But since LV networks are inherently more resistive than inductive, any voltage impacts are noticeably smaller.
+And due to the constraining half-hourly schedule, the impact on line utilisation was limited, too.
+
+\input{_chapter1/tab/cost-table}
+
+
 
 \subsection{Probability Density Analysis}
 \label{ch1:subsec:probability-density-analysis}
+
+\input{_chapter1/tab/ks-test-table}
