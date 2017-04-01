@@ -2,7 +2,7 @@
 \label{ch1:sec:results-and-discussion}
 
 In this section, all results from the three assessment parts that were outlined in Section \ref{ch1:subsec:method-execution} are presented, and they are briefly discussed, too.
-Each assessment focus on improvements in voltage level, power quality, resource utilisation and network losses, in that order.
+Each assessment focus on improvements in voltage level, power quality, network losses and resource utilisation, in that order.
 For completeness and transparency however, the complete analysis of the entire data for each part of the assessment is included in this Thesis' Appendix, Chapter \ref{appx-a:ch1}.
 
 \subsection{Time Series Analysis}
@@ -27,6 +27,17 @@ The ability to support voltage levels at the ESMU's PCC is interesting, yet to s
 Therefore, the next voltage plot inspects both the highest and lowest voltage level that was recorded throughout the network.
 
 \input{_chapter1/fig/ts-all-voltages}
+
+In Figure \ref{ch1:subfig:ts-all-voltages}, despite no voltage violations taking place due to the already boosted substation voltage, the ESMU's positive impact can be observed.
+Here, the difference between highest and lowest voltage in the network was noticeably reduced at all times and their average was brought closer to the network's nominal voltage.
+The ESMU's function to support the network in providing more stable voltage levels at customer endpoints can therefore be fulfilled.
+This fact is also reflected in the associated cost plot, i.e. in Figure \ref{ch1:subfig:ts-all-voltages-cost}.
+
+Beside providing stable voltage levels, power quality should also be upheld to assure that the distribution network operates as efficient as possible.
+The first power related parameter that to indicate network efficiency is the phase unbalance.
+
+\input{_chapter1/fig/ts-phase-unbalance}
+
 
 
 \subsection{Difference Analysis}
