@@ -116,6 +116,12 @@ It is also interesting to see, how a specific cost minimisation had noticeable i
 For example, adjusting the ESMU schedule to achieve the largest reduction in distribution losses (i.e. far right column) had an impact on all key network parameters.
 This impact was also positive in nature for all key network parameters (apart from substation voltage deviation).
 
+Then again, although the network optimisation for an optimised line and fuse loading did result in a positive cumulative cost difference, reduction in power factor had a more significant positive impact.
+The reason behind this is that instantaneous apparent power contributes to the loading.
+This means, that increasing the power factor inadvertently reduces reactive load, which in turn lowers the total current flowing into the system.
+Not knowing what cost to address first, makes it difficult for the used solving algorithm to find the global minimum.
+To improve the performance of the adjusted ESMU schedule, one could concatenate the cost minimisation in series to locate regions where lower minima may be found.
+In this case at least, maximising the network's power factor before addressing fuse and line utilisation would have been a better choice.
 
 \subsection{Probability Density Analysis}
 \label{ch1:subsec:probability-density-analysis}
