@@ -82,28 +82,44 @@ Yet as mentioned before, the constraint that is imposed due to the underlying ha
 \label{ch1:subsec:difference-analysis}
 
 In order to gage the whether the is a statistical difference in network performance, a box-plot was generated for each case.
-The underlying data for each box-plot is the difference between the case's cost and the associated cost when letting the ESMU operate normally, i.e. without adjusting its schedule.
-Any improvement would result in a positive difference, and any worsening would result in a negative difference.
+The underlying data for each box-plot is the paired difference between the corresponding case's costs and the associated normal case's costs, i.e. when letting the ESMU operate normally, without adjusting its schedule.
+Any positive difference in those costs indicates an improvement to the system's performance, whilst a negative difference would imply a worsening.
 
-Here, the improvements for each individual cost are compared to the normal case and plotted in Figure \ref{ch1:fig:boxplot-overall-improvements}.
-A further set of comparing figure is however included in Appendix Section \ref{appx-a:ch1:additional-difference-analysis}, where the impacts on all costs, when minimising a for only an individual cost are compared.
-Instead of including all these figures in the main body of this Thesis, the sum of all costs is computed and included in a table to give a first indication of the cross-cost improvements.
+Here, the improvements for each individual cost are compared and plotted in Figure \ref{ch1:fig:boxplot-overall-improvements}.
+A further set of comparing figures is also included in Appendix Section \ref{appx-a:ch1:additional-difference-analysis}, where the impacts on all costs, when minimising a for only an individual cost are compared.
+Instead of including all these figures in the main body of this Thesis, the sum of all costs is computed and included in a table to give a more comprehensive indication of these so called cross-cost improvements.
 
 \input{_chapter1/fig/boxplot-overall-improvements}
 
-It can be seen that the most significant cost related impact on the network was on the improvement of phase unbalance, neutral power and power facto.r
-The suspected reason for this noticeably larger but positive impact is, that the means of adjusting the ESMU schedule have the biggest and most direct impact on those three key network parameters.
-These means of adjustment are the modification of reactive power and the distribution of charging and discharging power across all there phases.
-
+In Figure \ref{ch1:fig:boxplot-overall-improvements}, it can be seen that the most significant cost related impact on the network was on the improvement of phase unbalance, neutral power and power factor.
+The reason for this noticeably larger impact is that the ESMU can assign its scheduled active power in an arbitrary manner to all three phases, as long as the predetermined half-hourly schedule is followed.
+It is this constraint of having to obey the schedule, that limits the impact on all other key network parameters.
+Reactive power on the other hand is not directly limited to this constraint, since it is not scheduled as such.
+The only limit that applies to the ESMU's reactive power injection capabilities, is the remaining PMU capacities when applying the active powers in order to follow the half-hourly schedule.
+Also, unlike active power, reactive power has a smaller impact on the LV network due to its physical property, i.e. being more resistive than inductive.
 Nonetheless, all key network parameters were impacted positively when they became subject to their associated cost-function minimisation.
-But since LV networks are inherently more resistive than inductive, any voltage impacts are noticeably smaller.
-And due to the constraining half-hourly schedule, the impact on line utilisation was limited, too.
+
+To summarise the aforementioned cross-cost improvements (which are presented in detail in the Appendix, Section \ref{appx-a:ch1:additional-difference-analysis}), all costs are calculated for all minimisation cases, compared against the normal case, and accumulated into a single value.
+This value is defined as the ``cumulative cost difference''.
+Additionally, the normal case is compared to the base case in a similar manner.
+This was done since it is interesting to see how the half-hourly schedule impacted the network.
 
 \input{_chapter1/tab/cost-table}
 
+The cumulative cost differences are tabulated in Table \ref{ch1:tab:cost-table}.
+Every improvement in system operation is reflected as a reduction in cost, when compared to the corresponding normal or base case.
+Therefore, a positive cumulative cost difference indicates, that over an entire day, the system operation improved in regards to the given cost.
+Here, these improvements, i.e. positive cumulative cost differences, have been highlighted.
+
+As expected, all entries along the diagonal, i.e. where the evaluated cost is also the cost that was minimised for the underlying case, nearly always show the largest cumulative cost differences.
+It is also interesting to see, how a specific cost minimisation had noticeable impacts on different cumulative cost measures.
+For example, adjusting the ESMU schedule to achieve the largest reduction in distribution losses (i.e. far right column) had an impact on all key network parameters.
+This impact was also positive in nature for all key network parameters (apart from substation voltage deviation).
 
 
 \subsection{Probability Density Analysis}
 \label{ch1:subsec:probability-density-analysis}
+
+
 
 \input{_chapter1/tab/ks-test-table}
