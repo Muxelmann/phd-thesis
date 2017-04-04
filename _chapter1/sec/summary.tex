@@ -1,2 +1,16 @@
 \section{Summary}
 \label{ch1:sec:summary}
+
+In this chapter, a method to adjust an ESMU schedule to support network operation has been developed and tested.
+The underlying schedule was a half-hourly dis/charge profile that the battery had to follow.
+Through the adjustment of the three-phase ESMU power, both active and reactive power could be adjusted in order to minimise a set of defined costs.
+The results indicate, that when explicitly focusing on the improvement of certain key network parameters, then in every case the derived cost reduced.
+Furthermore, for most cost minimisation attempts, different costs were impacted, too (i.e. loss minimisation impacted nearly all other costs).
+Using cumulative cost differences it was shown that a net cost reduction could be achieved, when implementing the proposed schedule adjustment method.
+\textcolor{red}{\hl{This fact is also the reason why the resulting probability density analysis, using the two-paired $t$-test and Kolmogorov-Smirnov test, disproved the null hypothesis as it was formulated for this chapter.}}
+Therefore, there is strong evidence that adjustments of ESMU schedules on a sub-half-hourly bases have positive impacts on the distribution network's operation.
+
+The main limitation of the proposed method is however the battery's half-hourly schedule.
+It dictates the total active power that has to be injected into or absorbed from the distribution network.
+Also, this schedule inadvertently dictates the remaining overhead in reactive power that may be compensated for on each phase.
+Therefore, the next chapter addresses how the active power schedule may be corrected in real-time.
