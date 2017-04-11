@@ -1,4 +1,4 @@
-\documentclass[12pt]{ociamthesis}  % default square logo 
+\documentclass[12pt,a4paper,twoside,openright]{ociamthesis}  % default square logo 
 %\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
 %\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
 
@@ -27,7 +27,8 @@
 % For flowchart
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,positioning,fit,calc,backgrounds,chains, decorations.pathreplacing}
-
+% For coloring
+\usepackage{color,soul}
 
 % What was additionally imported by MDPI style
 \usepackage{graphicx}
@@ -45,7 +46,7 @@
 %  \renewcommand{\includegraphics}[2][]{\Oldincludegraphics[width=0.9\textwidth,#1]{#2}}
   \renewcommand{\includegraphics}[2][]{%
 	\ifstrempty{#1}{%
-	  \Oldincludegraphics[width=0.9\textwidth]{#2}%
+	  \Oldincludegraphics[width=0.95\textwidth]{#2}%
 	}{%
 	  \Oldincludegraphics[#1]{#2}%
 	}%
