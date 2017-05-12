@@ -1,0 +1,21 @@
+\begin{sidewaystable}\centering
+\definecolor{light_blue}{rgb}{0.9, 0.9, 1.0}
+\definecolor{dark_blue}{rgb}{0.5, 0.5, 1.0}
+\definecolor{light_red}{rgb}{1.0, 0.5, 0.5}
+\begin{tabular}{cc|ccccccccc|}
+& & \multicolumn{9}{c}{minimisation cases} \\
+& \rotatebox[origin=l]{90}{normal}& \rotatebox[origin=l]{90}{substation voltage deviation}& \rotatebox[origin=l]{90}{battery voltage deviation}& \rotatebox[origin=l]{90}{maximum voltage deviation}& \rotatebox[origin=l]{90}{phase unbalance}& \rotatebox[origin=l]{90}{neutral power}& \rotatebox[origin=l]{90}{power factor}& \rotatebox[origin=l]{90}{substation fuse loading}& \rotatebox[origin=l]{90}{maximum line loading}& \rotatebox[origin=l]{90}{losses} \\
+\hline
+\multicolumn{1}{r|}{substation voltage deviation} & $0.851$ & \cellcolor{light_blue}$<0.001$ & $0.999$ & $1.000$ & $0.999$ & $1.000$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & $0.999$ \\
+\multicolumn{1}{r|}{battery voltage deviation} & $0.899$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$0.022$ & \cellcolor{light_blue}$0.018$ & $0.325$ & \cellcolor{light_blue}$<0.001$ \\
+\multicolumn{1}{r|}{maximum voltage deviation} & $0.718$ & \cellcolor{light_blue}$0.000$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & $0.086$ & $0.167$ & $0.772$ & \cellcolor{light_blue}$<0.001$ \\
+\multicolumn{1}{r|}{phase unbalance} & $0.331$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$0.001$ & \cellcolor{light_blue}$0.038$ & \cellcolor{light_blue}$<0.001$ \\
+\multicolumn{1}{r|}{neutral power} & $0.940$ & $0.999$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$0.016$ & \cellcolor{light_blue}$<0.001$ \\
+\multicolumn{1}{r|}{power factor} & $0.488$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$0.020$ & $0.999$ & $0.999$ & $1.000$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ \\
+\multicolumn{1}{r|}{substation fuse loading} & $0.777$ & \cellcolor{light_blue}$<0.001$ & $0.929$ & $0.999$ & $0.999$ & $1.000$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$0.001$ \\
+\multicolumn{1}{r|}{maximum line loading} & $0.846$ & \cellcolor{light_blue}$<0.001$ & $0.996$ & $0.999$ & $0.999$ & $0.999$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & $0.102$ \\
+\multicolumn{1}{r|}{losses} & $0.881$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & $0.637$ & $0.910$ & $0.999$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ & \cellcolor{light_blue}$<0.001$ \\
+\end{tabular}
+\caption{$p$-values for statistical evidence of cross-cost improvements based on statistical two-sample single-tailed $t$-test.}
+\label{ch1:tab:t-test-table}
+\end{sidewaystable}
