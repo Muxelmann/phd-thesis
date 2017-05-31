@@ -1,3 +1,43 @@
 \section{Overview}
 \label{ch3:sec:overview}
 
+In previous chapters the the question regarding how one can optimally control a single battery has been addressed.
+It was shown that half-hourly forecasts can be used to predict demand due to customer behaviours.
+With this knowledge, Battery Energy Storage Systems (BESS) can be scheduled shave peak load in order to avoid overloading the already stressed system.
+However, sub-half-hourly issues cannot be addressed by traditional BESS schedules, which is why two successive sub-half-hourly power adjustment methods were developed.
+The first method improved network operation by focusing on the underlying three-phase network topology, whilst strictly following the underlying half-hourly SOC plan.
+The second method on the other hand alleviated this constraint by adjusting total power flow instead.
+Benefits from using BESS schedules complement dynamic feedback and yield improved power profiles with reduced peak load.
+
+The logical next step is to take such schedules and apply them to multiple, distributed batteries.
+To prevent the negative impact from battery charging, particularly when dealing with the home-charging of Electric Vehicles (EVs), their charging scheduling needs to be coordinated.
+As already discussed in Section \ref{ch-review}, multiple EV scheduling methods exist.
+Approaches propose demand prioritisation, multi-tariff environments or other game theory approaches to maximise global benefit whilst reducing the individual's disadvantages.
+Here, coordination of charge scheduling signals becomes a vital requirement to react to other EV's charging plans.
+This statement is commonly acknowledged, yet in a system of distributed scheduling the assumption of perfect knowledge about the environment no longer holds.
+
+In fact, during distributed scheduling, control instructions that may be broadcasted by each EV, to inform all other EVs in the system of updated charging plan, need not or cannot be sent at certain times unless message synchronisation is guaranteed.
+Therefore, this chapter studies the impact of desynchronising message propagation by adding transmission jitter to the updating broadcasts.
+Here, EVs are used since their so called ``smart-charging'' behaviour is intended to avoid home-charging related load spikes.
+A robust smart-charging algorithm to determine multiple EVs' charging schedule is presented and executed in both a synchronised and a desynchronised messaging scenario.
+This smart-charging algorithm is designed to prevent aggregated demand, due to EV charging, from reaching certain peak power.
+A Multi-Agent System (MAS) is implemented to perform the distributed scheduling using the Foundation for Intelligent Physical Agents (FIPA) compliant agents.
+
+Results show how synchronised scheduling leads to expected outcomes that have also been established in literature.
+However, adding jitter to message broadcasting significantly changes the same algorithm's behaviour.
+Differences regarding rate of convergence and criteria for stability are most noticeable.
+In this chapter, a brief summary of distributed control and the reasons for choosing a multi-agent system is presented in Section \ref{ch3:sec:distributed-systems}.
+Then, the EV scheduling algorithm is detailed and the two cases for synchronised and desynchronised information propagation are outlined in Section \ref{ch3:sec:ev-coordination}.
+Section \ref{ch3:sec:results} presents and discusses the results from these two cases, upon which conclusions is drawn and presented in Section \ref{ch3:sec:summary}.
+
+
+
+
+
+
+
+
+
+
+
+
