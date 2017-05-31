@@ -1,0 +1,115 @@
+\section{Control of BESS}
+\label{ch2:sec:control-of-bess}
+
+In this section, the dynamic control entailing the two PID controllers is explained.
+Since one of these controllers requires MPC in order to function, the auto-regressive models that were used during the course of this research are explained, too.
+
+\subsection{Dynamic control}
+
+Two inputs are used as reference signals in the dynamic controller.
+The first reference signal is the BESS scheduled and the second is an estimated next network power.
+These two inputs are fed into compensator PID$_1$ and compensator PID$_2$, respectively.
+The output of each compensator is a corrective battery power component that, when summed, return the next BESS power, i.e. $p(t+\tau)$.
+Each PID compensator also receives a feedback signal.
+Here, PID$_1$ is fed by the current SOC measurements from the battery, $SOC(t)$, and PID$_2$ receives the network's most recent power demand, $p_{network}(t)$ (e.g. through measurements from substation monitoring).
+This procedure is represented in Figure \ref{ch2:fig:system-controller}, where the controller constituent of the system diagram in Figure \ref{ch2:fig:system-diagram} is expanded in relation to its surrounding components.
+
+\input{_chapter2/fig/system-controller}
+
+Focusing on compensator PID$_1$, it should remembered noted, that the original BESS schedule is of half-hourly resolution.
+Therefore the control diagram above receives an interpolated SOC value from the schedule, by using the predefined battery model to forward compute the scheduled SOC.
+It is this higher resolution SOC value that is used during the corresponding sub-half-hourly time-slot.
+When compared to the most recent SOC that was reported from the BESS, an error term can be derived, i.e,:
+
+\input{_chapter2/equ/soc-error}
+
+Applying the standard weighted dynamic gain (with $\alpha_P$, $\alpha_I$ and $\alpha_D$, being the P, I and D weights, respectively) the SOC derived corrective battery power component is defined as:
+
+\input{_chapter2/equ/corrective-component-soc}
+
+Here, the integral component removes steady-state error and the instantaneous error differential bounds overshooting the SOC.
+Therefore, this compensator uses present (and past) values to issue a corrective future BESS instruction.
+Compensator PID$_2$ on the other hand uses values from the present, past and future in order to minimise the power transient.
+
+\input{_chapter2/fig/power-transient-minimisation}
+
+Figure \ref{ch2:fig:power-transient-minimisation} summarises the time series computations for each power sample at times $t$, $t+\tau$, etc.
+Here, PID$_2$ ideally uses present power readings, $p_{network}(t)$, and a power value of the immediate future, i.e. $p_{network}(t+\tau)$, to compute power error signal, which is defined as follows:
+
+\input{_chapter2/equ/power-error-signal}
+
+However, the future is unknown, which is why an ``estimated next power'', $\hat{p}_{network}(t+\tau)$ is used instead.
+This value is the compensator's input from MPC and results in an ``estimated power error signal'':
+
+\input{_chapter2/equ/power-error-estimate}
+
+Similarly to PID$_1$, PID$_2$ produces a compensating BESS power component, $p_2(t)$ that smoothens the resulting power profile.
+This compensating BESS power is also computed using a standard weighted dynamic gain (with $\beta_P$, $\beta_P$ and $\beta_P$, being the P, I and D weight, respectively):
+
+\input{_chapter2/equ/corrective-component-power}
+
+Finally, the ``next BESS power'' can be deduced by adding the two BESS power components, as it is explained in the equation below.
+
+\input{_chapter2/equ/next-battery-power}
+
+Both PID compensators do however depend on correctly chosen weights for $\alpha$ and $\beta$.
+Therefore they need to be tuned prior to executing the dynamic control.
+Whilst traditional PID tuning is performed by converting the system model into the frequency domain, this option does not apply due to the tight constraints and nonlinearity of the battery model. 
+Instead, a Sequential Quadratic Programming (SQP) problem was formulated to minimise a weights based cost, $\zeta^*(\alpha, \beta)$, as follows:
+
+\input{_chapter2/equ/cost-weights}
+
+In Equation \ref{ch2:equ:cost-weights}, $\zeta^*(\alpha, \beta)$ represents the minutely peak load during a day, when BESS schedules are adjusted with the corresponding $\alpha$ and $\beta$ weights.
+An additional SOC tolerance, $SOC_{tol}$, is included, too.
+This is done to prevent the solution from deviating off the prescheduled battery's SOC profile.
+Additionally, this constraint assures solution convergence for the specific load case.
+To generalise this solution for all cases, the SQP problem was applied to several daily load profiles, resulting in several $\alpha$ and $\beta$ weights.
+The most probable values for $\alpha$ and $\beta$ were extracted from this set of weights and used in the case studies.
+All details concerning these case studies are outlined in Section \ref{ch2:sec:case-studies}.
+
+\subsection{Model predictive control}
+
+The major difference between SPC and MPC is the fact that MPC takes into account the model's future behaviour.
+With this knowledge, MPC can be used to not only react to recent changes but also to counteract foreseen trends.
+Different approaches exist to obtain these foreseen trends and these approaches highly vary in accuracy, computational burden and robustness.
+Equally, the characteristics of underlying data which is used to train these models highly impacts their performances.
+
+For the presented work, an efficient and robust approach is required, since system deployment dictates these functional requirements.
+Prediction accuracy is therefore an optional requirement, which becomes important once the predicting model can issue predictions within real-time and does (for the predicting horizon) remain stationary and bounded.
+
+The lightest form of prediction is to assume that the currently observed behaviour will manifest into the future.
+This kind of prediction does however not take into account model dynamics.
+An AR model uses multiple past observations to predict the next.
+The further into the future these predictions are made, the less accurate they become.
+Therefore, this work only attempts to issue a prediction for the immediate future, i.e. at $t+\tau$.
+Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model, with a time-series of input powers, $p(t) \in \textbf{p}$, and a time-series of predicted ``next powers'', $\hat{p}(t) \in \hat{\textbf{p}}$.
+
+\input{_chapter2/fig/mpc-arx}
+
+Figure \ref{ch2:fig:mpc-arx} graphically captures this model's function, which is also represented mathematically in the following equation:
+
+\input{_chapter2/equ/mpc-arx}
+
+Values of the two weight vectors $a$ and $b$ are determined during runtime using the standard least squares adaptive algorithm.
+This algorithm dynamically adjusts $a$ and $b$ to minimise the prediction for each time-step.
+
+Beside the correct values for $a$ and $b$, the model's number of regressors, $N$, is also predicted to impact the model's performance ($N$ is also referred to as the ``model length'').
+In Figure \ref{ch2:fig:mpc-arx} for example, a symmetric model where $N=3$ is plotted.
+This short length however is most likely insufficient for predicting $p(t+\tau)$.
+Therefore, several models of increasing lengths are assessed to determine the impact on their resulting values of $\hat{p}(t+\tau)$, and correspondingly on the performance of the dynamic controller.
+Details about the cases for different model length are presented in the case studies in Section \ref{ch2:sec:case-studies}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

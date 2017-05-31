@@ -1,0 +1,111 @@
+\section{Introduction}
+\label{ch2:sec:introduction}
+
+Outages are becoming more frequent in the UK as nearly half a million customers experienced service disruptions in December 2013 alone \cite{Ofgem2014}.
+Latest figures from the UK energy regulator \textit{ofgem} indicate that \pounds44.6 million worth of penalties were accumulated due to customer interruptions and customer minutes lost in a single year \cite{Ofgem2012}.
+Underlying causes that lead to these penalties were both due to natural events, e.g. extreme weather, as well as system overloads due to increasing demand for electricity.
+The latter issue is only amplified since major focus of UK energy policies has been put on transitioning towards a low carbon economy \cite{HMGovernment2009, RoyalAcademyofEngineering2010}.
+Particularly the decarbonisation of heat and transport sectors are two areas of significant strategic focus and Low Carbon Technology (LTC) such as photovoltaic installations, electric vehicles and heat pumps are expected to contribute significantly to this transition.
+
+However, as adaptation pf these LTCs increases and they start to penetrate power distribution networks, stress on these networks will continue to increase even further, which may result in additional service disruptions.
+Furthermore, the uptake of LTCs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks to exceed their operational constraints even at relatively low national rate of LTC adaption \cite{Poghosyan2014}.
+Correspondingly, the traditional network planning approaches to circumvent constraint violations follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. After Diversity Maximum Demand (ADMD) method.
+This ADMD method as remained the same for many years and uses historical load analysis and standard growth assumptions that are both no longer valid in this unprecedented LTC uptake scenario.
+To make things worse, LV networks in the UK are generally unmonitored once installed.
+Distribution Network Operators (DNOs) have become aware of this issue and are developing updated planning strategies.
+However, in situ equipment that will become subject to the same adaptation of LTC needs to be managed actively via innovation in the use of existing and new technologies; otherwise both frequency of service disruptions and customer minutes lost will increase alongside the proliferation of LTCs.
+
+Two solutions exist that allow DNOs to support their LV network's operation: network reinforcement or deployment of network support equipment.
+Whilst network reinforcement would certainly address the issue of current network capacity constraints, it is also the more expensive and potentially a medium-term solution.
+More specifically, customer will need to plan for outages during the period of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
+The resulting cable replacement and decommissioning costs are enough reason for DNOs to seek more economic solutions.
+This is particularly true if demand continues to rise and exceed the capacity of the newly reinforced network, since additional reinforcements would have to take place.
+The second solution is to install flexible and controllable Distributed Energy Resources (DERs).
+
+Such a technical solution avoids direct interference with customers connectivity and allows for easier upgradability, if it is required in the future.
+Although the application of controllable DERs is very ubiquitous, storage and specifically Battery Energy Storage Solutions (BESS) received an increasing amount of attention in both academic studies and industry trials \cite{Palizban2016}.
+Installing BESS in a strategic location and controlling it to reshape the network's load profile allows DNOs to limit voltage deviation, reduce maximum line utilisation and therefore increase the efficiency of energy delivery.
+However, the questions regarding locating, scaling and controlling of BESS have only partly been addressed and remain open for research.
+Determining an optimal location for BESS installation has been done by Yunusov et al. \cite{Yunusov2016}.
+They rate the impact of different BESS connection strategies based on predefined measures of network performance, i.e. voltage deviation and phase unbalance, and compare each location's performance to find the optimum BESS installation site.
+Unlike locating of BESS however, its sizing plays a more significant role as this research has been ongoing for more than a decade.
+Early approaches by Oudalov et al. \cite{Oudalov2007} used dynamic programming to generate schedules for which BESS was scaled.
+Nowadays, research like that by Baker et al. \cite{Baker2017} size BESS whilst also taking into account the uncertainty of wind power.
+However, once BESS is installed the most dominant research question is how to control is effectively.
+This is also the focus of this paper, yet before presenting the contribution, a brief overview of BESS applications is given to provide context for presented research.
+
+\subsection{Literature review}
+\label{ch2:subsec:literature-review}
+
+Traditional BESS control can be split into two distinct categories: off-line and on-line control.
+The former was implemented by developing a fixed control plan, which is based on demand forecasts.
+Work by Rowe et al. \cite{Rowe2014a} showed how such a scheduling algorithm can be used to successfully reduce peak load in LV networks.
+Yet erroneous load forecasts result in imperfect schedules which, when executed, cannot always address load peaks as effectively as promised.
+On-line control on the other hand issues control instructions based on recent measurements.
+Set-Point Control (SPC) is a simple control technique that can respond to changes in load immediately, yet this kind of control runs the risk of reaching shortage or surplus of BESS stored energy.
+Modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed to address this issue.
+However, pure SPC cannot take into account how demand will change in the immediate future and, on the long-scale, is therefore less effective in addressing daily demand peaks.
+Therefore, SPC has been extended using short-term load predictions to address this shortcoming.
+
+For example, Reidani et al. \cite{Reihani2016} addressed this shortcoming by predicting load based upon a recent demand record using a complex-valued neural network.
+They could predict load up to 20 minutes into the future and used this knowledge to adjust BESS operation accordingly, yet due to the short forecasting horizon, daily peaks were not always met.
+Pezeshki et al. \cite{Pezeshki2014} proposed a BESS control strategy for peak-shaving and load-smoothing using wavelet neural networks.
+This load prediction ranged 12 hours into the future and they showed how improved BESS operation can also save operational costs.
+More specifically, their results showed that 18\% of the weekly energy cost can be saved, yet (and this is true for most neural network solving approaches) computational stress makes it difficult to deploy this system in a real-time environment.
+Unlike Reidani et al. however, Pezeshki et al.'s research was conducted at hourly resolution, and could only address daily peaks whilst minutely load volatility was neglected.
+As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have also become the standard for generating BESS operating schedules.
+A large proportion of current research has therefore used half-hourly datasets in their work.
+
+For instance, a very recent piece of research by Greenwood et al. \cite{Greenwood2017} proposed a control method for energy storage systems to directly defer network reinforcement and in their case studies, they showed the possible peak-shaving capabilities for different storage sizes when subjected to six years of half-hourly load data.
+Additionally, they take into account real-time thermal-rating as an additional control input and with this input successfully lowered the ``Energy Not Supplied''.
+Similar research was also conducted by Baker et al. \cite{Baker2016a}, where they used Model Predictive Control (MPC) to coordinate multiple distributed storage devices.
+In their work, half-hourly smart-meter data was used to issue storage control instructions in order to maximise its impact, relative to asset location within the network.
+Wade et al. \cite{Wade2010} used a one year long data set of half-hourly resolution to asses the benefits of a shared BESS through simulation.
+In their work, the simulated BESS was connected between two 11kV networks and had to be carefully balanced in order to provide network support for both networks (e.g. voltage control, power flow management, fault recovery etc.).
+Beside the simulations in their work, a physical device was also implemented in a field trial.
+Whilst revisiting the question of how to size energy storage, Yang et al. \cite{Yang2014} simulated at hourly time-steps whilst taking into account irreversible capacity loss due to extensive battery cycling.
+In their work, they propose that by combining multiple BESS functions, economic profit can be further improved.
+Similarly, Wang et al. \cite{Wang2014a} proposed a forecast driven control mechanism for daily peak-shaving using household connected BESS.
+By formulating an optimal control problem during each decision epoch of their algorithm (where each epoch varied length between three to four hours) they showed how forecasts could optimally solve their ``\textit{peak shaving with inadequate energy}'' problem to yield cost savings when compared to several baseline cases.
+
+Results like the ones above are showcase examples how half-hourly load forecasts can be used to successfully improve network operation.
+However, findings at such a long temporal resolution only hold true, if the underlying network contains a significant number of loads, so that they cancel or smoothen out each others high individual volatility.
+Where this assumption does not hold true, control instructions need to be issued at high resolution using fast load prediction (i.e. Reidani et al.) or load forecasting is omitted and replaced by fast real-time response.
+
+\subsection{Contribution of the proposed method}
+
+The main contribution of this paper is a BESS schedule adjustment method that combines the benefits of low resolution forecasts with the benefits of real-time control using dynamic control.
+In this connection, the main focus of this presented paper is on the optimised usage of half-hourly BESS schedules and real sub-half-hourly demand information in order to compute on-line BESS schedule adjustments so that sub-half-hourly load peaks are effectively addressed without running the risk of reaching a shortage or surplus of stored energy.
+To assure implementability, stability and real-time operability the well established control using Proportional Integral Differential (PID) compensators is used.
+In fact, two linked PID compensators are used in this work to produce the correction signals for the next BESS power.
+The PID compensators' error signals are the deviation in SOC and the forecasted change in network load.
+Having to meet the critical requirement to forecast power immediately, required the implementation of a lightweight, yet flexible MPC.
+Therefore, the immediate power forecast is provided using fast MPC, which in turn is based on a different types of auto-regressive load models.
+
+The proposed dynamic BESS control method is therefore a natural extension of our work presented in \cite{Zangs2016}.
+Whilst we previously highlighted the importance of performing sub-half-hourly adjustments to BESS operation, it is only now become possible to adjust the BESS schedule itself - previously this schedule was seen as an operational constraint whilst three phase apparent power was adjutsed.
+Results will show how fluctuations due to high load volatility are mitigated on a minutely basis and daily peaks, which might have been missed by half-hourly BESS schedules, are also shaved by the proposed dynamic BESS control.
+
+In Section \ref{ch2:sec:system-explanation} of this paper, a brief background to the complete system is given.
+Here, all constituent components including the BESS model, forecast acquisition and BESS schedule generation are explained.
+Cost functions to generate optimised half-hourly BESS schedules are formulated, containing well established parameters like the Peak-to-Average Ratio (PAR) or ``Min-Max'' difference, which have been widely used in DER scheduling and operation \cite{Liu2014, Deng2015, Bayram2015, Zangs2016a}.
+
+After having addressed these prerequisites, details on the proposed dynamic control are presented in Section \ref{ch2:sec:control-of-bess}.
+Here, the implementation and tuning of the linked PID controllers is explained.
+Furthermore, the MPC that is required to produce inputs for one of the PID controllers is also explained.
+
+Since the proposed dynamic control aims to improve BESS operation even with the presence of errors in the half-hourly forecasts, forecast quality, and different MPCs are compared.
+This procedure is presented in Section \ref{ch2:sec:case-studies}, where different case studies are defined, so that they can be compared to the baseline case where only half-hourly schedules are executed.
+The heuristic approaches that are presented in this section, range over optimal scenarios with perfect foresight, to worst case scenarios with real forecast.
+Section \ref{ch2:sec:results} presents the results for these case studies, and they are discussed in Section \ref{ch2:sec:discussion}.
+Finally, conclusion and the future work are described in Section \ref{ch2:sec:conclusion}.
+
+
+
+
+
+
+
+
+
+

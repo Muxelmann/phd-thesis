@@ -1,0 +1,18 @@
+\section{Case studies}
+\label{ch2:sec:case-studies}
+
+The aim of the presented work is to show that BESS operation, that is guided by imperfect forecasts, can be improved to yield further reductions of peak load.
+Therefore, six different case studies are defined and split into two distinct groups.
+Here, the first group addresses the the impact of dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts, whilst the second group assumes perfect half-hourly load forecasts.
+Since half-hourly temporal resolution does not allow to compensate for sub-half-hourly demand volatility, each group is sub-divided into three cases, where different mechanisms to predict the volatility are presented.
+The first case in each group implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats.
+For the second case, the more sophisticated MPC is used and different lengths of AR models are assessed.
+The third and final case is the ideal case where perfect foresight is given.
+These six cases are numbered \textbf{I} to \textbf{VI} and, for clarity, they are tabulated in Table \ref{ch2:tab:cases}, too.
+
+\input{_chapter2/tab/cases}
+
+Results from each case are compared against the baseline, \textbf{B}, where the half-hourly BESS schedule is simulated without and sub-half-hourly adjustments.
+In this work, two comparison steps are performed.
+The first step compares the impact of dynamic BESS control for a single day, i.e. time-series comparison to get this first impression is presented in the results section.
+Secondly, the entire dataset is compared by only focusing on the daily power peak, and the magnitude of their reduction is compared.

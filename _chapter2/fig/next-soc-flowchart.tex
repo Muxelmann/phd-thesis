@@ -1,0 +1,67 @@
+\begin{figure}[htb]\centering
+% Define some block styles
+\tikzstyle{input} = [%
+	draw,%
+	ellipse,%
+	fill=green!20,%
+	minimum height=2em,%
+]
+\tikzstyle{result} = [%
+	draw,%
+	ellipse,%
+	fill=blue!20,%
+	minimum height=2em,%
+]
+\tikzstyle{output} = [%
+	draw,%
+	ellipse,%
+	fill=yellow!20,%
+	minimum height=2em,%
+]
+\tikzstyle{decision} = [%
+	diamond,%
+	draw,%
+	text width=4.5em,%
+	text badly centered,%
+	inner sep=0pt%
+]
+\begin{tikzpicture}[node distance=3cm, shorten >= 1pt, >=stealth', auto, scale=0.8, transform shape]
+
+	% Define nodes
+    \node (power_esmu) [input] {$p(t)$};
+    \node (is_charging) [decision, right of=power_esmu] {charging};
+    \node (charging) [state, above right of=is_charging] {$\times\eta$};
+    \node (discharging) [state, below right of=is_charging] {$\times\frac{1}{\eta}$};
+    \node (power_battery) [result, below right of=charging] {$p_{battery}(t)$};
+    \node (sample) [state, right of=power_battery] {$\times t_s$};
+    \node (change_energy_battery) [result, below of=sample, yshift=5mm] {$\delta E_{battery}(t)$};
+    \node (add) [state, below of=change_energy_battery, yshift=5mm] {$+$};
+    \node (current_energy_battery) [result, left of=add] {$E_{battery}(t)$};
+    \node (multiply) [state, left of=current_energy_battery] {$\times C_{battery}$};
+    \node (current_soc) [input, left of=multiply] {$SOC(t)$};
+    \node (losses) [state, below of=add, yshift=5mm] {$\times \mu t_s$};
+	\node (next_energy) [result, left of=losses, xshift=-5mm] {$E_{battery}(t+\tau)$};
+	\node (divide) [state, left of=next_energy, xshift=-5mm] {$\div C_{battery}$};
+	\node (next_soc) [output, left of=divide, xshift=-5mm] {$SOC(t+\tau)$};
+
+	% Draw lines
+	\draw [->] (power_esmu) to (is_charging);
+	\draw [->, bend left] (is_charging) to node {yes} (charging);
+	\draw [->, bend right] (is_charging) to node [swap] {no} (discharging);
+	\draw [->, bend left] (charging) to (power_battery);
+	\draw [->, bend right] (discharging) to (power_battery);
+	\draw [->] (power_battery) to (sample);
+	\draw [->] (sample) to (change_energy_battery);
+	\draw [->] (change_energy_battery) to (add);
+	\draw [->] (current_soc) to (multiply);
+	\draw [->] (multiply) to (current_energy_battery);
+	\draw [->] (current_energy_battery) to (add);
+	\draw [->] (add) to (losses);
+	\draw [->] (losses) to (next_energy);
+	\draw [->] (next_energy) to (divide);
+	\draw [->] (divide) to (next_soc);
+	
+\end{tikzpicture}
+\caption{Flowchart to calculate the next SOC (i.e. $SOC(t+\tau)$) based on current BESS power (i.e. $p(t)$) and current SOC (i.e. $SOC(t)$). Here, $\delta E_{battery}(t) = SOC(t) * C_{battery}$ }
+\label{ch2:fig:next-soc-flowchart}
+\end{figure}

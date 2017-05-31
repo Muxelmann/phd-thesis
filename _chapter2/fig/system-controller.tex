@@ -1,0 +1,49 @@
+\begin{figure}[htb]\centering
+% Define some block styles
+\tikzstyle{box} = [%
+	draw,%
+	rectangle,%
+	%fill=green!20,%
+	minimum height=3em,%
+	minimum width=5em,%
+]
+\begin{tikzpicture}[node distance=2cm, shorten >= 1pt, >=stealth', auto, scale=0.8, transform shape]
+	% Define nodes
+    \path
+    (0,0)
+    node [box, minimum width=5cm](network) {Network}
+    node [box, below of=network, yshift=5mm](battery) {Battery}
+    node [draw, circle, below of=battery](plus) {+}
+    node [box, fill=green!20, below left of=plus, yshift=-10mm, xshift=-10mm](pid_soc) {PID$_1$}
+    node [box, fill=green!20, below right of=plus, yshift=-10mm, xshift=10mm](pid_p) {PID$_2$}
+    node [box, fill=blue!20, left of=pid_soc, xshift=-20mm](schedule) {Schedule}
+    node [box, fill=green!20, right of=pid_p, xshift=20mm](mpc) {MPC};
+%    node [box, below of=schedule](battery) {Battery}
+%    node [box, below of=battery](network) {Network}
+%   	node [box, fill=green!20, left of=battery, xshift=-14.5mm](controller) {Controller}
+%	node [box, fill=green!20, below of=controller](mpc) {MCP};
+	% Draw lines
+	\draw [->] (battery) to (network);
+	\draw [->] (plus) to node[right] {$p(t+\tau)$} (battery);
+	\draw [->, bend left] (pid_soc) to node[right, pos=0.2] {$p_{1}(t+\tau)$} (plus);
+	\draw [->, bend right] (pid_p) to node[left, pos=0.2] {$p_{2}(t+\tau)$} (plus);
+	\draw [->] (battery.180) to [out=180, in=120] node[left, pos=0.2] {$SOC(t)$} (pid_soc.180|-pid_soc.90);
+	\draw [->] (network) to [out=340, in=60] node[right] {$\text{ }p_{network}(t)$} (pid_p.0|-pid_p.90);
+	\draw [->] (schedule) to node[pos=0.35] {$SOC(k)$} (pid_soc);
+	\draw [->] (mpc) to node[pos=0.35] {$\hat{p}(t+\tau)$} (pid_p);
+	\draw [->, bend left] (network.0) to (mpc.90);
+	
+	\draw (-4, -7.25) node [right] {Controller};
+	
+	\draw [dashed] (-4, -3) -- (4, -3) -- (4, -7) -- (-4, -7) -- (-4, -3);
+%	\draw [->, bend right] (schedule.180) to (controller.90);
+%	\draw [->] (network) to (mpc);
+%	\draw [->] (mpc) to (controller);
+%	\draw [->] (controller) to (battery);
+%	\draw [->] (battery) to (network);
+\end{tikzpicture}%
+
+
+\caption{Controller}
+\label{ch2:fig:system-controller}
+\end{figure}

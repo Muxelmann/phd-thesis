@@ -1,0 +1,108 @@
+\section{System Explanation}
+\label{ch2:sec:system-explanation}
+
+\input{_chapter2/fig/system-diagram}
+
+The underlying research project was conducted in collaboration with the \textit{Energy Networks} division of the British DNO \textit{Scottish and Southern Energy} (SSE-EN) \cite{NTVV2016}.
+For their field trial, they developed a forecast driven and an on-line control method to control their street-level connected BESS.
+The diagram in Figure \ref{ch2:fig:system-diagram} shows these two control methods and their main system constituents, alongside the proposed hybrid system.
+Here, the two underlying traditional systems in Figure \ref{ch2:subfig:traditional-forecast-based-system} and \ref{ch2:subfig:traditional-on-line-system}, encapsulate off-line and on-line BESS control, respectively.
+Entailing the benefits from both the traditional forecast driven and the on-line BESS control, the proposed dynamic control (in Figure \ref{ch2:subfig:proposed-hybrid-system}) is therefore titled the hybrid system.
+
+Battery and network model are common constituents amongst all three systems.
+Therefore, the battery model that is used in this work is explained first.
+Afterwards, the data acquisition, forecasting and BESS scheduling is explained, since scheduling is performed whilst with battery constraints.
+The next section then entails the dynamic control, i.e. the two green constituent system blocks that control BESS operation.
+
+\subsection{BESS model}
+
+The model of the system has been defined to coincide with the physical device that was deployed by SSE-EN.
+Therefore, the model had to accurately capture the physical limitations of the device, which include a limited capacity of the battery pack, $C_{battery}$, and a corresponding charge and discharge factor (i.e. the ``C-factor''), $C_{factor}$.
+Self-discharge losses inside the battery pack were captured as the ratio $\eta$, where $\eta \in (0, 1)$ and represented the energy that was lost over time due to the battery's imperfect means of storing charge.
+Units containing power electronics to regulate the three-phase power flow into and out of the BESS also had power ratings, $P_{rating}$, which must not be exceeded.
+Correspondingly, conversion loss leading into a BESS round-trip efficiency, $\mu$, where $\mu \in (0, 1)$, was also included in the model.
+
+Since the model was simulated, a finite time between each simulation step had to be defined, $\tau$.
+Therefore, the change in SOC, i.e. $\delta SOC(t)$, can be computed as the difference in the current SOC, $SOC(t)$, and the next SOC, $SOC(t+\tau)$.
+Combining this with the self-discharge loss, the following SOC equation is defined:
+
+\input{_chapter2/equ/soc-equation}
+
+However, this change in SOC is the result of charging or discharging the battery by injecting or releasing energy.
+The amount of energy that flows into or out of the BESS is defined by the active power that is consumed, $p(t)$.
+Here, the sign of the BESS power indicates whether the device is charging or discharging.
+To behave similar to a load in a network, positive power was associated to charging and therefore negative power represented discharging the BESS.
+The amount of actual charge stored in the battery differs from the due to the aforementioned conversion efficiency, $\eta$.
+In order to deliver the correct BESS power, a conversion to the system's battery power was defined:
+
+\input{_chapter2/equ/battery-power}
+
+Therefore, the amount of energy injected into the battery during $\tau$ can also be determined based upon the battery power, i.e.:
+
+\input{_chapter2/equ/soc-equation-from-battery-power}
+
+Combining Equation \ref{ch2:equ:soc-equation} and \ref{ch2:equ:soc-equation-from-battery-power} and solving for $SOC(t+\tau)$, yields the following battery model equation:
+
+\input{_chapter2/equ/battery-model-equation}
+
+For the purpose of the simulation, it is assumed that the battery is initially charged up to 50\%.
+Hence, the initial conditions of this model are defined as $SOC(0) = 0.5$, which makes the model valid for a time span of $t \geq 0$.
+
+\subsection{Load data and BESS scheduling}
+
+Having established the BESS model, the procedure to generate a corresponding schedule is explained.
+Following common scheduling practice and for the reasons mentioned in the literature review, this schedule was generated at half-hourly resolution.
+Since BESS operation is performed at a sub-half-hourly period, i.e. $\tau$, the schedule's period is denoted as $\kappa$.
+It is worth mentioning, that the scheduled BESS power is assumed constant over the scheduling period $\kappa$.
+With this assumption and the knowledge of the BESS's SOC, it is possible to interpolate the change in SOC during $\kappa$.
+This feature is used to link the sub-half-hourly BESS operation to its half-hourly power schedule.
+
+In order to generate the schedule a load forecast, $p_{forecast}(k)$, was required.
+This forecast, similar to the schedule, is also at half-hourly resolution and was provided by SSE-EN as part of the research project.
+The task at hand was to find a half-hourly BESS schedule, $p_{schedule}(k)$, that improves the shape of the underlying forecast.
+In order to generate an optimised BESS schedule, a mechanism to quantify improvements had to be defined before the problem to solve for $p_{schedule}(k)$ can be formalised.
+Three cost-functions are used that capture these improvements when minimised.
+
+These costs entailed the Peak-to-Average Ratio (PAR), the difference between the resulting power profile's maximum and minimum load, and the magnitude of all power transients \cite{Mohsenian-Rad2010, Mostafa2016}.
+The first cost function, which addresses the minimisation of PAR is defined as follows:
+
+\input{_chapter2/equ/cost-par}
+
+Here, $K$ is the length of the scheduling horizon, which is equal to the forecast length, too.
+A perfect power profile that yields a PAR of zero would be a perfectly flat power profile.
+However, due to limited battery capacity, achieving such a cost is highly unlikely.
+The second cost function represents the difference between minimum and maximum power:
+
+\input{_chapter2/equ/cost-min-max}
+
+Similar to the PAR, this cost also reduces to zero when the resulting power profile is a perfectly flat line.
+Unlike the PAR, this cost is insensitive to mean power adjustments.
+Therefore, unnecessary and potentially damaging battery cycling in order to elevate the profile's mean is avoided when this cost is included alongside PAR.
+So far, $\zeta_{PAR}$ and $\zeta_{MM}$ only impact the fringes of the resulting half-hourly power profile.
+The final cost therefore addresses the interim power volatility by aiming to minimise the largest possible power transient:
+
+\input{_chapter2/equ/cost-tra}
+
+Minimising this final cost therefore has a smoothening effect on the improved half-hourly power profile.
+All three cost functions are summaries into a single global cost function, where only the half-hourly BESS schedule is seen as an input and the forecast is kept as constant:
+
+\input{_chapter2/equ/cost-global}
+
+Subject to BESS constraints, this global cost function was then minimised using Sequential Quadratic Programming (SQP) to yield a BESS schedule that is optimised for the given forecast:
+
+\input{_chapter2/equ/cost-minimisation}
+
+To visualise this schedule optimisation, a three day sample schedule was generated using the cost minimisation as it is defined in Eq. \ref{ch2:equ:cost-minimisation}.
+To generate this sample BESS schedule, three forecasted days were separately evaluated and a half-hourly BESS schedule was generated for each day.
+Then, the actual sub-half-hourly demand was used and the half-hourly BESS schedule was applied to emphasise the disparity in peak load magnitude and timing.
+
+\input{_chapter2/fig/cost-sample}
+
+This example in Figure \ref{ch2:fig:cost-sample} highlights the potential incompatibility between half-hourly BESS schedules and the actual sub-half-hourly load.
+As previously discussed, benefits of BESS were intended to mitigate high resolution volatility, yet this cannot be achieved when applying BESS schedules in an open-loop manner.
+Therefore, in the next section, the control strategy to add an on-line component is explained.
+
+
+
+
+ 

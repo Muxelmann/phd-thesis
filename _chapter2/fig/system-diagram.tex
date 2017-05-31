@@ -1,0 +1,72 @@
+\begin{figure}[htb]\centering
+% Define some block styles
+\tikzstyle{box} = [%
+	draw,%
+	rectangle,%
+	%fill=green!20,%
+	minimum height=3em,%
+	minimum width=5em,%
+]
+\subfloat[]{%
+	\begin{tikzpicture}[node distance=1.5cm, shorten >= 1pt, >=stealth', auto, scale=0.8, transform shape]
+		% Define nodes
+	    \path (0,0)
+	    node [box, fill=blue!20](data) {Data}
+	    node [box, fill=blue!20, below of=data](forecast) {Forecast}
+	    node [box, fill=blue!20, below of=forecast](schedule) {Schedule}
+	    node [box, below of=schedule](battery) {Battery}
+	    node [box, below of=battery](network) {Network};
+		% Draw lines
+		\draw [->] (data) to (forecast);
+		\draw [->] (forecast) to (schedule);
+		\draw [->] (schedule) to (battery);
+		\draw [->] (battery) to (network);
+	\end{tikzpicture}%
+	\label{ch2:subfig:traditional-forecast-based-system}%
+}
+\hspace{10mm}
+\subfloat[]{
+	\begin{tikzpicture}[node distance=1.5cm, shorten >= 1pt, >=stealth', auto, scale=0.8, transform shape]
+		% Define nodes
+	    \path
+	    (0,0) 
+	   	node [box, fill=green!20, below of=schedule, xshift=-14.5mm](controller) {Controller}
+		node [box, fill=green!20, below of=controller](mpc) {MCP}
+	    node [box, right of=controller, xshift=15mm](battery) {Battery}
+	    node [box, below of=battery](network) {Network};;
+		% Draw lines
+		\draw [->] (network) to (mpc);
+		\draw [->] (mpc) to (controller);
+		\draw [->] (controller) to (battery);
+		\draw [->] (battery) to (network);
+	\end{tikzpicture}%
+	\label{ch2:subfig:traditional-on-line-system}%
+}
+\hspace{10mm}
+\subfloat[]{%
+	\begin{tikzpicture}[node distance=1.5cm, shorten >= 1pt, >=stealth', auto, scale=0.8, transform shape]
+		% Define nodes
+	    \path
+	    (0,0)
+	    node [box, fill=blue!20](data) {Data}
+	    node [box, fill=blue!20, below of=data](forecast) {Forecast}
+	    node [box, fill=blue!20, below of=forecast](schedule) {Schedule}
+	    node [box, below of=schedule](battery) {Battery}
+	    node [box, below of=battery](network) {Network}
+	   	node [box, fill=green!20, left of=battery, xshift=-14.5mm](controller) {Controller}
+		node [box, fill=green!20, below of=controller](mpc) {MCP};
+		% Draw lines
+		\draw [->] (data) to (forecast);
+		\draw [->] (forecast) to (schedule);
+		\draw [->, bend right] (schedule.180) to (controller.90);
+		\draw [->] (network) to (mpc);
+		\draw [->] (mpc) to (controller);
+		\draw [->] (controller) to (battery);
+		\draw [->] (battery) to (network);
+	\end{tikzpicture}%
+	\label{ch2:subfig:proposed-hybrid-system}%
+}
+
+\caption{Combination of traditional forecast driven BESS control (Subfig. \ref{ch2:subfig:traditional-forecast-based-system}) and traditional on-line system (Subfig. \ref{ch2:subfig:traditional-on-line-system}) results in the proposed hybrid system (Subfig. \ref{ch2:subfig:proposed-hybrid-system}).}
+\label{ch2:fig:system-diagram}
+\end{figure}
