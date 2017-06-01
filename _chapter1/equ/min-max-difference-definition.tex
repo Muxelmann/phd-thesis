@@ -1,7 +1,7 @@
 \begin{equation}
 \begin{split}
-	\zeta^*_{MMD}(\textbf{s}^*_{A}(t), \textbf{s}^*_{B}(t)) :=& \frac{\max_t\left(\textbf{s}^*_{A}(t)+\textbf{s}^*_{B}(t)\right) - \min_t\left(\textbf{s}^*_{A}(t)+\textbf{s}^*_{B}(t)\right)}{\frac{1}{T^*}\sum_{t=1}^{T^*}\left[\textbf{s}^*_{A}(t)+\textbf{s}^*_{B}(t)\right]}\\
-	&\text{where } \textbf{s}^*_{A}(t) \in \textbf{s}^*_{A} \text{ and } \textbf{s}^*_{B}(t) \in \textbf{s}^*_{B}
+	\zeta_{MMD}(\textbf{s}_{A}, \textbf{s}_{B}) :=& \frac{\max_k\left(\textbf{s}_{A}+\textbf{s}_{B}\right) - \min_k\left(\textbf{s}_{A}+\textbf{s}_{B}\right)}{\frac{1}{K}\sum_{k=1}^{K}\left[{s}_{A}(k)+{s}_{B}(k)\right]}\\
+	&\text{where } {s}_{A}(k) \in \textbf{s}_{A} \text{ and } {s}_{B}(k) \in \textbf{s}_{B}
 \end{split}
 \label{ch1:equ:min-max-difference-definition}
 \end{equation}

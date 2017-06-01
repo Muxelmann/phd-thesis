@@ -33,13 +33,13 @@
     \node (charging) [state, above right of=is_charging] {$\times\eta$};
     \node (discharging) [state, below right of=is_charging] {$\times\frac{1}{\eta}$};
     \node (power_battery) [result, below right of=charging] {$s_{battery}(t)$};
-    \node (sample) [state, right of=power_battery] {$\times t_s$};
+    \node (sample) [state, right of=power_battery] {$\times \tau$};
     \node (change_energy_battery) [result, below of=sample, yshift=5mm] {$\Delta E_{battery}(t)$};
     \node (add) [state, below of=change_energy_battery, yshift=5mm] {$+$};
     \node (current_energy_battery) [result, left of=add] {$E_{battery}(t)$};
     \node (multiply) [state, left of=current_energy_battery] {$\times C_{battery}$};
     \node (current_soc) [input, left of=multiply] {$SOC(t)$};
-    \node (losses) [state, below of=add, yshift=5mm] {$\times \mu t_s$};
+    \node (losses) [state, below of=add, yshift=5mm] {$\times \mu \tau$};
 	\node (next_energy) [result, left of=losses, xshift=-5mm] {$E_{battery}(t+1)$};
 	\node (divide) [state, left of=next_energy, xshift=-5mm] {$\div C_{battery}$};
 	\node (next_soc) [output, left of=divide, xshift=-5mm] {$SOC(t+1)$};
@@ -65,4 +65,4 @@
 \caption{Flowchart to calculate the next SOC (i.e. $SOC(t+1)$) based on current ESMU power (i.e. $\textbf{s}_{ESMU}(t)$) and current SOC (i.e. $SOC(t)$)}
 \end{figure}
 
-\footnotetext[2]{In the flowchart ``charging'' implies that $\sum_{p=1}^{P}s_{ESMU,p}(t) \geq 0$ as explained in Equation \ref{ch1:equ:battery-power-definition}.}
+\footnotetext[2]{In the flowchart ``charging'' implies that $\sum_{\phi=1}^{\Phi}s_{ESMU,\phi}(t) \geq 0$ as explained in Equation \ref{ch1:equ:battery-power-definition}.}

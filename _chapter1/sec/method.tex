@@ -10,13 +10,13 @@ Now, the implemented method on generating a traditional ESMU schedules is presen
 
 As discussed in the literature review in Chapter \ref{ch-review}, the main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
 It has been identified, that both the Peak-to-Average Ratio (PAR) as well as the min-max-difference (MMD) are good indicators of how well the pursued behaviours have been implemented.
-Therefore, a half-hourly PAR scheduling cost, $\zeta^*_{PAR}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load})$, and a half-hourly MMD scheduling cost, $\zeta^*_{MMD}(\textbf{s}^*_{ESMU}, \textbf{s}^*_{network\;\;load})$, are defined as follows:
+Therefore, a half-hourly PAR scheduling cost, $\zeta_{PAR}(\textbf{s}_{ESMU}, \textbf{s}_{network\;\;load})$, and a half-hourly MMD scheduling cost, $\zeta_{MMD}(\textbf{s}_{ESMU}, \textbf{s}_{network\;\;load})$, are defined as follows:
 
 \input{_chapter1/equ/peak-to-average-definition}
 
 \input{_chapter1/equ/min-max-difference-definition}
 
-Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}^*_{network\;\;load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
+Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}_{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}_{network\;\;load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
 For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve the following minimisation problem.
 Reasons behind this choice are the SQP's robustness and speed, since it is built on the well established Newton-Raphson Method, as well as its ability to cope with nonlinear constraints.
 It is this latter point that is most important, since the battery model's solving constraints are inherently nonlinear; the Newton-Raphson Method by itself is unable to solve with this kind of nonlinear constraints.
@@ -24,9 +24,9 @@ The final minimisation problem that was passe into the SQP solver can be formula
 
 \input{_chapter1/equ/scheduling-cost}
 
-To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}^*_{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}^*_{network\;\;load}$.
+To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}_{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}_{network\;\;load}$.
 These two costs both capture the PAR and MMD of the resulting power profile, and when minimised to zero, indicate a perfectly flat power curve.
-The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_{battery}(t) \leq C_{factor} \times C_{battery} \forall t$), to not exceed the PMU's phase power rating (i.e. $\left|s_{ESMU,p}(t)\right| \leq S_{rating} \forall p \forall t$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(t) \leq 1 \forall t$).
+The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_{battery}(k) \leq C_{factor} \times C_{battery} \forall k$), to not exceed the PMU's phase power rating (i.e. $\left|s_{ESMU,\phi}(k)\right| \leq S_{rating} \forall \phi \forall k$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(k) \leq 1 \forall k$).
 
 For the work presented in this chapter, the supplied half-hourly network load (or forecast) was extrapolated from sub-half-hourly data.
 This forecast can be seen as if it had been generated with perfect foresight.
@@ -51,12 +51,12 @@ The constraint of having to follow this half-hourly ESMU schedule is lifted in C
 To quickly summarise, the following key network parameters are used in this chapter:
 
 \begin{itemize}
-	\item substation phase voltages, $v_{ss,p}(t) \in \textbf{v}_{ss}(t)$,
-	\item ESMU phase voltages, $v_{ESMU,p}(t) \in \textbf{v}_{ESMU}(t)$,
+	\item substation phase voltages, $v_{ss,\phi}(t) \in \textbf{v}_{ss}(t)$,
+	\item ESMU phase voltages, $v_{ESMU,\phi}(t) \in \textbf{v}_{ESMU}(t)$,
 	\item all load voltages, $v_{load,i}(t) \in \textbf{v}_{load}(t)$,
-	\item substation apparent phase power, $s_{ss,p}(t) \in \textbf{s}_{ss}(t)$,
-	\item substation phase currents, $i_{ss,p}(t) \in \textbf{i}_{ss}(t)$,
-	\item all line currents, $i_{line,l,p}(t) \in \textbf{i}_{line}(t)$, and
+	\item substation apparent phase power, $s_{ss,\phi}(t) \in \textbf{s}_{ss}(t)$,
+	\item substation phase currents, $i_{ss,\phi}(t) \in \textbf{i}_{ss}(t)$,
+	\item all line currents, $i_{line,l,\phi}(t) \in \textbf{i}_{line}(t)$, and
 	\item all network losses, $s_{losses}(t)$.
 \end{itemize}
 

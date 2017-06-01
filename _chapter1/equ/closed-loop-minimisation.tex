@@ -3,12 +3,12 @@
 	\min_{\delta \textbf{s}_{ESMU}(t)} \zeta(\boldsymbol{\alpha})
 	&\text{ s.t.}
 	\begin{cases}
-		\sum_{p=1}^{P} \text{Re} \left(\delta s_{ESMU,p}(t)\right) = 0 \forall t\\
+		\sum_{\phi=1}^{\Phi} \text{Re} \left(\delta s_{ESMU,\phi}(t)\right) = 0 \forall t\\
 		s_{battery}(t) \leq C_{factor}\times C_{battery} \forall t\\
-		\left|s_{ESMU,p}(t)\right| \leq S_{rating} \forall p \forall t\\
+		\left|s_{ESMU,\phi}(t)\right| \leq S_{rating} \forall \phi \forall t\\
 		0 \leq SOC(t) \leq 1 \forall t
 	\end{cases}\\
-	&\text{ where } \delta s_{ESMU,p}(t) \in \textbf{s}_{ESMU}(t) \text{ and } P \in \mathbb{N}
+	&\text{ where } \delta s_{ESMU,\phi}(t) \in \textbf{s}_{ESMU}(t) \text{ and } \Phi \in \mathbb{N}
 \end{split}
 \label{ch1:equ:closed-loop-minimisation}
 \end{equation}

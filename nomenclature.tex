@@ -1,9 +1,9 @@
 \singlespacing
 
 % Constants
-\nomenclature{$\alpha, \beta, \gamma$}{Three intermediary variables}
+\nomenclature{$\alpha, \beta, \gamma$}{Three intermediary variables used as gains, bias or weights}
 \nomenclature{$T$}{Number of steps of the entire power flow simulation, here $T \in \mathbb{N}$ (i.e. $T=1440$ for one day of minutely simulations).}
-\nomenclature{$T^*$}{Number of coarse simulation steps, here $T^* \in \mathbb{N} \text{ and } T=\alpha T^* \text{ where } \alpha \in \mathbb{N}$ (i.e. $T^*=48$ for one day of half-hourly simulations).}
+\nomenclature{$k$}{Number of coarse simulation steps, here $k \in \mathbb{N} \text{ and } T=\alpha k \text{ where } \alpha \in \mathbb{N}$ (i.e. $k=48$ for one day of half-hourly simulations).}
 \nomenclature{$L$}{Number of lines in the network model, here $L \in \mathbb{N}$.}
 \nomenclature{$I$}{Number of loads in the network model, here $I \in \mathbb{N}$.}
 \nomenclature{$V_n$}{Nominal voltage for a LV network, i.e. 230V P2N ($\approx \frac{400}{\sqrt{3}}\text{V}$).}
@@ -18,10 +18,11 @@
 \nomenclature{$\Delta SOC(t)$}{Change in the ESMU's SOC at time $t$.}
 
 % variables
-\nomenclature{$p$}{Phase number, here $p \in \{1, 2, 3\}$.}
-\nomenclature{$t$}{Time-step of the current simulation step, here $t \in [1, \dots, T]$.}
-\nomenclature{$t^*$}{Coarser time-step where one integer increment represents multiple integer increments in $t$, here $t^* \in [1, \dots, T^*] $.}
-\nomenclature{$t_s$}{Sample-period or iteration-duration used in the simulations, usually in seconds unless otherwise specified.}
+\nomenclature{$\phi$}{Phase number, here $\phi \in \{1, 2, 3\}$.}
+\nomenclature{$t$}{Number of time-steps in the current simulation, here $t \in [1, \dots, T]$.}
+\nomenclature{$k$}{Time-step coarser than $t$, i.e. where one integer increment represents multiple integer increments in $t$, here $k \in [1, \dots, K]$.}
+\nomenclature{$K$}{Number of coarse time-steps in the current simulation, here $k \in [1, \dots, K]$.}
+\nomenclature{$\tau$}{Sample-period or iteration-duration used in the simulations, usually in seconds unless otherwise specified.}
 \nomenclature{$l$}{Line number of a given line in the network model, here $l \in [1, 2, \dots, L]$.}
 \nomenclature{$i$}{Load number of a given load in the network model, here $i \in [1, 2, \dots, I]$.}
 
@@ -30,22 +31,22 @@
 \nomenclature{$s_{loss}(t)$}{Computed network losses at time $t$.}
 \nomenclature{$s_{battery}(t)$}{The apparent power (with no reactive component) that is charged into or discharged from the battery at time $t$.}
 \nomenclature{$s_{network\;\;load}(t)$}{Sub-half-hourly network load at time $t$.}
-\nomenclature{$s_{network\;\;load}^*(t^*)$}{Half-hourly (or coarse) network load at time $t^*$.}
+\nomenclature{$s_{network\;\;load}(k)$}{Half-hourly (or coarse) network load at time $k$.}
 
 % nD arrays
-\nomenclature{$v_{ss,p}(t)$}{Single phase voltage measured at the substation transformer's secondary winding for phase $p$ at time $t$.}
-\nomenclature{$s_{ss,p}(t)$}{Single phase apparent power measured at substation for phase $p$ at time $t$.}
+\nomenclature{$v_{ss,\phi}(t)$}{Single phase voltage measured at the substation transformer's secondary winding for phase $\phi$ at time $t$.}
+\nomenclature{$s_{ss,\phi}(t)$}{Single phase apparent power measured at substation for phase $\phi$ at time $t$.}
 \nomenclature{$s_{ESMU,p}(t)$}{ESMU's apparent power that is injected into phase $p$ at time $t$.}
-\nomenclature{$\delta s_{ESMU,p}(t)$}{Change or adjustment in ESMU's apparent power that is injected into phase $p$ at time $t$.}
-\nomenclature{$v_{ESMU,p}(t)$}{Single phase voltage that is measured at the ESMU's PCC for phase $p$ at time $t$.}
-\nomenclature{$i_{line,l,p}(t)$}{Single phase line current that is calculated for line $l$ on phase $p$ during time $t$.}
-\nomenclature{$v_{load,i,p}(t)$}{Single phase load voltage that is calculated for load $i$ on phase $p$ during time $t$.}
+\nomenclature{$\delta s_{ESMU,\phi}(t)$}{Change or adjustment in ESMU's apparent power that is injected into phase $\phi$ at time $t$.}
+\nomenclature{$v_{ESMU,\phi}(t)$}{Single phase voltage that is measured at the ESMU's PCC for phase $\phi$ at time $t$.}
+\nomenclature{$i_{line,l,\phi}(t)$}{Single phase line current that is calculated for line $l$ on phase $\phi$ during time $t$.}
+\nomenclature{$v_{load,i,\phi}(t)$}{Single phase load voltage that is calculated for load $i$ on phase $\phi$ during time $t$.}
 
 % functions
-\nomenclature{$\zeta_\text{voltage}(v_p)$}{Voltage divergence cost for a single-phase voltage $v$ on phase $p$.}
-\nomenclature{$\zeta_\text{load voltage}(v_{i,p})$}{Voltage divergence cost for a single-phase customer voltage $v$ at customer $i$, who is connected to phase $p$.}
+\nomenclature{$\zeta_\text{voltage}(v_\phi)$}{Voltage divergence cost for a single-phase voltage $v$ on phase $\phi$.}
+\nomenclature{$\zeta_\text{load voltage}(v_{i,\phi})$}{Voltage divergence cost for a single-phase customer voltage $v$ at customer $i$, who is connected to phase $\phi$.}
 \nomenclature{$\text{UF}(\textbf{x})$}{Unbalance Factor of a vector $\textbf{x}$.}
-\nomenclature{$\zeta_\text{unbalance}(\textbf{s})$}{Unbalance cost for a three-phase power vector $\textbf{s}$ where $s_p \in \textbf{s}$.}
+\nomenclature{$\zeta_\text{unbalance}(\textbf{s})$}{Unbalance cost for a three-phase power vector $\textbf{s}$ where $s_\phi \in \textbf{s}$.}
 
 \printnomenclature[0.75in]
 
