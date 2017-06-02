@@ -1,2 +1,69 @@
 \section{Coordination of EV charging}
 \label{ch3:sec:ev-coordination}
+
+Here, an algorithm for EV charging is presented, which is later implemented in both a synchronised and desynchronised case.
+Real load data is used in combination with EV demand to evaluate the performance of the algorithm at preventing new power spikes from occurring.
+Convergence of the algorithm is studied and convergence criteria as well as rate of convergence are also presented.
+
+This section is structured as follows.
+First, the means and assumptions for calculating EV demand is defined.
+Then the real load data is introduced and explained.
+The EV scheduling algorithm is introduced next, before the performance parameters are presented.
+
+\subsection{EV Demand}
+
+EVs were modelled as loads that, over the course of a scheduling horizon, $H$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
+Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
+Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand, $p_u(k)$, where $p_u(t) \in \textbf{p}(k)$.
+In other words, they need to autonomously assign each charging plan over a certain number of future time-slots.
+Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{u,max}$, is restricted and may not be exceeded.
+Equally, in order to meet the EV's charging demand over the scheduling horizon, $H$, a soft minimum charging power, $P_{u,min}$ is also introduced:
+
+\input{_chapter3/equ/power-charge-minimum}
+
+Although the upper limit is hard, i.e. caused by technical restrictions, this lower limit is a necessity to initiate the scheduling procedure, which will become apparent when the scheduling algorithm is explained.
+Using MAS, EVs utilise their broker agents to purchase energy quantities for each time-slot, $k$, and also sell or ``undo'' some of the already acquired energy quantities if it contributed towards a new load spike.
+
+\subsection{Base Load}
+
+To replicate real power consumption in the simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
+This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\kappa = 0.5$ hours.
+A single scheduling horizon was defined as one day, therefore $H=48$ samples.
+
+In this context, each household, i.e. physical entity, dispatches its broker agents to order the household's daily energy demand; therefore it a scenario with some foresight is assumed.
+After having issued this energy request, the entire network demand is known to the supplier and can be relayed to all broker agents when they query for it.
+This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
+More specifically, all households' broker agents communicate with the suppler's broker agents to optimally embed their charging profiles, $p_u(k)$, within this aggregated base load, $d(k)$.
+
+\subsection{Scheduling Algorithm}
+
+For this work's EV charging coordination strategy, an algorithm is designed to generate optimised charging profiles for each EV.
+Optimality implies that aggregation of all charging profiles and adding the aggregate onto the network's base demand, $d(k)$, does not result in additional spikes in the resulting demand profile, $p(k)$.
+This optimality is achieved by repetitively querying the network's base load and adjusting the individual charging profiles according to the obtained information.
+The updated charging profile is then reapplied and the new base load is queried.
+This loop continues until either convergence towards a global solution has been achieved or a certain number of iterations has been reached.
+
+\hl{Rewrite the entire algorithm explanation... The paper is very unclear!}
+
+In order to control the algorithm, two parameters are used, i.e. $\alpha$ and $\beta$.
+Here, $\alpha \in (0, 1]$ and $\beta \in (0, 1]$, too.
+These two parameters control the convergence rate of the algorithm, as well as its resultant steady-state ripple.
+Since the algorithm is designed to update each EV's charging profile based on a preceding state (i.e. $n-1$), the algorithm's initialisation is explained before expanding on the updating procedure.
+
+\subsubsection{Algorithm Initialisation ($n=1$)}
+
+Having obtained the network's base demand profile (following the procedure mentioned above), the initial charging profile for each EV can be defined:
+
+\input{_chapter3/equ/initial-charging-profile}
+
+
+
+
+
+
+
+
+
+
+
+

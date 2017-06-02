@@ -1,0 +1,50 @@
+\begin{figure}\centering
+\tikzstyle{box} = [%
+	draw,%
+	rectangle,%
+	%fill=green!20,%
+	minimum height=2em,%
+	minimum width=2em,%
+]
+\begin{tikzpicture}[node distance=2cm, shorten >= 1pt, >=stealth', auto, scale=1, transform shape]
+	\pgfmathsetmacro\N{4}
+
+	% Draw supplyer
+    \draw
+    (0, 0)
+    node [box, fill=black!10](supplier) {Supplier}
+    node [box, below left of=supplier](buyer_s) {Buyer}
+    node [box, below right of=supplier](seller_s) {Seller};
+    
+    \draw (5, 0) node(bracket) {};
+    
+    \draw
+    node [box, below of=buyer_s, yshift=-10mm](buyer_1) {Buyer}
+    node [box, below left of=buyer_1, fill=black!10](load_1) {Load}
+    node [box, above left of=load_1](seller_1) {Seller}
+    node [box, below of=seller_s, yshift=-10mm](seller_2) {Seller}
+    node [box, below right of=seller_2, fill=black!10](load_2) {Load}
+    node [box, above right of=load_2](buyer_2) {Buyer};
+    
+    \draw [-] (supplier) to (buyer_s);
+    \draw [-] (supplier) to (seller_s);
+    \draw [-] (load_1) to (buyer_1);
+    \draw [-] (load_1) to (seller_1);
+    \draw [-] (load_2) to (buyer_2);
+    \draw [-] (load_2) to (seller_2);
+    
+    \draw [->] (seller_s) to node[pos=0.7, align=center, left, xshift=-5mm]{buys\\from} (buyer_1);
+    \draw [->] (seller_s) to node[pos=0.7, align=center, right, xshift=5mm]{buys\\from} (buyer_2);
+    \draw [->] (seller_1) to node[pos=0.3, align=center, left, xshift=-5mm]{sells\\to} (buyer_s);
+    \draw [->] (seller_2) to node[pos=0.3, align=center, right, xshift=5mm]{sells\\to} (buyer_s);
+    
+	
+    \draw [decorate,decoration={brace,amplitude=5pt,raise=0pt},yshift=0pt](supplier.90-|bracket.0) -- (supplier.270-|bracket.0) node [black,midway,xshift=2mm,align=left] {physical entity};
+    \draw [decorate,decoration={brace,amplitude=5pt,raise=0pt},yshift=0pt](seller_s.90-|bracket.0) -- (seller_s.270-|bracket.0) node [black,midway,xshift=2mm,align=left] {CNP responding\\broker agents};
+    \draw [decorate,decoration={brace,amplitude=5pt,raise=0pt},yshift=0pt](seller_2.90-|bracket.0) -- (seller_2.270-|bracket.0) node [black,midway,xshift=2mm,align=left] {CNP initiating\\broker agents};
+    \draw [decorate,decoration={brace,amplitude=5pt,raise=0pt},yshift=0pt](load_2.90-|bracket.0) -- (load_2.270-|bracket.0) node [black,midway,xshift=2mm,align=left] {physical entities};
+    
+\end{tikzpicture}
+\caption{A simplified MAS structure containing virtual seller and buyer agents (white), that negotiate power/charging profiles for physical entities (grey).}
+\label{ch3:fig:agent-network}
+\end{figure}

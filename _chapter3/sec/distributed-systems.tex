@@ -1,3 +1,19 @@
 \section{Distributed Systems}
 \label{ch3:sec:distributed-systems}
 
+As it was discussed in the literature review in Section \ref{ch-review}, several mechanisms exist to decentralise control of DERs.
+Du to their reactivity, pro-activeness and social ability, a Multi Agent System (MAS) distinguishes itself from traditional software and hardware systems, which is also why it was chosen for the coordination of EV charging.
+Several agent packages implementations exist and each may follow a different communication paradigm.
+These paradigms include ``Belief, Desire and Intention'' (BDI), neutral behaviour or other specialised functionality \cite{Luck2004}.
+From this comprehensive catalogue, the Java Agent Development Framework (JADE) was chosen since it natively implements FIPA specification \cite{JADE-website, FIPA-agent-specs}.
+Furthermore, JADE is an application independent package that has become quite popular, as seen by the number of publications using JADE \cite{Karfopoulos2013, Eddy2011, Kuo2013, Mocci2014, Li2017}.
+
+In this work, multiple virtual trading agents are designed to negotiate a corresponding EV's charging profile with other trading agents.
+Tying virtual agents to a physical entity is not new \cite{Nagata2002, Dimeas2005, Nguyen2011, Nagata2012}, yet in previous work these agents directly controlled the entity whilst the agents in the presented work negotiate schedules that will be applied after ratification.
+So called ``broker'' agents are implemented to facilitate this trading process, and the implement the Contact-Net Protocol (CNP), which in turn is based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure.
+The broker is linked to one EV and negotiates the charging profile over a scheduling horizon, $H$.
+This link is shown in Figure \ref{ch3:fig:agent-network}.
+
+\input{_chapter3/fig/agent-network}
+
+The dominant goal of the negotiation procedure is to prevent charging spikes when multiple EVs connect and begin their charging.
