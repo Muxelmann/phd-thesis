@@ -1,0 +1,83 @@
+\begin{figure}\centering
+\tikzstyle{box} = [%
+	draw,%
+	rectangle,%
+	%fill=green!20,%
+	minimum height=2em,%
+	minimum width=2em,%
+]
+\tikzstyle{bracket} = [%
+	decorate,%
+	decoration={brace,amplitude=5pt,raise=1mm},%
+	yshift=0mm,%
+	color=black!50,%
+]
+\tikzstyle{bracket_text} = [%
+	black,%
+	midway,%
+	xshift=2mm,%
+	align=left,%
+	color=black!50,%
+]
+\begin{tikzpicture}[node distance=2cm, shorten >= 1pt, >=stealth', auto, scale=1, transform shape]
+	\pgfmathsetmacro\N{4}
+
+	% Draw supplyer
+    \draw (0, 0) node [box, fill=black!10](supplier) {Supplier};
+    \draw (5, 0) node [box, fill=black!10](load1) {Load$_1$};
+    \draw (10, 0) node [box, fill=black!10](load2) {Load$_2$};
+    
+    \draw (0, -11.5) node [](s_end) {};
+    \draw (0, -10) node [](s_sync) {};
+    
+    \draw (5, -1) node [](l1_q1) {};
+    \draw (5, -2) node [](l1_r1) {};
+    \draw (5, -5) node [](l1_u1) {};
+    \draw (5, -6) node [](l1_a1) {};
+    \draw (5, -11) node[](l1_q2) {};
+    
+    \draw (10, -1.1) node [](l2_q1) {};
+    \draw (10, -3.0) node [](l2_r1) {};
+    \draw (10, -7.5) node [](l2_u1) {};
+    \draw (10, -8.5) node [](l2_a1) {};
+    \draw (10, -11.1) node[](l2_q2) {};
+    
+    
+    \draw [dotted] (supplier.south) to (s_end.center);
+    \draw [dotted] (load1.south) to (s_end.center-|l1_q1.center);
+    \draw [dotted] (load2.south) to (s_end.center-|l2_q1.center);
+    
+    \draw [->] (l1_q1.center) to node[pos=0.5, above]{query$(l_1)$} (supplier.center|-l1_q1);
+    \draw [->] (supplier.center|-l1_q1) to
+    			(supplier.center|-l1_r1) to node[pos=0.5, above]{reply$(l_1)$} (l1_r1.center);
+    \draw [bracket] (l1_q1) -- (l1_r1) node[bracket_text]{waiting};
+    \draw [->] (l1_r1.center) to 
+    			(l1_u1.center) to node[pos=0.5, above]{update$(l_1)$} (supplier.center|-l1_u1);
+    \draw [bracket] (l1_r1) -- (l1_u1) node[bracket_text]{scheduling};
+    \draw [->] (supplier.center|-l1_u1) to
+    			(supplier.center|-l1_a1) to node[pos=0.5, above]{ack$(l_1)$} (l1_a1.center);
+    \draw [bracket] (l1_u1) -- (l1_a1) node[bracket_text]{waiting};
+    \draw [bracket] (l1_a1) -- (l1_a1|-s_sync.90) node[bracket_text]{syncing};
+    
+    \draw [->] (l2_q1.center) to node[pos=0.25, above]{query$(l_2)$} (supplier.center|-l2_q1);
+    \draw [->] (supplier.center|-l2_q1) to
+    			(supplier.center|-l2_r1) to node[pos=0.75, above]{reply$(l_2)$} (l2_r1.center);
+    \draw [bracket] (l2_q1) -- (l2_r1) node[bracket_text]{waiting};
+    \draw [->] (l2_r1.center) to
+    			(l2_u1.center) to node[pos=0.25, above]{update$(l_2)$} (supplier.center|-l2_u1);
+    \draw [bracket] (l2_r1) -- (l2_u1) node[bracket_text]{scheduling};
+    \draw [->] (supplier.center|-l2_u1) to
+    			(supplier.center|-l2_a1) to node[pos=0.75, above]{ack$(l_2)$} (l2_a1.center);
+    \draw [bracket] (l2_u1) -- (l2_a1) node[bracket_text]{waiting};
+    \draw [bracket] (l2_a1) -- (l2_a1|-s_sync.90) node[bracket_text]{syncing};
+    
+    \draw [thick] (supplier.180|-s_sync) to node[pos=1, right]{SYNC} (load2.0|-s_sync);
+    
+    \draw [->] (l1_q2.center) to node[pos=0.5, above]{query$(l_1)$} (supplier.center|-l1_q2);
+    \draw [->] (l2_q2.center) to node[pos=0.25, above]{query$(l_2)$} (supplier.center|-l2_q2);
+    
+    \draw [-] (supplier.center|-l1_q2) to (s_end.center);
+\end{tikzpicture}	
+\caption{Agent synchronisation before re-scheduling their EVs charging profile.}
+\label{ch3:fig:agent-synchronisation}
+\end{figure}
