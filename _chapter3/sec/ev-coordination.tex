@@ -14,10 +14,10 @@ The EV scheduling algorithm is introduced next, before the performance parameter
 
 EVs were modelled as loads that, over the course of a scheduling horizon, $H$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
 Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
-Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand, $p_u(k)$, where $p_u(t) \in \textbf{p}(k)$.
+Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand, $p_{u,k}$, where $p_{u,k} \in \textbf{p}_u$.
 In other words, they need to autonomously assign each charging plan over a certain number of future time-slots.
-Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{u,max}$, is restricted and may not be exceeded.
-Equally, in order to meet the EV's charging demand over the scheduling horizon, $H$, a soft minimum charging power, $P_{u,min}$ is also introduced:
+Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{max,u}$, is restricted and may not be exceeded.
+Equally, in order to meet the EV's charging demand over the scheduling horizon, $H$, a soft minimum charging power, $P_{min,u}$ is also introduced:
 
 \input{_chapter3/equ/power-charge-minimum}
 
@@ -55,6 +55,29 @@ It is worth mentioning that this synchronisation is removed by purposefully desy
 However, the common algorithm design approach, where the presupposition that all loads will have successfully transmitted their charging profiles to the substation before the algorithm continues, is used in the design of the following algorithm.
 
 \hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
+
+As already shown in Figure \ref{ch3:fig:agent-synchronisation}, the proposed scheduling algorithm consists of four fundamental steps that are repeated during for iteration of the algorithm:
+
+\begin{enumerate}
+	\item Query for the base network load
+	\item Schedule the EV's charging according to load
+	\item Update the supplier
+	\item Wait to let other EV's submit their schedules
+\end{enumerate}
+
+During the first iteration of the algorithm (i.e. $n=1$), the EV demand is spread out over the load profile to only ``\textit{fill the lowest valley}''.
+This process is shown in the following algorithm:
+
+\input{_chapter3/alg/valley-filling}
+
+If every EV does this, the aggregated EV demand may overfill this valley, which leads to all EVs having to undo some of the schedule.
+Therefore, during any subsequent algorithm iteration (i.e. $n>1$), a portion of the previous EV schedule is undone, and reallocated in using an updated base demand profile.
+The amount of ``\textit{undoing}'' is governed by the parameter $\alpha$, where $\alpha \in [0, 1)$).
+When the value of $\alpha$ is chosen close to zero, then the corrections to the preceding schedules are very small.
+Conversely, when the value of $\alpha$ is chosen close to one, then the corrections nearly undo all of the previously found charging profile.
+To prevent the algorithm from allocating its entire charging power to a single time slot, a second parameter, $\beta$, is used, where $\beta \in [0, 1)$, too.
+When the value of $\beta$ is chosen close to zero, then only a smaller fraction of power can be added to a time-slot of the charging profile.
+And conversely, when the value of $\beta$ is chosen closer to one, the the charging power can be adjusted more aggressively.
 
 
 

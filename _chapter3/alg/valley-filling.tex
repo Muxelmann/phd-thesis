@@ -1,0 +1,34 @@
+\begin{algorithm}
+ \SetKwFunction{Query}{query}
+ \SetKwFunction{Update}{update}
+ \SetKwFunction{Break}{break}
+ \KwData{$\textbf{p}_{base}(n)$, $E_u$, $P_{max,u}$, $P_{min,u}$}
+ \KwResult{$\textbf{p}_u(n)$}
+ \For{$n\leftarrow 1$ \KwTo $N$}{
+  \tcp{Query for base load}\label{cmt}
+  $\textbf{p}_{base}(n) \leftarrow$ \Query{}\;
+  \tcp{Forward and undo previous schedule}\label{cmt}
+  \eIf{$n>1$}{
+    $\textbf{p}_u(n) \leftarrow \textbf{p}_u(n-1)\alpha$\;
+   }{
+    $\textbf{p}_u(n) \leftarrow [0, 0, \dots, 0]$\;
+  }
+  \tcp{Determine unallocated energy}\label{cmt}
+  $\hat{E}_{u}(n) = E_u - \sum_{k=1}^K \kappa\times p_{u,k}(n)$\;
+  \tcp{Fill valley}\label{cmt}
+  \For{$k\leftarrow \min_k(\textbf{p}_{base}(n))$ \KwTo $\max_k(\textbf{p}_{base}(n))$}{
+   \eIf{$p_{u,k}(n) + P_{max,u}\beta \leq P_{max,u}$}{
+    $p_{u,k}(n) \leftarrow p_{u,k}(n) + P_{max,u}\beta$\;
+   }{
+    $p_{u,k}(n) \leftarrow P_{max,u}$\;
+   }
+   $\hat{E}_{u}(n) = E_u - \sum_{k=1}^K \kappa\times p_{u,k}(n)$\;
+   \If{$\hat{E}_{u}(n) = 0$}{
+    \Update{$\textbf{p}_u(n)$}\;
+   	\Break{}\;
+   }
+  }
+ }
+ \caption{Robust valley filling algorithm for a single EV in}
+ \label{ch3:alg:valley-filling}
+\end{algorithm}
