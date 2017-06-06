@@ -45,24 +45,32 @@ For visualisation, the message exchange bewteen two loads and a supplier includi
 
 \input{_chapter3/fig/agent-synchronisation}
 
-Here, one iteration of querying, scheduling and updating is shown.
-Both load$_1$ and load$_2$ can query for the network load at any time, and can start scheduling an EV charging profile immediately upon receipt of a reply, i.e. reply$(l_1)$ and reply$(l_2)$, respectively.
-Whilst load$_1$ might quickly find a solution and update the supplier by informing it about the charging profile (i.e. update$(l_1)$), load$_2$ may take longer and cannot send an update.
-During this time, load$_1$ has to wait until load$_2$ has notified the supplier about its charging profile and this profile was acknowledged (i.e. ack$(l_2)$).
-After all loads (in this case only two) have submitted their charging profiles, a synchronisation event triggers all loads to continue and repeat the querying (followed by re-scheduling the profile and re-updating the supplier).
+Here, the horizontal arrows indicate messages being sent from loads to a supplier and vertical lines indicate processesing or idle time. 
+As a whole, a single iteration of querying, scheduling, updating and synchronising is shown.
+This single iteration can be broken into several sub-processes.
+From top to bottom, the temporal execution of these sub-processes were as follows:
+First, both load$_1$ and load$_2$ query the supplier for the currently known network load.
+These two loads can start scheduling their EV charging profile immediately upon receipt of a reply, i.e. reply$(l_1)$ and reply$(l_2)$, respectively.
+In this example, load$_1$ might find a solution before load$_2$ and can therefore update the supplier with the charging profile (i.e. update$(l_1)$) sooner, too.
+Querying the supplier for the updated network load would therefore not make sense, since load$_2$ has not yet generated and updated its EV schedule.
+Therefore, a synchronisation mechanism is used to wait until all loads have sent updates to the supplier.
+During this waiting time, load$_1$ has to wait until load$_2$ has updated the supplier about its charging profile, the corresponding profile was acknowledged (i.e. ack$(l_2)$), and the synchronisation event has been triggered.
+In this case only two loads need to have submitted their charging profiles before the \textit{SYNC} event is triggered.
+After this synchronisation event, the next algorithm iteration is initiated (in the example, the two queries of this iteration are shown).
 
-It is worth mentioning that this synchronisation is removed by purposefully desynchronising agents, and the impact of this desynchronisation on the algorithm is studied.
-However, the common algorithm design approach, where the presupposition that all loads will have successfully transmitted their charging profiles to the substation before the algorithm continues, is used in the design of the following algorithm.
+%It is worth mentioning that this synchronisation is removed by purposefully desynchronising agents, and the impact of this desynchronisation on the algorithm is studied.
+%However, the common algorithm design approach, where the presupposition that all loads will have successfully transmitted their charging profiles to the substation before the algorithm continues, is used in the design of the following algorithm.
 
 \hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
 
-As already shown in Figure \ref{ch3:fig:agent-synchronisation}, the proposed scheduling algorithm consists of four fundamental steps that are repeated during for iteration of the algorithm:
+As shown in Figure \ref{ch3:fig:agent-synchronisation}, the proposed scheduling algorithm consists of four fundamental steps that are repeated for iteration of the algorithm.
+These steps are to:
 
 \begin{enumerate}
-	\item Query for the base network load
-	\item Schedule the EV's charging according to load
-	\item Update the supplier
-	\item Wait to let other EV's submit their schedules
+	\item query for the base network load,
+	\item schedule the EV's charging according to load,
+	\item update the supplier, and
+	\item synchronise by waiting to let other EV's submit their schedules.
 \end{enumerate}
 
 During the first iteration of the algorithm (i.e. $n=1$), the EV demand is spread out over the load profile to only ``\textit{fill the lowest valley}''.
