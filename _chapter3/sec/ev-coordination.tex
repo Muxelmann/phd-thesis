@@ -45,23 +45,26 @@ For visualisation, the message exchange bewteen two loads and a supplier includi
 
 \input{_chapter3/fig/agent-synchronisation}
 
-Here, the horizontal arrows indicate messages being sent from loads to a supplier and vertical lines indicate processesing or idle time. 
-As a whole, a single iteration of querying, scheduling, updating and synchronising is shown.
-This single iteration can be broken into several sub-processes.
-From top to bottom, the temporal execution of these sub-processes were as follows:
-First, both load$_1$ and load$_2$ query the supplier for the currently known network load.
-These two loads can start scheduling their EV charging profile immediately upon receipt of a reply, i.e. reply$(l_1)$ and reply$(l_2)$, respectively.
-In this example, load$_1$ might find a solution before load$_2$ and can therefore update the supplier with the charging profile (i.e. update$(l_1)$) sooner, too.
-Querying the supplier for the updated network load would therefore not make sense, since load$_2$ has not yet generated and updated its EV schedule.
-Therefore, a synchronisation mechanism is used to wait until all loads have sent updates to the supplier.
-During this waiting time, load$_1$ has to wait until load$_2$ has updated the supplier about its charging profile, the corresponding profile was acknowledged (i.e. ack$(l_2)$), and the synchronisation event has been triggered.
-In this case only two loads need to have submitted their charging profiles before the \textit{SYNC} event is triggered.
-After this synchronisation event, the next algorithm iteration is initiated (in the example, the two queries of this iteration are shown).
+Here, the horizontal arrows indicate messages being sent from loads (i.e. EV agents) to a supplier and vertical lines indicate processing or idle time.
+In this figure, a single iteration is shown, which can be broken into several sub-processes of querying, scheduling, updating and synchronising.
+From top to bottom, the temporal execution of these sub-processes is as follows:
+First, both load$_1$ and load$_2$ query the supplier for the currently known network load (i.e. query($l_1$) and query($l_2$)).
+This network load is used to schedule their power profiles to ``fill valleys'', i.e. only charge their EVs during periods of low demand.
+Upon receipt of a  reply from the energy supplier (i.e. reply($l_1$) and reply($l_2$)), both loads immediately start scheduling these profiles.
+As shown in the example, load$_1$ found a solution before load$_2$ and can therefore inform the supplier about its intended load profile sooner, by sending an update (i.e. update$(l_1)$) to the supplier.
+Subsequently querying the supplier for an updated network load would be premature, since other loads (i.e. load$_2$) has not yet generated and updated its load profile.
+Therefore, a synchronisation mechanism has to be used, forcing load$_1$ to wait until all loads have sent updates to the supplier.
+In this example, load$_1$ waits until load$_2$ has send an updated and the corresponding profile was acknowledged by the supplier (i.e. ack$(l_2)$).
+Only thereafter, a synchronisation event may be triggered (i.e. \textit{SYNC} event).
+After this synchronisation event, the next algorithm iteration is initiated and the procedure repeats.
+Here, the second iteration's two querying messages are shown in the example.
 
 %It is worth mentioning that this synchronisation is removed by purposefully desynchronising agents, and the impact of this desynchronisation on the algorithm is studied.
 %However, the common algorithm design approach, where the presupposition that all loads will have successfully transmitted their charging profiles to the substation before the algorithm continues, is used in the design of the following algorithm.
 
 \hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
+
+With this synchronised message and information exchange, the underlying algorithm that is
 
 As shown in Figure \ref{ch3:fig:agent-synchronisation}, the proposed scheduling algorithm consists of four fundamental steps that are repeated for iteration of the algorithm.
 These steps are to:
