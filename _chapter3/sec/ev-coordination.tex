@@ -64,20 +64,9 @@ Here, the second iteration's two querying messages are shown in the example.
 
 \hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
 
-With this synchronised message and information exchange, the underlying algorithm that is
+With this synchronised message and information exchange, the underlying procedure that assigns EV charging power at times of low energy demand still needs to be defined.
 
-As shown in Figure \ref{ch3:fig:agent-synchronisation}, the proposed scheduling algorithm consists of four fundamental steps that are repeated for iteration of the algorithm.
-These steps are to:
-
-\begin{enumerate}
-	\item query for the base network load,
-	\item schedule the EV's charging according to load,
-	\item update the supplier, and
-	\item synchronise by waiting to let other EV's submit their schedules.
-\end{enumerate}
-
-During the first iteration of the algorithm (i.e. $n=1$), the EV demand is spread out over the load profile to only ``\textit{fill the lowest valley}''.
-This process is shown in the following algorithm:
+\input{_chapter3/fig/valley-filling}
 
 \input{_chapter3/alg/valley-filling}
 
