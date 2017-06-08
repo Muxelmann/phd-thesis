@@ -65,32 +65,46 @@ Here, the second iteration's two querying messages are shown in the example.
 \hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
 
 With this synchronised message and information exchange, the underlying procedure that assigns EV charging power at times of low energy demand still needs to be defined.
+Figure \ref{ch3:fig:valley-filling} shows a graphical representation of the iterative allocation and reallocation of charging power as the valley filling algorithm progresses.
 
 \input{_chapter3/fig/valley-filling}
 
+During the first iteration, i.e. $n=1$, a base network load, $\textbf{p}_{base}(n)$ (black line) indicates the underlying and unmodifiable load that is expected to occur.
+Following the same annotation that was used in previous chapters, $k$ represents a half-hourly time-slot (i.e. sample period $\kappa = 30\text{minutes}$), so that each power value $p_{base,k}(n) \in \textbf{p}_{base}(n)$.
+Here, $n$ represents the iteration number, where $n \in [1, \dots, N]$.
+An EV charging power $p_{u,k}(n)$ (green line) is added to the time where demand is lowest.
+The addition of this charging power is assigned for each EV, $u$, at time $k$, during the iteration step $n$, and for convenience this adding process is highlighted in green, too.
+Therefore, each EV's charging profile consists of several charge power values, where $p_{u,k}(n) \in \textbf{p}_u(n)$.
+
+
+During subsequent iterations, i.e. $n>1$, a proportion of the applied charging power, which potentially contributed to a new demand peak, is subtracted and added to new demand troughs.
+The magnitude of the reduction is determined by an ``\textit{undoing}'' parameter, $\alpha$, where $\alpha \in [0, 1)$.
+As seen in the above figure, the undone energy is highlighted in red and the corresponding addition of unassigned charge demand is, again, highlighted in green (an arrow emphasises the direction of reallocation).
+\hl{Here, it is important to note that for all steps where power is added to the the EV's charging profile, none of the values must exceed the EV's maximum charging power, }$P_{max,u}$.
+In fact, in order to spread out the added powers over multiple periods of low demand, a second so called ``\textit{spreading}'' parameter is used, $\beta$, where $\beta \in [0, 1)$.
+Therefore, the subsequent equation that determines charge power allocation for each iteration of the scheduling algorithm is defined as follows:
+
+\input{_chapter3/equ/valley-filling-equation}
+
+An intermediate demanded energy, $\hat{E}_u(n)$, is defined, which captures the total energy that needs to be allocated in the charge profile.
+In the first iteration, this energy is equal to the total, actual EV energy demand, $E_u$, and for all subsequent iterations, this energy is equal to the undone energy, i.e.:
+
+\input{_chapter3/equ/intermediate-demand-energy}
+
+Since the energy that is charged by the resulting charging profile has to equate to the original charging demand, Equation \ref{ch3:equ:intermediate-demand-energy} can be expanded into a recursive formula:
+
+\input{_chapter3/equ/intermediate-demand-energy-expanded}
+
+Instead of being based on the general energy demand, this form shows how the algorithm's power reduction mechanism acts on the previous iteration's power profile.
+Therefore, the undone power portion can be defined as:
+
+\input{_chapter3/equ/undone-power}
+
+To summarise: the message exchange is explained in Figure \ref{ch3:fig:agent-synchronisation}; the power allocation captured to achieve valley filling is explained in Equation \ref{ch3:equ:valley-filling-equation}; and the recursive intermediate demand is defined in Equation \ref{ch3:equ:intermediate-demand-energy-expanded}.
+When combined, the complete smart valley filling algorithm can be defined as shown in Algorithm \ref{ch3:alg:valley-filling}.
+
 \input{_chapter3/alg/valley-filling}
 
-If every EV does this, the aggregated EV demand may overfill this valley, which leads to all EVs having to undo some of the schedule.
-Therefore, during any subsequent algorithm iteration (i.e. $n>1$), a portion of the previous EV schedule is undone, and reallocated in using an updated base demand profile.
-The amount of ``\textit{undoing}'' is governed by the parameter $\alpha$, where $\alpha \in [0, 1)$).
-When the value of $\alpha$ is chosen close to zero, then the corrections to the preceding schedules are very small.
-Conversely, when the value of $\alpha$ is chosen close to one, then the corrections nearly undo all of the previously found charging profile.
-To prevent the algorithm from allocating its entire charging power to a single time slot, a second parameter, $\beta$, is used, where $\beta \in [0, 1)$, too.
-When the value of $\beta$ is chosen close to zero, then only a smaller fraction of power can be added to a time-slot of the charging profile.
-And conversely, when the value of $\beta$ is chosen closer to one, the the charging power can be adjusted more aggressively.
-
-
-
-In order to control the algorithm, two parameters are used, i.e. $\alpha$ and $\beta$.
-Here, $\alpha \in (0, 1]$ and $\beta \in (0, 1]$, too.
-These two parameters control the convergence rate of the algorithm, as well as its resultant steady-state ripple.
-Since the algorithm is designed to update each EV's charging profile based on a preceding state (i.e. $n-1$), the algorithm's initialisation is explained before expanding on the updating procedure.
-
-\subsubsection{Algorithm Initialisation ($n=1$)}
-
-Having obtained the network's base demand profile (following the procedure mentioned above), the initial charging profile for each EV can be defined:
-
-\input{_chapter3/equ/initial-charging-profile}
 
 
 
