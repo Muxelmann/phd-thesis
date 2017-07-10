@@ -1,4 +1,7 @@
 \begin{equation}
-	\hat{p}(t+\tau) = p(t) + \sum_{i=1}^{N} a_i p(t-i\tau) + \sum_{i=1}^{N} b_i \hat{p}(t-(i-1)\tau)
-	\label{ch2:equ:mpc-arx}
+\begin{split}
+	\hat{p}(t+\Delta t) &= p(t) + \sum_{i=1}^{N} a_i p(t-i\Delta t)\\
+	&+ \sum_{i=1}^{N} b_i \hat{p}(t-(i-1)\Delta t)
+\end{split}
+\label{ch2:equ:mpc-arx}
 \end{equation}

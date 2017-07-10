@@ -1,4 +1,4 @@
-\begin{figure}[htb]\centering
+\begin{figure*}[htb]\centering
 % Define some block styles
 \tikzstyle{box} = [%
 	draw,%
@@ -22,8 +22,8 @@
 		{\draw (\t,-0.1) node[anchor=north] {$t$}}
 		{
 			\ifthenelse{\l=1}
-			{\draw (\t,-0.1) node[anchor=north] {$t+\tau$}}
-			{\draw (\t,-0.1) node[anchor=north] {$t+\l\tau$}};
+			{\draw (\t,-0.1) node[anchor=north] {$t+\Delta t$}}
+			{\draw (\t,-0.1) node[anchor=north] {$t+\l\Delta t$}};
 		};
 	}
 	% Draw main power curve
@@ -48,30 +48,30 @@
 	(10,1.7) node[estimate](est_3) {};
 	
 	% Label the power samples
-	\draw [->] (1, 5) node[anchor=south] {$p(t)$} to [out=-135,in=135] (sam_0);
-	\draw [->] (4, 5) node[anchor=south] {$p(t+\tau)$} to [out=-135,in=135] (sam_1);
-	\draw [->] (7, 5) node[anchor=south] {$p(t+2\tau)$} to [out=-135,in=135] (sam_2);
-	\draw [->] (10, 5) node[anchor=south] {$p(t+3\tau)$} to [out=-135,in=135] (sam_3);
+	\draw [->] (1, 5) node[anchor=south] {$p_{net}(t)$} to [out=-135,in=135] (sam_0);
+	\draw [->] (4, 5) node[anchor=south] {$p_{net}(t+\Delta t)$} to [out=-135,in=135] (sam_1);
+	\draw [->] (7, 5) node[anchor=south] {$p_{net}(t+2\Delta t)$} to [out=-135,in=135] (sam_2);
+	\draw [->] (10, 5) node[anchor=south] {$p_{net}(t+3\Delta t)$} to [out=-135,in=135] (sam_3);
 	
 	% Label the estimates
-	\draw [->] (4, 0.75) node[anchor=north] {$\hat{p}(t+\tau)$} to [in=-45] (est_1);
-	\draw [->] (7, 0.75) node[anchor=north] {$\hat{p}(t+2\tau)$} to [in=-45] (est_2);
-	\draw [->] (10, 0.75) node[anchor=north] {$\hat{p}(t+3\tau)$} to [in=-45] (est_3);
+	\draw [->] (4, 0.75) node[anchor=north] {$\hat{p}_{net}(t+\Delta t)$} to [in=-45] (est_1);
+	\draw [->] (7, 0.75) node[anchor=north] {$\hat{p}_{net}(t+2\Delta t)$} to [in=-45] (est_2);
+	\draw [->] (10, 0.75) node[anchor=north] {$\hat{p}_{net}(t+3\Delta t)$} to [in=-45] (est_3);
 	
 	% Label the forward power transients
 	\draw [decorate,decoration={brace,amplitude=3pt,mirror,raise=4pt},yshift=0pt,xshift=5mm]
-	(4, 2) -- (4, 4) node [anchor=west,black,midway,xshift=2mm] {$\epsilon_p(t)$};
+	(4, 2) -- (4, 4) node [anchor=west,black,midway,xshift=2mm] {$E_p(t)$};
 	\draw [decorate,decoration={brace,amplitude=3pt,mirror,raise=4pt},yshift=0pt,xshift=3mm]
-	(7, 3.5) -- (7, 4) node [anchor=west,black,midway,xshift=2mm] {$\epsilon_p(t+\tau)$};
+	(7, 3.5) -- (7, 4) node [anchor=west,black,midway,xshift=2mm] {$E_p(t+\Delta t)$};
 	\draw [decorate,decoration={brace,amplitude=3pt,mirror,raise=4pt},yshift=0pt,xshift=3mm]
-	(10, 2) -- (10, 3.5) node [anchor=west,black,midway,xshift=2mm] {$\epsilon_p(t+2\tau)$};
+	(10, 2) -- (10, 3.5) node [anchor=west,black,midway,xshift=2mm] {$E_p(t+2\Delta t)$};
 	
 \end{tikzpicture}
 %	\draw [solid] (12, 6) -- (12, 4.75) -- (10.5, 4.75) -- (10.5, 6) -- (12, 6);
 %	\draw (10, 6) node[sample, yshift=-10mm, xshift=25mm](legend_sample) {};
 %	\draw node[right of=legend_sample, xshift=-15mm] {$p$};
 %	\draw (10, 6) node[estimate, yshift=-20mm, xshift=25mm](legend_estimate) {};
-%	\draw node[right of=legend_estimate, xshift=-15mm] {$\hat{p}$};
-\caption{Underlying time-series based compensation strategy for compensator PID$_2$. Here, $p_{network}$ and $\hat{p}_{network}$ are abbreviated to $p$ and $\hat{p}$, respectively.}
+%	\draw node[right of=legend_estimate, xshift=-15mm] {$\hat{p}_{net}$};
+\caption{Underlying time-series based compensation strategy for compensator PID$_2$.}
 \label{ch2:fig:power-transient-minimisation}
-\end{figure}
+\end{figure*}

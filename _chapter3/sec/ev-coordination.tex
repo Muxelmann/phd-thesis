@@ -1,39 +1,46 @@
 \section{Coordination of EV charging}
 \label{ch3:sec:ev-coordination}
 
-Here, an algorithm for EV charging is presented, which is later implemented in both a synchronised and desynchronised case.
+In this section, an algorithm for EV charging is presented, which is later implemented in both a synchronised and desynchronised case.
 Real load data is used in combination with EV demand to evaluate the performance of the algorithm at preventing new power spikes from occurring.
-Convergence of the algorithm is studied and convergence criteria as well as rate of convergence are also presented.
+Convergence of the algorithm is studied and convergence criteria as well as rate of convergence are presented, too.
 
-This section is structured as follows.
+The structure of this section is as follows.
 First, the means and assumptions for calculating EV demand is defined.
 Then the real load data is introduced and explained.
 The EV scheduling algorithm is introduced next, before the performance parameters are presented.
 
 \subsection{EV Demand}
 
-EVs were modelled as loads that, over the course of a scheduling horizon, $H$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
+\nomenclature{$T_{sch}$}{Scheduling horizon for EV charging.}
+\nomenclature{$u$}{EV number, where $u \in [1, \dots, U]$.}
+\nomenclature{$p_{u, n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{u, n}(t) \in \textbf{p}_{u,n}$.}
+
+\nomenclature{$P_{min,u}$}{Minimum EV charging power.}
+\nomenclature{$P_{max,u}$}{Maximum EV charging power.}
+
+EVs were modelled as loads that, over the course of a scheduling horizon, $T_{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
 Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
-Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand, $p_{u,k}$, where $p_{u,k} \in \textbf{p}_u$.
-In other words, they need to autonomously assign each charging plan over a certain number of future time-slots.
+Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{u,n}(t)$, where $p_{u,n}(t) \in \textbf{p}_{u,n}$.
+In other words, they can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_{sch}$.
 Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{max,u}$, is restricted and may not be exceeded.
-Equally, in order to meet the EV's charging demand over the scheduling horizon, $H$, a soft minimum charging power, $P_{min,u}$ is also introduced:
+Equally, in order to meet the EV's charging demand over the scheduling horizon, $T_{sch}$, a soft minimum charging power, $P_{min,u}$ is also introduced:
 
 \input{_chapter3/equ/power-charge-minimum}
 
 Although the upper limit is hard, i.e. caused by technical restrictions, this lower limit is a necessity to initiate the scheduling procedure, which will become apparent when the scheduling algorithm is explained.
-Using MAS, EVs utilise their broker agents to purchase energy quantities for each time-slot, $k$, and also sell or ``undo'' some of the already acquired energy quantities if it contributed towards a new load spike.
+Using MAS, EVs utilise their broker agents to purchase energy quantities for each time-slot, $t$, and also sell or ``undo'' some of the already acquired energy quantities if it contributed towards a new load spike.
 
 \subsection{Base Load}
 
 To represent real power consumption in simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
-This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\kappa = 0.5$ hours.
-A single scheduling horizon was defined as one day, therefore $H=48$ samples.
+This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\Delta t = 0.5$ hours.
+A single scheduling horizon was defined as one day, therefore $T_{sch}=48$ samples.
 
 In this context, each household, i.e. physical entity, dispatches its broker agents to order the household's daily energy demand; therefore it a scenario with some foresight is assumed.
 After having issued this energy request, the entire network demand is known to the supplier and can be relayed to all broker agents when they query for it.
 This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
-More specifically, all households' broker agents communicate with the suppler's broker agents to optimally embed their charging profiles, $p_u(k)$, within this aggregated base load, $d(k)$.
+More specifically, all households' broker agents communicate with the suppler's broker agents to optimally embed their charging profiles, $p_{u,n}(t)$, within this aggregated base load.
 
 \subsection{Scheduling Algorithm}
 
@@ -76,6 +83,7 @@ This spike would be seen on the updated demand profile, $\hat{\textbf{p}}_{base,
 For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{n-1}$ is ``undone'' and reallocated to the new trough in demand.
 Subsequently, the spike in the resulting $\hat{\textbf{p}}_{base, n}$ is therefore reduced and reallocated to different periods.
 The amount of power that is undone for each time-slot is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
+
 
 \hl{Continue here...}
 

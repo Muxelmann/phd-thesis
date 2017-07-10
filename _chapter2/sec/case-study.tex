@@ -1,18 +1,23 @@
 \section{Case studies}
 \label{ch2:sec:case-studies}
 
-The aim of the presented work is to show that BESS operation, that is guided by imperfect forecasts, can be improved to yield further reductions of peak load.
-Therefore, six different case studies are defined and split into two distinct groups.
-Here, the first group addresses the the impact of dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts, whilst the second group assumes perfect half-hourly load forecasts.
-Since half-hourly temporal resolution does not allow to compensate for sub-half-hourly demand volatility, each group is sub-divided into three cases, where different mechanisms to predict the volatility are presented.
-The first case in each group implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats.
-For the second case, the more sophisticated MPC is used and different lengths of AR models are assessed.
-The third and final case is the ideal case where perfect foresight is given.
-These six cases are numbered \textbf{I} to \textbf{VI} and, for clarity, they are tabulated in Table \ref{ch2:tab:cases}, too.
+Two cases are defined that the performance of the proposed dynamic control is compared against: case \textbf{O} and case \textbf{B}.
+More specifically, case \textbf{O}, original case, is the scenario where no BESS operation takes place.
+Traditional off-line BESS operation that only uses predetermined half-hourly BESS schedules is referred to as the benchmark case, or case \textbf{B}.
+All remaining cases, which are explained below, are capture different versions of the dynamic control.
+
+In addition to the two comparison cases, three more different case studies are defined: cases \textbf{I}, \textbf{II} and \textbf{III}.
+This group of three case studies evaluates the impact of the proposed dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts.
+In each of the three cases, a different mechanisms is used to predict the power volatility.
+More specifically, case \textbf{I} implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats, case \textbf{II} uses the aforementioned MPC, and performance of different AR model lengths is compared, and the third and final case, case \textbf{III}, represents an ideal scenario where perfect foresight is assumed and the exact next load can be estimated.
+For clarity, all three cases, numbered \textbf{I} to \textbf{III}, are summarised and tabulated in Table \ref{ch2:tab:cases}.
 
 \input{_chapter2/tab/cases}
 
-Results from each case are compared against the baseline, \textbf{B}, where the half-hourly BESS schedule is simulated without and sub-half-hourly adjustments.
-In this work, two comparison steps are performed.
-The first step compares the impact of dynamic BESS control for a single day, i.e. time-series comparison to get this first impression is presented in the results section.
-Secondly, the entire dataset is compared by only focusing on the daily power peak, and the magnitude of their reduction is compared.
+Results from all BESS cases (\textbf{B}, \textbf{I}, \textbf{II} and \textbf{III}) are first compared against the original, i.e. uncompensated, network load case (\textbf{O}).
+Here, by using a sample day, the assessment of load profile improvements are made clear.
+Once it is clear how each day's peak is reduced by the algorithm, the daily peak reduction capability from all cases' results are compared.
+Rather than assessing the underlying load profile from a time-series perspective, only focus is put on any further peak load reductions.
+However, the number of days may make it difficult to spot trends and improvements in the data.
+Therefore, from the daily peak reduction results, a Probability Density Function (PDF) is derived, which is based on kernel density estimation.
+The PDF shows the stochastic improvement of each case type in comparison to the original case, i.e. case \textbf{O}.

@@ -1,4 +1,8 @@
 \begin{equation}
-	p_1(t+\tau) := \alpha_P \epsilon_{SOC}(t) + \alpha_I \sum_{i=0}^\infty \epsilon_{SOC}(t-i\tau) + \alpha_D \frac{\epsilon_{SOC}(t)-\epsilon_{SOC}(t-\tau)}{\tau}
-	\label{ch2:equ:corrective-component-soc}
+\begin{split}
+	p_1(t+\Delta t) &:= \alpha_P E_{SOC}(t)\\
+	&+ \alpha_I \sum_{i=0}^\infty E_{SOC}(t-i\Delta t)\\
+	&+ \alpha_D \frac{E_{SOC}(t)-E_{SOC}(t-\Delta t)}{\Delta t}
+\end{split}
+\label{ch2:equ:corrective-component-soc}
 \end{equation}

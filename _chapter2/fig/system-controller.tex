@@ -13,29 +13,23 @@
     (0,0)
     node [box, minimum width=5cm](network) {Network}
     node [box, below of=network, yshift=5mm](battery) {Battery}
-    node [draw, circle, below of=battery](plus) {+}
-    node [box, fill=green!20, below left of=plus, yshift=-10mm, xshift=-10mm](pid_soc) {PID$_1$}
-    node [box, fill=green!20, below right of=plus, yshift=-10mm, xshift=10mm](pid_p) {PID$_2$}
-    node [box, fill=blue!20, left of=pid_soc, xshift=-20mm](schedule) {Schedule}
-    node [box, fill=green!20, right of=pid_p, xshift=20mm](mpc) {MPC};
-%    node [box, below of=schedule](battery) {Battery}
-%    node [box, below of=battery](network) {Network}
-%   	node [box, fill=green!20, left of=battery, xshift=-14.5mm](controller) {Controller}
-%	node [box, fill=green!20, below of=controller](mpc) {MCP};
+    node [box, fill=green!20, below left of=battery, yshift=-20mm, xshift=-10mm](pid_soc) {PID$_1$}
+    node [box, fill=green!20, below right of=battery, yshift=-20mm, xshift=10mm](pid_p) {PID$_2$}
+    node [box, fill=blue!20, below of=pid_soc, yshift=-10mm](schedule) {Schedule}
+    node [box, fill=green!20, below of=pid_p, yshift=-10mm](mpc) {MPC};
 	% Draw lines
 	\draw [->] (battery) to (network);
-	\draw [->] (plus) to node[right] {$p(t+\tau)$} (battery);
-	\draw [->, bend left] (pid_soc) to node[right, pos=0.2] {$p_{1}(t+\tau)$} (plus);
-	\draw [->, bend right] (pid_p) to node[left, pos=0.2] {$p_{2}(t+\tau)$} (plus);
-	\draw [->] (battery.180) to [out=180, in=120] node[left, pos=0.2] {$SOC(t)$} (pid_soc.180|-pid_soc.90);
-	\draw [->] (network) to [out=340, in=60] node[right] {$\text{ }p_{network}(t)$} (pid_p.0|-pid_p.90);
-	\draw [->] (schedule) to node[pos=0.35] {$SOC(k)$} (pid_soc);
-	\draw [->] (mpc) to node[pos=0.35] {$\hat{p}(t+\tau)$} (pid_p);
-	\draw [->, bend left] (network.0) to (mpc.90);
+	\draw [->, bend right] (pid_soc) to node[left, pos=0.4, xshift=-1mm] {$p_{1}(t+\Delta t)$} (battery);
+	\draw [->, bend left] (pid_p) to node[right, pos=0.4, xshift=1mm] {$p_{2}(t+\Delta t)$} (battery);
+	\draw [->] (battery.180) to [out=180, in=120] node[left, pos=0.2, xshift=-5mm] {$SOC^*(t)$} (pid_soc.180|-pid_soc.90);
+	\draw [->] (network.0) to [out=340, in=60] (pid_p.0|-pid_p.90);
+	\draw [->] (schedule) to node[pos=0.25] {$SOC(t)$} (pid_soc);
+	\draw [->] (mpc) to node[pos=0.25] {$\hat{p}_{net}(t+\Delta t)$} (pid_p);
+	\draw [->, bend left] (network.0) to [out=80, in=100] node[right, pos=0.1, xshift=2mm, yshift=1mm] {$p_{net}(t)$} (mpc.0);
 	
-	\draw (-4, -7.25) node [right] {Controller};
+	\draw (-4, -6.25) node [right] {Controller};
 	
-	\draw [dashed] (-4, -3) -- (4, -3) -- (4, -7) -- (-4, -7) -- (-4, -3);
+	\draw [dashed] (-4, -3) -- (4, -3) -- (4, -6) -- (-4, -6) -- (-4, -3);
 %	\draw [->, bend right] (schedule.180) to (controller.90);
 %	\draw [->] (network) to (mpc);
 %	\draw [->] (mpc) to (controller);
@@ -44,6 +38,6 @@
 \end{tikzpicture}%
 
 
-\caption{Controller}
+\caption{Dynamic controller breakdown as previously shown in Figure \ref{ch2:subfig:proposed-dynamic-control-system}.}
 \label{ch2:fig:system-controller}
 \end{figure}
