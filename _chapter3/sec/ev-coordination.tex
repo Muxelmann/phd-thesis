@@ -46,30 +46,42 @@ For visualisation, the message exchange bewteen two loads and a supplier includi
 \input{_chapter3/fig/agent-synchronisation}
 
 In this figure, the horizontal arrows indicate messages being sent from loads (i.e. EV agents) to a supplier and vertical lines indicate processing or idle time.
-Shown within Figure \ref{ch3:fig:agent-synchronisation} is a single scheduling iteration, which can be broken into several sub-processes of querying, scheduling, updating and synchronising.
-From top to bottom, the temporal execution of these sub-processes is as follows:
+Shown within Figure \ref{ch3:fig:agent-synchronisation} is a single scheduling iteration, which can be broken into the sub-processes of: querying, scheduling, updating and synchronising.
+From top to bottom, the sequential execution of these sub-processes is as follows:
+
 First, both load$_1$ and load$_2$ query the supplier for the currently known network load (i.e. query($l_1$) and query($l_2$)).
-This network load is used to schedule their power profiles to ``fill valleys'', i.e. only charge their EVs during periods of low demand.
-Upon receipt of a  reply from the energy supplier (i.e. reply($l_1$) and reply($l_2$)), both loads immediately start scheduling these profiles.
-As shown in the example, load$_1$ found a solution before load$_2$ and can therefore inform the supplier about its intended load profile sooner, by sending an update (i.e. update$(l_1)$) to the supplier.
-Subsequently querying the supplier for an updated network load would be premature, since other loads (i.e. load$_2$) has not yet generated and updated its load profile.
-Therefore, a synchronisation mechanism has to be used, forcing load$_1$ to wait until all loads have sent updates to the supplier.
-In this example, load$_1$ waits until load$_2$ has send an updated and the corresponding profile was acknowledged by the supplier (i.e. ack$(l_2)$).
-Only thereafter, a synchronisation event may be triggered (i.e. \textit{SYNC} event).
+This network load is used to schedule their power profiles to ``fill valleys'', i.e. only charge EVs during periods of low demand.
+Upon receipt of a reply from the energy supplier (i.e. reply($l_1$) and reply($l_2$)), both loads immediately start scheduling their profiles.
+In the example above, load$_1$ found a solution before load$_2$ and can therefore inform the supplier about its intended load profile sooner, by sending an update (i.e. update$(l_1)$) to the supplier.
+Subsequently querying the supplier for an updated network load would be premature, since the other load (i.e. load$_2$) has not yet generated and updated its load profile.
+Therefore, a synchronisation mechanism had to be used, forcing load$_1$ to wait until all loads have sent updates to the supplier.
+Here, load$_1$ waits until load$_2$ has sent an update and the corresponding profile was acknowledged by the supplier (i.e. ack$(l_2)$).
+Only after this had happened, a synchronisation event would be triggered (i.e. \textit{SYNC} event).
 After this synchronisation event, the next algorithm iteration is initiated and the procedure repeats.
-Here, the second iteration's two querying messages are shown in the example.
+Since all subsequent iterations are similar to the one shown in Figure \ref{ch3:fig:agent-synchronisation}, only the two querying messages of the  second iteration are shown.
 
-%It is worth mentioning that this synchronisation is removed by purposefully desynchronising agents, and the impact of this desynchronisation on the algorithm is studied.
-%However, the common algorithm design approach, where the presupposition that all loads will have successfully transmitted their charging profiles to the substation before the algorithm continues, is used in the design of the following algorithm.
-
-\hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
-
-With this synchronised message and information exchange, the underlying procedure that assigns EV charging power at times of low energy demand still needs to be defined.
-Figure \ref{ch3:fig:valley-filling} shows a graphical representation of the iterative allocation and reallocation of charging power as the valley filling algorithm progresses.
+Although the timing and message exchange has been defined, the mechanism to allocate and reallocate charging powers in order to achieve a valley filling behaviour has not yet been defined.
+This behaviour is shown in Figure \ref{ch3:fig:valley-filling}, where several iterations numbered $n$ are shown, and for each subsequent iteration, some amount of prescheduled power is reallocated to different time-slots.
 
 \input{_chapter3/fig/valley-filling}
 
-During the first iteration, i.e. $n=1$, a base network load, $\textbf{p}_{base}(n)$ (black line) indicates the underlying and unmodifiable load that is expected to occur.
+For every iteration in Figure \ref{ch3:fig:valley-filling}, charging profiles are added onto a base network load, $\textbf{p}_{base,n}$, where $p_{base,n}(t) \in \textbf{p}_{base,n}$.
+This base load is shown as the bold black line and does not change throughout EV scheduling.
+During the first iteration, i.e. Figure \ref{ch3:subfig:valley-filling-1} where $n=1$, the charging profile during iteartion $n$ of EV $u$ is $\textbf{p}_n$ (where $p_{u,n}(t) \in \textbf{p}_n$), and it is determined by assigning the EV charging power to the time-slots of lowest load, until the total EV energy demand is met.
+Since all EVs schedule their profiles based on the same knowledge of $\textbf{p}_{base,n}$, the aggregated charging power generates a new spike.
+This spike would be seen on the updated demand profile, $\hat{\textbf{p}}_{base, n}$, where $\hat{p}_{base, n}(t) \in \hat{\textbf{p}}_{base, n}$ is defined as:
+
+\input{_chapter3/equ/updated-demand-profile}
+
+For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{n-1}$ is ``undone'' and reallocated to the new trough in demand.
+Subsequently, the spike in the resulting $\hat{\textbf{p}}_{base, n}$ is therefore reduced and reallocated to different periods.
+The amount of power that is undone for each time-slot is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
+
+\hl{Continue here...}
+
+\hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
+
+During the first iteration, i.e. Figure \ref{ch3:subfig:valley-filling-1} where i.e. $n=1$, a base network load, $\textbf{p}_{base}(n)$ (black line) indicates the underlying and unmodifiable load that is expected to occur.
 Following the same annotation that was used in previous chapters, $k$ represents a half-hourly time-slot (i.e. sample period $\kappa = 30\text{minutes}$), so that each power value $p_{base,k}(n) \in \textbf{p}_{base}(n)$.
 Here, $n$ represents the iteration number, where $n \in [1, \dots, N]$.
 An EV charging power $p_{u,k}(n)$ (green line) is added to the time where demand is lowest.
