@@ -1,0 +1,9 @@
+\begin{equation}
+	SOC(t+\Delta t) = 
+	\begin{cases}
+		\mu\left(\frac{\eta \hat{s}_\text{ESMU}(t)\Delta t}{C_\text{bat}} + SOC(t)\right)	&\text{if } \hat{s}_\text{ESMU}(t) \geq 0\\
+		\mu\left(\frac{\hat{s}_\text{ESMU}(t)\Delta t}{\eta C_\text{bat}} + SOC(t)\right) &\text{otherwise}
+	\end{cases}
+	\forall t
+	\label{ch1:equ:next-state-of-charge-2}
+\end{equation}

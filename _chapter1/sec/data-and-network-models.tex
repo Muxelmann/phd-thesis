@@ -2,8 +2,8 @@
 \label{ch1:sec:data-and-network-models}
 
 All key network parameters and their associated cost functions have now been established.
-In this section the network model and power flow simulation, from which all aforementioned key network parameters were extracted is explained.
-Also, all data that is used throughout the research, as it is presented in this chapter, is included presented, too.
+In this section the network model and power flow simulation, from which all aforementioned key network parameters were extracted are explained.
+Also, all data that is used throughout the presented research is included, too.
 
 \subsection{Standardised Network Model}
 \label{ch1:subsec:standardised-network-model}
@@ -11,33 +11,34 @@ Also, all data that is used throughout the research, as it is presented in this 
 The IEEE Power and Energy Society (IEEE-PES) provided several multi-node test feeder cases.
 These test cases used to be limited to distribution networks in the United States.
 In 2015 however, they published a standardised model of a LV distribution network for the UK power network.
-This model is called the ``European Low Voltage Test Feeder'' and an OpenDSS compatible version can be obtained from their website, too \cite{DistributionTestFeeders2017}.
-Within the context of this work, the feeder is referred to as the ``LV Test Case'' and a network plot of this feeder has been included for reference.
+This model is called the ``European Low Voltage Test Feeder'' and an OpenDSS compatible version can now be obtained from their website \cite{DistributionTestFeeders2017}.
+Within the context of this work, this feeder is referred to as the ``LV Test Case'' and a network plot of this feeder has been included for reference.
 
 \input{_chapter1/fig/network-plot-LVTestCase}
 
-Here, a substation (triangle in north west) provides power to the feeder, and the amount of power is visualised by using a thicker line plot.
-There are 55 single-phase households connected to the substation and for this particularly case, are each customer drew 2kW.
+Here, a substation (triangle in north west) provides power to the feeder, and the power flowing through this feeder is visualised by the thickness of its lines.
+In total, there are 55 single-phase households connected to the substation, which represents a medium-sized UK feeder.
 
 \subsection{Load Profiles: Minutely and Half-Hourly}
 
-Alongside the LV Test Case, 100 minutely demand profiles were supplied; each being 24h long.
-Therefore, by assigning one load profile to each customer, a series of 1440 snapshot simulations were run in OpenDSS in order to simulate the variation and volatility in demand over an entire day.
-Since the provided power values are only active power values, a standardised power factor of 0.95 was used for all loads to calculate their reactive component.
+Alongside the LV Test Case, 100 minutely demand profiles were supplied; each profile being 24h long.
+Therefore, by assigning one load profile to each customer, a series of 1440 snapshot simulations could be run in OpenDSS in order to simulate the variation and volatility in demand over the entire day.
+Since the provided power values only provided active power values, a standardised power factor of 0.95 was used for all loads to calculate their reactive component.
 This non-unity power factor simulates a certain inductive load, which would otherwise be neglected.
 
 \nomenclature{$s_\text{net}(t)$}{Apparent network load at time $t$ (Chapter \ref{ch1})}
 \nomenclature{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $s_{\text{load},i}(t) \in \textbf{s}_\text{load}(t)$ (Chapter \ref{ch1})}
 \nomenclature{$\textbf{s}_\text{load}(t)$}{Apparent load power vector of all loads at time $t$ (Chapter \ref{ch1})}
 
-Before any scheduling may occur, the total network power demand, $s_\text{net}(t)$, had to be determined:
+Before any scheduling could take place, the total network load, $s_\text{net}(t)$, had to be calculated by aggregating all customer loads:
 
 \input{_chapter1/equ/sub-half-hourly-network-load}
 
-This demand is however at minutely resolution, and computing the ESMU schedule at this resolution (or any sub-half-hourly resolution) for an entire day is very computationally demanding and highly ineffective.
-Mainly, since cutting edge research in load forecasting has shown that demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible, but also, since traditional forecasts are usually at half-hourly resolution.
-Therefore, the sub-half-hourly profile must be down-sampled or extrapolated to a coarser resolution and linked using a synchronisation function $k(t)$.
-This function links sub-half-hourly and half-hourly time-series like so:
+This demand is however at minutely resolution.
+Computing the ESMU schedule at this resolution (or any sub-half-hourly resolution) for an entire day is very computationally demanding and highly ineffective.
+Mainly, since cutting edge research in load forecasting has shown that demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible, but also since traditional forecasts are generally provided at half-hourly resolution.
+Therefore, the sub-half-hourly profile had to be down-sampled or extrapolated to a coarser resolution, by using a synchronisation function $k(t)$.
+This function links the original sub-half-hourly to a resulting half-hourly time-series like so:
 
 \input{_chapter1/equ/synchronisation-function}
 
@@ -47,45 +48,45 @@ This function links sub-half-hourly and half-hourly time-series like so:
 \nomenclature{$k$}{Half-hourly timing, where $k \in [1, \dots, K]$ (Chapter \ref{ch1})}
 \nomenclature{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
 
-Here, $\Delta t$ is the sampling period (i.e. minutely period) of the simulation, and $K$ is the linking factor.
+Here, $\Delta t$ is the sampling period (i.e. minutely period) of the simulation, and $K$ is number of low-resolution blocks.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $T_\text{sch} \overset{!}{=} \alpha K \text{ where } \alpha \in \mathbb{Z}^{>0}$.
-Only in this case can the sub-half-hourly profile be divided into a set of chunks of $K\Delta t$ length.
+Only in this case can the sub-half-hourly profile be divided into a complete set of chunks, where each chunk is of length $K\Delta t$.
 Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$, can be defined as follows:
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
-Since all power values from a period of $k(t)K \rightarrow (k(t)+1)K-1$ are of equal value, a simplified half-hourly power vector is introduced as $p_\text{net}(k)$. 
+Since all power values from a period of $k(t)K \rightarrow (k(t)+1)K-1$ are equal, a simplified half-hourly power vector is introduced as $p_\text{net}(k)$. 
 In this and any subsequent vector, half-hourly timing is indicated by using the half-hourly time $k$ instead of the sub-half-hourly time $t$, where $k \in [1, \dots, K]$ and $K \in \mathbb{Z}^{>0}$.
-The link between $s^{*}_\text{net}(t)$ and $s_\text{net}(k)$ is defined as:
+The link between $s^{*}_\text{net}(t)$ and $s_\text{net}(k)$ is therefore defined as:
 
 \input{_chapter1/equ/half-hourly-power-profile}
 
-It is worth mentioning, that from here on, all subsequent cost functions ($\zeta$) that deal with half-hourly profile shapes, are functions of the half-hourly timing $k$, whilst sub-half-hourly or real-time costs are defined as functions using $t$.
+It is worth mentioning, that from here on all subsequent cost functions (i.e. any $\zeta$) that deal with half-hourly profiles, are functions that use the half-hourly timing $k$, whilst sub-half-hourly or real-time costs use the high-resolution timing $t$.
 This difference will become important when differentiating between scheduling costs and the aforementioned network costs (which are based on a set of key network parameters).
-Nonetheless, to illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both are plotted in a figure below.
+Nonetheless, to illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both profiles are plotted in a figure below.
 
 \input{_chapter1/fig/sub-half-horuly-demand-comparison}
 
-Here, in Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
+In Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
 When generating the ESMU schedules (which is addressed in Section \ref{ch1:subsec:esmu-schedule-generation}) these variations are neglected and the unwanted peak power demands are hence no longer sufficiently compensated.
 
 \subsection{Battery Model}
 
 \nomenclature{$S_\text{rating}$}{Rating of battery's power electronics, where $S_\text{rating} \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
 
-The deployed ESMU systems themselves consist of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
-The PMU controls the phase powers converters and links the battery packs to the grid.
-Each PMU's power rating, $S_\text{rating}$, is the maximum phase power of 12kVA and, beside battery charging and discharging, can also perform filtering functions, e.g. compensating for  harmonic distortion.
-The ESU is a modular container of 12.5kWh of Li-Ion energy storage, that can be aggregated to increase the energy storage capacity.
-All battery monitoring, conditioning and regulation is performed internally and need not be considered for the scope of this work.
-However, control instructions that are sent to the ESMU system itself must not request the device to operate outside its own specifications.
+The ESMU systems that were deployed throughout the NTVV project consisted of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
+The PMU controls the three-phase powers and links the ESU to the grid.
+Each PMU's per phase power rating, $S_\text{rating}$, is 12kVA and, beside battery charging and discharging, can also perform filtering functions, e.g. compensating for harmonic distortion, reactive power and phase unbalance.
+The ESU is a modular container of 12.5kWh of Li-Ion energy storage that can be aggregated to increase the total energy storage capacity.
+All battery monitoring, conditioning and regulation is performed within the ESU and hence need not be considered for the scope of this work.
+However, control instructions that are sent to the ESMU system should not request the device to operate outside its own specifications, i.e. under- or over-charge the batteries.
 
-In order to simulate this ESMU system and its energy flow behaviour, a model had to be derived from the given device specifications.
-This model includes both an inversely proportional charge-discharge efficiency, and a standby loss.
+In order to simulate this ESMU system and its energy storing behaviour, a model is developed from the given device specifications.
+This model includes both an charge-discharge efficiency and standby losses.
 The charge-discharge efficiency is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\%.
-The standby loss on the other hand is associated to the nominal control system's power demand as well as the battery's self-discharge rate.
-It has become common practice to assess an energy storage's charge level as the State of Charge (SOC).
-This SOC is described as:
+The standby losses on the other hand are associated to the nominal power drawn by the battery's control system as well as the battery's self-discharge rate.
+It became common practice to assess the energy storage's charge level as the State of Charge (SOC) instead of using the actual charge stored.
+This SOC is defined as:
 
 \input{_chapter1/equ/state-of-charge-definition}
 
@@ -96,16 +97,16 @@ This SOC is described as:
 \nomenclature{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $s_{\text{ESMU},\phi}(t) \in \textbf{s}_\text{ESMU}(t)$ (Chapter \ref{ch1})}
 
 
-Here, the SOC is defined for any given time $t$, as the actual energy stored in the ESU, $E_\text{bat}(t)$, divided by the capacity of the system, $C_\text{bat}$.
-With the conversion efficiency as the factor $\mu$, the battery charge and discharge power, $s_\text{bat}(t)$ (in kW)\footnote[1]{It is worth mentioning, that $s$ is chosen for apparent power (i.e. active and reactive power in kVA), yet $s_\text{bat}$ is purely active (i.e. in kW).}, can be calculated for any given ESMU power, $\textbf{s}_\text{ESMU}(t)$ (where $s_{\text{ESMU},\phi}(t) \in \textbf{s}_\text{ESMU}(t)$).
+SOC is therefore defined for any given time $t$, as the actual energy stored in the ESU, $E_\text{bat}(t)$, divided by the total capacity of the system, $C_\text{bat}$.
+With the conversion efficiency as the factor $\eta$, the battery charge and discharge power, $s_\text{bat}(t)$ (in kW)\footnote[1]{It is worth mentioning, that $s$ is chosen for apparent power (i.e. active and reactive power in kVA), yet $s_\text{bat}$ is purely active (i.e. in kW).}, can be calculated for any given ESMU power, $\textbf{s}_\text{ESMU}(t)$ (where $s_{\text{ESMU},\phi}(t) \in \textbf{s}_\text{ESMU}(t)$).
 
 \input{_chapter1/equ/battery-power-definition}
 
 \nomenclature{$C_f$}{Charge factor or ``C-factor'' of the battery, where $C_f \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
 
-Although the ESMU's PSU rating, $S_\text{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$), the charging power is limited based on a charging factor, $C_f$, which was chosen to be the standard value of 1.6.
+Although the ESMU's PSU rating, $S_\text{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$), the charging power is internally limited, due to a charging factor, $C_f$, which was chosen to be the standard value of 1.6.
 This factor is the ratio between the battery's maximum discharge power and its total capacity (i.e. $s_\text{bat}(t) \leq C_f \cdot C_\text{bat} \forall t$).
-Assuming this charge/discharge power is applied and constant during a sample period of $\Delta t$, an equation for the optimum change in stored energy can be formulated.
+Assuming that this charge/discharge power is applied and remains constant during a sample period of $\Delta t$, an equation describing the change in stored energy can be formulated.
 
 \input{_chapter1/equ/change-in-energy}
 
@@ -114,7 +115,7 @@ Assuming this charge/discharge power is applied and constant during a sample per
 \nomenclature{$SOC(t)$}{State of charge at time $t$ (Chapter \ref{ch1})}
 
 As already mentioned, the energy level is however affected by standby losses, which are captured by a self-discharge factor, $\mu$.
-Therefore, when adding the change in energy level to the current energy level, in order to calculate the next energy level, this factor needs to be taken into account.
+Therefore, when adding the change in energy level to the current energy level in order to calculate the next energy level, this factor needs to be taken into account.
 
 \input{_chapter1/equ/next-energy}
 
@@ -122,6 +123,10 @@ In an ideal case, $\mu = 1$, where no energy would be lost in the storage system
 Finally, by adding the current energy level to the change in energy level, and by substituting Equation \ref{ch1:equ:state-of-charge-definition}, the next SOC can be found:
 
 \input{_chapter1/equ/next-state-of-charge}
+
+When summarising $\hat{s}_\text{ESMU}(t) = \text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t)\right\}$ and substituting Equation \ref{ch1:equ:battery-power-definition} into Equation \ref{ch1:equ:next-state-of-charge}, then $SOC(t+\Delta t)$ can be rewritten as:
+
+\input{_chapter1/equ/next-state-of-charge-2}
 
 A flowchart to visually capture the model, as it is explained from Equation \ref{ch1:equ:state-of-charge-definition} to \ref{ch1:equ:next-state-of-charge}, is presented below.
 
