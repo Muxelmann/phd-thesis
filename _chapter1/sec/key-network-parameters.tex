@@ -146,40 +146,36 @@ Therefore, for this work, the customer (or load) voltage is defined as $\textbf{
 \subsection{Total power flow}
 \label{ch1:subsec:total-power-flow}
 
-Beside having to keep voltages within their specified operational boundaries, DNOs want to make sure that the distribution network operates in an efficient and ideal manner.
+Beside having to keep voltages within their specified operational boundaries, DNOs want to assure that the distribution network operates both in an efficient and ideal manner.
 Determining how ideal a three-phase network operates can be done by e.g. assessing the balance of the network's phases.
-The frequently neglected disturbance of unbalanced phases may not have an immediately associated impact on the network's customers, but the negative long term effects (e.g. asymmetric load on transformers, rotating machines and increased neutral current) must be addressed since they weaken the network's infrastructure.
+The frequently neglected disturbance due to unbalanced phases may not have an immediate impact, but the negative long term effects (e.g. asymmetric load on transformers, rotating machines and increased neutral current) weaken the network's assets and must not be neglected.
 
-The choice of how customers are connected to LV feeders in the UK makes phase unbalance a more dominant problem than one might have thought.
-Customers in urban UK distribution networks have a single-phase link to the three-phase feeder line.
-The link is established by connecting their supply cables or ``laterals'' between a phase and the neutral conductor.
-In the UK, the phase allocation for each customer has been random, in order to distribute load as evenly as possible across all three phases.
-In theory, this approach should assure a more or less balanced three-phase load, yet in reality this is not the case.
-Even if the number of customers on each phase was the same for all three phases, the probability that all customers' load profiles are identical is very low.
-Therefore, the likeliness of LV distribution feeders in the UK to be unbalanced is very high.
+Customer phasing procedures in the UK increase the problem of phase unbalance even more, since phases are chosen arbitrarily and customers are connected via single-phase laterals.
+These lateral or the link to the feeder is established by connecting the customer's supply cable to a phase and the neutral conductor.
+Randomly assigning customers to phases should distribute load evenly across all three phases, which in theory should balance the three-phase network load, yet in reality this is not the case.
+Even if the number of customers per phase was the same, the probability that all customers' load profiles are identical is very low.
+Therefore, the likeliness that LV distribution feeders in the UK are unbalanced is very high.
 
 \nomenclature{$\textbf{s}_{ss}(t)$}{Apparent multi-phase power at substation level at time $t$ (Chapter \ref{ch1})}
 \nomenclature{$s_{ss,\phi}(t)$}{Apparent single-phase power at substation level for phase $\phi$ at time $t$, where $s_{ss,\phi}(t) \in \textbf{s}_{ss}(t)$ (Chapter \ref{ch1})}
 \nomenclature{$\text{UF}(\textbf{x})$}{Function calculating the Unbalance Factor (UF) for any multidimensional vector $\textbf{x}$, where $x_n \in \textbf{x}$ and $n \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
 
-
-Since substation monitoring is capable of providing three-phase power measurements, they are used as realistic key network parameters, and summarised in a substation power vector $\textbf{s}_{ss}(t)$.
-Deriving phase unbalance from these three-phase sub is done by following the American National Standards Institute (ANSI) definition of phase unbalance \cite{ANSI-MB-1-2011}.
-The standardised Unbalance Factor (UF) is defined as:
+Since substation monitoring is capable of providing reliable three-phase power measurements, they can be used as realistic key network parameters from which the network's unbalance can be determined.
+Deriving phase unbalance from this power vector is done by following the American National Standards Institute's (ANSI) definition of Unbalance Factor (UF) \cite{ANSI-MB-1-2011}:
 
 \input{_chapter1/equ/unbalance-equation}
 
 \nomenclature{$\zeta_\text{unbalance}(\textbf{s}(t))$}{Power unbalance for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
 
-From the substation monitoring, a three-phase substation power vector, $\textbf{s}_{ss}(t)$ (where $s_{ss,\phi} \in \textbf{s}_{ss}$), is used and the network's phase unbalance can be calculated.
-Since this forms another realistic key network parameter, the UF in Equation \ref{ch1:equ:unbalance-equation} was formulated into a cost function, too.
-The resulting cost function $\zeta_\text{unbalance}(\textbf{s}_{ss})$ is defined as:
+From the substation monitoring, a three-phase substation power vector, $\textbf{s}_{ss}(t)$ (where $s_{ss,\phi} \in \textbf{s}_{ss}$), can be used to calculate the network's phase unbalance.
+Since this forms another realistic key network parameter, the UF in Equation \ref{ch1:equ:unbalance-equation} was formulated into a cost function.
+The resulting cost function $\zeta_\text{unbalance}(\textbf{s}_{ss})$ is thus defined as:
 
 \input{_chapter1/equ/unbalance-cost}
 
-The minimum value the unbalance function can take is one.
-In order to adjust the cost function in such a way, that a perfectly balance network results in an $\zeta_\text{unbalance}(\textbf{s})$ of zero, an additional one was subtracted.
-An illustration how this cost function is provided in the Figure \ref{ch1:fig:power-unbalance}, as shown below.
+Since the lowest value the UF can take is one, its corresponding cost function had to be adjusted so that it can reach a lowest value of zero instead.
+This adjustment can be observed by the subtraction of one at the end of the definition of the cost function, $\zeta_\text{unbalance}(\textbf{s})$.
+An sample illustration, showing how this cost behaves as phase unbalance increases, is included in the Figure \ref{ch1:fig:power-unbalance}, which shown below.
 
 \input{_chapter1/fig/power-unbalance}
 
@@ -187,11 +183,11 @@ Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s})$ varies with an inc
 
 \nomenclature{$\zeta_\text{PF}(\textbf{s}(t))$}{Power Factor (PF) cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
 
-Additionally, to assess the effective utilisation of the power distribution network, the Power Factor (PF) divergence is also addressed.
-PF is the ratio between the supplied active and apparent power.
+Additionally, to assess the effective utilisation of the power distribution network, the Power Factor (PF) divergence is also included as a cost.
+PF is the ratio between the supplied active (p) and apparent power (s).
 It therefore gives an indication of how much ``good''\footnote[1]{Reactive power is used to maintain magnetic fields in rotating machines, yet this can be supplied by local reactive power compensators and thus need not occupy otherwise free power transmission resources.} power is being consumed by the system.
-Experts would agree that keeping the PF of a system close to unity indicates that the system only draws active power and therefore is using the least amount of power transmission resources.
-In order to asses the proximity to unity PF a PF cost function, $\zeta_\text{PF}(\textbf{s}_{ss}(t))$, is defined a power vector as input:
+Experts would agree that keeping the PF of a system close to unity indicates that the system only requires active power to operate and therefore uses the lowest amount transmission resources.
+In order to asses the proximity to unity PF a cost function, $\zeta_\text{PF}(\textbf{s}_{ss}(t))$, is defined, using a multi-phase power vector as input:
 
 \input{_chapter1/equ/power-factor}
 
@@ -200,17 +196,18 @@ Here, deviating from a unity PF per phase increases the associated cost, whilst 
 \nomenclature{$\zeta_\text{neutral load}(\textbf{s}(t))$}{Neutral load cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
 
 Lastly, the already mentioned neutral current is also a result of both three-phase unbalance and non-unity PF.
-Since all three phases are $120^\circ$ out of phase, the sum of instantaneous powers should equate to zero.
-This would result in no neutral current flowing in the system.
+Since in perfectly balanced systems all three phases are $120^\circ$ out of phase, the sum of the instantaneous powers should equate to zero.
+This summation would also result in no neutral current flowing in the system.
 However, in an unbalanced system the power transmitted through the neutral conductor deviates significantly from zero.
-This situation is amplified since power distribution cables often use neutral conductors with significantly smaller diameter than those conductors used for the lines.
-Therefore, any additional power flow in this neutral conductor will deviate neutral voltages from zero volts and it could also exhaust the conductor's power carrying capacity, making the system more prone to failures.
-To address this last point, and before dealing with line utilisation, a final cost function that deals with the neutral loading $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$ is defined as follows:
+This negative impact of neutral currents is further amplified, since power distribution cables often use neutral conductors with significantly smaller cross-section than those used for line conductors.
+Therefore, any additional power flow in this neutral conductor will further deviate neutral voltages from ground.
+Furthermore, since it also exhausts the neutral conductor's power carrying capability, the system becomes more prone to failures.
+To address this last point, and before dealing with line utilisation, a cost function that deals with the neutral load $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$ is defined as follows:
 
 \input{_chapter1/equ/neutral-load}
 
-For $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, each phase power, $s_{ss,\phi}(t)$, is therefore rotated by an integer multiple of $120^\circ$ before adding them to obtain the neutral load vector.
-The magnitude of this apparent power vector is the size of the load in the neutral conductor.
+In a three phase scenario, each phase power, $s_{ss,\phi}(t)$, is therefore rotated by an integer multiple of $120^\circ$ before adding them to obtain the neutral load vector.
+Then, to obtain $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, the magnitude of this apparent power vector is computed, which is also the size of the neutral conductor's load.
 
 \subsection{Substation line utilisation}
 \label{ch1:subsec:substation-line-utilisation}
