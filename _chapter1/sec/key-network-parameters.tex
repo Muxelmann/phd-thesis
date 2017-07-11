@@ -88,58 +88,58 @@ In Figure \ref{ch1:fig:voltage-deviation}, this intentional feature is demonstra
 \subsection{Voltages at ESMU's PCC}
 \label{ch1:subsec:voltages-at-esmu}
 
-At the ESMU's PCC, it is connected to all three phases of the feeding cable.
-The location of this PCC is at some distance from the substation or simply ``down stream'' the feeder.
-Where to connect the ESMU, in order to achieve a best possible network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
-Ignoring the exact ESMU location, voltage along the line, i.e. from the substation to its PCC, will change and most likely drop.
-The reason behind this effect is due to resistive and inductive losses in the distribution lines.
-These losses are amplified with proximity to the substation, since load currents are aggregated.
-For purely consumptive loads, and particularly under heavy load conditions, this voltage may at some stage drop below the low-voltage threshold.
+At the ESMU's Point of Common Coupling (PCC), the device has access to all three phases of the feeder.
+Where ESMU should be connected in order to achieve a best possible network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
+Neglecting the exact ESMU location for now, one can assume that the line voltage along the feeder will change and, with increasing load, most likely drop.
+Reasons behind this voltage drop are the resistive and inductive losses in the distribution lines.
+These losses are amplified with proximity to the substation, since load currents form ``down stream'' customers are aggregated.
+For purely consumptive loads (i.e. no distributed generation), and particularly under heavy load conditions, this voltage is likely drop below the statutory nominal operation band.
 As mentioned in literature, this threshold is an operational constraint of LV networks and must not be violated to assure correct appliance operation and prevent financial penalisation.
 
 In order to mitigate this voltage drop, power is injected into the feeder at the ESMU's PCC.
-Doing so boosts the voltage at that location since the portion of the load current that would normally be supplied by the substation is now delivered by the ESMU.
-The effect of this power injection is sketched in the figure below.
+Doing so boosts the voltage at that location, since the portion of load current that would normally be supplied by the substation is now delivered by the ESMU.
+The effect of this power injection is sketched in the Figure \ref{ch1:fig:sketch-voltage-esmu} below.
 
 \input{_chapter1/fig/sketch-voltage-esmu}
 
 \nomenclature{$v_{ESMU,\phi}(t)$}{Phase voltage at ESMU for phase $\phi$ at time $t$, where $v_{ESMU,\phi}(t) \in \textbf{v}_{ESMU}(t)$ (Chapter \ref{ch1})}
 
-In Figure \ref{ch1:subfig:sketch-voltage-esmu-normal}, an expected voltage drop along the feeder is sketched, where the down stream feeder section's voltage dropped below $V_l$.
-In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU's intervention can alleviate some load and raise the trailing voltage levels to a level above $V_l$.
+In this figure, an expected voltage drop along the entire feeder is sketched. 
+It can be seen how the line voltage of the feeder's tailing section drops below $V_l$.
+In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU's intervention can alleviate some load and raise the trailing voltage levels above $V_l$.
 
-This realistic key network parameter is translated into a cost function, since the P2N voltage at the ESMU's PCC can be measured quite easily.
-To do so, the three-phase PCC voltage, $\textbf{v}_{ESMU}(t)$ (where $v_{ESMU,\phi}(t) \in \textbf{v}_{ESMU}(t)$), is used in Equation \ref{ch1:equ:voltage-deviation}; the same cost used for the substation transformer's secondary voltage.
+This realistic key network parameter is also used in a cost function, since the Phase to Neutral (P2N) voltage at the ESMU's PCC can easily be measured.
+To do so, the three-phase ESMU voltage at its PCC, $\textbf{v}_{ESMU}(t)$ (where $v_{ESMU,\phi}(t) \in \textbf{v}_{ESMU}(t)$), is used in the same cost that was used with the substation transformer's voltage, i.e. Equation \ref{ch1:equ:voltage-deviation}.
 Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 
 \subsection{Voltages at customer laterals}
 \label{ch1:subsec:voltages-at-customers}
 
 As mentioned in Chapter \ref{ch-introduction:sec:overview}, the allowable voltage range at customers is defined by the Electricity Safety, Quality and Continuity Regulations (ESQCR).
-Monitoring those voltages in real-time to assure they obey these regulations is costly, and therefore they are left unmonitored.
+However, monitoring those voltages in real-time to assure they obey these regulations is costly, which is why they are often left unmonitored.
 Ultimately, when it comes to voltage level correction, only substation voltage levels and customer voltage levels need to be controlled.
-This fact is to assure proper transformer operation (e.g. to maximise its lifespan) and to prevent penalisation due to customer voltage violation (i.e. fining according to the ESQCR).
+This is to assure proper transformer operation (e.g. to maximise its lifespan) and to prevent penalisation due to customer voltage violation (i.e. fining according to the ESQCR).
 As explained in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers but, as mentioned above, these voltage levels cannot be measured in reality.
-In simulations however, all loads' voltages can be extracted with ease, which is why they are included but treated as theoretical key network parameters.
+In simulations however, all load voltages can easily be extracted, which is why they are treated as theoretical key network parameters.
 
-To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the IEEE LV Test Case with all load powers set to a high value of 8kW\footnote[1]{Whilst historic and recent loads may reach values of this magnitude quite seldom, future customer demand with the aggregated effect home-charging of EVs may indeed yield extreme scenarios like this.}.
-In the following plot, the magnitude of the load bus voltages against the distance between the corresponding load and its feeding substation was drawn.
+To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the used network model with all load consuming  8kW of power\footnote[1]{Whilst historic and recent loads may reach values of this magnitude quite infrequently, future customer demand with the aggregated effect home-charging of EVs is expeceted to yield extreme scenarios like this.}.
+In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, the load bus voltages are plotted against the loads' distances to their feeding substation was drawn.
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
 \nomenclature{$v_{load,i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $v_{load,i,\phi}(t) \in \textbf{v}_{load}(t)$ (Chapter \ref{ch1})}
 \nomenclature{$\zeta_\text{load voltage}(\textbf{v}(t))$}{Voltage deviation cost for load voltage vector $\textbf{v}$ at time $t$ (Chapter \ref{ch1})}
 
-In this Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, two observations can be made.
+In this figure, two observations can be made.
 For one, it can be seen that phases are significantly unbalanced.
-Secondly, customers further than 200m from the substation experience low-voltage events (for this particular scenario).
-As already proposed in the previous section, ESMU aims to avoid these voltage violations, but the number of loads would add significant computational burden on the any used solving algorithm.
+Secondly, customers further than 200m from the substation experience low-voltage events.
+As already proposed in the previous section, ESMU can reduce the number of such low-voltage events, but including a cost for each load would add significant computational burden onto the solving algorithm.
 
-To address this problem, the previously defined voltage cost function (i.e. Equation \ref{ch1:equ:voltage-deviation}) is expanded.
-Rather than including the cost for every single customer's voltage deviation, only the worst deviation is used.
-By limiting this number, solvers need not consider such a large number of parameters and only focus on the worst network parameter.
-This focus is of particular need if the impact of the ESMU on some customers' voltages is relatively low, since the aggregate cost would otherwise cloud the impact on those individual voltages.
-For this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{load,i,\phi} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t))$, as such:
+To address this problem more efficiently, the previously defined voltage cost function (i.e. Equation \ref{ch1:equ:voltage-deviation}) is expanded to only return a single value from all customer voltages.
+More specifically, instead of including the cost for every single customer's voltage deviation, only the worst deviation is used.
+By reducing this number to the worst case, any implemented solver needs not consider the otherwise large number of parameters, and only needs to focus on the minimisation of a single value.
+This focus is of particular importance, especially if the impact of the ESMU on some customers' voltages is comparatively low, since e.g. an aggregated deviation cost could potentially obfuscate the solver and prevent it from targeting the worst case.
+Therefore, for this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{load,i,\phi} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t))$, which is defined as:
 
 \input{_chapter1/equ/load-voltage-deviation}
 
