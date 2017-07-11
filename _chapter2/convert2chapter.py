@@ -13,6 +13,16 @@ def convert_tex(p):
 		content = content.replace('{equ/', '{_chapter2/equ/')
 		content = content.replace('{tab/', '{_chapter2/tab/')
 
+		print('Line count {}'.format(len(content.split('\n'))))
+		content = content.split('\n')
+		for l in range(len(content)):
+			if '\\nomenclature{' in content[l]:
+				nomenclature = content[l].split('}')
+				nomenclature[-2] += ' (Chapter \\ref{ch2})'
+				content[l] = '}'.join(nomenclature)
+
+		content = '\n'.join(content)
+
 		f = file(p+'.tmp', 'w')
 		f.write(content)
 		f.close()

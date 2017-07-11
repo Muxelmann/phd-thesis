@@ -26,9 +26,9 @@ Therefore, by assigning one load profile to each customer, a series of 1440 snap
 Since the provided power values are only active power values, a standardised power factor of 0.95 was used for all loads to calculate their reactive component.
 This non-unity power factor simulates a certain inductive load, which would otherwise be neglected.
 
-\nomenclature{$s_\text{net}(t)$}{Apparent network load at time $t$ (Chapter \ref{ch1}).}
-\nomenclature{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $s_{\text{load},i}(t) \in \textbf{s}_\text{load}(t)$ (Chapter \ref{ch1}).}
-\nomenclature{$\textbf{s}_\text{load}(t)$}{Apparent load power vector of all loads at time $t$ (Chapter \ref{ch1}).}
+\nomenclature{$s_\text{net}(t)$}{Apparent network load at time $t$ (Chapter \ref{ch1})}
+\nomenclature{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $s_{\text{load},i}(t) \in \textbf{s}_\text{load}(t)$ (Chapter \ref{ch1})}
+\nomenclature{$\textbf{s}_\text{load}(t)$}{Apparent load power vector of all loads at time $t$ (Chapter \ref{ch1})}
 
 Before any scheduling may occur, the total network power demand, $s_\text{net}(t)$, had to be determined:
 
@@ -41,11 +41,11 @@ This function links sub-half-hourly and half-hourly time-series like so:
 
 \input{_chapter1/equ/synchronisation-function}
 
-\nomenclature{$\Delta t$}{Sampling period , where $\Delta t \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1}).}
-\nomenclature{$K$}{Number of blocks to downsample the sub-half-hourly profile into, where $K \in \mathbb{Z}^{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1}).}
-\nomenclature{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1}).}
-\nomenclature{$k$}{Half-hourly timing, where $k \in [1, \dots, K]$ (Chapter \ref{ch1}).}
-\nomenclature{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1}).}
+\nomenclature{$\Delta t$}{Sampling period , where $\Delta t \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
+\nomenclature{$K$}{Number of blocks to downsample the sub-half-hourly profile into, where $K \in \mathbb{Z}^{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
+\nomenclature{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1})}
+\nomenclature{$k$}{Half-hourly timing, where $k \in [1, \dots, K]$ (Chapter \ref{ch1})}
+\nomenclature{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
 
 Here, $\Delta t$ is the sampling period (i.e. minutely period) of the simulation, and $K$ is the linking factor.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $T_\text{sch} \overset{!}{=} \alpha K \text{ where } \alpha \in \mathbb{Z}^{>0}$.
@@ -71,7 +71,7 @@ When generating the ESMU schedules (which is addressed in Section \ref{ch1:subse
 
 \subsection{Battery Model}
 
-\nomenclature{$S_\text{rating}$}{Rating of battery's power electronics, where $S_\text{rating} \in \mathbb{R}^{>0}$ (Chapter \ref{ch1}).}
+\nomenclature{$S_\text{rating}$}{Rating of battery's power electronics, where $S_\text{rating} \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
 
 The deployed ESMU systems themselves consist of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
 The PMU controls the phase powers converters and links the battery packs to the grid.
@@ -89,11 +89,11 @@ This SOC is described as:
 
 \input{_chapter1/equ/state-of-charge-definition}
 
-\nomenclature{$C_\text{bat}$}{Battery capacity, where $C_\text{bat} \in \mathbb{R}^{>0}$ (Chapter \ref{ch1}).}
-\nomenclature{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}^{>0}$ (Chapter \ref{ch1}).}
-\nomenclature{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch1}).}
-\nomenclature{$s_{\text{bat},\phi}(t)$}{Single-phase apparent battery power for phase $\phi$ at time $t$, where $s_{\text{bat},\phi}(t) \in \textbf{s}_\text{bat}(t)$ (Chapter \ref{ch1}).}
-\nomenclature{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $s_{\text{ESMU},\phi}(t) \in \textbf{s}_\text{ESMU}(t)$ (Chapter \ref{ch1}).}
+\nomenclature{$C_\text{bat}$}{Battery capacity, where $C_\text{bat} \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
+\nomenclature{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
+\nomenclature{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch1})}
+\nomenclature{$s_{\text{bat},\phi}(t)$}{Single-phase apparent battery power for phase $\phi$ at time $t$, where $s_{\text{bat},\phi}(t) \in \textbf{s}_\text{bat}(t)$ (Chapter \ref{ch1})}
+\nomenclature{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $s_{\text{ESMU},\phi}(t) \in \textbf{s}_\text{ESMU}(t)$ (Chapter \ref{ch1})}
 
 
 Here, the SOC is defined for any given time $t$, as the actual energy stored in the ESU, $E_\text{bat}(t)$, divided by the capacity of the system, $C_\text{bat}$.
@@ -101,7 +101,7 @@ With the conversion efficiency as the factor $\mu$, the battery charge and disch
 
 \input{_chapter1/equ/battery-power-definition}
 
-\nomenclature{$C_f$}{Charge factor or ``C-factor'' of the battery, where $C_f \in \mathbb{R}^{>0}$ (Chapter \ref{ch1}).}
+\nomenclature{$C_f$}{Charge factor or ``C-factor'' of the battery, where $C_f \in \mathbb{R}^{>0}$ (Chapter \ref{ch1})}
 
 Although the ESMU's PSU rating, $S_\text{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$), the charging power is limited based on a charging factor, $C_f$, which was chosen to be the standard value of 1.6.
 This factor is the ratio between the battery's maximum discharge power and its total capacity (i.e. $s_\text{bat}(t) \leq C_f \cdot C_\text{bat} \forall t$).
@@ -109,9 +109,9 @@ Assuming this charge/discharge power is applied and constant during a sample per
 
 \input{_chapter1/equ/change-in-energy}
 
-\nomenclature{$\mu$}{Self-discharge losses of battery, where $\mu \in (0, 1]$ (Chapter \ref{ch1}).}
-\nomenclature{$\Delta E_\text{bat}(t)$}{Change in stored energy at time $t$ (Chapter \ref{ch1}).}
-\nomenclature{$SOC(t)$}{State of charge at time $t$ (Chapter \ref{ch1}).}
+\nomenclature{$\mu$}{Self-discharge losses of battery, where $\mu \in (0, 1]$ (Chapter \ref{ch1})}
+\nomenclature{$\Delta E_\text{bat}(t)$}{Change in stored energy at time $t$ (Chapter \ref{ch1})}
+\nomenclature{$SOC(t)$}{State of charge at time $t$ (Chapter \ref{ch1})}
 
 As already mentioned, the energy level is however affected by standby losses, which are captured by a self-discharge factor, $\mu$.
 Therefore, when adding the change in energy level to the current energy level, in order to calculate the next energy level, this factor needs to be taken into account.
