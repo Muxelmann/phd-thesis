@@ -1,4 +1,4 @@
 \begin{equation}
-	s_{network\;\;load}(k) = \frac{K}{T}\sum_{t=1}^{\frac{T}{K}}s_{network\;\;load}\left(\frac{T}{K}(k-1) + t\right) \forall k \text{ where } k \in [1, \dots, K]
+	s^{*}_\text{net}(t) = \frac{1}{K}\sum_{\tau=k(t)K}^{(k(t)+1)K-1}s_\text{net}(\tau) \forall t
 	\label{ch1:equ:down-sampling-to-half-hourly}
 \end{equation}

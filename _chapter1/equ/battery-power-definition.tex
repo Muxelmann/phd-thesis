@@ -1,8 +1,11 @@
 \begin{equation}
-	s_{battery}(t) = 
+\begin{split}
+	s_\text{bat}(t) = 
 	\begin{cases}
-		\eta\text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{ESMU,\phi}(t)\right\} &\text{ if } \sum_{\phi=1}^{\Phi}s_{ESMU,\phi}(t) \geq 0\\
-		\frac{1}{\eta}\text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{ESMU,\phi}(t)\right\} &\text{ otherwise}
-	\end{cases} \forall t \text{ and } \Phi \in \mathbb{N}
-	\label{ch1:equ:battery-power-definition}
+		\eta\text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t)\right\} &\text{ if } \sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t) \geq 0\\
+		\frac{1}{\eta}\text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t)\right\} &\text{ otherwise}
+	\end{cases} \forall t \\
+	\text{and } \Phi \in [1, \dots, \Phi] \text{ and } \Phi \in \mathbb{Z}^{>0}
+\end{split}
+\label{ch1:equ:battery-power-definition}
 \end{equation}

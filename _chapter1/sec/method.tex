@@ -10,23 +10,26 @@ Now, the implemented method on generating a traditional ESMU schedules is presen
 
 As discussed in the literature review in Chapter \ref{ch-review}, the main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
 It has been identified, that both the Peak-to-Average Ratio (PAR) as well as the min-max-difference (MMD) are good indicators of how well the pursued behaviours have been implemented.
-Therefore, a half-hourly PAR scheduling cost, $\zeta_{PAR}(\textbf{s}_{ESMU}, \textbf{s}_{network\;\;load})$, and a half-hourly MMD scheduling cost, $\zeta_{MMD}(\textbf{s}_{ESMU}, \textbf{s}_{network\;\;load})$, are defined as follows:
+Therefore, a half-hourly PAR scheduling cost, $\zeta_\text{PAR}(\textbf{s}_\text{ESMU} + \textbf{s}_\text{network load})$, and a half-hourly MMD scheduling cost, $\zeta_\text{MM}(\textbf{s}_\text{ESMU} + \textbf{s}_\text{network load})$, are defined as follows:
 
 \input{_chapter1/equ/peak-to-average-definition}
 
 \input{_chapter1/equ/min-max-difference-definition}
 
-Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}_{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}_{network\;\;load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
+\nomenclature{$\zeta_\text{PAR}(\textbf{s}$}{Cost of the underlying power profile $\textbf{s}$, based on the Peak to Average Ratio (PAR) (Chapter \ref{ch1}).}
+\nomenclature{$\zeta_\text{PAR}(\textbf{s}$}{Cost of the underlying power profile $\textbf{s}$, based on the difference between Minimum and Maximum power (MM) (Chapter \ref{ch1}).}
+
+Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}_\text{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}_\text{network load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
 For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve the following minimisation problem.
 Reasons behind this choice are the SQP's robustness and speed, since it is built on the well established Newton-Raphson Method, as well as its ability to cope with nonlinear constraints.
 It is this latter point that is most important, since the battery model's solving constraints are inherently nonlinear; the Newton-Raphson Method by itself is unable to solve with this kind of nonlinear constraints.
-The final minimisation problem that was passe into the SQP solver can be formulated as:
+The final minimisation problem that was passed into the SQP solver can be formulated as:
 
 \input{_chapter1/equ/scheduling-cost}
 
-To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}_{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}_{network\;\;load}$.
+To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}_\text{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}_\text{network load}$.
 These two costs both capture the PAR and MMD of the resulting power profile, and when minimised to zero, indicate a perfectly flat power curve.
-The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_{battery}(k) \leq C_{factor} \times C_{battery} \forall k$), to not exceed the PMU's phase power rating (i.e. $\left|s_{ESMU,\phi}(k)\right| \leq S_{rating} \forall \phi \forall k$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(k) \leq 1 \forall k$).
+The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $s_\text{bat}(k) \leq C_f \times C_\text{bat} \forall k$), to not exceed the PMU's phase power rating (i.e. $\left|s_{\text{ESMU},\phi}(k)\right| \leq S_\text{rating} \forall \phi \forall k$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(k) \leq 1 \forall k$).
 
 For the work presented in this chapter, the supplied half-hourly network load (or forecast) was extrapolated from sub-half-hourly data.
 This forecast can be seen as if it had been generated with perfect foresight.
@@ -52,12 +55,12 @@ To quickly summarise, the following key network parameters are used in this chap
 
 \begin{itemize}
 	\item substation phase voltages, $v_{ss,\phi}(t) \in \textbf{v}_{ss}(t)$,
-	\item ESMU phase voltages, $v_{ESMU,\phi}(t) \in \textbf{v}_{ESMU}(t)$,
-	\item all load voltages, $v_{load,i}(t) \in \textbf{v}_{load}(t)$,
+	\item ESMU phase voltages, $v_{\text{ESMU},\phi}(t) \in \textbf{v}_\text{ESMU}(t)$,
+	\item all load voltages, $v_{load,i}(t) \in \textbf{v}_\text{load}(t)$,
 	\item substation apparent phase power, $s_{ss,\phi}(t) \in \textbf{s}_{ss}(t)$,
 	\item substation phase currents, $i_{ss,\phi}(t) \in \textbf{i}_{ss}(t)$,
-	\item all line currents, $i_{line,l,\phi}(t) \in \textbf{i}_{line}(t)$, and
-	\item all network losses, $s_{losses}(t)$.
+	\item all line currents, $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$, and
+	\item all network losses, $s_\text{losses}(t)$.
 \end{itemize}
 
 Together with these key network parameters, and the cost functions defined in Section \ref{ch1:sec:key-network-parameters}, a weighted sum of all costs is generated and formalised into the following global cost function:
@@ -71,11 +74,11 @@ Since all key network parameters are outputs of the power flow simulations and n
 \input{_chapter1/fig/closed-loop-optimisation}
 
 The underlying method that performs the proposed closed-loop optimisation is captured in the next Figure \ref{ch1:fig:closed-loop-optimisation}.
-Here, for each time slot, $t$, a pre-scheduled ESMU power vector, $\textbf{s}_{ESMU}(t)$, is extracted and adjusted by an offset vector, $\delta \textbf{s}_{ESMU}(t)$.
+Here, for each time slot, $t$, a pre-scheduled ESMU power vector, $\textbf{s}_\text{ESMU}(t)$, is extracted and adjusted by an offset vector, $\delta \textbf{s}_\text{ESMU}(t)$.
 This offset vector is found through the aforementioned optimiser that minimises the global cost function, $\zeta(\boldsymbol{\alpha})$, by repetitively running power flow simulations of the IEEE distribution feeder.
-Once the adjusted ESMU schedule (i.e. $\textbf{s}_{ESMU}(t) + \delta \textbf{s}_{ESMU}(t)$) is no longer changed by the optimiser, the closed-loop optimisation process ends and the simulation continues to the next time slot (i.e. $t+1$).
+Once the adjusted ESMU schedule (i.e. $\textbf{s}_\text{ESMU}(t) + \delta \textbf{s}_\text{ESMU}(t)$) is no longer changed by the optimiser, the closed-loop optimisation process ends and the simulation continues to the next time slot (i.e. $t+1$).
 
-Since $\delta \textbf{s}_{ESMU}(t)$ must not impact the underlying half-hourly ESMU schedule, one more constraint is defined.
+Since $\delta \textbf{s}_\text{ESMU}(t)$ must not impact the underlying half-hourly ESMU schedule, one more constraint is defined.
 This constraint assures that the sum of all phase powers in the adjustment vector equates to zero, hence keeping the internal battery's dis/charging power the same.
 Including the previously mentioned battery system constraints, which ensure that the ESMU operates within its technical limitations (e.g. to not over- or undercharge the battery), the minimisation problem for the closed-loop optimisation mechanism can be formulated as follows:
 

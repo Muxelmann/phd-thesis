@@ -1,7 +1,7 @@
 \begin{equation}
-\begin{split}
-	\zeta_{MMD}(\textbf{s}_{A}, \textbf{s}_{B}) :=& \frac{\max_k\left(\textbf{s}_{A}+\textbf{s}_{B}\right) - \min_k\left(\textbf{s}_{A}+\textbf{s}_{B}\right)}{\frac{1}{K}\sum_{k=1}^{K}\left[{s}_{A}(k)+{s}_{B}(k)\right]}\\
-	&\text{where } {s}_{A}(k) \in \textbf{s}_{A} \text{ and } {s}_{B}(k) \in \textbf{s}_{B}
-\end{split}
+%\begin{split}
+	\zeta_\text{MM}(\textbf{s}) := \frac{\max_k\left(\textbf{s}\right) - \min_k\left(\textbf{s}\right)}{\frac{1}{K}\sum_{k=1}^{K}s(k)}
+	\text{ where } s(k) \in \textbf{s}
+%\end{split}
 \label{ch1:equ:min-max-difference-definition}
 \end{equation}

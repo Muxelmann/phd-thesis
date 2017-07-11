@@ -58,9 +58,9 @@
 
 	\draw [->, bend left] (simulation) to node {key parameters} (cost_function);
 	\draw [->] (cost_function) to node [above] {$\zeta(\boldsymbol{\alpha})$} (optimiser);
-	\draw [->, bend left] (optimiser) to node [left] {$\delta \textbf{s}_{ESMU}(t)$} (addition);
-	\draw [->] (addition) to node [above] {$\textbf{s}_{ESMU}(t) + \delta \textbf{s}_{ESMU}(t)$} (simulation);
-	\draw [->] (model.west|-addition) to node [above, pos=0.3] {$\textbf{s}_{ESMU}(t)$} (addition);
+	\draw [->, bend left] (optimiser) to node [left] {$\delta \textbf{s}_\text{ESMU}(t)$} (addition);
+	\draw [->] (addition) to node [above] {$\textbf{s}_\text{ESMU}(t) + \delta \textbf{s}_\text{ESMU}(t)$} (simulation);
+	\draw [->] (model.west|-addition) to node [above, pos=0.3] {$\textbf{s}_\text{ESMU}(t)$} (addition);
 	\draw [->, dashed, bend right, color=red] (model) to node [midway, above, yshift=1mm] {constraints} (optimiser.east|-optimiser.center);
 	\draw [->] (addition) -- (output);
 \end{tikzpicture}
