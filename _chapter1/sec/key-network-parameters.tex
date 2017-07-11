@@ -213,7 +213,7 @@ Then, to obtain $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, the magnitude o
 \label{ch1:subsec:substation-line-utilisation}
 
 Although phase unbalance deteriorates the efficiency and life expectancy of three-phase network assets, high power demand puts strain on the physical cables themselves.
-This is due dominantly due to resistive and inductive losses heating the cables, and bringing them closer to their operational limits.
+This is predominantly due to resistive and inductive losses heating the cables, and bringing them closer to their operational limits.
 Therefore, cables have an assigned thermal rating which must not be exceeded to prevent permanent cable damage or network failures.
 At substation level, to prevent over-currents, fuses or reclosers are installed that will disconnect the network under fault or high demand conditions.
 To quantify whether the substation fuse is approaching its tripping point, its nominal rating is used as reference.
@@ -224,11 +224,11 @@ To quantify whether the substation fuse is approaching its tripping point, its n
 \nomenclature{$\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$}{Fuse utilisation cost, derived from multi-phase substation current vector $\textbf{i}_{ss}$ at time $t$ (Chapter \ref{ch1})}
 
 For the context of this work, this nominal fuse rating, $I_\text{fuse}$, is a fixed value for the fuse at the substation and must not be exceeded.
-Using the three-phase current vector from substation monitoring, $\textbf{i}_{ss}(t)$ (where $i_{ss,\phi}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
+Using the three-phase current vector (obtained via substation monitoring), $\textbf{i}_{ss}(t)$ (where $i_{ss,\phi}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
 
 \input{_chapter1/equ/fuse-utilisation}
 
-A plot has been included in the below figure, which illustrates how this quadratic cost behaves as substation current increases.
+A plot has been included in the Figure \ref{ch1:fig:fuse-utilisation}, which illustrates how this quadratic cost behaves as substation current increases.
 
 \input{_chapter1/fig/fuse-utilisation}
 
@@ -237,13 +237,13 @@ For this simple case, the substation line rating was set as $i_{fuse}=400\text{A
 \subsection{Maximum line utilisation}
 \label{ch1:subsec:maximum-line-utilisation}
 
-Similar how voltage levels at all customers are theoretical key network parameters, currents in all lines are key network parameters, too.
-Optimising the aforementioned current at substation level would prevent unintentional feeder disconnection and equipment damage, yet lines' ratings impose distributed limits, too.
-Moreover, as feeder cables are not of a singly type of cable.
-For instance, the main three-phase wire must to be sufficiently scaled to deliver several 100s of Amperes to a collection of customers, whilst branches with a few loads may only experience 10s of Amperes worth of current.
-Furthermore, as distance to the substation increases, fewer customers are connected down stream, which allows the feeding cables to be down scaled, too.
-This network topology is very common for radial distribution networks, since it saves significant equipment cost without compromising the network integrity.
-Yet with the advent of DG and electrified LCTs, the feeder's branches are going to experience larger current flows.
+Just like voltage levels at each customer's bus are a theoretical key network parameters, currents in all lines are theoretical key network parameters, too.
+Whilst optimising the aforementioned current at substation level would prevent unintentional feeder disconnection and equipment damage, the lines' ratings impose distributed limits, too.
+For instance, the main three-phase wire has to be of sufficient scale in order to deliver several 100s of Amperes to a collection of customers
+Feeder branches on the other hand, with a lower load count, may only experience 10s of Amperes and can be of smaller scale.
+Generally, as distance to the substation increases, fewer down stream customers are connected, which allows the feeding cables to be down scaled.
+This network topology is very common for radial distribution networks, since it saves significant equipment cost without compromising network integrity.
+Yet with the advent of DG and electrified LCTs, the feeder's branches are expected to experience increasingly larger currents.
 
 \nomenclature{$l$}{Line number, where $l \in [1, \dots, L]$ (Chapter \ref{ch1})}
 \nomenclature{$L$}{Number of lines, where $L \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
@@ -251,9 +251,10 @@ Yet with the advent of DG and electrified LCTs, the feeder's branches are going 
 \nomenclature{$\textbf{i}_\text{line}(t)$}{Multi-phase line currents at time $t$, where $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$ (Chapter \ref{ch1})}
 \nomenclature{$I_{\text{nom},l}$}{Nominal line current for line $l$ (Chapter \ref{ch1})}
 
-This is why the previous cost function, as it was defined in Equation \ref{ch1:equ:fuse-utilisation}, ought to be expanded to take all line currents and ratings into account.
-Since this work was based on network simulations, each line current, $i_{\text{line},l,\phi}(t)$ (where $l$ represents the line number and $p$ the phase in that line), could be extracted with ease.
-Collecting them in $\textbf{i}_{line}(t)$ (where $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$) allows the formulation of an extended line utilisation cost function, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$, which is defined as:
+This is why the previous cost function, as it was defined in Equation \ref{ch1:equ:fuse-utilisation}, has to be expanded to take all line currents and ratings into account.
+Since this work was based on network simulations, each line current, $i_{\text{line},l,\phi}(t)$ (where $l$ represents the line number and $p$ the phase in that line), could easily be extracted.
+Collecting them in $\textbf{i}_{line}(t)$ (where $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$) allows the formulation of an extended line utilisation cost function, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$.
+Addressing the multitude of line currents just like the multitude of customer voltages was dealt with, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$ can be defined as follows:
 
 \input{_chapter1/equ/line-utilisation}
 
