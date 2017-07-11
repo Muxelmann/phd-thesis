@@ -1,36 +1,40 @@
 \section{Overview}
 \label{ch1:sec:overview}
 
-Since the increasing domestic demand for electric energy is expected to put significant strain on existing power distribution networks, DNOs have a binary choice to address this issue.
-Either they invest in substantial network reinforcement, resulting in unavoidable cost and service disruption, or alternative network support mechanisms need to be installed.
-As mentioned in the Introduction in Section \ref{ch-introduction:sec:ntvv}, DNOs prefer the latter option since it yields long term flexibility at significantly lower cost; more specifically, SSE-EN decided to deploy ESMU in LV power distribution networks.
-To operate the ESMU so that its promised battery's life expectancy is reached and operational constraints are not violated, scheduled operation was chosen.
-To reiterate, during the scheduled operation of a ESMU it consumes or injects power according to a preset plan, which changes at regular intervals.
-For historic reasons and compliance, this interval was chosen to be of 30 minutes or half-hourly period.
+Due to the previously identified trend in energy demand, future network load is expected to increase in both magnitude and volatility.
+As a result, DNOs have two choices to address the issues that are expected to result from increased network stress.
+They can either invest in network reinforcement or install network support equipment.
+Since the former option has more costs than benefits, which has been outlined in Chapter \ref{ch-introduction} (e.g. decommissioning cost, installation cost, service disruption, etc.), the installation of network support equipment was favoured.
+As mentioned in Section \ref{ch-introduction:sec:ntvv}, \textit{SSEN} decided to deploy an Energy Storage Management Unit (ESMU) in some of their Low-Voltage (LV) power distribution networks.
+Within the scope of their research, ESMU had to be controlled to benefit the network, without exceeding or violating its operational constraints.
+In order to achieve this kind of operation, ESMU was scheduled.
+During this scheduled operation of ESMU, the system either consumes or injects power, according to a predetermined plan that changes at regular intervals.
+For historic reasons and system compliance, this interval was chosen to be of 30 minutes or at half-hourly period.
 
-Resulting operation of the LV network is based upon two factors:
+Since the ESMU schedule was generated based upon a demand forecast, any resulting impact on the LV network operation is then based upon two factors:
 
 \begin{enumerate}
-	\item the underlying forecast that was used to generate the ESMU schedule, and
-	\item the network parameters used to quantify the improvements that were experienced by the network if the half-hourly schedule had been applied.
+	\item quality of the underlying forecast that was used to generate the ESMU schedule, and
+	\item network parameters that are used to quantify the improvements that were experienced by the network when the half-hourly schedule is applied.
 \end{enumerate}
 
-Our previous research focused on improving half-hourly network operation \cite{Rowe2014a, Yunusov2011}.
-Yet limiting performance parameters and the measure of success to a high level at half-hourly resolution does not effectively address and mitigate the negative impact of sub-half-hourly (i.e. minute by minute) variations in demand.
+Our previous research focused on improving half-hourly network operation to e.g. reduce peak load \cite{Rowe2014a, Yunusov2011}.
+However, in that research, high-resolution demand variability has not been taken into account.
+Therefore, the previously used performance parameters and the corresponding measure of success did not effectively address the ESMU's capability at mitigating negative impacts from minutely (or sub-half-hourly) demand.
 
-Therefore, in this chapter, a closed-loop optimisation method is proposed that adjusts a ESMU schedule in a sub-half-hourly manner in order to improve network operation whilst maintaining the same average power flow during the half-hourly period.
-Unlike previous work in the field, this approach guarantees the correct execution of the predetermined ESMU schedule, whilst allowing higher ESMU responsiveness to high resolution variations in power demand.
+In this chapter, a closed-loop optimisation method is proposed that adjusts the scheduled phase powers at a sub-half-hourly resolution, in order to improve network operation, whilst maintaining the same average active power flow during the corresponding half-hourly period.
+Unlike previous work in the field, this approach guarantees the correct execution of the predetermined ESMU schedule, despite allowing ESMU to respond to high-resolution variations in network load.
 
-In order to investigate how network operation may be improved, several, commonly used parameters are summarised in a set of cost functions.
-Initially, these cost functions are minimised individually to inspect their resulting individual impact.
-Then, they are combined in an optimal manner using a weighted sum cost function, and the final improvement is analysed.
-For each optimisation approach, power flow simulations are run on a standardised UK power distribution feeder.
-Finally, to statistically determine that the proposed cost minimisation approach resulted in better network performance, a one-tailed null hypothesis is formulated, and rejected with $p<0.05$.
+In order to investigate how network operation may be improved, a collection of commonly used parameters are summarised in a set of cost functions.
+Initially, these cost functions are minimised on an individual basis to inspect their separate impact.
+Then, all cost functions are combined using the method of a weighted sum, forming a global cost function, which is used for the final analysis of positive impact.
+For each optimisation approach, power flow simulations are run on a standardised UK power distribution feeder model in the simulation environment OpenDSS.
+To statistically determine that the proposed cost minimisation approach resulted in better network performance, a one-tailed null hypothesis is formulated, and rejected with $p<0.05$.
 The null hypothesis for this piece of work (i.e. the assumption to be rejected), is:
 
 \textit{Adjusting an ESMU schedule based on sub-half-hourly measurements of key network parameters cannot significantly improve network operation.}
 
-The term ``\textit{network measurements}'' and the correlated measure of ``\textit{improvement}'' is explained in the next section.
-All data acquisition and the power network models used for this piece of work are shown next.
-Then, the closed-loop optimisation method is presented.
-All results are discussed and, in the last section, the null hypothesis rejection is is summarised.
+The term ``\textit{network measurements}'' and the correlated measure of ``\textit{improvement}'' are explained in the next section.
+All acquired data and the power network models used for this piece of work are shown afterwards.
+Subsequently, the closed-loop optimisation method is presented.
+At the end of this chapter, all results are presented, discussed and summarised.
