@@ -3,29 +3,30 @@
  \SetKwFunction{Update}{update}
  \SetKwFunction{Break}{break}
  \SetKwFunction{Sync}{synchronising}
- \KwData{$\textbf{p}_{base}(n)$, $E_u$, $P_{max,u}$, $P_{min,u}$}
- \KwResult{$\textbf{p}_u(n)$}
+ \KwData{$\textbf{p}_{\text{base},n}$, $E_u$, $P_{\text{max},u}$, $P_{\text{min},u}$, $\Delta t$, $T_\text{sch}$}
+ \KwResult{$\textbf{p}_{\text{EV},u,n}$}
  \For{$n\leftarrow 1$ \KwTo $N$}{
   \tcp{Query for base load}\label{cmt}
-  $\textbf{p}_{base}(n) \leftarrow$ \Query{}\;
+  $\textbf{p}_{\text{base},n} \leftarrow$ \Query{}\;
   \tcp{Forward and undo previous schedule}\label{cmt}
   \eIf{$n>1$}{
-    $\textbf{p}_u(n) \leftarrow \textbf{p}_u(n-1)\alpha$\;
+    $\textbf{p}_{\text{EV},u,n} \leftarrow \textbf{p}_{\text{EV},u,n-1}\alpha$\;
    }{
-    $\textbf{p}_u(n) \leftarrow [0, 0, \dots, 0]$\;
+    $\textbf{p}_{\text{EV},u,n} \leftarrow [0, 0, \dots, 0]$\;
   }
   \tcp{Determine unallocated energy}\label{cmt}
-  $\hat{E}_{u}(n) = E_u - \sum_{k=1}^K \kappa p_{u,k}(n)$\;
+  $\hat{E}_{u,n} = E_u - \sum_{\tau=1}^{T_\text{sch}} p_{\text{EV},u,n}(\tau)\Delta t$\;
   \tcp{Fill valley}\label{cmt}
-  \For{$k\leftarrow \text{argmin}_k(\textbf{p}_{base}(n))$ \KwTo $\text{argmax}_k(\textbf{p}_{base}(n))$}{
-   \eIf{$p_{u,k}(n) + P_{max,u}\beta \leq P_{max,u}$}{
-    $p_{u,k}(n) \leftarrow p_{u,k}(n) + P_{max,u}\beta$\;
+  \For{$\tau\leftarrow \text{argmin}(\textbf{p}_{\text{base},n})$ \KwTo $\text{argmax}(\textbf{p}_{\text{base},n})$}{
+   \eIf{$p_{\text{EV},u,n}(\tau) + \frac{\hat{E}_{u,n}}{\Delta t}\beta \leq P_{\text{max},u}$}{
+    $p_{\text{EV},u,n}(\tau) \leftarrow p_{\text{EV},u,n}(\tau) + \frac{\hat{E}_{u,n}}{\Delta t}\beta$\;
    }{
-    $p_{u,k}(n) \leftarrow P_{max,u}$\;
+    $p_{\text{EV},u,n}(\tau) \leftarrow P_{\text{max},u}$\;
    }
-   $\hat{E}_{u}(n) = E_u - \sum_{k=1}^K \kappa p_{u,k}(n)$\;
-   \If{$\hat{E}_{u}(n) = 0$}{
-    \Update{$\textbf{p}_u(n)$}\;
+   $\hat{E}_{u,n} = E_u - \sum_{\tau=1}^{T_\text{sch}} p_{\text{EV},u,n}(\tau) \Delta t$\;
+   \tcp{Once EV profile is found, send update}\label{cmt}
+   \If{$\hat{E}_{u,n} = 0$}{
+    \Update{$\textbf{p}_{\text{EV},u,n}$}\;
    	\Break{}\;
    }
   }

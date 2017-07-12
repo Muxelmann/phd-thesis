@@ -1,11 +1,13 @@
 \begin{equation}
 \begin{split}
-	p_{u,k}(n) :=
+	p_{\text{EV},u,n}(\tau) :&=
 	\begin{cases}
-		\frac{\hat{E}_u(n)}{\kappa}\beta &\text{if } \frac{\hat{E}_u(n)}{\kappa}\beta \leq P_{max,u}\\
-		P_{max,i} &\text{otherwise}
+		\hat{p}_{\text{EV},u,n-1} + \frac{\hat{E}_{u,n}}{\Delta t}\beta &\text{if } \hat{p}_{\text{EV},u,n-1} + \frac{\hat{E}_{u,n}}{\Delta t}\beta \leq P_{\text{max},u}\\
+		P_{\text{max},n} &\text{otherwise}
  	\end{cases}
- 	\forall u  \\\text{ where } k = \text{argmin}_k(\textbf{p}_{base}(n)) \text{ and } n > 1
+ 	\forall u  \\
+ 	&\text{where } \tau = \text{argmin}(\hat{\textbf{p}}_{\text{base},n}) \text{ and } n > 1\\
+ 	&\text{s.t. } \hat{p}_{\text{EV},u,n-1} + \frac{\hat{E}_{u,n}}{\Delta t}\beta \geq P_{\text{min},u}
 \end{split}
 \label{ch3:equ:valley-filling-equation}
 \end{equation}

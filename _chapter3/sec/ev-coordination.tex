@@ -25,7 +25,7 @@ The EV scheduling algorithm is introduced next, before the performance parameter
 
 EVs were modelled as loads that, over the course of a scheduling horizon, $T_\text{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
 Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
-Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{u,n}(t)$, where $p_{u,n}(t) \in \textbf{p}_{\text{EV},u,n}$.
+Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{\text{EV},u,n}(t)$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$.
 In other words, they can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_\text{sch}$.
 Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{\text{max},u}$, is restricted and may not be exceeded.
 Equally, in order to meet the EV's charging demand over the scheduling horizon, $T_\text{sch}$, a soft minimum charging power, $P_{\text{min},u}$ is also introduced:
@@ -78,56 +78,64 @@ This behaviour is shown in Figure \ref{ch3:fig:valley-filling}, where several it
 
 \input{_chapter3/fig/valley-filling}
 
+\nomenclature[K]{$p_{\text{base},n}(t)$}{Base load at time $t$, where $p_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\textbf{p}_{\text{base},n}$}{Base load vector, where $p_{\text{base},n}(t) \in \textbf{p}_{\text{base},n}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\hat{p}_{\text{base},n}(t)$}{Temporary demand at time $t$, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\hat{\textbf{p}}_{\text{base},n}$}{Temporary demand vector, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \hat{\textbf{p}}_{\text{base},n}$ (Chapter \ref{ch3})}
+
 For every iteration in Figure \ref{ch3:fig:valley-filling}, charging profiles are added onto a base network load, $\textbf{p}_{base,n}$, where $p_{base,n}(t) \in \textbf{p}_{base,n}$.
 This base load is shown as the bold black line and does not change throughout EV scheduling.
-During the first iteration, i.e. Figure \ref{ch3:subfig:valley-filling-1} where $n=1$, the charging profile during iteartion $n$ of EV $u$ is $\textbf{p}_n$ (where $p_{u,n}(t) \in \textbf{p}_n$), and it is determined by assigning the EV charging power to the time-slots of lowest load, until the total EV energy demand is met.
-Since all EVs schedule their profiles based on the same knowledge of $\textbf{p}_{base,n}$, the aggregated charging power generates a new spike.
-This spike would be seen on the updated or temporary demand profile, $\hat{\textbf{p}}_{base, n}$, where $\hat{p}_{base, n}(t) \in \hat{\textbf{p}}_{base, n}$ is defined as:
+For any iteration, the charging profile during iteration number $n$, for EV $u$, is defined as $\textbf{p}_n$ (where $p_{u,n}(t) \in \textbf{p}_n$).
+During the first iteration however, i.e. Figure \ref{ch3:subfig:valley-filling-1} where $n=1$, this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met, i.e. at time-slot $\tau$ where $\tau = \text{argmin}(\textbf{p}_\text{base})$.
+Since all EVs schedule their profiles based upon the same knowledge of $\textbf{p}_{base,n}$, the aggregated charging power is likely to generate a new spike.
+This spike is seen on an updated or temporary demand profile, $\hat{\textbf{p}}_{\text{base}, n}$, where $\hat{p}_{\text{base}, n}(t) \in \hat{\textbf{p}}_{\text{base}, n}$ is defined as:
 
 \input{_chapter3/equ/updated-demand-profile}
 
-For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{n-1}$ is ``undone'' and reallocated onto the new trough in temporary demand.
-Subsequently, the spike in the resulting $\hat{\textbf{p}}_{base, n}$ is therefore reduced and reallocated to different periods.
-The amount of power that is undone for each time-slot is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
+\nomenclature[K]{$\hat{p}_{\text{EV}, u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}_{\text{EV}, u, n}(t) \in \textbf{Z}^{\geq0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\hat{\textbf{p}}_{\text{EV}, u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}_{\text{EV}, u, n}(t) \in \hat{\textbf{p}}_{\text{EV}, u, n}$ (Chapter \ref{ch3})}
 
+For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{\text{EV},n-1}$ is ``undone''.
+Subsequently, the spike in the resulting $\hat{\textbf{p}}_{\text{base}, n}$ is reduced, yet the energy that has been undone needs to be reallocated.
+The amount by which $\textbf{p}_{\text{EV},n-1}$ is reduced is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
+A new reduced or temporary charging vector $\hat{p}_{\text{EV}, u, n}(t)$ is therefore defined as:
 
-\hl{Continue here...}
+\input{_chapter3/equ/temporary-charging-power}
 
-\hl{Rewriting the entire algorithm explanation... The paper is very unclear!}
+Using this temporary charging power, the regained or temporary energy demand, $\hat{E}_{u,n}$, that needs to be reallocated, can also be defined:
 
-During the first iteration, i.e. Figure \ref{ch3:subfig:valley-filling-1} where i.e. $n=1$, a base network load, $\textbf{p}_{base}(n)$ (black line) indicates the underlying and unmodifiable load that is expected to occur.
-Following the same annotation that was used in previous chapters, $k$ represents a half-hourly time-slot (i.e. sample period $\kappa = 30\text{minutes}$), so that each power value $p_{base,k}(n) \in \textbf{p}_{base}(n)$.
-Here, $n$ represents the iteration number, where $n \in [1, \dots, N]$.
-An EV charging power $p_{u,k}(n)$ (green line) is added to the time where demand is lowest.
-The addition of this charging power is assigned for each EV, $u$, at time $k$, during the iteration step $n$, and for convenience this adding process is highlighted in green, too.
-Therefore, each EV's charging profile consists of several charge power values, where $p_{u,k}(n) \in \textbf{p}_u(n)$.
+\input{_chapter3/equ/temporary-charging-demand}
 
+To include the first iteration of the algorithm, Equation \ref{ch3:equ:temporary-charging-demand} needs to be expanded to redefine $\hat{E}_{u,n}$ for all possible algorithm iterations $n$:
 
-During subsequent iterations, i.e. $n>1$, a proportion of the applied charging power, which potentially contributed to a new demand peak, is subtracted and added to new demand troughs.
-The magnitude of the reduction is determined by an ``\textit{undoing}'' parameter, $\alpha$, where $\alpha \in [0, 1)$.
-As seen in the above figure, the undone energy is highlighted in red and the corresponding addition of unassigned charge demand is, again, highlighted in green (an arrow emphasises the direction of reallocation).
-\hl{Here, it is important to note that for all steps where power is added to the the EV's charging profile, none of the values must exceed the EV's maximum charging power, }$P_{\text{max},u}$.
-In fact, in order to spread out the added powers over multiple periods of low demand, a second so called ``\textit{spreading}'' parameter is used, $\beta$, where $\beta \in [0, 1)$.
-Therefore, the subsequent equation that determines charge power allocation for each iteration of the scheduling algorithm is defined as follows:
+\input{_chapter3/equ/temporary-charging-demand-expanded}
 
-\input{_chapter3/equ/valley-filling-equation}
+Following the similar procedure as for the first iteration, $\hat{E}_{u,n}$ needs to be allocated to different time-slots, where the rule of performing the power allocation is defined as:
 
-An intermediate demanded energy, $\hat{E}_u(n)$, is defined, which captures the total energy that needs to be allocated in the charge profile.
-In the first iteration, this energy is equal to the total, actual EV energy demand, $E_u$, and for all subsequent iterations, this energy is equal to the undone energy, i.e.:
+\input{_chapter3/equ/valley-filling-equation.tex}
 
-\input{_chapter3/equ/intermediate-demand-energy}
+\nomenclature[K]{$\beta$}{Allocation parameter to assign a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\beta \in (0, 1]$ (Chapter \ref{ch3})}
 
-Since the energy that is charged by the resulting charging profile has to equate to the original charging demand, Equation \ref{ch3:equ:intermediate-demand-energy} can be expanded into a recursive formula:
+Here, a maximum ``allocation'' parameter, $\beta$, where $\beta \in (0, 1]$ limits the power that may be allocated to any successive time-slot, $\tau$.
+To not exceed the EV's maximum charging power, any value in the charging vector, $\textbf{p}_{\text{EV},u,n}$, is capped to $P_{\text{max},u}$.
+If $\beta$ is chosen as one, then the undone energy is allocated as quickly as possible.
+For smaller values of $\beta$ on the other hand, the undone charge is reallocated in smaller portions.
+Since EV scheduling takes place over a finite scheduling horizon, $T_\text{sch}$, a constraint was added in Equation \ref{ch3:equ:valley-filling-equation}.
+This was done to assure that the temporary energy demand equates after some charging power was assigned to every time-slot of $\textbf{p}_{\text{EV},u,n}$.
 
-\input{_chapter3/equ/intermediate-demand-energy-expanded}
-
-Instead of being based on the general energy demand, this form shows how the algorithm's power reduction mechanism acts on the previous iteration's power profile.
-Therefore, the undone power portion can be defined as:
-
-\input{_chapter3/equ/undone-power}
-
-To summarise: the message exchange is explained in Figure \ref{ch3:fig:agent-synchronisation}; the power allocation captured to achieve valley filling is explained in Equation \ref{ch3:equ:valley-filling-equation}; and the recursive intermediate demand is defined in Equation \ref{ch3:equ:intermediate-demand-energy-expanded}.
-When combined, the complete smart valley filling algorithm can be defined as shown in Algorithm \ref{ch3:alg:valley-filling}.
+Any following algorithm iteration, i.e. $n>2$ as shown in Figure \ref{ch3:subfig:valley-filling-3}, the entire charging profile is adjusted and spread further over the base load, $\textbf{p}_\text{base}$.
+In the end, i.e. when $n=N$, the ideal EV charging profiles aggregate with the base load in such a way, that the resulting network load has an optimally filled valley.
+This valley filling behaviour is achieved with the ``undoing'' and ``allocation'' of EV charging power from one algorithm iteration to the next.
+Regardless of the final network load's shape, the algorithm terminates when the final iteration is reached, i.e. $n=N$.
+Rate of convergence of the algorithm differs based upon the choice of $\alpha$ and $\beta$ values.
+However, convergence is in fact guaranteed when selecting values of $\alpha < 1$ and $\beta < 1$, since the algorithm satisfies the D'Alembert Criterion in those cases.
+The complete EV scheduling algorithm has therefore been developed by: 
+\begin{enumerate*}
+	\item defining the message exchange, which is shown in Figure \ref{ch3:fig:agent-synchronisation};
+	\item formulating the initial and consecutive ``undoing'' of power, as shown in Equation \ref{ch3:equ:temporary-charging-power}, and ;
+	\item defining the iterative update and ``allocation'' of the temporary energy demand, as defined in Equation \ref{ch3:equ:temporary-charging-demand-expanded}.
+\end{enumerate*}
+For clarity, pseudocode that summarises all equations, the complete smart valley filling algorithm can be defined as shown in Algorithm \ref{ch3:alg:valley-filling}.
 
 \input{_chapter3/alg/valley-filling}
 
