@@ -12,19 +12,23 @@ The EV scheduling algorithm is introduced next, before the performance parameter
 
 \subsection{EV Demand}
 
-\nomenclature{$T_{sch}$}{Scheduling horizon for EV charging.}
-\nomenclature{$u$}{EV number, where $u \in [1, \dots, U]$.}
-\nomenclature{$p_{u, n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{u, n}(t) \in \textbf{p}_{u,n}$.}
+\nomenclature{$T_\text{sch}$}{Scheduling horizon for EV charging, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature{$u$}{EV unit number, where $u \in [1, \dots, U]$ (Chapter \ref{ch3})}
+\nomenclature{$n$}{Iteration number of EV scheduling algorithm, where $N \in [1, \dots, N]$ (Chapter \ref{ch3})}
+\nomenclature{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter \ref{ch3})}
+\nomenclature{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$ (Chapter \ref{ch3})}
 
-\nomenclature{$P_{min,u}$}{Minimum EV charging power.}
-\nomenclature{$P_{max,u}$}{Maximum EV charging power.}
+\nomenclature{$P_{\text{min},u}$}{Minimum EV charging power (Chapter \ref{ch3})}
+\nomenclature{$P_{\text{min},u}$}{Maximum EV charging power (Chapter \ref{ch3})}
 
-EVs were modelled as loads that, over the course of a scheduling horizon, $T_{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
+EVs were modelled as loads that, over the course of a scheduling horizon, $T_\text{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
 Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
-Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{u,n}(t)$, where $p_{u,n}(t) \in \textbf{p}_{u,n}$.
-In other words, they can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_{sch}$.
-Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{max,u}$, is restricted and may not be exceeded.
-Equally, in order to meet the EV's charging demand over the scheduling horizon, $T_{sch}$, a soft minimum charging power, $P_{min,u}$ is also introduced:
+Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{u,n}(t)$, where $p_{u,n}(t) \in \textbf{p}_{\text{EV},u,n}$.
+In other words, they can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_\text{sch}$.
+Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{\text{max},u}$, is restricted and may not be exceeded.
+Equally, in order to meet the EV's charging demand over the scheduling horizon, $T_\text{sch}$, a soft minimum charging power, $P_{\text{min},u}$ is also introduced:
 
 \input{_chapter3/equ/power-charge-minimum}
 
@@ -33,19 +37,21 @@ Using MAS, EVs utilise their broker agents to purchase energy quantities for eac
 
 \subsection{Base Load}
 
+\nomenclature{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$ (Chapter \ref{ch3})}
+
 To represent real power consumption in simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
 This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\Delta t = 0.5$ hours.
-A single scheduling horizon was defined as one day, therefore $T_{sch}=48$ samples.
+A single scheduling horizon was defined as one day, therefore $T_\text{sch}=48$ samples.
 
 In this context, each household, i.e. physical entity, dispatches its broker agents to order the household's daily energy demand; therefore it a scenario with some foresight is assumed.
 After having issued this energy request, the entire network demand is known to the supplier and can be relayed to all broker agents when they query for it.
 This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
-More specifically, all households' broker agents communicate with the suppler's broker agents to optimally embed their charging profiles, $p_{u,n}(t)$, within this aggregated base load.
+More specifically, all households' broker agents communicate with the suppler's broker agents to optimally embed their charging profiles, $p_{\text{EV},u,n}(t)$, within this aggregated base load.
 
 \subsection{Scheduling Algorithm}
 
 For the EV charging coordination strategy, an algorithm was designed that generates optimised charging profiles for each EV.
-Here, optimality implies that when adding all aggregated charging profiles to the network's base demand, $d(k)$, no additional spikes occur in the resulting demand profile, $p(k)$.
+Here, optimality implies that when adding all aggregated charging profiles to the network's base demand, $p_\text{base}(t)$, no additional spikes occur in the resulting demand profile, i.e. $p_\text{base}(t) + \sum_{u=1}^U p_{EV,u,N}(t)$.
 These profiles were generated by repetitively querying for the network's base load, adjusting individual EV charging profiles, and resubmitting the adjusted charging profile.
 As already stated, the common assumption when designing such a scheduling algorithm is that all scheduling entities are synchronised, i.e. wait for each other, before querying for the network's base load.
 For visualisation, the message exchange bewteen two loads and a supplier including a synchronisation time is shown in Figure \ref{ch3:fig:agent-synchronisation}.
@@ -76,11 +82,11 @@ For every iteration in Figure \ref{ch3:fig:valley-filling}, charging profiles ar
 This base load is shown as the bold black line and does not change throughout EV scheduling.
 During the first iteration, i.e. Figure \ref{ch3:subfig:valley-filling-1} where $n=1$, the charging profile during iteartion $n$ of EV $u$ is $\textbf{p}_n$ (where $p_{u,n}(t) \in \textbf{p}_n$), and it is determined by assigning the EV charging power to the time-slots of lowest load, until the total EV energy demand is met.
 Since all EVs schedule their profiles based on the same knowledge of $\textbf{p}_{base,n}$, the aggregated charging power generates a new spike.
-This spike would be seen on the updated demand profile, $\hat{\textbf{p}}_{base, n}$, where $\hat{p}_{base, n}(t) \in \hat{\textbf{p}}_{base, n}$ is defined as:
+This spike would be seen on the updated or temporary demand profile, $\hat{\textbf{p}}_{base, n}$, where $\hat{p}_{base, n}(t) \in \hat{\textbf{p}}_{base, n}$ is defined as:
 
 \input{_chapter3/equ/updated-demand-profile}
 
-For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{n-1}$ is ``undone'' and reallocated to the new trough in demand.
+For the next iteration $n+1$, i.e. Figure \ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{n-1}$ is ``undone'' and reallocated onto the new trough in temporary demand.
 Subsequently, the spike in the resulting $\hat{\textbf{p}}_{base, n}$ is therefore reduced and reallocated to different periods.
 The amount of power that is undone for each time-slot is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
 
@@ -100,7 +106,7 @@ Therefore, each EV's charging profile consists of several charge power values, w
 During subsequent iterations, i.e. $n>1$, a proportion of the applied charging power, which potentially contributed to a new demand peak, is subtracted and added to new demand troughs.
 The magnitude of the reduction is determined by an ``\textit{undoing}'' parameter, $\alpha$, where $\alpha \in [0, 1)$.
 As seen in the above figure, the undone energy is highlighted in red and the corresponding addition of unassigned charge demand is, again, highlighted in green (an arrow emphasises the direction of reallocation).
-\hl{Here, it is important to note that for all steps where power is added to the the EV's charging profile, none of the values must exceed the EV's maximum charging power, }$P_{max,u}$.
+\hl{Here, it is important to note that for all steps where power is added to the the EV's charging profile, none of the values must exceed the EV's maximum charging power, }$P_{\text{max},u}$.
 In fact, in order to spread out the added powers over multiple periods of low demand, a second so called ``\textit{spreading}'' parameter is used, $\beta$, where $\beta \in [0, 1)$.
 Therefore, the subsequent equation that determines charge power allocation for each iteration of the scheduling algorithm is defined as follows:
 

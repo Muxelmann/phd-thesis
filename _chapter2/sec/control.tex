@@ -15,22 +15,22 @@ The first reference signal is the SOC profile derived from the BESS scheduled, $
 These two inputs are fed into compensator PID$_1$ and compensator PID$_2$, respectively.
 The output of each compensator is a corrective battery power component that, when summed, yields the next BESS power, i.e. $p(t+\Delta t)$, which is applied to the BESS model.
 Each PID compensator also receives a feedback signal to compute the internal error states.
-More specifically, PID$_1$ receives the most recent SOC value that is obtained from the BESS model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_{net}(t)$ (e.g. through measurements by substation monitoring).
+More specifically, PID$_1$ receives the most recent SOC value that is obtained from the BESS model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (e.g. through measurements by substation monitoring).
 
-\nomenclature{$p_{net}(t)$}{Most recent network demand at sample $t$, where $p_{net}(t) \in \textbf{p}_{net}$ (Chapter \ref{ch2})}
+\nomenclature{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $p_\text{net}(t) \in \textbf{p}_{net}$ (Chapter \ref{ch2})}
 \nomenclature{$SOC^*(t)$}{Battery's state of charge at sample $t$ (Chapter \ref{ch2})}
-\nomenclature{$E_{SOC}(t)$}{Error in state of charge at sample $t$ (Chapter \ref{ch2})}
+\nomenclature{$E_\text{SOC}(t)$}{Error in state of charge at sample $t$ (Chapter \ref{ch2})}
 \nomenclature{$E_{p}(t)$}{Difference between current and predicting network power at sample $t$, where $p(t) \in \textbf{p}$ (Chapter \ref{ch2})}
-\nomenclature{$\hat{p}_{net}(t+\Delta t)$}{Predicted next network power at sample $t$ (Chapter \ref{ch2})}
+\nomenclature{$\hat{p}_\text{net}(t+\Delta t)$}{Predicted next network power at sample $t$ (Chapter \ref{ch2})}
 \nomenclature{$\alpha$}{PID weight vector for compensator PID$_1$ (Chapter \ref{ch2})}
 \nomenclature{$\beta$}{PID weight vector for compensator PID$_2$ (Chapter \ref{ch2})}
 \nomenclature{$a$}{Weight vector for compensator input regression of the AR model (Chapter \ref{ch2})}
 \nomenclature{$b$}{Weight vector for compensator output regression of the AR model (Chapter \ref{ch2})}
 \nomenclature{$N$}{Number of regressors of the AR model (Chapter \ref{ch2})}
 \nomenclature{$p_1(t)$, $p_2(t)$}{Corrective BESS power components from PID$_1$ and PID$_2$, respectively (Chapter \ref{ch2})}
-\nomenclature{$SOC_{tol}$}{SOC tolerance, i.e. maximum deviation from the prescheduled SOC profile (Chapter \ref{ch2})}
+\nomenclature{$SOC_\text{tol}$}{SOC tolerance, i.e. maximum deviation from the prescheduled SOC profile (Chapter \ref{ch2})}
 
-Inside the PID$_1$ component, a SOC error term, $E_{SOC}(t)$, is computed.
+Inside the PID$_1$ component, a SOC error term, $E_\text{SOC}(t)$, is computed.
 This term is the difference between the scheduled SOC profile, $SOC(t)$, and the actual (or simulated) SOC values, $SOC^*(t)$.
 The following equation captures this error term.
 
@@ -49,12 +49,12 @@ Compensator PID$_2$ on the other hand uses values from the present, past and fut
 \input{_chapter2/fig/power-transient-minimisation}
 
 Figure \ref{ch2:fig:power-transient-minimisation} summarises the time series computations for each power sample at times $t$, $t+\Delta t$, etc.
-In theory, PID$_2$ would use present power readings, $p_{network}(t)$, and a power value of the immediate future, i.e. $p_{network}(t+\Delta t)$, to compute a power error signal, which is to be reduced to a smallest possible value.
+In theory, PID$_2$ would use present power readings, $p_\text{net}(t)$, and a power value of the immediate future, i.e. $p_\text{net}(t+\Delta t)$, to compute a power error signal, which is to be reduced to a smallest possible value.
 This error signal is defined as:
 
 \input{_chapter2/equ/power-error-signal}
 
-However, since the future network power is unknown an ``estimated next power'', $\hat{p}_{network}(t+\Delta t)$, is used instead.
+However, since the future network power is unknown an ``estimated next power'', $\hat{p}_\text{net}(t+\Delta t)$, is used instead.
 This value is the PID$_2$'s input from the MPC and results in an ``estimated power error signal'':
 
 \input{_chapter2/equ/power-error-estimate}
@@ -79,7 +79,7 @@ Here, $\zeta^*(\alpha, \beta)$ is defined as:
 \input{_chapter2/equ/dynamic-cost}
 
 In Equation \ref{ch2:equ:cost-weights} and \ref{ch2:equ:dynamic-cost}, $\zeta^*(\alpha, \beta)$ represents the minutely peak load during a day, when BESS schedules are adjusted with the corresponding $\alpha$ and $\beta$ weights.
-Also, the same SOC tolerance that was used to generate the SOC schedule, i.e. $SOC_{tol}$, is included also to prevent the solution from deviating off the prescheduled SOC profile.
+Also, the same SOC tolerance that was used to generate the SOC schedule, i.e. $SOC_\text{tol}$, is included also to prevent the solution from deviating off the prescheduled SOC profile.
 Additionally, this constraint assures solution convergence for the specific load case.
 To generalise this solution for all cases, the minimisation problem was applied to several daily load profiles, resulting in several $\alpha$ and $\beta$ weights.
 The most optimal values for $\alpha$ and $\beta$ that resulted in system convergence were extracted from this set of weights and used in the case studies.

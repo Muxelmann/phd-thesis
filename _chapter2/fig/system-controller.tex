@@ -24,8 +24,8 @@
 	\draw [->] (battery.180) to [out=180, in=120] node[left, pos=0.2, xshift=-5mm] {$SOC^*(t)$} (pid_soc.180|-pid_soc.90);
 	\draw [->] (network.0) to [out=340, in=60] (pid_p.0|-pid_p.90);
 	\draw [->] (schedule) to node[pos=0.25] {$SOC(t)$} (pid_soc);
-	\draw [->] (mpc) to node[pos=0.25] {$\hat{p}_{net}(t+\Delta t)$} (pid_p);
-	\draw [->, bend left] (network.0) to [out=80, in=100] node[right, pos=0.1, xshift=2mm, yshift=1mm] {$p_{net}(t)$} (mpc.0);
+	\draw [->] (mpc) to node[pos=0.25] {$\hat{p}_\text{net}(t+\Delta t)$} (pid_p);
+	\draw [->, bend left] (network.0) to [out=80, in=100] node[right, pos=0.1, xshift=2mm, yshift=1mm] {$p_\text{net}(t)$} (mpc.0);
 	
 	\draw (-4, -6.25) node [right] {Controller};
 	

@@ -1,7 +1,7 @@
 \begin{equation}
 \begin{split}
 	\zeta_\text{voltage}(\textbf{v}(t)) :=& \sum_{\phi=1}^{\Phi}{\begin{cases}
-		\zeta_h(v_{\phi}(t)) & \text{if } V_{ss} \leq v_\phi\\
+		\zeta_h(v_{\phi}(t)) & \text{if } V_\text{ss} \leq v_\phi\\
 		\zeta_l(v_{\phi}(t)) & \text{otherwise}\\
 	\end{cases}} \forall t\\
 	&\text{ where } \Phi \in \mathbb{Z}^{>0}
@@ -10,23 +10,23 @@
 \end{equation}
 
 In this voltage cost function, $\Phi$ represents the number of phases (i.e. $\Phi = 3$), and $\zeta_h(v)$ and $\zeta_l(v)$ are two functions that convert a single voltage value, i.e. $v_p$, into a normalised positive cost based upon the direction of voltage deviation.
-E.g. if the voltage $v_p$ is greater than or equal to the nominal substation voltage, $V_{ss}$, then the result from $\zeta_h(v)$ is used as a cost; otherwise the result from $\zeta_l(v)$ is used.
+E.g. if the voltage $v_p$ is greater than or equal to the nominal substation voltage, $V_\text{ss}$, then the result from $\zeta_h(v)$ is used as a cost; otherwise the result from $\zeta_l(v)$ is used.
 In order to define these two functions, the corresponding high and low voltage thresholds, respectively $V_h$ and $V_l$, are introduced.
-With those high and low voltage bands, $V_{ss}$ has to be chosen in order to satisfy the following inequality:
+With those high and low voltage bands, $V_\text{ss}$ has to be chosen in order to satisfy the following inequality:
 
 \begin{equation}
-	V_l < V_{ss} < V_h
+	V_l < V_\text{ss} < V_h
 \end{equation}
 
 For the presented work, these two voltage thresholds are based on the UK's nominal LV voltage range of +10\% -6\% around $V_n$, i.e. 230V P2N.
 
 \begin{equation}
-	\zeta_h(v) := \alpha \left|\frac{v-V_{ss}}{V_h-V_{ss}}\right|^{\beta}
+	\zeta_h(v) := \alpha \left|\frac{v-V_\text{ss}}{V_h-V_\text{ss}}\right|^{\beta}
 	\label{ch1:equ:high-voltage-threshold-cost-complete}
 \end{equation}
 
 \begin{equation}
-	\zeta_l(v) := \alpha \left|\frac{V_{ss}-v}{V_{ss}-V_l}\right|^{\beta}
+	\zeta_l(v) := \alpha \left|\frac{V_\text{ss}-v}{V_\text{ss}-V_l}\right|^{\beta}
 	\label{ch1:equ:low-voltage-threshold-cost-complete}
 \end{equation}
 
@@ -37,11 +37,11 @@ Both $\alpha$ and $\beta$ were treated as constants and, for the scope of this w
 Substituting these values into Equations \ref{ch1:equ:high-voltage-threshold-cost-complete} and \ref{ch1:equ:low-voltage-threshold-cost-complete}, simplifies the high and low cost functions to:
 
 \begin{equation}
-	\zeta_h(v) := \left|\frac{v-V_{ss}}{V_h-V_{ss}}\right|^{2}
+	\zeta_h(v) := \left|\frac{v-V_\text{ss}}{V_h-V_\text{ss}}\right|^{2}
 	\label{ch1:equ:high-voltage-threshold-cost-simple}
 \end{equation}
 
 \begin{equation}
-	\zeta_l(v) := \left|\frac{V_{ss}-v}{V_{ss}-V_l}\right|^{2}
+	\zeta_l(v) := \left|\frac{V_\text{ss}-v}{V_\text{ss}-V_l}\right|^{2}
 	\label{ch1:equ:low-voltage-threshold-cost-simple}
 \end{equation}

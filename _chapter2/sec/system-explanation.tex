@@ -21,23 +21,23 @@ Also the load data acquisition, forecasting and BESS schedule generation are out
 
 \subsection{BESS model}
 
-\nomenclature{$C_{bat}$}{Battery capacity in kWh, where $C_{bat} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
+\nomenclature{$C_\text{bat}$}{Battery capacity in kWh, where $C_\text{bat} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
 \nomenclature{$C_{f}$}{Charge factor or ``C-factor'' of the battery, where $C_{f} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
 \nomenclature{$\mu$}{Self-discharge losses of battery, where $\mu \in (0, 1]$ (Chapter \ref{ch2})}
-\nomenclature{$P_{bat}$}{BESS power electronic rating, where $P_{bat} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
+\nomenclature{$P_\text{bat}$}{BESS power electronic rating, where $P_\text{bat} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
 \nomenclature{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch2})}
 \nomenclature{$t$}{Discrete sample of time, where $t \in [0, \Delta t, \dots, T\Delta t]$ (Chapter \ref{ch2})}
 \nomenclature{$T$}{Number of samples during the entire simulation (Chapter \ref{ch2})}
 \nomenclature{$\Delta t$}{High resolution sample period, i.e. sub-half hourly or minutely, where $\Delta t \in \mathbb{Z}^{>0}$ (Chapter \ref{ch2})}
 \nomenclature{$SOC(t)$}{Scheduled state of charge at sample $t$ (Chapter \ref{ch2})}
 \nomenclature{$p(t)$}{BESS power at time $t$, where $p(t) \in \textbf{p}$ and $p(t) \in \mathbb{Z}$ (Chapter \ref{ch2})}
-\nomenclature{$p_{bat}(t)$}{Battery power at time $t$, which is derived form $p(t)$, where $p_{bat}(t) \in \textbf{p}_{bat}$ and $p(t) \in \mathbb{Z}$ (Chapter \ref{ch2})}
+\nomenclature{$p_\text{bat}(t)$}{Battery power at time $t$, which is derived form $p(t)$, where $p_\text{bat}(t) \in \textbf{p}_\text{bat}$ and $p(t) \in \mathbb{Z}$ (Chapter \ref{ch2})}
 
 The BESS model is based on the physical system that was deployed by SSEN during the NTVV project.
-Therefore, the model was designed to accurately capture the physical limitations of the device, which included a limited capacity of the battery pack, $C_{bat}$, and a corresponding charge and discharge factor (i.e. the ``C-factor''), $C_{f}$, to limit the maximum charge and discharge rate
+Therefore, the model was designed to accurately capture the physical limitations of the device, which included a limited capacity of the battery pack, $C_\text{bat}$, and a corresponding charge and discharge factor (i.e. the ``C-factor''), $C_{f}$, to limit the maximum charge and discharge rate
 \footnote{Nominal charge and discharge powers are calculated from the ``C-factor'' and the capacity of the battery. For example, a 12.5kWh battery with a C-factor of 1.6(h$^{-1}$) would have a maximum dis/charge rate of 20kW ($=12.5 \cdot 1.6$).}
 .
-Furthermore, the power electronics unit that regulated the three-phase power flow into and out of the BESS was limited by its power ratings, $P_{bat}$, which must not be exceeded.
+Furthermore, the power electronics unit that regulated the three-phase power flow into and out of the BESS was limited by its power ratings, $P_\text{bat}$, which must not be exceeded.
 Corresponding conversion losses within the power electronics unit lead to a limited BESS round-trip efficiency, $\eta$, where $\eta \in (0, 1]$.
 Self-discharge losses inside the battery pack were also included as the ratio $\mu$, where $\mu \in (0, 1]$.
 This ratio expresses how much energy is lost over time, due to the battery's imperfect means of storing energy.
@@ -54,7 +54,7 @@ The amount of energy that flows into or out of the BESS is equal to the active p
 Yet $\delta SOC(t)$ is not equal to this consumed energy, due to the imperfect round-trip efficiency.
 In order to act like a load in the LV network, positive power was associated to charging and negative power associated to discharging the BESS.
 Therefore, the sign of the BESS power indicated the direction of the flowing energy, and based upon this direction of energy flow, the true amount of stored charge can be calculated, i.e. by using the aforementioned round-trip efficiency, $\mu$.
-In order to correctly provide or consume power, BESS power is given and battery power, $p_{bat}(t)$, is derived and defined as follows:
+In order to correctly provide or consume power, BESS power is given and battery power, $p_\text{bat}(t)$, is derived and defined as follows:
 
 \input{_chapter2/equ/battery-power}
 
@@ -87,12 +87,12 @@ For simplicity linear forwarding was chosen, which means that the power assigned
 With this assumption, the BESS's SOC can be calculated for each $t$ despite the scheduled power profile only having been defined for every 30$^\text{th}$ $t$.
 With this second assumption, not only every sub-half-hourly BESS power can be derived from its half-hourly power schedule, but it also enables the calculation of every SOC, i.e. $SOC(t) \forall t$ is well defined.
 
-\nomenclature{$p_{for}(k(t))$}{Half-hourly load forecast that is used for computing the BESS schedule, where $p_{for}(k(t))\in\textbf{p}_{for}$ and $p_{for}(k(t))\in\mathbb{Z}$ (Chapter \ref{ch2})}
-\nomenclature{$p_{sch}(k(t))$}{Half-hourly schedule that is generated from the load forecast, where $p_{sch}(k(t))\in\textbf{p}_{sch}$ and$p_{sch}(k(t))\in\mathbb{Z}$ (Chapter \ref{ch2})}
+\nomenclature{$p_\text{for}(k(t))$}{Half-hourly load forecast that is used for computing the BESS schedule, where $p_\text{for}(k(t))\in\textbf{p}_{for}$ and $p_\text{for}(k(t))\in\mathbb{Z}$ (Chapter \ref{ch2})}
+\nomenclature{$p_\text{sch}(k(t))$}{Half-hourly schedule that is generated from the load forecast, where $p_\text{sch}(k(t))\in\textbf{p}_{sch}$ and$p_\text{sch}(k(t))\in\mathbb{Z}$ (Chapter \ref{ch2})}
 
-For the generation of the BESS schedule a load forecast, $\textbf{p}_{for}$, was required; here $p_{for}(k(t)) \in \textbf{p}_{for}$.
+For the generation of the BESS schedule a load forecast, $\textbf{p}_{for}$, was required; here $p_\text{for}(k(t)) \in \textbf{p}_{for}$.
 This forecast, similar to the BESS schedule, was also at half-hourly resolution and was provided by SSEN as part of the NTVV research project.
-The task at hand was to find a half-hourly BESS schedule, $\textbf{p}_{sch}$, where $p_{sch}(k(t)) \in \textbf{p}_{sch}$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
+The task at hand was to find a half-hourly BESS schedule, $\textbf{p}_{sch}$, where $p_\text{sch}(k(t)) \in \textbf{p}_{sch}$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
 In order to generate an optimised BESS schedule, a metric quantifying improvements had to be defined.
 Remaining was the problem of solving for $\textbf{p}_{sch}$, but this could be formalised mathematically using cost-functions.
 
@@ -102,10 +102,10 @@ Before explaining each of these three cost functions however, a notation simplif
 
 \input{_chapter2/equ/notation-simplification}
 
-Within this section, the vector $\textbf{p}$ represents the power profile as it would be measured at the substation when both forecast, $p_{for}(t)$, and scheduled, $p_{sch}(t)$, power were applied.
+Within this section, the vector $\textbf{p}$ represents the power profile as it would be measured at the substation when both forecast, $p_\text{for}(t)$, and scheduled, $p_\text{sch}(t)$, power were applied.
 The first cost function, addressing the minimisation of PAR, is defined as follows:
 
-\nomenclature{$\zeta_{PAR}(\textbf{p})$}{Cost of the underlying power profile, based on Peak-to-Average Ratio (PAR) (Chapter \ref{ch2})}
+\nomenclature{$\zeta_\text{PAR}(\textbf{p})$}{Cost of the underlying power profile, based on Peak-to-Average Ratio (PAR) (Chapter \ref{ch2})}
 \input{_chapter2/equ/cost-par}
 
 Here, $\overline{\textbf{p}}$ represents the mean power, i.e. $\overline{\textbf{p}} = \frac{\Delta t}{T}\sum_{t=1}^Tp(t)$, where $T$ is the length of the scheduling horizon in regards to the sampling period $\Delta t$.
@@ -113,16 +113,16 @@ From this cost, a perfect power profile would yield a PAR cost of zero, if the p
 However, due to limited battery capacity, achieving such a cost of zero is unlikely.
 The second cost function represents the difference between minimum and maximum power of $\textbf{p}$:
 
-\nomenclature{$\zeta_{MM}(\textbf{p})$}{Cost of the underlying power profile, based on the difference between minimum and maximum power (Chapter \ref{ch2})}
+\nomenclature{$\zeta_\text{MM}(\textbf{p})$}{Cost of the underlying power profile, based on the difference between minimum and maximum power (Chapter \ref{ch2})}
 \input{_chapter2/equ/cost-min-max}
 
 Similar to the PAR, this cost also reduces to zero when the resulting power profile is a perfectly flat line.
 Unlike the PAR, this cost does not incentivise an increase of mean power.
-Minimising PAR by itself may result in unnecessary and potentially damaging battery cycling, when trying to elevate the power profile's mean, yet this is avoided when $\zeta_{MM}$ is included alongside $\zeta_{PAR}$.
-However, $\zeta_{PAR}$ and $\zeta_{MM}$ only impact the fringes of the resulting half-hourly power profile.
+Minimising PAR by itself may result in unnecessary and potentially damaging battery cycling, when trying to elevate the power profile's mean, yet this is avoided when $\zeta_\text{MM}$ is included alongside $\zeta_\text{PAR}$.
+However, $\zeta_\text{PAR}$ and $\zeta_\text{MM}$ only impact the fringes of the resulting half-hourly power profile.
 The final cost therefore addresses the interim power volatility by aiming to minimise the largest possible power transient:
 
-\nomenclature{$\zeta_{TRA}(\textbf{p})$}{Cost of the underlying power profile, based on largest power transient (Chapter \ref{ch2})}
+\nomenclature{$\zeta_\text{TRA}(\textbf{p})$}{Cost of the underlying power profile, based on largest power transient (Chapter \ref{ch2})}
 \input{_chapter2/equ/cost-tra}
 
 Minimising this final cost has a smoothening effect on the improved half-hourly power profile.
@@ -135,8 +135,8 @@ Subject to BESS constraints, this global cost function was then minimised using 
 
 \input{_chapter2/equ/cost-minimisation}
 
-It is worth mentioning, that a State Of Charge tolerance, $SOC_{tol}$, is included in this minimisation problem.
-$SOC_{tol}$ defines the maximum allowed deviation from the computed SOC profile without hitting operational limits, i.e. SOC of one or zero, and may take values in the form of $SOC_{tol} \in (0, 0.5)$, where 0 implies no tolerance and 0.5 implies complete flexibility.
+It is worth mentioning, that a State Of Charge tolerance, $SOC_\text{tol}$, is included in this minimisation problem.
+$SOC_\text{tol}$ defines the maximum allowed deviation from the computed SOC profile without hitting operational limits, i.e. SOC of one or zero, and may take values in the form of $SOC_\text{tol} \in (0, 0.5)$, where 0 implies no tolerance and 0.5 implies complete flexibility.
 For the work at hand, a value of 0.1 was chosen.
 
 \input{_chapter2/fig/cost-sample}

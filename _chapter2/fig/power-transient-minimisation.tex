@@ -48,15 +48,15 @@
 	(10,1.7) node[estimate](est_3) {};
 	
 	% Label the power samples
-	\draw [->] (1, 5) node[anchor=south] {$p_{net}(t)$} to [out=-135,in=135] (sam_0);
-	\draw [->] (4, 5) node[anchor=south] {$p_{net}(t+\Delta t)$} to [out=-135,in=135] (sam_1);
-	\draw [->] (7, 5) node[anchor=south] {$p_{net}(t+2\Delta t)$} to [out=-135,in=135] (sam_2);
-	\draw [->] (10, 5) node[anchor=south] {$p_{net}(t+3\Delta t)$} to [out=-135,in=135] (sam_3);
+	\draw [->] (1, 5) node[anchor=south] {$p_\text{net}(t)$} to [out=-135,in=135] (sam_0);
+	\draw [->] (4, 5) node[anchor=south] {$p_\text{net}(t+\Delta t)$} to [out=-135,in=135] (sam_1);
+	\draw [->] (7, 5) node[anchor=south] {$p_\text{net}(t+2\Delta t)$} to [out=-135,in=135] (sam_2);
+	\draw [->] (10, 5) node[anchor=south] {$p_\text{net}(t+3\Delta t)$} to [out=-135,in=135] (sam_3);
 	
 	% Label the estimates
-	\draw [->] (4, 0.75) node[anchor=north] {$\hat{p}_{net}(t+\Delta t)$} to [in=-45] (est_1);
-	\draw [->] (7, 0.75) node[anchor=north] {$\hat{p}_{net}(t+2\Delta t)$} to [in=-45] (est_2);
-	\draw [->] (10, 0.75) node[anchor=north] {$\hat{p}_{net}(t+3\Delta t)$} to [in=-45] (est_3);
+	\draw [->] (4, 0.75) node[anchor=north] {$\hat{p}_\text{net}(t+\Delta t)$} to [in=-45] (est_1);
+	\draw [->] (7, 0.75) node[anchor=north] {$\hat{p}_\text{net}(t+2\Delta t)$} to [in=-45] (est_2);
+	\draw [->] (10, 0.75) node[anchor=north] {$\hat{p}_\text{net}(t+3\Delta t)$} to [in=-45] (est_3);
 	
 	% Label the forward power transients
 	\draw [decorate,decoration={brace,amplitude=3pt,mirror,raise=4pt},yshift=0pt,xshift=5mm]
@@ -71,7 +71,7 @@
 %	\draw (10, 6) node[sample, yshift=-10mm, xshift=25mm](legend_sample) {};
 %	\draw node[right of=legend_sample, xshift=-15mm] {$p$};
 %	\draw (10, 6) node[estimate, yshift=-20mm, xshift=25mm](legend_estimate) {};
-%	\draw node[right of=legend_estimate, xshift=-15mm] {$\hat{p}_{net}$};
+%	\draw node[right of=legend_estimate, xshift=-15mm] {$\hat{p}_\text{net}$};
 \caption{Underlying time-series based compensation strategy for compensator PID$_2$.}
 \label{ch2:fig:power-transient-minimisation}
 \end{figure}

@@ -16,8 +16,8 @@ Therefore, a half-hourly PAR scheduling cost, $\zeta_\text{PAR}(\textbf{s}_\text
 
 \input{_chapter1/equ/min-max-difference-definition}
 
-\nomenclature{$\zeta_\text{PAR}(\textbf{s}$}{Cost of the underlying power profile $\textbf{s}$, based on the Peak to Average Ratio (PAR) (Chapter \ref{ch1})}
-\nomenclature{$\zeta_\text{PAR}(\textbf{s}$}{Cost of the underlying power profile $\textbf{s}$, based on the difference between Minimum and Maximum power (MM) (Chapter \ref{ch1})}
+\nomenclature{$\zeta_\text{PAR}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the Peak to Average Ratio (PAR) (Chapter \ref{ch1})}
+\nomenclature{$\zeta_\text{PAR}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the difference between Minimum and Maximum power (MM) (Chapter \ref{ch1})}
 
 Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}_\text{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}_\text{network load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
 For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve the following minimisation problem.
@@ -54,11 +54,11 @@ The constraint of having to follow this half-hourly ESMU schedule is lifted in C
 To quickly summarise, the following key network parameters are used in this chapter:
 
 \begin{itemize}
-	\item substation phase voltages, $v_{ss,\phi}(t) \in \textbf{v}_{ss}(t)$,
+	\item substation phase voltages, $v_{\text{ss},\phi}(t) \in \textbf{v}_{ss}(t)$,
 	\item ESMU phase voltages, $v_{\text{ESMU},\phi}(t) \in \textbf{v}_\text{ESMU}(t)$,
-	\item all load voltages, $v_{load,i}(t) \in \textbf{v}_\text{load}(t)$,
-	\item substation apparent phase power, $s_{ss,\phi}(t) \in \textbf{s}_{ss}(t)$,
-	\item substation phase currents, $i_{ss,\phi}(t) \in \textbf{i}_{ss}(t)$,
+	\item all load voltages, $v_{\text{load},i}(t) \in \textbf{v}_\text{load}(t)$,
+	\item substation apparent phase power, $s_{\text{ss},\phi}(t) \in \textbf{s}_{ss}(t)$,
+	\item substation phase currents, $i_{\text{ss},\phi}(t) \in \textbf{i}_{ss}(t)$,
 	\item all line currents, $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$, and
 	\item all network losses, $s_\text{losses}(t)$.
 \end{itemize}
