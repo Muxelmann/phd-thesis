@@ -17,18 +17,18 @@ The output of each compensator is a corrective battery power component that, whe
 Each PID compensator also receives a feedback signal to compute the internal error states.
 More specifically, PID$_1$ receives the most recent SOC value that is obtained from the BESS model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (e.g. through measurements by substation monitoring).
 
-\nomenclature{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $p_\text{net}(t) \in \textbf{p}_{net}$ (Chapter \ref{ch2})}
-\nomenclature{$SOC^*(t)$}{Battery's state of charge at sample $t$ (Chapter \ref{ch2})}
-\nomenclature{$E_\text{SOC}(t)$}{Error in state of charge at sample $t$ (Chapter \ref{ch2})}
-\nomenclature{$E_{p}(t)$}{Difference between current and predicting network power at sample $t$, where $p(t) \in \textbf{p}$ (Chapter \ref{ch2})}
-\nomenclature{$\hat{p}_\text{net}(t+\Delta t)$}{Predicted next network power at sample $t$ (Chapter \ref{ch2})}
-\nomenclature{$\alpha$}{PID weight vector for compensator PID$_1$ (Chapter \ref{ch2})}
-\nomenclature{$\beta$}{PID weight vector for compensator PID$_2$ (Chapter \ref{ch2})}
-\nomenclature{$a$}{Weight vector for compensator input regression of the AR model (Chapter \ref{ch2})}
-\nomenclature{$b$}{Weight vector for compensator output regression of the AR model (Chapter \ref{ch2})}
-\nomenclature{$N$}{Number of regressors of the AR model (Chapter \ref{ch2})}
-\nomenclature{$p_1(t)$, $p_2(t)$}{Corrective BESS power components from PID$_1$ and PID$_2$, respectively (Chapter \ref{ch2})}
-\nomenclature{$SOC_\text{tol}$}{SOC tolerance, i.e. maximum deviation from the prescheduled SOC profile (Chapter \ref{ch2})}
+\nomenclature[J]{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $p_\text{net}(t) \in \textbf{p}_{net}$ (Chapter \ref{ch2})}
+\nomenclature[J]{$SOC^*(t)$}{Battery's state of charge at sample $t$ (Chapter \ref{ch2})}
+\nomenclature[J]{$E_\text{SOC}(t)$}{Error in state of charge at sample $t$ (Chapter \ref{ch2})}
+\nomenclature[J]{$E_{p}(t)$}{Difference between current and predicting network power at sample $t$, where $p(t) \in \textbf{p}$ (Chapter \ref{ch2})}
+\nomenclature[J]{$\hat{p}_\text{net}(t+\Delta t)$}{Predicted next network power at sample $t$ (Chapter \ref{ch2})}
+\nomenclature[J]{$\alpha$}{PID weight vector for compensator PID$_1$ (Chapter \ref{ch2})}
+\nomenclature[J]{$\beta$}{PID weight vector for compensator PID$_2$ (Chapter \ref{ch2})}
+\nomenclature[J]{$a$}{Weight vector for compensator input regression of the AR model (Chapter \ref{ch2})}
+\nomenclature[J]{$b$}{Weight vector for compensator output regression of the AR model (Chapter \ref{ch2})}
+\nomenclature[J]{$N$}{Number of regressors of the AR model (Chapter \ref{ch2})}
+\nomenclature[J]{$p_1(t)$, $p_2(t)$}{Corrective BESS power components from PID$_1$ and PID$_2$, respectively (Chapter \ref{ch2})}
+\nomenclature[J]{$SOC_\text{tol}$}{SOC tolerance, i.e. maximum deviation from the prescheduled SOC profile (Chapter \ref{ch2})}
 
 Inside the PID$_1$ component, a SOC error term, $E_\text{SOC}(t)$, is computed.
 This term is the difference between the scheduled SOC profile, $SOC(t)$, and the actual (or simulated) SOC values, $SOC^*(t)$.

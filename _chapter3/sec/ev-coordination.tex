@@ -12,16 +12,16 @@ The EV scheduling algorithm is introduced next, before the performance parameter
 
 \subsection{EV Demand}
 
-\nomenclature{$T_\text{sch}$}{Scheduling horizon for EV charging, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature{$u$}{EV unit number, where $u \in [1, \dots, U]$ (Chapter \ref{ch3})}
-\nomenclature{$n$}{Iteration number of EV scheduling algorithm, where $N \in [1, \dots, N]$ (Chapter \ref{ch3})}
-\nomenclature{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter \ref{ch3})}
-\nomenclature{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$T_\text{sch}$}{Scheduling horizon for EV charging, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$u$}{EV unit number, where $u \in [1, \dots, U]$ (Chapter \ref{ch3})}
+\nomenclature[K]{$n$}{Iteration number of EV scheduling algorithm, where $N \in [1, \dots, N]$ (Chapter \ref{ch3})}
+\nomenclature[K]{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$ (Chapter \ref{ch3})}
 
-\nomenclature{$P_{\text{min},u}$}{Minimum EV charging power (Chapter \ref{ch3})}
-\nomenclature{$P_{\text{min},u}$}{Maximum EV charging power (Chapter \ref{ch3})}
+\nomenclature[K]{$P_{\text{min},u}$}{Minimum EV charging power (Chapter \ref{ch3})}
+\nomenclature[K]{$P_{\text{min},u}$}{Maximum EV charging power (Chapter \ref{ch3})}
 
 EVs were modelled as loads that, over the course of a scheduling horizon, $T_\text{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
 Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
@@ -37,7 +37,7 @@ Using MAS, EVs utilise their broker agents to purchase energy quantities for eac
 
 \subsection{Base Load}
 
-\nomenclature{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$ (Chapter \ref{ch3})}
 
 To represent real power consumption in simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
 This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\Delta t = 0.5$ hours.

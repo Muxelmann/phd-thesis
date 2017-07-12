@@ -1,6 +1,7 @@
 \documentclass[12pt,a4paper,twoside,openright]{ociamthesis}  % default square logo 
 %\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
 %\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
+\usepackage[utf8]{inputenc}
 
 %enhanced support of Computer Modern fonts
 \usepackage{lmodern}
@@ -10,8 +11,6 @@
 \usepackage{amsthm}
 %American Mathematical Society mathematical symbols
 \usepackage{amssymb}
-% For ° symbol
-%\usepackage{gensymb}
 % For double line spacing
 \usepackage{setspace}
 % For opening quote
@@ -20,8 +19,8 @@
 \usepackage[table]{xcolor}
 % For rotated table
 \usepackage{rotating}
-% For glossary
-\usepackage[acronym]{glossaries}
+% For nomenclature
+\usepackage[intoc]{nomencl}
 % For flowchart
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,positioning,fit,calc,backgrounds,chains, decorations.pathreplacing}
@@ -29,20 +28,6 @@
 \usepackage{color,soul}
 % Inline enumeration
 \usepackage[inline]{enumitem}
-
-% For nomenclature
-\usepackage[intoc]{nomencl}
-
-%% This code creates the groups
-% -----------------------------------------
-\usepackage{etoolbox}
-\renewcommand\nomgroup[1]{%
-  \item[\bfseries
-  \ifstrequal{#1}{CH1}{Used in Chapter 3}{%
-  \ifstrequal{#1}{CH2}{Used in Chapter 4}{%
-  \ifstrequal{#1}{CH3}{Used in chapter 5}{}}}%
-]}
-% -----------------------------------------
 
 % What was additionally imported by MDPI style
 \usepackage{graphicx}
@@ -84,8 +69,20 @@
 % New footnote style
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
+%% This code creates the groups
+% -----------------------------------------
+\usepackage{ifthen}
+\renewcommand\nomgroup[1]{%
+  \ifthenelse{\equal{#1}{G}}{\item[\textbf{Acronyms}]}{%
+  \ifthenelse{\equal{#1}{I}}{\item[\textbf{Symbols used in Chapter 3}]}{%
+  \ifthenelse{\equal{#1}{J}}{\item[\textbf{Symbols used in Chapter 4}]}{%
+  \ifthenelse{\equal{#1}{K}}{\item[\textbf{Symbols used in Chapter 5}]}{%
+  \ifthenelse{\equal{#1}{L}}{\item[\textbf{Symbols used in Chapter 6}]}{%
+  {}}}}}}}
+% -----------------------------------------
+
 % Generate the glossary and nomenclature
-\makeglossaries
+%\makeglossaries
 \makenomenclature
 
 %input macros (i.e. write your own macros file called mymacros.tex 
@@ -157,5 +154,4 @@ Low-Voltage Distribution Networks}   %note \\[1ex] is a line break in the title
 \include{_appendices/appendix2}
 \include{_appendices/appendix3}
 \include{_appendices/appendix4}
-
 \end{document}

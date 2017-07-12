@@ -20,7 +20,20 @@ def fix_nomenclatures(p):
 	content = f.read()
 	f.close()
 
+	if '_chapter1' in p:
+		content = content.replace('\\nomenclature{', '\\nomenclature[I]{')
+	elif '_chapter2' in p:
+		content = content.replace('\\nomenclature{', '\\nomenclature[J]{')
+	elif '_chapter3' in p:
+		content = content.replace('\\nomenclature{', '\\nomenclature[K]{')
+	elif '_chapter4' in p:
+		content = content.replace('\\nomenclature{', '\\nomenclature[L]{')
 
+	# content = content.replace('\\nomenclature[A]{', '\\nomenclature[I]{')
+	# content = content.replace('\\nomenclature[B]{', '\\nomenclature[J]{')
+	# content = content.replace('\\nomenclature[C]{', '\\nomenclature[K]{')
+	# content = content.replace('\\nomenclature[D]{', '\\nomenclature[L]{')
+	# content = content.replace('\\nomenclature[Z]{', '\\nomenclature[G]{')
 
 	f = file(p+'.tmp', 'w')
 	f.write(content)
