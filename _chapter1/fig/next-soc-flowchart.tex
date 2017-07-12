@@ -40,9 +40,9 @@
     \node (multiply) [state, left of=current_energy_battery] {$\times C_\text{bat}$};
     \node (current_soc) [input, left of=multiply] {$SOC(t)$};
     \node (losses) [state, below of=add, yshift=5mm] {$\times \mu \Delta t$};
-	\node (next_energy) [result, left of=losses, xshift=-5mm] {$E_\text{bat}(t+1)$};
+	\node (next_energy) [result, left of=losses, xshift=-5mm] {$E_\text{bat}(t+\Delta t)$};
 	\node (divide) [state, left of=next_energy, xshift=-5mm] {$\div C_\text{bat}$};
-	\node (next_soc) [output, left of=divide, xshift=-5mm] {$SOC(t+1)$};
+	\node (next_soc) [output, left of=divide, xshift=-5mm] {$SOC(t+\Delta t)$};
 
 	% Draw lines
 	\draw [->] (power_esmu) to (is_charging);

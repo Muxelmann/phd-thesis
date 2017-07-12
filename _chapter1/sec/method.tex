@@ -76,7 +76,7 @@ Since all key network parameters are outputs of the power flow simulations and n
 The underlying method that performs the proposed closed-loop optimisation is captured in the next Figure \ref{ch1:fig:closed-loop-optimisation}.
 Here, for each time slot, $t$, a pre-scheduled ESMU power vector, $\textbf{s}_\text{ESMU}(t)$, is extracted and adjusted by an offset vector, $\delta \textbf{s}_\text{ESMU}(t)$.
 This offset vector is found through the aforementioned optimiser that minimises the global cost function, $\zeta(\boldsymbol{\alpha})$, by repetitively running power flow simulations of the IEEE distribution feeder.
-Once the adjusted ESMU schedule (i.e. $\textbf{s}_\text{ESMU}(t) + \delta \textbf{s}_\text{ESMU}(t)$) is no longer changed by the optimiser, the closed-loop optimisation process ends and the simulation continues to the next time slot (i.e. $t+1$).
+Once the adjusted ESMU schedule (i.e. $\textbf{s}_\text{ESMU}(t) + \delta \textbf{s}_\text{ESMU}(t)$) is no longer changed by the optimiser, the closed-loop optimisation process ends and the simulation continues to the next time slot (i.e. $t+\Delta t$).
 
 Since $\delta \textbf{s}_\text{ESMU}(t)$ must not impact the underlying half-hourly ESMU schedule, one more constraint is defined.
 This constraint assures that the sum of all phase powers in the adjustment vector equates to zero, hence keeping the internal battery's dis/charging power the same.

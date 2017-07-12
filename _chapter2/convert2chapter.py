@@ -13,6 +13,14 @@ def convert_tex(p):
 		content = content.replace('{equ/', '{_chapter2/equ/')
 		content = content.replace('{tab/', '{_chapter2/tab/')
 
+		content = content.replace('[width=\linewidth]', '')
+		content = content.replace('\\begin{table}[htb]\\centering', '\\begin{table}\\centering')
+
+
+		content = content.replace('\\begin{figure}[htb]\\centering', '\\begin{figure}\\centering')
+		content = content.replace('\\begin{figure*}[htb]\\centering', '\\begin{figure}\\centering')
+		content = content.replace('\\end{figure*}', '\\end{figure}')
+
 		print('Line count {}'.format(len(content.split('\n'))))
 		content = content.split('\n')
 		for l in range(len(content)):
