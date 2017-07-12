@@ -22,8 +22,6 @@
 \usepackage{rotating}
 % For glossary
 \usepackage[acronym]{glossaries}
-% For nomenclature
-\usepackage[intoc]{nomencl}
 % For flowchart
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,positioning,fit,calc,backgrounds,chains, decorations.pathreplacing}
@@ -31,6 +29,20 @@
 \usepackage{color,soul}
 % Inline enumeration
 \usepackage[inline]{enumitem}
+
+% For nomenclature
+\usepackage[intoc]{nomencl}
+
+%% This code creates the groups
+% -----------------------------------------
+\usepackage{etoolbox}
+\renewcommand\nomgroup[1]{%
+  \item[\bfseries
+  \ifstrequal{#1}{CH1}{Used in Chapter 3}{%
+  \ifstrequal{#1}{CH2}{Used in Chapter 4}{%
+  \ifstrequal{#1}{CH3}{Used in chapter 5}{}}}%
+]}
+% -----------------------------------------
 
 % What was additionally imported by MDPI style
 \usepackage{graphicx}
