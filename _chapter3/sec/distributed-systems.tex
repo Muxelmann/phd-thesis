@@ -1,19 +1,54 @@
 \section{Distributed Systems}
 \label{ch3:sec:distributed-systems}
 
-As it was discussed in the literature review in Section \ref{ch-review}, several mechanisms exist to decentralise control of DERs.
-Du to their reactivity, pro-activeness and social ability, a Multi Agent System (MAS) distinguishes itself from traditional software and hardware systems, which is also why it was chosen for the coordination of EV charging.
-Several agent packages implementations exist and each may follow a different communication paradigm.
+As discussed in the literature review in Chapter \ref{ch-review}, several mechanisms exist to decentralise control of DERs.
+Due to their reactivity, pro-activeness and social ability, the Multi Agent System (MAS) distinguished itself from traditional software and hardware systems, which is also why it was also chosen for the coordination of smart EV charging.
+Several agent package implementations exist, each following different interaction paradigms.
 These paradigms include ``Belief, Desire and Intention'' (BDI), neutral behaviour or other specialised functionality \cite{Luck2004}.
-From this comprehensive catalogue, the Java Agent Development Framework (JADE) was chosen since it natively implements FIPA specification \cite{JADE-website, FIPA-agent-specs}.
-Furthermore, JADE is an application independent package that has become quite popular, as seen by the number of publications using JADE \cite{Karfopoulos2013, Eddy2011, Kuo2013, Mocci2014, Li2017}.
+From this catalogue of MAS paradigms, the Java Agent Development Framework (JADE) was chosen, since it natively implements the Foundation for Intelligent Physical Agent (FIPA) specification \cite{JADE-website, FIPA-agent-specs}.
+Furthermore, JADE is an application independent package that has become quite popular, as seen by the increasing number of publications \cite{Karfopoulos2013, Eddy2011, Kuo2013, Mocci2014, Li2017}.
 
-In this work, multiple virtual trading agents are designed to negotiate a corresponding EV's charging profile with other trading agents.
-Tying virtual agents to a physical entity is not new \cite{Nagata2002, Dimeas2005, Nguyen2011, Nagata2012}, yet in previous work these agents directly controlled the entity whilst the agents in the presented work negotiate schedules that will be applied after ratification.
-So called ``broker'' agents are implemented to facilitate this trading process, and the implement the Contact-Net Protocol (CNP), which in turn is based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure.
-The broker is linked to one EV and negotiates the charging profile over a scheduling horizon, $H$.
+In this work, multiple virtual trading agents are used to negotiate their corresponding EV's charging profile with other trading agents.
+Tying virtual agents to a physical entity is not new \cite{Nagata2002, Dimeas2005, Nguyen2011, Nagata2012}, yet in previous work these agents directly controlled the entity whilst the agents in the presented work negotiate schedules that will be applied after schedule ratification.
+So called ``broker'' agents, following the Brokering Interaction Protocol (BIP), are implemented to facilitate this trading process.
+The brokers communicate with each other by following the Contact-Net Protocol (CNP).
+It is worth mentioning, that all FIPA protocols are based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure, and possibly include different agent packages, too.
+High level explanations of all protocols that were used in this implementation of FIPA agents are included in Appendix \ref{appx-b:multi-agent-systems}.
+In this work, each broker is linked to a single EV and negotiates its charging profile over the aforementioned scheduling horizon, $T_\text{sch}$.
 This link is shown in Figure \ref{ch3:fig:agent-network}.
 
 \input{_chapter3/fig/agent-network}
 
-The dominant goal of the negotiation procedure is to prevent charging spikes when multiple EVs connect and begin their charging.
+In the example in Figure \ref{ch3:fig:agent-network}, a single supplier with two brokers (one for selling and one for buying, i.e. ``undoing'', energy) acts as the energy source, and two loads represent the charging EVs that dispatch their two brokers (i.e. to ``allocate'' and ``undo'' charging demand).
+With this kind of system architecture, charging spikes are designed to be mitigated, since all loads and their corresponding brokers execute the previously defined smart charging algorithm.
+
+Since the architecture of MAS has now been defined, the means of implementing and desynchronising them is explained.
+Subsequently, all case studies and metrics that are used to assess the MAS performance are defined.
+
+\subsection{MAS Implementation}
+\label{ch3:subsec:implementation}
+
+The MAS was written in Java and implemented on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
+Here, 
+
+\input{_chapter1/fig/agent-implementation}
+
+\subsection{MAS Desynchronisation}
+\label{ch3:subsec:desynchronisation}
+
+Operating the agents in a desynchronised manner can be achieved in two distinct ways.
+Either, any idle state that is interrupted by the synchronising signal is removed, or agents operate within a fixed execution loop and continue after each agent's loop timer expired.
+
+The former option would be the easier option to implement
+
+\subsection{Cases and Performance Metrics}
+\label{ch3:subsec:cases-and-metrics}
+
+
+
+
+
+
+
+
+
