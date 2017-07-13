@@ -129,13 +129,14 @@ This valley filling behaviour is achieved with the ``undoing'' and ``allocation'
 Regardless of the final network load's shape, the algorithm terminates when the final iteration is reached, i.e. $n=N$.
 Rate of convergence of the algorithm differs based upon the choice of $\alpha$ and $\beta$ values.
 However, convergence is in fact guaranteed when selecting values of $\alpha < 1$ and $\beta < 1$, since the algorithm satisfies the D'Alembert Criterion in those cases.
-The complete EV scheduling algorithm has therefore been developed by: 
+
+To summarise this section, the complete EV scheduling algorithm was developed by: 
 \begin{enumerate*}
-	\item defining the message exchange, which is shown in Figure \ref{ch3:fig:agent-synchronisation};
-	\item formulating the initial and consecutive ``undoing'' of power, as shown in Equation \ref{ch3:equ:temporary-charging-power}, and ;
+	\item defining the message exchange and synchronisation mechanism, which is shown in Figure \ref{ch3:fig:agent-synchronisation};
+	\item formulating the initial and successive ``undoing'' of charging power, as shown in Equation \ref{ch3:equ:temporary-charging-power}; and
 	\item defining the iterative update and ``allocation'' of the temporary energy demand, as defined in Equation \ref{ch3:equ:temporary-charging-demand-expanded}.
 \end{enumerate*}
-For clarity, pseudocode that summarises all equations, the complete smart valley filling algorithm can be defined as shown in Algorithm \ref{ch3:alg:valley-filling}.
+For clarity, the this smart charging algorithm's pseudocode, performing the complete valley filling procedure, has been included in Algorithm \ref{ch3:alg:valley-filling}.
 
 \input{_chapter3/alg/valley-filling}
 
