@@ -85,27 +85,25 @@ This intentional feature is demonstrated by raising $V_\text{ss}$ from $V_n$ by 
 \label{ch1:subsec:voltages-at-esmu}
 
 At the ESMU's Point of Common Coupling (PCC), the device has access to all three phases of the feeder.
-Where ESMU should be connected in order to achieve a best possible network impact, is explained in Section \ref{ch1:sec:data-and-network-models}.
-Neglecting the exact ESMU location for now, one can assume that the line voltage along the feeder will change and, with increasing load, most likely drop.
-Reasons behind this voltage drop are the resistive and inductive losses in the distribution lines.
-These losses are amplified with proximity to the substation, since load currents form ``down stream'' customers are aggregated.
-For purely consumptive loads (i.e. no distributed generation), and particularly under heavy load conditions, this voltage is likely drop below the statutory nominal operation band.
-As mentioned in literature, this threshold is an operational constraint of LV networks and must not be violated to assure correct appliance operation and prevent financial penalisation.
+One can assume that the line voltage along a purely consumtive feeder will drop continuously.
+Reasons behind this voltage drop are the resistive and inductive losses in the distribution lines, which are amplified with proximity to the substation, due to aggregated load currents form ``down stream'' customers.
+Under heavy load conditions, this voltage is likely drop below the statutory operation limit.
+Since this limit is an operational constraint for DNOs, it must not be violated.
 
-In order to mitigate this voltage drop, power is injected into the feeder at the ESMU's PCC.
-Doing so boosts the voltage at that location, since the portion of load current that would normally be supplied by the substation is now delivered by the ESMU.
-The effect of this power injection is sketched in the Figure \ref{ch1:fig:sketch-voltage-esmu} below.
+To mitigate this voltage drop, power is injected into the feeder at the ESMU's PCC.
+Doing so increases the voltage at its PCC and surrounding nodes, since the portion of load current that would normally be supplied by the substation is now delivered by the ESMU.
+This effect when injecting power is sketched in the Figure \ref{ch1:fig:sketch-voltage-esmu} below.
 
 \input{_chapter1/fig/sketch-voltage-esmu}
 
-\nomenclature[I]{$v_{\text{ESMU},\phi}(t)$}{Phase voltage at ESMU for phase $\phi$ at time $t$, where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$ and $v_{\text{ESMU},\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$v_{\text{ESMU},\phi}(t)$}{Phase voltage at ESMU for phase $\phi$ at time $t$, where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$ and $v_{\text{ESMU},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{v}_\text{ESMU}(t)$}{Multi-phase voltage vector at ESMU at time $t$, where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$ and $v_{\text{ESMU},\phi}(t) \in \mathbb{C}^{\Phi}$ (Chapter \ref{ch1})}
 
-In this figure, an expected voltage drop along the entire feeder is sketched. 
-It can be seen how the line voltage of the feeder's tailing section drops below $V_l$.
-In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU's intervention can alleviate some load and raise the trailing voltage levels above $V_l$.
-
-This realistic key network parameter is also used in a cost function, since the Phase to Neutral (P2N) voltage at the ESMU's PCC can easily be measured.
-To do so, the three-phase ESMU voltage at its PCC, $\textbf{v}_{ESMU}(t)$ (where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$), is used in the same cost that was used with the substation transformer's voltage, i.e. Equation \ref{ch1:equ:voltage-deviation}.
+In this figure, the expected voltage drop along the entire feeder is sketched. 
+It can be seen how the voltage of the feeder's tailing section can potentially drop below $V_l$, but ESMU's intervention can alleviate some load and bring voltages back within operational bounds.
+The three-phase ESMU voltage, $\textbf{v}_{ESMU}(t)$ (where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$) is seen as a realistic key network parameter, which is also used in combination with a cost function.
+In fact, $\textbf{v}_{ESMU}(t)$ is used with cost function, $\zeta_\text{voltage}(\textbf{v}(t))$, which was defined in Equation \ref{ch1:equ:voltage-deviation}.
+This is the same cost function that was used to asses the deviation in transformer voltage.
 Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 
 \subsection{Voltages at customer laterals}
