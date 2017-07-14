@@ -54,15 +54,15 @@ In the following subsections, all key network parameters' associated cost functi
 \subsection{Voltages at substation}
 \label{ch1:subsec:voltages-at-substation}
 
-\nomenclature[I]{$t$}{Time-steps of the simulation, where $t \in \mathbb{Z}^{\geq0}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$v_{\text{ss},\phi}$}{Phase voltage at substation for phase $\phi$ at time $t$, where $v_{\text{ss},\phi}(t) \in \textbf{v}_{ss}(t)$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\textbf{v}_{ss}(t)$}{Phase voltage vector at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\phi$}{Phase number, typically $\phi \in [1, \dots, \Phi]$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\Phi$}{Number of phases, here $\Phi = 3$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\zeta_\text{voltage}(\textbf{v}(t))$}{Voltage deviation cost for voltage vector $\textbf{v}$ at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$V_\text{ss}$}{Nominal substation voltage (Chapter \ref{ch1})}
-\nomenclature[I]{$V_h$}{High-voltage threshold of statutory voltage band (Chapter \ref{ch1})}
-\nomenclature[I]{$V_l$}{Low-voltage threshold of statutory voltage band (Chapter \ref{ch1})}
+\nomenclature[I]{$t$}{Time-steps of the simulation, where $t \in \mathbb{Z}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$v_{\text{ss},\phi}$}{Phase voltage at substation for phase $\phi$ at time $t$, where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{v}_{ss}(t)$}{Phase voltage vector at time $t$, where $\textbf{v}_\text{ss}(t) \in \mathbb{R}^{\Phi}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\phi$}{Phase number, where $\phi \in \{1, \dots, \Phi\}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\Phi$}{Number of phases, where $\Phi \in \mathbb{Z}_{>0}$ here $\Phi = 3$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{voltage}(\textbf{v}(t))$}{Voltage deviation cost for voltage vector $\textbf{v}$ at time $t$, where $\zeta_\text{voltage}(\textbf{v}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$V_\text{ss}$}{Nominal substation voltage, where $V_\text{ss} \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$V_h$}{High-voltage threshold of statutory voltage band, where $V_h \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$V_l$}{Low-voltage threshold of statutory voltage band, where $V_l \in \mathbb{R}$ (Chapter \ref{ch1})}
 
 In UK LV distribution networks, substations supply electric power to a feeding three-phase cable.
 These substations provide the link from MV distribution networks, which operates at 11kV P2P, to the LV distribution network, which operates at nominal 230V P2N (i.e. 400V P2P).
@@ -70,7 +70,7 @@ If the substation transformer was an ideal transformer, then the voltage measure
 In reality however, as load increases, internal losses (e.g. conductive losses and magnetic leakage) lead to a drop in voltage level.
 Therefore, any deviation from the substation's nominal voltage is an indicator of suboptimal network operation.
 
-When defining substation voltage for a single-phase complex voltage as $v_{\text{ss},\phi}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then the resulting substation voltage vector $\textbf{v}_{ss}(t)$ (where $v_{\text{ss},\phi}(t) \in \textbf{v}_{ss}(t)$) can be used in a ``voltage deviation cost function'' $\zeta_\text{voltage}(\textbf{v}_{ss}(t))$.
+When defining substation voltage for a single-phase complex voltage as $v_{\text{ss},\phi}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then the resulting substation voltage vector $\textbf{v}_{ss}(t)$ (where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$) can be used in a ``voltage deviation cost function'' $\zeta_\text{voltage}(\textbf{v}_{ss}(t))$.
 A cost above zero hence indicates a level of substation overloading.
 However, to define this cost function in more general terms, an arbitrary multi-phase voltage voltage vector, $\textbf{v}(t)$), is used in its definition as:
 
@@ -102,14 +102,14 @@ The effect of this power injection is sketched in the Figure \ref{ch1:fig:sketch
 
 \input{_chapter1/fig/sketch-voltage-esmu}
 
-\nomenclature[I]{$v_{\text{ESMU},\phi}(t)$}{Phase voltage at ESMU for phase $\phi$ at time $t$, where $v_{\text{ESMU},\phi}(t) \in \textbf{v}_{ESMU}(t)$ (Chapter \ref{ch1})}
+\nomenclature[I]{$v_{\text{ESMU},\phi}(t)$}{Phase voltage at ESMU for phase $\phi$ at time $t$, where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$ and $v_{\text{ESMU},\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
 
 In this figure, an expected voltage drop along the entire feeder is sketched. 
 It can be seen how the line voltage of the feeder's tailing section drops below $V_l$.
 In contrast, Figure \ref{ch1:subfig:sketch-voltage-esmu-boost} shows how the ESMU's intervention can alleviate some load and raise the trailing voltage levels above $V_l$.
 
 This realistic key network parameter is also used in a cost function, since the Phase to Neutral (P2N) voltage at the ESMU's PCC can easily be measured.
-To do so, the three-phase ESMU voltage at its PCC, $\textbf{v}_{ESMU}(t)$ (where $v_{\text{ESMU},\phi}(t) \in \textbf{v}_{ESMU}(t)$), is used in the same cost that was used with the substation transformer's voltage, i.e. Equation \ref{ch1:equ:voltage-deviation}.
+To do so, the three-phase ESMU voltage at its PCC, $\textbf{v}_{ESMU}(t)$ (where $(v_{\text{ESMU},\phi}(t)) = \textbf{v}_{ESMU}(t)$), is used in the same cost that was used with the substation transformer's voltage, i.e. Equation \ref{ch1:equ:voltage-deviation}.
 Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 
 \subsection{Voltages at customer laterals}
@@ -127,8 +127,8 @@ In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, the load bus voltag
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
-\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $v_{\text{load},i,\phi}(t) \in \textbf{v}_{load}(t)$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\zeta_\text{load voltage}(\textbf{v}(t))$}{Voltage deviation cost for load voltage vector $\textbf{v}$ at time $t$ (Chapter \ref{ch1})}
+\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $(v_{\text{load},i,\phi}(t)) = \textbf{v}_{load}(t)$ and $v_{\text{load},i,\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{load voltage}(\textbf{v}(t))$}{Voltage deviation cost for load voltage vector $\textbf{v}$ at time $t$ and $\zeta_\text{load voltage}(\textbf{v}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 In this figure, two observations can be made.
 For one, it can be seen that phases are significantly unbalanced.
@@ -156,16 +156,16 @@ Randomly assigning customers to phases should distribute load evenly across all 
 Even if the number of customers per phase was the same, the probability that all customers' load profiles are identical is very low.
 Therefore, the likeliness that LV distribution feeders in the UK are unbalanced is very high.
 
-\nomenclature[I]{$\textbf{s}_{ss}(t)$}{Apparent multi-phase power at substation level at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_{\text{ss},\phi}(t)$}{Apparent single-phase power at substation level for phase $\phi$ at time $t$, where $s_{\text{ss},\phi}(t) \in \textbf{s}_{ss}(t)$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\text{UF}(\textbf{x})$}{Function calculating the Unbalance Factor (UF) for any multidimensional vector $\textbf{x}$, where $x_n \in \textbf{x}$ and $n \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{s}_{ss}(t)$}{Apparent multi-phase power at substation level at time $t$, where $\textbf{s}_{ss}(t) \in \mathbb{C}^\Phi$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_{\text{ss},\phi}(t)$}{Apparent single-phase power at substation level for phase $\phi$ at time $t$, where $(s_{\text{ss},\phi}(t)) = \textbf{s}_{ss}(t)$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\text{UF}(\textbf{x})$}{Function calculating the Unbalance Factor (UF) for any multidimensional vector $\textbf{x}$, where $(x_n) = \textbf{x}$, $n \in \mathbb{Z}_{>0}$ and $\text{UF}(\textbf{x}) \in \textbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 Since substation monitoring is capable of providing reliable three-phase power measurements, they can be used as realistic key network parameters from which the network's unbalance can be determined.
 Deriving phase unbalance from this power vector is done by following the American National Standards Institute's (ANSI) definition of Unbalance Factor (UF) \cite{ANSI-MB-1-2011}:
 
 \input{_chapter1/equ/unbalance-equation}
 
-\nomenclature[I]{$\zeta_\text{unbalance}(\textbf{s}(t))$}{Power unbalance for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{unbalance}(\textbf{s}(t))$}{Power unbalance for multi-phase apparent power vector $\textbf{s}$ at time $t$, where $\zeta_\text{unbalance}(\textbf{s}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 From the substation monitoring, a three-phase substation power vector, $\textbf{s}_{ss}(t)$ (where $s_{\text{ss},\phi} \in \textbf{s}_{ss}$), can be used to calculate the network's phase unbalance.
 Since this forms another realistic key network parameter, the UF in Equation \ref{ch1:equ:unbalance-equation} was formulated into a cost function.
@@ -181,7 +181,7 @@ An sample illustration, showing how this cost behaves as phase unbalance increas
 
 Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s})$ varies with an increasing separation of the three phases' power values.
 
-\nomenclature[I]{$\zeta_\text{PF}(\textbf{s}(t))$}{Power Factor (PF) cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{PF}(\textbf{s}(t))$}{Power Factor (PF) cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$, where $\zeta_\text{PF}(\textbf{s}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 Additionally, to assess the effective utilisation of the power distribution network, the Power Factor (PF) divergence is also included as a cost.
 PF is the ratio between the supplied active (p) and apparent power (s).
@@ -193,7 +193,7 @@ In order to asses the proximity to unity PF a cost function, $\zeta_\text{PF}(\t
 
 Here, deviating from a unity PF per phase increases the associated cost, whilst achieving a perfect PF for each phase results in a total cost of zero.
 
-\nomenclature[I]{$\zeta_\text{neutral load}(\textbf{s}(t))$}{Neutral load cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{neutral load}(\textbf{s}(t))$}{Neutral load cost function for multi-phase apparent power vector $\textbf{s}$ at time $t$, where $\zeta_\text{neutral load}(\textbf{s}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 Lastly, the already mentioned neutral current is also a result of both three-phase unbalance and non-unity PF.
 Since in perfectly balanced systems all three phases are $120^\circ$ out of phase, the sum of the instantaneous powers should equate to zero.
@@ -218,13 +218,13 @@ Therefore, cables have an assigned thermal rating which must not be exceeded to 
 At substation level, to prevent over-currents, fuses or reclosers are installed that will disconnect the network under fault or high demand conditions.
 To quantify whether the substation fuse is approaching its tripping point, its nominal rating is used as reference.
 
-\nomenclature[I]{$I_\text{fuse}$}{Nominal fuse rating at substation (Chapter \ref{ch1})}
-\nomenclature[I]{$i_{\text{ss},\phi}(t)$}{Single-phase substation current for phase $\phi$ at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\textbf{i}_{ss}(t)$}{Multi-phase substation current at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$}{Fuse utilisation cost, derived from multi-phase substation current vector $\textbf{i}_{ss}$ at time $t$ (Chapter \ref{ch1})}
+\nomenclature[I]{$I_\text{fuse}$}{Nominal fuse rating at substation, where $I_\text{fuse} \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$i_{\text{ss},\phi}(t)$}{Single-phase substation current for phase $\phi$ at time $t$, where $i_{\text{ss},\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{i}_{ss}(t)$}{Multi-phase substation current at time $t$, where $\textbf{i}_{ss}(t) \in \mathbb{R}^\Phi$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$}{Fuse utilisation cost, derived from multi-phase substation current vector $\textbf{i}_{ss}$ at time $t$, where $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 For the context of this work, this nominal fuse rating, $I_\text{fuse}$, is a fixed value for the fuse at the substation and must not be exceeded.
-Using the three-phase current vector (obtained via substation monitoring), $\textbf{i}_{ss}(t)$ (where $i_{\text{ss},\phi}(i) \in \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
+Using the three-phase current vector (obtained via substation monitoring), $\textbf{i}_{ss}(t)$ (where $(i_{\text{ss},\phi}(t)) = \textbf{i}_{ss}(t)$) a cost function, $\zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))$, can be defined as follows:
 
 \input{_chapter1/equ/fuse-utilisation}
 
@@ -247,13 +247,13 @@ Yet with the advent of DG and electrified LCTs, the feeder's branches are expect
 
 \nomenclature[I]{$l$}{Line number, where $l \in [1, \dots, L]$ (Chapter \ref{ch1})}
 \nomenclature[I]{$L$}{Number of lines, where $L \in \mathbb{Z}^{>0}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$i_{\text{line},l,\phi}(t)$}{Single-phase line current for phase $\phi$ of line $l$ at time $t$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\textbf{i}_\text{line}(t)$}{Multi-phase line currents at time $t$, where $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$ (Chapter \ref{ch1})}
-\nomenclature[I]{$I_{\text{nom},l}$}{Nominal line current for line $l$ (Chapter \ref{ch1})}
+\nomenclature[I]{$i_{\text{line},l,\phi}(t)$}{Single-phase line current for phase $\phi$ of line $l$ at time $t$, where $i_{\text{line},l,\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{i}_\text{line}(t)$}{Multi-phase line currents at time $t$, where $(i_{\text{line},l,\phi}(t)) = \textbf{i}_\text{line}(t)$, and $\textbf{i}_\text{line}(t) \in \mathbb{R}^{L\times\Phi}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$I_{\text{nom},l}$}{Nominal line current for line $l$, $I_{\text{nom},l} \in \mathbb{R}$ (Chapter \ref{ch1})}
 
 This is why the previous cost function, as it was defined in Equation \ref{ch1:equ:fuse-utilisation}, has to be expanded to take all line currents and ratings into account.
 Since this work was based on network simulations, each line current, $i_{\text{line},l,\phi}(t)$ (where $l$ represents the line number and $p$ the phase in that line), could easily be extracted.
-Collecting them in $\textbf{i}_{line}(t)$ (where $i_{\text{line},l,\phi}(t) \in \textbf{i}_\text{line}(t)$) allows the formulation of an extended line utilisation cost function, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$.
+Collecting them in $\textbf{i}_{line}(t)$ (where $(i_{\text{line},l,\phi}(t)) = \textbf{i}_\text{line}(t)$) allows the formulation of an extended line utilisation cost function, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$.
 Addressing the multitude of line currents just like the multitude of customer voltages was dealt with, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$ can be defined as follows:
 
 \input{_chapter1/equ/line-utilisation}
@@ -273,8 +273,8 @@ This is made apparent in Figure \ref{ch1:fig:losses-against-network-demand}, whe
 
 \input{_chapter1/fig/losses-against-network-demand}
 
-\nomenclature[I]{$\zeta_\text{losses}(s(t))$}{Losses based cost function (Chapter \ref{ch1})}
-\nomenclature[I]{$s_\text{losses}(t)$}{Total apparent power losses in the network (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{losses}(s(t))$}{Losses based cost function, where $\zeta_\text{losses}(s(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_\text{losses}(t)$}{Total apparent power losses in the network $s_\text{losses}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
 
 In Figure \ref{ch1:fig:losses-against-network-demand}, the region where losses exceed 5\% of the total network power is highlighted in red.
 These preliminary results were found from power flow simulations.

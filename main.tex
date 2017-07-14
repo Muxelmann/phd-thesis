@@ -74,11 +74,12 @@
 \usepackage{ifthen}
 \renewcommand\nomgroup[1]{%
   \ifthenelse{\equal{#1}{G}}{\item[\textbf{Acronyms}]}{%
+  \ifthenelse{\equal{#1}{H}}{\item[\textbf{Definition variables and dimensionality}]}{%
   \ifthenelse{\equal{#1}{I}}{\item[\textbf{Symbols used in Chapter 3}]}{%
   \ifthenelse{\equal{#1}{J}}{\item[\textbf{Symbols used in Chapter 4}]}{%
   \ifthenelse{\equal{#1}{K}}{\item[\textbf{Symbols used in Chapter 5}]}{%
   \ifthenelse{\equal{#1}{L}}{\item[\textbf{Symbols used in Chapter 6}]}{%
-  {}}}}}}}
+  {}}}}}}}}
 % -----------------------------------------
 
 % Generate the glossary and nomenclature

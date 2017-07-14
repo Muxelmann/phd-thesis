@@ -4,7 +4,7 @@
 		\zeta_h(v_{\phi}(t)) & \text{if } V_\text{ss} \leq v_\phi\\
 		\zeta_l(v_{\phi}(t)) & \text{otherwise}\\
 	\end{cases}} \forall t\\
-	&\text{ where } \Phi \in \mathbb{Z}^{>0}
+	&\text{ where } \Phi \in \mathbb{Z}_{>0}
 \end{split}
 \label{ch1:equ:voltage-deviation}
 \end{equation}
@@ -30,9 +30,9 @@ For the presented work, these two voltage thresholds are based on the UK's nomin
 	\label{ch1:equ:low-voltage-threshold-cost-complete}
 \end{equation}
 
-In this context of defining $\zeta_{voltage}$, the variable $\alpha$ is used as the functions' linear weight that scales the corresponding cost, and the variable $\beta$ linearly increases the functions' gradients as voltage continues to deviate.
-More specifically, $\alpha$ determines the value of the functions at voltages $V_l$ and $V_h$, where $\alpha \in \mathbb{R}^{>0}$; for example, when $\alpha = 1$, then $\zeta_{h}(v_l) = 1$.
-$\beta$ on the other hand may take any value in the range of $\mathbb{R}^{>2}$, to assure a continuously differentiable cost function.
+In this context of defining $\zeta_\text{voltage}$, the variable $\alpha$ is used as the functions' linear weight that scales the corresponding cost, and the variable $\beta$ linearly increases the functions' gradients as voltage continues to deviate.
+More specifically, $\alpha$ determines the value of the functions at voltages $V_l$ and $V_h$, where $\alpha \in \mathbb{R}_{>0}$; for example, when $\alpha = 1$, then $\zeta_{h}(v_l) = 1$.
+$\beta$ on the other hand may take any value in the range of $\mathbb{R}_{>2}$, to assure a continuously differentiable cost function.
 Both $\alpha$ and $\beta$ were treated as constants and, for the scope of this work, set to $1$ and $2$, respectively.
 Substituting these values into Equations \ref{ch1:equ:high-voltage-threshold-cost-complete} and \ref{ch1:equ:low-voltage-threshold-cost-complete}, simplifies the high and low cost functions to:
 

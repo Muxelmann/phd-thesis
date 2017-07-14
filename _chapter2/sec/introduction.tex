@@ -39,7 +39,7 @@ Off-line control uses historic data to predict future load patterns, which are u
 Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had a relatively high forecast error due to the inherent difficulty of predicting future loads, which ultimately limits the ability of given BESS schedule to i.e. reduce peaks.
 This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS, or it frequently re-evaluates BESS schedules, as done by Wang et.al \cite{Wang2014a}, where BESS control is adjusted after each decision epoch.
 Despite load forecasts being imperfect, forecasts remain a key component for scheduling BESS thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
-It is worth mentioning, that most day-ahead forecast only forecast at a temporal resolution down to half-hourly periods.
+Also, most day-ahead forecast only forecast at a temporal resolution down to half-hourly periods.
 As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating BESS operating schedules.
 Nonetheless, high-resolution load volatility, imposing most stress on the network, cannot be addressed when using this kind of low-resolution forecast, which is why on-line control has been considered as an alternative to off-line control.
 
