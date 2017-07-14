@@ -109,33 +109,37 @@ Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf
 \subsection{Voltages at customer laterals}
 \label{ch1:subsec:voltages-at-customers}
 
-As mentioned in Chapter \ref{ch-introduction:sec:overview}, the allowable voltage range at customers is defined by the Electricity Safety, Quality and Continuity Regulations (ESQCR).
-However, monitoring those voltages in real-time to assure they obey these regulations is costly, which is why they are often left unmonitored.
-Ultimately, when it comes to voltage level correction, only substation voltage levels and customer voltage levels need to be controlled.
-This is to assure proper transformer operation (e.g. to maximise its lifespan) and to prevent penalisation due to customer voltage violation (i.e. fining according to the ESQCR).
-As explained in Section \ref{ch1:subsec:voltages-at-esmu}, ESMU can impact voltage levels for all customers but, as mentioned above, these voltage levels cannot be measured in reality.
-In simulations however, all load voltages can easily be extracted, which is why they are treated as theoretical key network parameters.
+The Electricity Safety, Quality and Continuity Regulations (ESQCR) define the statutory voltage range at UK electricity customers.
+However, monitoring those voltages to assure they lie within limits is unfeasible, which is why they are unknown in reality.
+Nonetheless, in simulations all load voltages can easily be extracted, and since ESMU can impact all voltage levels to some degree, they are treated as theoretical key network parameters.
 
 To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the used network model with all load consuming  8kW of power\footnote[1]{Whilst historic and recent loads may reach values of this magnitude quite infrequently, future customer demand with the aggregated effect home-charging of EVs is expeceted to yield extreme scenarios like this.}.
-In Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder}, the load bus voltages are plotted against the loads' distances to their feeding substation was drawn.
+Figure \ref{ch1:fig:voltage-drop-for-loads-along-feeder} then shows all load bus voltages against their distances to the substation.
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
-\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $(v_{\text{load},i,\phi}(t)) = \textbf{v}_{load}(t)$ and $v_{\text{load},i,\phi}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $(v_{\text{load},i,\phi}(t)) = \textbf{v}_\text{load}(t)$ and $v_{\text{load},i,\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{v}_\text{load}(t)$}{Multi-phase load voltage vector at time $t$, where $(v_{\text{load},i,\phi}(t)) = \textbf{v}_\text{load}(t)$ and $\textbf{v}_\text{load}(t) \in \mathbb{C}^{I\times\Phi}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\zeta_\text{load voltage}(\textbf{v}(t))$}{Voltage deviation cost for load voltage vector $\textbf{v}$ at time $t$ and $\zeta_\text{load voltage}(\textbf{v}(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 In this figure, two observations can be made.
-For one, it can be seen that phases are significantly unbalanced.
-Secondly, customers further than 200m from the substation experience low-voltage events.
-As already proposed in the previous section, ESMU can reduce the number of such low-voltage events, but including a cost for each load would add significant computational burden onto the solving algorithm.
 
-To address this problem more efficiently, the previously defined voltage cost function (i.e. Equation \ref{ch1:equ:voltage-deviation}) is expanded to only return a single value from all customer voltages.
-More specifically, instead of including the cost for every single customer's voltage deviation, only the worst deviation is used.
-By reducing this number to the worst case, any implemented solver needs not consider the otherwise large number of parameters, and only needs to focus on the minimisation of a single value.
-This focus is of particular importance, especially if the impact of the ESMU on some customers' voltages is comparatively low, since e.g. an aggregated deviation cost could potentially obfuscate the solver and prevent it from targeting the worst case.
-Therefore, for this work, the customer (or load) voltage is defined as $\textbf{v}_{load}(t)$ (where $v_{\text{load},i,\phi} \in \textbf{v}_{load}$) and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_{load}(t))$, which is defined as:
+\begin{enumerate}
+	\item It can be seen that phases are significantly unbalanced. 
+	\item Customers further than 200m from the substation are likely to experience low-voltage events.
+\end{enumerate}
+
+Although ESMU can reduce the number of such low-voltage events, including a cost for each load would add significant difficulty to the minimisation problem.
+Therefore, to solve this problem more efficiently, the previously defined voltage cost function (i.e. Equation \ref{ch1:equ:voltage-deviation}) is expanded to only return a single value from all customer voltages.
+More specifically, only the cost deviation is used.
+By reducing this number to the worst case, any implemented solver only focuses on the edges of the problem.
+This focus is of particular importance, especially if the impact of the ESMU on some customer voltages is comparatively low.
+An aggregated voltage deviation cost would potentially obfuscate this impact and prevent the solver from effectively targeting the worst cases.
+Therefore, the customer (or load) voltage is defined as $\textbf{v}_\text{load}(t)$, where $(v_{\text{load},i,\phi}(t)) = \textbf{v}_{load}(t)$, and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_\text{load}(t))$, which is defined as:
 
 \input{_chapter1/equ/load-voltage-deviation}
+
+Here, $i$ represents the customer number out of a total customer count $I$, and $\phi$ represents the phase, out of the phase count $\Phi$, to which the customer is connected.
 
 \subsection{Total power flow}
 \label{ch1:subsec:total-power-flow}
