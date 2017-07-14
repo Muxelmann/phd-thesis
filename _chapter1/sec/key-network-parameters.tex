@@ -1,43 +1,29 @@
 \section{Key Network Parameters and Derived Cost Functions}
 \label{ch1:sec:key-network-parameters}
 
-\nomenclature[I]{$\zeta_u(x)$}{Sample utility function that should be maximised in order to achieve optimality (Chapter \ref{ch1})}
-\nomenclature[I]{$\zeta_c(x)$}{Sample cost function that should be minimised in order to achieve optimality (Chapter \ref{ch1})}
-
-In literature (see Chapter \ref{ch-review}), two distinct approaches have emerged to quantitatively improve the performance of a system: either cost is reduced or utility is maximised.
+Two distinct approaches have emerged to quantitatively improve the performance of a system: either ``cost'' is reduced or ``utility'' is maximised.
 Both approaches rely on a mathematical explanation of underlying features that relate to performance of the system.
-To reiterate, utility functions need to be maximised, since they explain how beneficial a system's state is, whereas cost functions need to be minimised, since any positive cost describes a suboptimal system performance.
-The choice for this piece of work was to associate each key network parameter to a tailored cost function, for the reason that cost functions can be minimised to a finite value, i.e. zero.
-Utility maximisation on the other hand is a mathematically unbound problem that may reach a maximum, where this maximum can only be approximated (e.g. though game theoretic approaches like Pareto- or Nash-Optimality).
-In other words, solutions to a cost function where the resulting cost is zero, are by definition the set of optimal solutions, whereas utility functions do not have a set of absolute maxima, hence making the optimality classification of their solutions inherently more difficult.
-To illustrate this fact, an arbitrary utility function, $\zeta_{u}(x)$, and an arbitrary (and unrelated) cost function, $\zeta_{c}(x)$, have been sketched in Figures \ref{ch1:subfig:sketch-utility} and \ref{ch1:subfig:sketch-cost}, respectively.
+The choice for this piece of work was to associate a cost to each key network parameter, for the reason that cost functions can be minimised to a finite value, i.e. zero.
+Utility maximisation on the other hand is a theoretically unbound problem that can only reach a maximum, if its maximum can be estimated in advance.
+In other words, solutions to a cost function where the resulting cost is zero, are by definition part of the set of optimal solutions.
+Determining the set of optimal solutions for the maximisation of a utility function is however more difficult.
 
-\input{_chapter1/fig/sketch-utility-vs-cost}
+\nomenclature[I]{$t$}{Time-steps of the simulation, where $t \in \{1,\Delta t, 2\Delta t,\dots,T\}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\Delta t$}{Sample time, where $\Delta t \in \mathbb{Z}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$T$}{Length of simulation, where $T \in \mathbb{Z}_{\geq0}$ (Chapter \ref{ch1})}
 
-These two figures illustrate how the peaks of the utility function are at different, large values of $y$, and the troughs of the cost function tend towards zero.
-Both peaks or minima are found using solving algorithms (the most common mathematical solvers are the Gradient Descend Method, Newton-Raphson Method, Active Set Method, or similar).
-If the cost or utility function is nonlinear or the system's gradient function can only be approximated more sophisticated algorithms had to be used, e.g. Mixed-Integer Linear Programming (MILP), Sequential Quadratic Programming (SQP), Genetic Algorithm (GA), Particle Swarm Optimisation (PSO), Interior Point Method (IPM) or some method based on Artificial Neural Network (ANN).
-Depending on the starting conditions of those solvers, i.e. the initial values for $x$, different maxima or minima (i.e. points $A$, $B$ or $C$) may be found.
-In the example above, the best solution for $\zeta_{c}(x)$ is at point $A$, whereas the best solution for $\zeta_{c}(x)$ is at point $C$.
-Whilst point $A$ represents the highest utility, it is difficult to determine whether this maximum is a most optimal solution since utility can be inherently unbounded in the search direction, i.e. $\zeta_{c}(x) \in \geq 0 \forall x$.
-For the cost function on the other hand, point $C$ represents the lowest minimum and an optimal solution since the cost function's range is bounded in the search direction, i.e. $\zeta_{c}(x) \geq 0 \forall x$.
-Therefore, the cost's proximity to zero directly indicates the absolute system performance (whereas a utility's proximity to infinity would not make sense).
-
-With this in mind, the key network parameters are defined and their corresponding cost functions can be introduced.
-The choice of parameters is virtually inexhaustible, since one could treat every single current, voltage and phase angle as a potential indicator of the network's performance.
-In reality however (and particularly in the context of NTVV), a power distribution network can only be observed at a limited number of measuring points.
+With this in mind, the key network parameters are defined and their corresponding cost functions are introduced.
+In this piece of work, power flow simulations are run at discrete times, $t$, which are separated by a sampling period $\Delta t$. 
+The model used for these simulations is the IEEE LV Test Case, which consists of 906 three phase buses, resulting in a total of 2718 nodes.
+For each node, complex currents and voltages can be obtained, making the number of parameters to chose from nearly inexhaustible.
+In reality however, a power distribution network can only be observed at a limited number of measuring points.
 For the NTVV project, these points were at the substation and the ESMU's Point of Common Coupling (PCC).
-Therefore, all derived network parameters that are based on these realistic measurements are treated as ``realistic parameters''.
-It is however worth mentioning that, for the work presented in this chapter, all realistic parameters are extracted from power flow simulations.
+Therefore, all derived network parameters that could be obtained in reality are seen as ``realistic parameters'', despite the fact that all key network parameters are extracted from power flow simulations.
+The remaining key network parameters, i.e. those that could not easily be obtained in reality, are therefore referred to as ``theoretical parameters''.
 
-In those simulations of power distribution networks (i.e. in OpenDSS), a system of equations that captures nodal power flow is solved.
-For this piece of work, the IEEE LV Test Case was used as a network model.
-Consisting of 906 three phase buses, which results in a total of 2718 nodes, for which complex currents and voltages can be obtained, this network model resulted produced an abundance of possible parameters that could be considered.
-Yet all those parameters could not easily be obtained in reality, which is why they are referred to as ``theoretical parameters''.
-Due to the high number of theoretical parameters, the correlation between some of these parameters and network performance is low.
-Therefore, the set of theoretical parameters that was used in this piece of work, was chosen based on the parameter's importance and impact on actual network operation.
-
-A list of all realistic and theoretical key network parameters\footnote[1]{Theoretical key network parameters that can only be extracted form power flow simulations are marked with a dagger ($\dagger$).} is presented below.
+Due to the high number of theoretical parameters, only a subset of those theoretical parameters is used.
+The choice of parameters is based on their importance, role and impact on the actual network operation.
+A list of all realistic and theoretical key network parameters is presented below, and in this list all theoretical key network parameters are marked with a dagger ($\dagger$).
 
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding
@@ -54,7 +40,6 @@ In the following subsections, all key network parameters' associated cost functi
 \subsection{Voltages at substation}
 \label{ch1:subsec:voltages-at-substation}
 
-\nomenclature[I]{$t$}{Time-steps of the simulation, where $t \in \mathbb{Z}_{\geq0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$v_{\text{ss},\phi}$}{Phase voltage at substation for phase $\phi$ at time $t$, where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\textbf{v}_{ss}(t)$}{Phase voltage vector at time $t$, where $\textbf{v}_\text{ss}(t) \in \mathbb{R}^{\Phi}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\phi$}{Phase number, where $\phi \in \{1, \dots, \Phi\}$ (Chapter \ref{ch1})}
@@ -64,26 +49,37 @@ In the following subsections, all key network parameters' associated cost functi
 \nomenclature[I]{$V_h$}{High-voltage threshold of statutory voltage band, where $V_h \in \mathbb{R}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$V_l$}{Low-voltage threshold of statutory voltage band, where $V_l \in \mathbb{R}$ (Chapter \ref{ch1})}
 
-In UK LV distribution networks, substations supply electric power to a feeding three-phase cable.
-These substations provide the link from MV distribution networks, which operates at 11kV P2P, to the LV distribution network, which operates at nominal 230V P2N (i.e. 400V P2P).
-If the substation transformer was an ideal transformer, then the voltage measured at its secondary winding would remain constant with changing load.
-In reality however, as load increases, internal losses (e.g. conductive losses and magnetic leakage) lead to a drop in voltage level.
-Therefore, any deviation from the substation's nominal voltage is an indicator of suboptimal network operation.
+In the UK, LV networks operate at a nominal voltage of 230V Phase-to-Neutral (P2N) or 400V Phase-to-Phase (P2P).
+Substations supply electricity to a three-phase cable, i.e. the feeder, and  link to MV distribution networks, which operate at 11kV P2P.
+In an ideal case the voltage measured at the substation transformer's secondary winding remains constant as load changes.
+But in reality, internal losses (e.g. conductive losses and magnetic leakage) lead to a dropping voltage level, when load increases.
+Therefore, any deviation from the substation's nominal voltage can be seen as an indication of suboptimal network operation.
 
-When defining substation voltage for a single-phase complex voltage as $v_{\text{ss},\phi}(t)$, where $p$ is the phase number and $t$ the time at which the measurement was taken, then the resulting substation voltage vector $\textbf{v}_{ss}(t)$ (where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$) can be used in a ``voltage deviation cost function'' $\zeta_\text{voltage}(\textbf{v}_{ss}(t))$.
-A cost above zero hence indicates a level of substation overloading.
-However, to define this cost function in more general terms, an arbitrary multi-phase voltage voltage vector, $\textbf{v}(t)$), is used in its definition as:
+The ``voltage deviation cost function'' $\zeta_\text{voltage}(\textbf{v}(t))$ captures this suboptimal operation.
+This cost function is defined for a multi-phase complex voltage vector as $\textbf{v}(t)$ where $(v_\phi(t)) = \textbf{v}(t)$, where $\phi$ is the phase number and where $t$ the time at which the measurement was taken.
+Both phase and time are discrete, i.e. $\phi \in \{1,\dots,\Phi\}$ where $\Phi \in \mathbb{Z}_{>0}$ and $t \in \mathbb{Z}_{\geq0}$.
+When using the three-phase substation voltage vector, $\textbf{v}_{ss}(t)$ (where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$), with this cost function, any drop in transformer voltage results in a positive cost.
 
 \input{_chapter1/equ/voltage-deviation}
 
-Since voltage levels drop continuously along a purely consumptive feeder, substations may boost the voltage above the nominal LV voltage level, yet keep it below the upper voltage threshold.
-The impact on the cost function $\zeta_\text{voltage}(\textbf{v})$ when boosting $V_\text{ss}$ is shown in Figure \ref{ch1:fig:voltage-deviation} (for simplicity the a single-phase voltage vector is shown, i.e. $\Phi = 1$).
+In this voltage cost function, $\Phi$ represents the number of phases (i.e. $\Phi = 3$), and $\zeta_h(v)$ and $\zeta_l(v)$ are two functions that convert a single voltage value, i.e. $v_\phi$, into a normalised positive cost based upon the direction of voltage deviation.
+High and low voltage thresholds, respectively $V_h$ and $V_l$, are introduced in order to define these two functions.
+When choosing these two thresholds, then they must also satisfy the following inequality:
+
+\input{_chapter1/equ/voltage-bounds-upper-lower}
+
+For the work presented here, these two thresholds are based on the UK's nominal LV voltage range of +10\% -6\% around $V_n$, i.e. 230V P2N.
+As a result, the following upper and lower threshold functions are defined, in order to form a continuously differentiable cost function with a single zero tangent.
+
+\input{_chapter1/equ/voltage-threshold-upper-lower}
+
+Substations may boost the voltage above the nominal LV voltage level, since voltage levels drop continuously along a purely consumptive feeder.
+The impact on the cost function $\zeta_\text{voltage}(\textbf{v})$ when $V_\text{ss}$ is boosted is shown in Figure \ref{ch1:fig:voltage-deviation} (for simplicity the a single-phase voltage vector is shown, i.e. $\Phi = 1$).
 
 \input{_chapter1/fig/voltage-deviation}
 
-In this figure, it can be seen that the cost at the high and low voltage thresholds equates to one, and to zero at the nominal substation voltage.
-When boosting this substation voltage, $V_\text{ss}$, only the zero intersection is moved, whereas the high and low voltage crossings remain unchanged.
-In Figure \ref{ch1:fig:voltage-deviation}, this intentional feature is demonstrated by boosting $V_\text{ss}$ by +4\% and +8\%.
+In this figure, it can be seen that $\zeta_\text{voltage}(\textbf{v})$ at the thresholds $V_l$ and $V_h$ equates to one, and to zero at the set substation voltage, even when this voltage is boosted.
+This intentional feature is demonstrated by raising $V_\text{ss}$ from $V_n$ by +4\% and +8\%.
 
 \subsection{Voltages at ESMU's PCC}
 \label{ch1:subsec:voltages-at-esmu}
@@ -158,7 +154,7 @@ Therefore, the likeliness that LV distribution feeders in the UK are unbalanced 
 
 \nomenclature[I]{$\textbf{s}_{ss}(t)$}{Apparent multi-phase power at substation level at time $t$, where $\textbf{s}_{ss}(t) \in \mathbb{C}^\Phi$ (Chapter \ref{ch1})}
 \nomenclature[I]{$s_{\text{ss},\phi}(t)$}{Apparent single-phase power at substation level for phase $\phi$ at time $t$, where $(s_{\text{ss},\phi}(t)) = \textbf{s}_{ss}(t)$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\text{UF}(\textbf{x})$}{Function calculating the Unbalance Factor (UF) for any multidimensional vector $\textbf{x}$, where $(x_n) = \textbf{x}$, $n \in \mathbb{Z}_{>0}$ and $\text{UF}(\textbf{x}) \in \textbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\text{UF}(\textbf{x})$}{Function calculating the Unbalance Factor (UF) for any multidimensional vector $\textbf{x}$, where $(x_n) = \textbf{x}$, $n \in \mathbb{Z}_{>0}$ and $\text{UF}(\textbf{x}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
 
 Since substation monitoring is capable of providing reliable three-phase power measurements, they can be used as realistic key network parameters from which the network's unbalance can be determined.
 Deriving phase unbalance from this power vector is done by following the American National Standards Institute's (ANSI) definition of Unbalance Factor (UF) \cite{ANSI-MB-1-2011}:

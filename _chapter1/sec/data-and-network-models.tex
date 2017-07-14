@@ -42,10 +42,8 @@ This function links the original sub-half-hourly to a resulting half-hourly time
 
 \input{_chapter1/equ/synchronisation-function}
 
-\nomenclature[I]{$\Delta t$}{High resolution sample period, i.e. sub-half hourly or minutely, where $\Delta t \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$K$}{Number of blocks to downsample the sub-half-hourly profile into, where $K \in \mathbb{Z}^{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1})}
-\nomenclature[I]{$k$}{Half-hourly timing, where $k \in \{1, \dots, K\}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 
 Here, $\Delta t$ is the sampling period (i.e. minutely period) of the simulation, and $K$ is number of low-resolution blocks.
@@ -93,7 +91,7 @@ This SOC is defined as:
 \nomenclature[I]{$C_\text{bat}$}{Battery capacity, where $C_\text{bat} \in \mathbb{R}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_{\text{bat},\phi}(t)$}{Single-phase apparent battery power for phase $\phi$ at time $t$, where $(s_{\text{bat},\phi}(t)) = \textbf{s}_\text{bat}(t)$ and $s_{\text{bat},\phi}(t) \in \textbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_{\text{bat},\phi}(t)$}{Single-phase apparent battery power for phase $\phi$ at time $t$, where $(s_{\text{bat},\phi}(t)) = \textbf{s}_\text{bat}(t)$ and $s_{\text{bat},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{Z}$ (Chapter \ref{ch1})}
 
 
