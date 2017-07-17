@@ -1,15 +1,14 @@
 \begin{multline}
-	\zeta(v_{\text{ss},p}(t), v_{\text{ESMU},\phi}(t), \textbf{v}_{\text{load}}(t), \textbf{s}_{ss}(t), \textbf{i}_{ss}(t), \textbf{i}_{\text{line}}(t), s_\text{losses}(t), \boldsymbol{\alpha}) :=\\
-	\alpha_1 \zeta_\text{voltage}(v_{\text{ss},\phi}(t))%\\
-	+ \alpha_2 \zeta_\text{voltage}(v_{\text{ESMU},\phi}(t))%\\
+	\zeta(\textbf{v}_\text{ss}(t), \textbf{v}_\text{ESMU}(t), \textbf{v}_{\text{load}}(t), \textbf{s}_{ss}(t), \textbf{i}_{ss}(t), \textbf{i}_{\text{line}}(t), s_\text{losses}(t), \boldsymbol{\alpha}) :=\\
+	\alpha_1 \sum_{\phi=1}^\Phi\zeta_\text{voltage}(v_{\text{ss},\phi}(t))%\\
+	+ \alpha_2 \sum_{\phi=1}^\Phi\zeta_\text{voltage}(v_{\text{ESMU},\phi}(t))%\\
 	+ \alpha_3 \zeta_\text{\text{load} voltage}(\textbf{v}_{\text{load}}(t))\\
 	+ \alpha_4 \zeta_\text{unbalance}(\textbf{s}_{ss}(t))%\\
 	+ \alpha_5 \zeta_\text{PF}(\textbf{s}_{ss}(t))%\\
 	+ \alpha_6 \zeta_{\text{neutral load}}(\textbf{s}_{ss}(t))\\
-	+ \alpha_6 \zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))%\\
-	+ \alpha_7 \zeta_\text{\text{line} utilisation}(\textbf{i}_{\text{line}}(t))%\\
-	+ \alpha_8 \zeta_\text{losses}(s_\text{losses}(t))%\\
-	 \forall t \\
-	 \text{ where } \phi \in \{1, \dots, \Phi\} \text{ and } \Phi \in \mathbb{Z}_{>0} \text{ and } (\alpha_n) = \boldsymbol{\alpha}
+	+ \alpha_7 \zeta_\text{fuse utilisation}(\textbf{i}_{ss}(t))%\\
+	+ \alpha_8 \zeta_\text{\text{line} utilisation}(\textbf{i}_{\text{line}}(t))%\\
+	+ \alpha_9 \zeta_\text{losses}(s_\text{losses}(t)) \\
+	 \text{where } \phi \in \{1, \dots, \Phi\} \text{ and } \Phi \in \mathbb{Z}_{>0} \text{ and } \boldsymbol{\alpha} = \{\alpha_1, \dots, \alpha_9\}
 \label{ch1:equ:weighted-sum-cost-function}
 \end{multline}

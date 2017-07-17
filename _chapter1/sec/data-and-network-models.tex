@@ -50,7 +50,8 @@ However, control instructions that are sent to the ESMU system should not reques
 \nomenclature[I]{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch1})}
 \nomenclature[I]{$p_\text{bat}(t)$}{Single-phase active battery power at time $t$, where $p_\text{bat}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{Z}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $\textbf{s}_\text{ESMU}(t) \in \mathbb{C}^{\Phi}$ (Chapter \ref{ch1})}
 
 In order to simulate this ESMU system and its energy storing behaviour, a model is developed from the given device specifications.
 This model includes an charge-discharge efficiency, $\eta$, and standby losses, $\mu$.
@@ -110,7 +111,7 @@ This is done with the synchronisation function $k(t)$, which links the original 
 
 \input{_chapter1/equ/synchronisation-function}
 
-\nomenclature[I]{$K$}{Number of blocks to downsample the sub-half-hourly profile into, where $K \in \mathbb{Z}^{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$K$}{Number of sample periods over which the sub-half-hourly is to be downsampled, where $K \in \mathbb{Z}_{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1})}
 \nomenclature[I]{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $(s^*_\text{net}(t)) = \textbf{s}^*_\text{net}$ and $s^*_\text{net}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
