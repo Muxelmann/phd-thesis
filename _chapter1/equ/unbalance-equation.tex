@@ -1,14 +1,7 @@
 \begin{equation}
 \begin{split}	
-	\text{UF}(\textbf{x}) :=& \frac{\max_n |\overline{\textbf{x}} - x_n|}{\overline{\textbf{x}}} \text{ where } x_n \in \textbf{x} \\
+	\text{UF}(\textbf{x}) :=& \frac{\max_n |\overline{\textbf{x}} - x_n|}{\overline{\textbf{x}}} \text{ where } (x_n) = \textbf{x} \\
 	&\text{ and } n \in \mathbb{Z}_{>0}
 \end{split}
 \label{ch1:equ:unbalance-equation}
-\end{equation}
-
-Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (e.g. $x_n$ may be voltage, current or power measurement per phase $n$), and for this work, $x_n$ was chosen to be the power flow into one of the network's phases.
-For clarity, the notation of $\overline{\textbf{x}}$ is used to define the mean of the given vector, i.e.:
-
-\begin{equation}
-	\overline{\textbf{x}} := \frac{1}{N}\sum_n^N{x_i}
 \end{equation}
