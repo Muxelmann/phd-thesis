@@ -2,7 +2,7 @@
 \begin{split}
 	\min_{\textbf{s}_\text{ESMU}} & \zeta_\text{PAR}(\textbf{s}_\text{ESMU}, \textbf{s}_\text{network load}) + \zeta_\text{MM}(\textbf{s}_\text{ESMU}, \textbf{s}_\text{network load})\\
 	\text{s.t. }& \begin{cases}
-		s_\text{bat}(k) \leq C_f\times C_\text{bat} \forall k\\
+		p_\text{bat}(k) \leq C_f\times C_\text{bat} \forall k\\
 		\left|s_{\text{ESMU},\phi}(k)\right| \leq S_\text{rating} \forall \phi \forall k\\
 		0 \leq SOC(k) \leq 1 \forall k
 	\end{cases}
