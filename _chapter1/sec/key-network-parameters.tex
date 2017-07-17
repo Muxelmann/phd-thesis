@@ -35,10 +35,11 @@ A list of all realistic and theoretical key network parameters is presented belo
 	\item Distribution losses$^{\dagger}$
 \end{itemize}
 
-In the following subsections, all key network parameters' associated cost functions are explained and formulated.
 
-\subsection{Voltages at substation}
-\label{ch1:subsec:voltages-at-substation}
+The following three substations cover all key network parameters, by detailing the cost functions relating to: voltages, powers and currents.
+
+\subsection{Voltage related cost functions}
+\label{ch1:subsec:voltages-related-cost-functions}
 
 \nomenclature[I]{$v_{\text{ss},\phi}$}{Phase voltage at substation for phase $\phi$ at time $t$, where $(v_{\text{ss},\phi}(t)) = \textbf{v}_{ss}(t)$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\textbf{v}_{ss}(t)$}{Phase voltage vector at time $t$, where $\textbf{v}_\text{ss}(t) \in \mathbb{R}^{\Phi}$ (Chapter \ref{ch1})}
@@ -81,8 +82,8 @@ The impact on the cost function $\zeta_\text{voltage}(\textbf{v})$ when $V_\text
 In this figure, it can be seen that $\zeta_\text{voltage}(\textbf{v})$ at the thresholds $V_l$ and $V_h$ equates to one, and to zero at the set substation voltage, even when this voltage is boosted.
 This intentional feature is demonstrated by raising $V_\text{ss}$ from $V_n$ by +4\% and +8\%.
 
-\subsection{Voltages at ESMU's PCC}
-\label{ch1:subsec:voltages-at-esmu}
+%\subsection{Voltages at ESMU's PCC}
+%\label{ch1:subsec:voltages-at-esmu}
 
 At the ESMU's Point of Common Coupling (PCC), the device has access to all three phases of the feeder.
 One can assume that the line voltage along a purely consumtive feeder will drop continuously.
@@ -106,8 +107,8 @@ In fact, $\textbf{v}_{ESMU}(t)$ is used with cost function, $\zeta_\text{voltage
 This is the same cost function that was used to asses the deviation in transformer voltage.
 Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 
-\subsection{Voltages at customer laterals}
-\label{ch1:subsec:voltages-at-customers}
+%\subsection{Voltages at customer laterals}
+%\label{ch1:subsec:voltages-at-customers}
 
 The Electricity Safety, Quality and Continuity Regulations (ESQCR) define the statutory voltage range at UK electricity customers.
 However, monitoring those voltages to assure they lie within limits is unfeasible, which is why they are unknown in reality.
@@ -141,8 +142,8 @@ Therefore, the customer (or load) voltage is defined as $\textbf{v}_\text{load}(
 
 Here, $i$ represents the customer number out of a total customer count $I$, and $\phi$ represents the phase, out of the phase count $\Phi$, to which the customer is connected.
 
-\subsection{Total power flow}
-\label{ch1:subsec:total-power-flow}
+\subsection{Power related cost functions}
+\label{ch1:subsec:powers-related-cost-functions}
 
 Beside having to keep voltages within their specified operational boundaries, DNOs want to assure that the distribution network operates both in an efficient and ideal manner.
 Determining how ideal a three-phase network operates can be done by e.g. assessing the balance of the network's phases.
@@ -207,8 +208,30 @@ To address this last point, and before dealing with line utilisation, a cost fun
 In a three phase scenario, each phase power, $s_{\text{ss},\phi}(t)$, is therefore rotated by an integer multiple of $120^\circ$ before adding them to obtain the neutral load vector.
 Then, to obtain $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, the magnitude of this apparent power vector is computed, which is also the size of the neutral conductor's load.
 
-\subsection{Substation line utilisation}
-\label{ch1:subsec:substation-line-utilisation}
+%\subsection{Distribution losses}
+%\label{ch1:subsec:losses}
+
+When it comes to profit margins, energy losses in a distribution network are unwanted, since nobody pays for undelivered energy.
+Although the losses a single distribution network are small in comparison to the losses in the entire electricity grid, the aggregate effect of reducing those losses could have a noticeable impact.
+To put this into perspective, the losses in the IEEE LV Test Case network were 58kW, when simulated under the same high demand scenario which was used for voltage drop visualisation in Section \ref{ch1:subsec:voltages-related-cost-functions}.
+This equates to 12\% of the total network demand ($\text{i.e. }\frac{s_\text{losses}(t)}{\sum_{\phi=1}^\Phi{s_{\text{ss},\phi}(t)}} \approx \frac{58kW}{484kW}$).
+Since this is a high network load, losses would be noticeably lower for notmal network operation.
+This is made apparent in Figure \ref{ch1:fig:losses-against-network-demand}, where the uniform network load is varied and the corresponding losses are plotted against this variation.
+
+\input{_chapter1/fig/losses-against-network-demand}
+
+\nomenclature[I]{$\zeta_\text{losses}(s(t))$}{Losses based cost function, where $\zeta_\text{losses}(s(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_\text{losses}(t)$}{Total apparent power losses in the network $s_\text{losses}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+
+In Figure \ref{ch1:fig:losses-against-network-demand}, the region where losses exceed 5\% of the total network power is highlighted in red.
+These preliminary results were found from power flow simulations.
+In reality however, losses cannot be determined this easily.
+Therefore, the network losses, $s_\text{losses}(t)$, are seen as theoretical key network parameters and used in the final cost function $\zeta_\text{losses}(s(t))$, which is simply defined as:
+
+\input{_chapter1/equ/losses}
+
+\subsection{Current related cost functions}
+\label{ch1:subsec:currents-related-cost-functions}
 
 Although phase unbalance deteriorates the efficiency and life expectancy of three-phase network assets, high power demand puts strain on the physical cables themselves.
 This is predominantly due to resistive and inductive losses heating the cables, and bringing them closer to their operational limits.
@@ -232,8 +255,8 @@ A plot has been included in the Figure \ref{ch1:fig:fuse-utilisation}, which ill
 
 For this simple case, the substation line rating was set as $i_{fuse}=400\text{A}$, and the total substation current is the sum of all three phase currents.
 
-\subsection{Maximum line utilisation}
-\label{ch1:subsec:maximum-line-utilisation}
+%\subsection{Maximum line utilisation}
+%\label{ch1:subsec:maximum-line-utilisation}
 
 Just like voltage levels at each customer's bus are a theoretical key network parameters, currents in all lines are theoretical key network parameters, too.
 Whilst optimising the aforementioned current at substation level would prevent unintentional feeder disconnection and equipment damage, the lines' ratings impose distributed limits, too.
@@ -258,26 +281,3 @@ Addressing the multitude of line currents just like the multitude of customer vo
 
 In this quadratic cost function, $I_{\text{nom},l}$ is the nominal rating of line $l$ in the network.
 Also, and similar to Equation \ref{ch1:equ:load-voltage-deviation}, by considering only the maximum line utilisation, computational burden is reduced whilst parameter dependent sensitivity is increased.
-
-\subsection{Distribution losses}
-\label{ch1:subsec:losses}
-
-When it comes to profit margins, energy losses in a distribution network are unwanted, since nobody pays for undelivered energy.
-Although the losses a single distribution network are small in comparison to the losses in the entire electricity grid, the aggregate effect of reducing those losses could have a noticeable impact.
-To put this into perspective, the losses in the IEEE LV Test Case network were 58kW, when simulated under the same high demand scenario which was used for voltage drop visualisation in Section \ref{ch1:subsec:voltages-at-customers}.
-This equates to 12\% of the total network demand ($\text{i.e. }\frac{s_\text{losses}(t)}{\sum_{\phi=1}^\Phi{s_{\text{ss},\phi}(t)}} \approx \frac{58kW}{484kW}$).
-Since this is a high network load, losses would be noticeably lower for notmal network operation.
-This is made apparent in Figure \ref{ch1:fig:losses-against-network-demand}, where the uniform network load is varied and the corresponding losses are plotted against this variation.
-
-\input{_chapter1/fig/losses-against-network-demand}
-
-\nomenclature[I]{$\zeta_\text{losses}(s(t))$}{Losses based cost function, where $\zeta_\text{losses}(s(t)) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_\text{losses}(t)$}{Total apparent power losses in the network $s_\text{losses}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
-
-In Figure \ref{ch1:fig:losses-against-network-demand}, the region where losses exceed 5\% of the total network power is highlighted in red.
-These preliminary results were found from power flow simulations.
-In reality however, losses cannot be determined this easily.
-Therefore, the network losses, $s_\text{losses}(t)$, are seen as theoretical key network parameters and used in the final cost function $\zeta_\text{losses}(s(t))$, which is simply defined as:
-
-\input{_chapter1/equ/losses}
-
