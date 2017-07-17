@@ -1,10 +1,10 @@
 \begin{equation}
 \begin{split}
-	\min_{\textbf{s}_\text{ESMU}} & \zeta_\text{PAR}(\textbf{s}_\text{ESMU}, \textbf{s}_\text{network load}) + \zeta_\text{MM}(\textbf{s}_\text{ESMU}, \textbf{s}_\text{network load})\\
+	\min_{\textbf{s}^*_\text{ESMU}} & \zeta_\text{PAR}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net}) + \zeta_\text{MMD}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net}) + \zeta_\text{TRA}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net})\\
 	\text{s.t. }& \begin{cases}
-		p_\text{bat}(k) \leq C_f\times C_\text{bat} \forall k\\
-		\left|s_{\text{ESMU},\phi}(k)\right| \leq S_\text{rating} \forall \phi \forall k\\
-		0 \leq SOC(k) \leq 1 \forall k
+		p_\text{bat}(t) \leq C_f\times C_\text{bat} \forall t\\
+		\left|s_{\text{ESMU},\phi}(t)\right| \leq S_\text{rating} \forall \phi \forall k\\
+		0 \leq SOC(t) \leq 1 \forall t
 	\end{cases}
 \end{split}
 \label{ch1:equ:scheduling-cost}

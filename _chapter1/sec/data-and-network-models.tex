@@ -102,77 +102,65 @@ The white states represent operations applied onto those inputs and results and 
 \subsection{ESMU scheduling}
 \label{ch1:subsec:esmu-scheduling}
 
-Computing the ESMU schedule at this resolution (or any sub-half-hourly resolution) for an entire day is very computationally demanding and highly ineffective.
-Mainly, since cutting edge research in load forecasting has shown that demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible, but also since traditional forecasts are generally provided at half-hourly resolution.
-Therefore, the sub-half-hourly profile had to be down-sampled or extrapolated to a coarser resolution, by using a synchronisation function $k(t)$.
-This function links the original sub-half-hourly to a resulting half-hourly time-series like so:
+Computing the ESMU's daily schedule at the dataset's temporal resolution, i.e. sub-half-hourly, is ineffective and slow.
+Doing so is ineffective, because demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible, and the large number of search parameters makes finding a solutions very computationally demanding.
+Therefore, forecasting and scheduling is generally performed at half-hourly temporal resolution.
+To obtain such a half-hourly profile, the sub-half-hourly profile had to be down-sampled and synchronised.
+This is done with the synchronisation function $k(t)$, which links the original sub-half-hourly demand to a half-hourly time-series and is defined as follows:
 
 \input{_chapter1/equ/synchronisation-function}
 
 \nomenclature[I]{$K$}{Number of blocks to downsample the sub-half-hourly profile into, where $K \in \mathbb{Z}^{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1})}
 \nomenclature[I]{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $(s^*_\text{net}(t)) = \textbf{s}^*_\text{net}$ and $s^*_\text{net}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{s}^*_\text{net}$}{Half-hourly network load, where $\textbf{s}^*_\text{net} \in \mathbb{C}^{\frac{T_\text{sch}}{K}}$ (Chapter \ref{ch1})}
 
-Here, $\Delta t$ is the sampling period (i.e. minutely period) of the simulation, and $K$ is number of low-resolution blocks.
+Here, $\Delta t$ is the sub-half-hourly sampling period of the simulation, and $K$ is the duration of the half-hourly time-slot, i.e. number of sub-half-hourly periods within the half-hourly slot.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $T_\text{sch} \overset{!}{=} \alpha K \text{ where } \alpha \in \mathbb{Z}_{>0}$.
-Only in this case can the sub-half-hourly profile be divided into a complete set of chunks, where each chunk is of length $K\Delta t$.
-Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$, can be defined as follows:
+Otherwise, the sub-half-hourly profile cannot be divided into a set of equal length time-slots, where each time-slot is of length $K\Delta t$.
+Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $(s^*_\text{net}(t)) = \textbf{s}^*_\text{net}$), is defined as follows:
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
-Since all power values from a period of $k(t)K \rightarrow (k(t)+1)K-1$ are equal, a simplified half-hourly power vector is introduced as $p_\text{net}(k)$. 
-In this and any subsequent vector, half-hourly timing is indicated by using the half-hourly time $k$ instead of the sub-half-hourly time $t$, where $k \in \{1, \dots, K\}$ and $K \in \mathbb{Z}_{>0}$.
-The link between $s^{*}_\text{net}(t)$ and $s_\text{net}(k)$ is therefore defined as:
-
-\input{_chapter1/equ/half-hourly-power-profile}
-
-From hereon, all subsequent cost functions (i.e. any $\zeta$) that deal with half-hourly profiles, are functions that use the half-hourly synchronisation function $k(t)$.
-This difference will become important when differentiating between scheduling costs and the aforementioned network costs (which are based on a set of key network parameters).
-Nonetheless, to illustrate how the original sub-half-hourly network load is extrapolated into the resulting half-hourly demand, both profiles are plotted in a figure below.
+Now, over the period from $k(t)K$ to $(k(t)+1)K-1$, are power values are equal.
+To illustrate the difference between the original sub-half-hourly network load and the resulting half-hourly demand, both profiles are plotted in Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}.
+In this figure, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
+When generating ESMU schedules these variations are neglected and thus the unwanted peak power demands cannot be sufficiently compensated.
 
 \input{_chapter1/fig/sub-half-horuly-demand-comparison}
 
-In Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
-When generating the ESMU schedules (which is addressed in Section \ref{ch1:subsec:esmu-schedule-generation}) these variations are neglected and the unwanted peak power demands are hence no longer sufficiently compensated.
-
-
-As discussed in the literature review in Chapter \ref{ch-review}, the main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
-It has been identified, that both the Peak-to-Average Ratio (PAR) as well as the min-max-difference (MMD) are good indicators of how well the pursued behaviours have been implemented.
-Therefore, a half-hourly PAR scheduling cost, $\zeta_\text{PAR}(\textbf{s}_\text{ESMU} + \textbf{s}_\text{network load})$, and a half-hourly MMD scheduling cost, $\zeta_\text{MM}(\textbf{s}_\text{ESMU} + \textbf{s}_\text{network load})$, are defined as follows:
+The main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
+As shown in the literature review in Chapter \ref{ch-review}, the Peak-to-Average Ratio (PAR), the min-max-difference (MMD) and the power transients (TRA) are good indicators of such a behaviour.
+Therefore, three half-hourly costs regarding are used as, $\zeta_\text{PAR}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, $\zeta_\text{MMD}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, and $\zeta_\text{TRA}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$ are defined as follows:
 
 \input{_chapter1/equ/peak-to-average-definition}
 
 \input{_chapter1/equ/min-max-difference-definition}
 
-\nomenclature[I]{$\zeta_\text{PAR}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the Peak to Average Ratio (PAR), where $\zeta_\text{PAR}(\textbf{s}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\zeta_\text{MMD}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the difference between Minimum and Maximum power (MM), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\input{_chapter1/equ/power-transients-definition}
 
-Both costs are functions of the entire half-hourly ESMU schedule, $\textbf{s}_\text{ESMU}$, and the entire half-hourly network load profile, $\textbf{s}_\text{network load}$, where only the ESMU schedule is adjustable by an optimisation algorithm.
-For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve the following minimisation problem.
-Reasons behind this choice are the SQP's robustness and speed, since it is built on the well established Newton-Raphson Method, as well as its ability to cope with nonlinear constraints.
-It is this latter point that is most important, since the battery model's solving constraints are inherently nonlinear; the Newton-Raphson Method by itself is unable to solve with this kind of nonlinear constraints.
-The final minimisation problem that was passed into the SQP solver can be formulated as:
+\nomenclature[I]{$\zeta_\text{PAR}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the Peak to Average Ratio (PAR), where $\zeta_\text{PAR}(\textbf{s}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{MMD}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the Minimum-Maximum Difference (MMD), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\zeta_\text{TRA}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the power transients (TRA), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$ (Chapter \ref{ch1})}
+
+All three costs functions assess the sum of the half-hourly ESMU schedule, $\textbf{s}^*_\text{ESMU}$, and the half-hourly network load profile, $\textbf{s}^*_\text{net}$.
+Combined with all underlying model constraints, the following minimisation problem is defined:
 
 \input{_chapter1/equ/scheduling-cost}
 
-To summarise, this operation therefore minimises two costs by adjusting the half-hourly ESMU schedule, $\textbf{s}_\text{ESMU}$, given a certain constant half-hourly network load (or forecast) $\textbf{s}_\text{network load}$.
-These two costs both capture the PAR and MMD of the resulting power profile, and when minimised to zero, indicate a perfectly flat power curve.
-The minimisation is constrained to not exceed the battery's maximum charge/discharge rate (i.e. $p_\text{bat}(k) \leq C_f \times C_\text{bat} \forall k$), to not exceed the PMU's phase power rating (i.e. $\left|s_{\text{ESMU},\phi}(k)\right| \leq S_\text{rating} \forall \phi \forall k$), and to not over- or under-charge the battery (i.e. $0 \leq SOC(k) \leq 1 \forall k$).
+For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve this minimisation problem.
+The resulting half-hourly ESMU power, $\textbf{s}^*_\text{ESMU}$, could then be extrapolated using the same synchronisation function, $k(t)$, to yield a sub-half-hourly ESMU schedule.
 
-For the work presented in this chapter, the supplied half-hourly network load (or forecast) was extrapolated from sub-half-hourly data.
-This forecast can be seen as if it had been generated with perfect foresight.
-Treating it in such a way does not further skew the already imperfect performance that is obtained when applying the resulting half-hourly schedule.
-Therefore, any additional improvement or worsening is the result of the sub-half-hourly schedule adjustments.
-In the following figure, a visualisation is provided where the impact of this half-hourly ESMU schedule becomes apparent.
+For the work presented in this chapter, the supplied half-hourly network load (or forecast) was obtained from sub-half-hourly data.
+Treating it as a forecast with perfect foresight does not skew the already imperfect schedule performance, which is obtained when applying the resulting half-hourly schedule to sub-half-hourly load.
+Figure \ref{ch1:fig:improved-network-power} shows a sample day, where the impact of this half-hourly ESMU schedule becomes apparent.
 
 \input{_chapter1/fig/improved-network-power}
 
-Figure \ref{ch1:fig:improved-network-power} shows the original half-hourly network load and the improved network when adding the half-hourly ESMU schedule.
-For this preliminary result, no network simulations have been carried out, as it should show an idea ESMU impact on the network's load.
-This positive impact can be seen, since the half-hourly profile in Figure \ref{ch1:subfig:improved-half-hourly-network-power} is dominated by an evening peak in demand.
-However, the actual sub-half-hourly demand, as it is plotted in Figure \ref{ch1:subfig:improved-sub-half-hourly-network-power}, has a much larger demand spike during the morning hours, which is not addressed as strongly as the evening peak.
-Therefore, the compared peak power shaving dropped from 9.46kW to only 6.36kW, although only 50\% of the battery's discharge capacity is used.
-Nonetheless, the overall improvement yielded by the ESMU schedule is still noticeable (given that it was scheduled using perfect half-hourly foresight). 
+This figure shows the positive impact on the half-hourly profile (i.e. in Figure \ref{ch1:subfig:improved-half-hourly-network-power}), which is particularly dominant during the evening peak load.
+However, the impact on the actual sub-half-hourly demand (i.e. in Figure \ref{ch1:subfig:improved-sub-half-hourly-network-power}) has a much larger demand spike during the morning hours, which is not that strongly addressed.
+When compared, the ideal peak power shaving dropped from 9.46kW to only 6.36kW.
+Nonetheless, the overall improvement yielded by the ESMU schedule can still be noticed. 
+The method of how to adjust the ESMU's phase powers to mitigate the impact of such volatile load spikes is addressed in the following section.
 
-In the following section, the underlying closed-loop schedule adjustment method is explained, where it will be shown how individual key network parameters can be positively impacted without deviating from this already optimised half-hourly schedule.
-The constraint of having to follow this half-hourly ESMU schedule is lifted in Chapter \ref{ch2}, where a real-time schedule adjustment method is proposed and researched.

@@ -1,7 +1,5 @@
 \begin{equation}
-%\begin{split}
-	\zeta_\text{MMD}(\textbf{s}) := \frac{\max_k\left(\textbf{s}\right) - \min_k\left(\textbf{s}\right)}{\frac{1}{K}\sum_{k=1}^{K}s(k)}
-	\text{ where } (s(k)) = \textbf{s}
-%\end{split}
+	\zeta_\text{MMD}(\textbf{s}) := \frac{\max_k \left(\textbf{s}\right) - \min_k\left(\textbf{s}\right)}{\frac{1}{K}\sum_{t=1}^{\frac{T_\text{sch}}{K}}s(t)}
+	\text{ where } (s(t)) = \textbf{s}
 \label{ch1:equ:min-max-difference-definition}
 \end{equation}
