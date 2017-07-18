@@ -20,43 +20,46 @@ This is also the case during the lighter load in the afternoon (i.e. between 12:
 But during the rest of the day when network load increases, the ESMU is unable to reduce voltage deviation to match its PCC voltage with the network's nominal substation voltage.
 The reason behind this behaviour that the ESMU has allocated its resources to serve for the underlying half-hourly ESMU schedule.
 Therefore, the remaining resources that could provide voltage support during periods of low demand become limited during periods of high demand.
-Combined with the fact that the LV distribution network is more resistive than inductive (i.e. unlike HV transmission networks), reactive power injection to support voltage levels has a reduced impact.
-Nonetheless, due to the constant yet small availability of power resources, the ESMU was able to boost voltages by to some extent at all times; this can be seen in Figure \ref{ch1:subfig:ts-esmu-voltage-cost}, where the associated cost has always been reduced in comparison to the base and normal.
+Combined with the fact that the LV distribution networks are more resistive than inductive (i.e. unlike HV transmission networks), adjusting only being able to adjust the ESMU's reactive powers to stabilise voltage levels, has an even smaller impact.
+Nonetheless, due to some continuous yet small availability of power resource, ESMU is able to boost voltages to some extent at all times. In Figure \ref{ch1:subfig:ts-esmu-voltage-cost}, this can be seen since the associated cost has always been reduced in comparison to the \textit{base} and \textit{normal} cases.
 
-The ability to support voltage levels at the ESMU's PCC is interesting, yet to support voltage levels at all buses throughout the network is more relevant, since some of these buses are linked to customers, for which maintaining a constant voltage level is essential.
-Therefore, the next voltage plot inspects both the highest and lowest voltage level that was recorded throughout the network.
+The ability to support voltage levels at the ESMU's PCC is interesting, yet supporting voltage levels at all buses throughout the network is more relevant since some of these buses are linked to customers, for which it is essential to maintain a constant voltage level.
+Therefore, the results assess both the highest and lowest voltage level that is recorded throughout the network.
 
 \input{_chapter1/fig/ts-all-voltages}
 
 In Figure \ref{ch1:subfig:ts-all-voltages}, despite no voltage violations taking place due to the already boosted substation voltage, the ESMU's positive impact can be observed.
-Here, the difference between highest and lowest voltage in the network was noticeably reduced at all times and their average was brought closer to the network's nominal voltage.
-The ESMU's function to support the network in providing more stable voltage levels at customer endpoints can therefore be fulfilled.
-This fact is also reflected in the associated cost plot, i.e. in Figure \ref{ch1:subfig:ts-all-voltages-cost}.
+Here, the difference between highest and lowest voltage in the network is noticeably reduced at all times, and their average voltage is brought closer to a nominal voltage level.
+The ESMU's function to support the network in providing more stable voltage levels at customer endpoints is therefore met.
+This fact is also supported by the associated cost plot in Figure \ref{ch1:subfig:ts-all-voltages-cost}, where a reduction in cost can be observed at all times.
 
-Beside providing stable voltage levels, power quality should also be upheld to assure that the distribution network operates as efficient as possible.
-The first power related parameter that to indicate network efficiency is the phase unbalance.
 
 \input{_chapter1/fig/ts-phase-unbalance}
 
-In Figure \ref{ch1:subfig:ts-phase-unbalance}, the most and least loaded phases' power values are plotted against time.
-At all times, the sub-half-hourly adjustments of the ESMU's schedule could reduce the underlying phase imbalance.
-It did so by alleviate some load from the most loaded phase and utilise the unused capacity on the lighter loaded phases.
-Correspondingly, the associated phase unbalance cost has noticeably lowered in comparison to the normal and base cases.
-It should however be noted, that phase balancing behaviour during the morning hours is predominantly comprised of reactive power injection and absorption, since the ESMU's half-hourly.
-Therefore, the tradeoff between adding additional strain on the network, versus balancing phases has to be taken into account.
-One unnecessary strain on the network is additional neutral power flow, which is inadvertently linked to phase unbalance.
+Beside providing stable voltage levels, power quality should also be upheld to assure that distribution networks operate as efficient as possible.
+The first power related parameter that indicates network efficiency is phase unbalance.
+In Figure \ref{ch1:subfig:ts-phase-unbalance}, the power value of the highest and lowest loaded corresponding phases is plotted over time.
+At all times, the sub-half-hourly adjustments of the ESMU's schedule did reduce the underlying phase imbalance.
+This is achieved by redistributing power from the most loaded phase to the least loaded phases; hence utilising the unused capacity of the lighter loaded phases.
+As expected, the associated cost has been noticeably lowered in comparison to the \textit{base} and \textit{normal} cases.
+It should however be noted, that phase balancing during the morning hours is predominantly achieved by using reactive power injection and absorption.
+This can be seen by the similar yet increased phase loadings between 0:00 and 7:00.
+Therefore, the tradeoff between adding additional strain onto the network, versus balancing phases has to be taken into account.
+One such strain that is being put onto the network, is increased neutral power flow due to phasor misalignment.
 
 \input{_chapter1/fig/ts-neutral-power}
 
-The results plotted in Figure \ref{ch1:fig:ts-neutral-power} show the network impact when adjusting the ESMU's schedule in order to minimise neutral power flow.
-Incidentally, when applying the normal half-hourly ESMU schedule, neutral power is not affected at all.
-The reason behind this was the choice of evenly assigning the scheduled power to all three phases, instead of taking into account the phases' loadings.
-Power factor on the other hand was impacted just by introducing the half-hourly ESMU schedule, as shown in the following figure.
+For the results that are plotted in Figure \ref{ch1:fig:ts-neutral-power}, neutral power flow is minimised through the adjustment of ESMU powers.
+It can be seen, that for the \textit{normal} case, neutral power is not affected at all.
+Reason for this result is the choice of evenly assigning the scheduled ESMU power to all three phases.
+Therefore, neither phase unbalance nor loading of the neutral conductor is being taken into account.
+For the \textit{minimisation} case however, loading of the neutral conductor is successfully reduced in comparison to both the \textit{normal} and \textit{base} case.
 
 \input{_chapter1/fig/ts-power-factor}
 
-Here, in Figure \ref{ch1:fig:ts-power-factor}, the power factor cost is successfully reduced during the entire day, in comparison to the normal cases.
-In contrast, the base case had a constant power factor cost, due to aforementioned assignment of a constant power factor of 0.95 to all loads.
+Unlike neutral phase unbalance and neutral loading, power factor on the other hand is impacted just by introducing the half-hourly ESMU schedule, as shown in Figure \ref{ch1:fig:ts-power-factor}.
+Whilst the choice of a static power factor for all loads in the \textit{normal} case resulted in a constant power throughout the day, half-hourly ESMU intervention in the \textit{base} case results in a noticeable power factor variation.
+This variation is successfully reduced during throughout the entire day for the \textit{minimisation} case, in comparison to the \textit{normal} cases.
 In reality, however, any network's power factor varies over time since the number of inductive machines and their associated inductive load varies constantly.
 Nonetheless, the results would be similar but more variable when applied to a network with varying power factor, since the aim when adjusting the ESMU schedule was to reduce the power factor's deviation from unit power factor.
 The final parameter that indicates system efficiency are the distribution losses.
