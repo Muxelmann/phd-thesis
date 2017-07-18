@@ -59,27 +59,25 @@ For the \textit{minimisation} case however, loading of the neutral conductor is 
 
 Unlike neutral phase unbalance and neutral loading, power factor on the other hand is impacted just by introducing the half-hourly ESMU schedule, as shown in Figure \ref{ch1:fig:ts-power-factor}.
 Whilst the choice of a static power factor for all loads in the \textit{normal} case resulted in a constant power throughout the day, half-hourly ESMU intervention in the \textit{base} case results in a noticeable power factor variation.
-This variation is successfully reduced during throughout the entire day for the \textit{minimisation} case, in comparison to the \textit{normal} cases.
-In reality, however, any network's power factor varies over time since the number of inductive machines and their associated inductive load varies constantly.
-Nonetheless, the results would be similar but more variable when applied to a network with varying power factor, since the aim when adjusting the ESMU schedule was to reduce the power factor's deviation from unit power factor.
-The final parameter that indicates system efficiency are the distribution losses.
+This variation is however successfully reduced throughout the entire day for the \textit{minimisation} case, in comparison to the \textit{normal} cases.
 
 \input{_chapter1/fig/ts-losses}
 
-Figure \ref{ch1:fig:ts-losses} shows the reduction in distribution losses that were achieved when adjusting the ESMU schedule accordingly.
-Again, the schedule adjustment reduced losses throughout the entire day.
-In fact, an additional 6.42\% of energy savings could be achieved, simply by adjusting the ESMU's power injection and absorption behaviour.
-Whilst this amount of energy may seem insignificant on a small scale, saving this amount of energy on a national level could potentially benefit the entire power network.
-However, losses are difficult to measure and attempting to do so would most likely outweigh the benefits.
+The final parameter that indicates system efficiency are the distribution losses.
+Figure \ref{ch1:fig:ts-losses} shows the reduction in distribution losses that were achieved when adjusting the ESMU powers accordingly.
+In fact, an additional 6.42\% energy savings is achieved, simply by adjusting the ESMU's power injection and absorption behaviour, when comparing the \textit{base} and \textit{minimisation} cases.
+Although this amount of energy may seem negligibly small, these saving can amount to a noticeable level of savings on a national scale, which can potentially benefit the entire power network.
+Nonetheless, measuring losses is difficult and costly, which is why attempting to do so will likely outweigh the benefits.
 
 Instead, a better way of relieving stress from the power network is to minimise its assets utilisation by mitigating demand spikes.
 Since the ESMU was constraint not to deviate from its underlying half-hourly schedule, only phase related demand differences could be addressed.
-Those differences could however be addressed successfully, as shown in the following figure.
+Hence the impact of correcting those phase differences is bare noticeable, which can be seen in Figure \ref{ch1:fig:ts-all-line-utilisation}.
 
 \input{_chapter1/fig/ts-all-line-utilisation}
 
-Whilst the worst line utilisation is predominantly driven by the half-hourly charging and discharging behaviour of the ESMU, a subtle reduction could be achieved throughout the entire day, as shown in Figure \ref{ch1:fig:ts-all-line-utilisation}.
-Yet as mentioned before, the constraint that is imposed due to the underlying half-hourly schedule significantly limits this improvement in network performance.
+Whilst the \textit{normal} case noticeably lowered some of the daily demand, power spikes after e.g. 9pm were not addressed at all.
+Even the \textit{minimisation} case could barely reduce those spikes, due to the constraining half-hourly schedule.
+Nonetheless, throughout the entire day, ESMU was still able to reduce line utilisation at the substation level; despite those improvements being relatively small in comparison to the impact in the \textit{normal} case.
 
 \subsection{Difference Analysis}
 \label{ch1:subsec:difference-analysis}
