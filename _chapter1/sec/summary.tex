@@ -1,20 +1,19 @@
 \section{Summary}
 \label{ch1:sec:summary}
 
-In this chapter, a method to adjust an ESMU schedule to support network operation has been developed and tested.
-This ESMU was controlled by a predetermined and underlying schedule, which was a half-hourly dis/charge profile that was tailored for the daily variations in power demand.
-Through adjustments of the three-phase active and reactive powers, ESMU could be controlled in such a way that it minimised a set of defined costs.
-Here, each defined cost is related to a key network parameter and needed to be minimised.
-Minimisation indicates an improvement in the network performance since each cost corresponds to a specific key network parameter that does directly indicate network performance.
+In this chapter, a method to adjust three-phase ESMU powers on a sub-half-hourly basis to support network operation, whilst following a pre-determined half-hourly schedule, is proposed and tested.
+The ESMU schedule is tailored to result in a ``peak-shaving'' and ``valley-filling'' behaviour and uses a realistic ESMU model to meet any operational constraints.
+A set of key network parameters to indicate the performance of the network, were used in a corresponding set of cost functions.
+By adjusting the ESMU's active and reactive powers, each cost could be minimised and therefore network operation is improved.
 
-The results indicate, that when explicitly focusing on the improvement of certain key network parameters, then the derived cost is reduced in every single case.
-Furthermore, for most cost minimisation attempts, different costs were impacted, too (i.e. loss minimisation impacted nearly all other costs).
-Using cumulative cost differences it was shown that a net cost reduction could be achieved, when the proposed schedule adjustment method was implemented on top of the standard schedule execution.
-This fact is also the supported by the resulting probability density analysis, using the two-paired $t$-test.
-Using this test after having preconditioned the data to meet its prerequisites, the initial null hypothesis for this chapter could successfully be disproven.
-Therefore, there is strong evidence that adjustments of ESMU schedules on a sub-half-hourly bases have positive impacts on the distribution network's operation.
+Results indicate that when explicitly focusing on the improvement of certain key network parameters, then the derived cost reduces for every single case.
+Nonetheless, any cost minimisation had an effect on different costs (e.g. loss minimisation positively impacted nearly all other costs).
+Using cumulative cross-cost differences, it is shown that a net cost reduction is achieved, simply by implementing the proposed ESMU power adjustment method top of the normal execution of a half-hourly schedule.
+This fact is also supported by the statistical sensitivity analysis, using the two-paired $t$-test.
+Using this test after having correctly preconditioned the data to meet the test's prerequisites, the initial null hypothesis is successfully be disproven; i.e. the hypothesis that sub-half hourly power adjustments have no impact.
+Hence there is strong evidence that those power adjustments do have a positive impact on the distribution network's operation.
 
 The main limitation of the proposed method is however the battery's half-hourly schedule.
-It dictates the total active power that has to be injected into or absorbed from the distribution network.
+It dictates the active power that has to be injected into or absorbed from the distribution network.
 Also, this schedule inadvertently dictates the remaining overhead in reactive power that may be compensated for on each phase.
-Therefore, the next chapter addresses how the active power schedule may be corrected in real-time.
+Therefore, the next chapter in this thesis presents a method of dynamically adjusting this scheduled power profile in real-time without violating any physical constraints.
