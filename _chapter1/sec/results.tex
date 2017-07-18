@@ -123,18 +123,16 @@ Doing so would focus the search for global minima for each iteration of the sequ
 \subsection{Probability Density Analysis}
 \label{ch1:subsec:probability-density-analysis}
 
-The final part of analysing the results is to statistically determine, whether the cumulative cost differences are indeed significantly different.
-To do so, the probability density functions (PDF) of the  cost differences is analysed using a null hypothesis test.
-However, the underlying data had to be conditioned in order to meet all prerequisites that are necessary to perform a null hypothesis test, such as the standard $t$-test.
+The final part of analysing the results is to determine, whether the cumulative cross-cost differences are statistically significant.
+To do so, the probability density functions (PDF) of the cross-cost differences is analysed using a null hypothesis test.
+The underlying data is conditioned in order to meet all prerequisites that are necessary to perform the null hypothesis test, e.g. the standard $t$-test.
 These prerequisites include stationarity, low auto-correlation and high gaussianity of the underlying time-series.
-The conditioning to meet such these prerequisites had to be carried out without falsifying the data, therefore limiting possible operations to time-series division and linear transformations.
-Details on the exact steps are outside the scope of this chapter, yet have been included in the appendix for completeness.
+The procedure to meet these prerequisites is carried out without falsifying the data, which means that all applied conditioning operations were restricted to time-series division and linear transformation.
+Details on the exact data conditioning steps are outside the scope of this chapter, but for completeness they are included in Appendix \ref{appx-a:ch1:probability-density-analysis}.
 
 \input{_chapter1/tab/t-test-table}
 
-Table \ref{ch1:tab:t-test-table} presents the results from this analysis.
-Here, $p$-values have been tabulated and those cells with a value below $0.05$ are highlighted in blue.
-A similar pattern to that in the previous table seen, where the cumulative cost difference was tabulated.
-Here however, instead of just comparing costs, statistical indications to support the significance of the findings is presented, here.
-In combination with the preceding table, one can determine that e.g. the impact of optimising operation based on maximum voltage deviation has little to no significant impact on improvements in power factor.
-The most critical finding is however, that each cost minimisation did indeed result in significant improvement of corresponding network operation.
+Table \ref{ch1:tab:t-test-table} presents the results from this analysis, where $p$-values have been tabulated and those cells with a value below $0.05$ have been highlighted.
+A similar pattern to that in the previous table can be seen (i.e. Table \ref{ch1:tab:cost-table}).
+In this table however, instead of just comparing cross-cost reductions, statistical indications to support the significance of the findings is presented.
+In combination with the preceding table, one can therefore determine that e.g. the impact of optimising operation based on maximum voltage deviation has little to no significant impact on improvements in power factor, whilst adjusting ESMU powers to improve the network's power factor has the most significant statistical impact on the chosen key network parameters.
