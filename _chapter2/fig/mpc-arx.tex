@@ -28,11 +28,11 @@
 	{
 		\ifthenelse{\n<\N}
 		{
-	    	\draw (1, 1-\l) node [box](z_a\n) {$z^{-1}$};
+	    	\draw (1, 1-\l) node [box](z_a\n) {${t-\Delta t}$};
 	    	\draw (1, -\l) node [](half_a\n) {};
 	    	\draw (1.8, -\l) node [box](a\n) {$a_\n$};
 	    	
-	    	\draw (5, 1-\l) node [box](z_b\n) {$z^{-1}$};
+	    	\draw (5, 1-\l) node [box](z_b\n) {${t-\Delta t}$};
 	    	\draw (5, -\l) node [](half_b\n) {};
 	    	\draw (4.2, -\l) node [box](b\n) {$b_\n$};
 	    	
@@ -81,6 +81,6 @@
     }
 
 \end{tikzpicture}
-\caption{Exogenous auto-regressive model that is used for model predictive control. Here, $z^{-1}$ indicates the time delay by one sample period, i.e. $\Delta t$.}
+\caption{Exogenous auto-regressive model that is used for model predictive control. Here, ${t-\Delta t}$ indicates the time delay by one sample period.}
 \label{ch2:fig:mpc-arx}
 \end{figure}

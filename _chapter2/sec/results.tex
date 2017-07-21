@@ -1,7 +1,7 @@
 \section{Results and discussion}
 \label{ch2:sec:results}
 
-The proposed cases are used to control power flow of the BESS using 24 days of uninterrupted minutely load record.
+The proposed cases are used to control power flow of the BESS using 24 days of uninterrupted sub-half-hourly load record.
 At first, the time-series improvements are presented, where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
 Then, the daily peak reduction across the entire dataset is presented, following by a probability density plot to better compare these findings.
 
@@ -15,10 +15,14 @@ It can be observed, that the unmodified demand profile, i.e. the original case (
 More specifically, the original peak reduction (which is equal to the scheduled BESS power) was 1.8kW (3.9\% reduction), whereas the average peak reduction when adjusting BESS operation was 9.6kW (20.6\% reduction).
 Furthermore, figure \ref{ch2:subfig:day-peak-total} highlights the volatility of the underlying data, which was not included in the half-hourly BESS schedule.
 
-It is worth mentioning, that both the standard AR and the exogenous AR estimation models, that were used in case \textbf{II}, performed very similar and show little to no significant difference in peak reduction performance.
+Interestingly, both the standard AR and the exogenous AR estimation models, that were used in case \textbf{II}, performed very similar and show little to no significant difference in peak reduction performance.
 Equally noteworthy is the fact, that the simplest prediction methods of them all, i.e. the method of ``assuming a power repetition occurs'', like in case \textbf{I}, yields good results, too.
 The amount by which the three cases were able to reduce the daily peak load is also highlighted with the corresponding horizontal dashed lines and dots located at the point of peak load.
-These initial findings show that every single version of dynamic control, i.e. cases \textbf{I}, \textbf{II}, \textbf{III}, reduced peak load, and suggest that the MPC prediction mechanism by itself did play a small role in compensating for demand volatility.
+These initial findings show that every single version of dynamic control reduces peak load further, when compared to the baseline case \textbf{O}.
+This finding is as tabulated in Table \ref{ch2:tab:ts-table}, and suggest that the prediction mechanism by itself did play a small role in compensating for demand volatility.
+
+\input{_chapter2/tab/ts-table}
+
 However, the general magnitude of peak reduction performance can only be assessed if the complete dataset is evaluated.
 Hence, the next section compares the daily peak load reduction from the application of each case.
 

@@ -33,7 +33,7 @@
 	   	node [box, fill=green!20, below of=schedule, xshift=-14.5mm](controller) {Controller}
 		node [box, fill=green!20, below of=controller](mpc) {MCP}
 	    node [box, right of=controller, xshift=15mm](battery) {Battery}
-	    node [box, below of=battery](network) {Network};;
+	    node [box, below of=battery](network) {Network};
 		% Draw lines
 		\draw [->] (network) to (mpc);
 		\draw [->] (mpc) to (controller);
@@ -67,6 +67,6 @@
 	\label{ch2:subfig:proposed-dynamic-control-system}%
 }
 
-\caption{Combination of traditional forecast driven BESS control (Subfig. \ref{ch2:subfig:traditional-forecast-based-system}) and traditional on-line system (Subfig. \ref{ch2:subfig:traditional-on-line-system}) results in the proposed dynamic control system (Subfig. \ref{ch2:subfig:proposed-dynamic-control-system}).}
+\caption{(\ref{ch2:subfig:traditional-forecast-based-system}) Traditional forecast driven BESS control; (\ref{ch2:subfig:traditional-on-line-system}) Traditional on-line system; (\ref{ch2:subfig:proposed-dynamic-control-system}) Proposed dynamic control system}
 \label{ch2:fig:system-diagram}
 \end{figure}

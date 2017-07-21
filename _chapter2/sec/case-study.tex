@@ -9,7 +9,12 @@ All remaining cases, which are explained below, are capture different versions o
 In addition to the two comparison cases, three more different case studies are defined: cases \textbf{I}, \textbf{II} and \textbf{III}.
 This group of three case studies evaluates the impact of the proposed dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts.
 In each of the three cases, a different mechanisms is used to predict the power volatility.
-More specifically, case \textbf{I} implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats, case \textbf{II} uses the aforementioned MPC, and performance of different AR model lengths is compared, and the third and final case, case \textbf{III}, represents an ideal scenario where perfect foresight is assumed and the exact next load can be estimated.
+More specifically:
+\begin{itemize}
+	\item case \textbf{I} implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats,
+	\item case \textbf{II} uses the aforementioned MPC, and performance of different AR model lengths is compared, and
+	\item case \textbf{III},the third and final case, represents an ideal scenario where perfect foresight is assumed and the exact next load can be estimated.
+\end{itemize}
 For clarity, all three cases, numbered \textbf{I} to \textbf{III}, are summarised and tabulated in Table \ref{ch2:tab:cases}.
 
 \input{_chapter2/tab/cases}
