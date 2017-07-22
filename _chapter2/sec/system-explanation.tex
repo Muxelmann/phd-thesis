@@ -3,43 +3,43 @@
 
 \input{_chapter2/fig/system-diagram}
 
-The presented work is part of the \textit{New Thames Valle Vision} (NTVV) research project, and was conducted in collaboration with the British DNO \textit{Scottish and Southern Energy Networks} (SSEN) \cite{NTVV2016}.
-From the findings of this research project, the diagram in Figure \ref{ch2:fig:system-diagram} was generated, showing two well established BESS control approaches and the proposed dynamic control approach.
-This figure includes all constituent systems that were used during the BESS street-level deployment.
-The two traditional systems are off-line and on-line BESS control, which are shown in Figure \ref{ch2:subfig:traditional-forecast-based-system} and \ref{ch2:subfig:traditional-on-line-system}, respectively.
+The presented work is part of the \textit{New Thames Valley Vision} (NTVV) research project, and was conducted in collaboration with the British DNO \textit{Scottish and Southern Energy Networks} (SSEN) \cite{NTVV2016}.
+From the findings of this research project, the diagram in Figure \ref{ch2:fig:system-diagram} was generated, showing two well established ESMU control approaches and the proposed dynamic control approach.
+This figure includes all constituent systems that were used during the ESMU street-level deployment.
+The two traditional systems are off-line and on-line ESMU control, which are shown in Figure \ref{ch2:subfig:traditional-forecast-based-system} and \ref{ch2:subfig:traditional-on-line-system}, respectively.
 Alongside these two control approaches is the proposed dynamic control system, as shown in Figure \ref{ch2:subfig:proposed-dynamic-control-system}.
-This control approach entails the benefits from both the traditional half-hourly forecast driven and the sub-half-hourly BESS control system, and can therefore be seen as the hybrid of the two traditional systems.
+This control approach entails the benefits from both the traditional half-hourly forecast driven and the sub-half-hourly ESMU control system, and can therefore be seen as the hybrid of the two traditional systems.
 Unlike previous work however, this hybrid system does not use Set-Point Control (SPC), which is aided by a MPC to compensate for trends in the load profile.
-Instead, it operates by executing a predetermined half-hourly BESS schedule with sub-half-hourly adjustments.
-Those adjustments are based on MPC-guided instructions, and details about this dynamic control are outlined in Section \ref{ch2:sec:control-of-bess}.
+Instead, it operates by executing a predetermined half-hourly ESMU schedule with sub-half-hourly adjustments.
+Those adjustments are based on MPC-guided instructions, and details about this dynamic control are outlined in Section \ref{ch2:sec:control-of-ESMU}.
 
 In this section however the battery model, which is used in this work, is explained first.
-Also the load data acquisition, forecasting and BESS schedule generation are outlined, where scheduling is performed in accordance to the BESS model's constraints.
+Also the load data acquisition, forecasting and ESMU schedule generation are outlined, where scheduling is performed in accordance to the ESMU model's constraints.
 
-\subsection{BESS model}
+\subsection{ESMU model}
 
 \nomenclature[J]{$C_{bat}$}{Battery capacity in kWh, where $C_{bat} \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$C_{f}$}{Charge factor or ``C-factor'' of the battery, where $C_{f} \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$\mu$}{Self-discharge losses of battery, where $\mu \in (0, 1]$}
-\nomenclature[J]{$P_{bat}$}{BESS power electronic rating, where $P_{bat} \in \mathbb{Z}^{>0}$}
+\nomenclature[J]{$P_{bat}$}{ESMU power electronic rating, where $P_{bat} \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$}
 \nomenclature[J]{$t$}{Discrete sample of time, where $t \in \{0, \Delta t, \dots, T\Delta t\}$}
 \nomenclature[J]{$T$}{Number of samples during the entire simulation, where $T \in \mathbb{Z}_{>0}$}
 \nomenclature[J]{$\Delta t$}{Sub-half-hourly sample period, where $\Delta t \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$SOC(t)$}{Scheduled state of charge at sample $t$}
-\nomenclature[J]{$p(t)$}{BESS power at time $t$, where $(p(t)) = \textbf{p}$ and $p(t) \in \mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}$}{BESS power vector, where $(p(t)) = \textbf{p}$}
+\nomenclature[J]{$p(t)$}{ESMU power at time $t$, where $(p(t)) = \textbf{p}$ and $p(t) \in \mathbb{Z}$}
+\nomenclature[J]{$\textbf{p}$}{ESMU power vector, where $(p(t)) = \textbf{p}$}
 \nomenclature[J]{$p_{bat}(t)$}{Battery power at time $t$, which is derived form $p(t)$, where $(p_{bat}(t)) = \textbf{p}_{bat}$ and $p(t) \in \mathbb{Z}$}
 \nomenclature[J]{$\textbf{p}_{bat}$}{Battery power vector, where $(p_{bat}(t)) = \textbf{p}_{bat}$}
 
-The BESS model is based on the physical system that was deployed by SSEN during the NTVV project.
+The ESMU model is based on the physical system that was deployed by SSEN during the NTVV project.
 Therefore, the model is designed to accurately capture the physical limitations of the device, which includes a limited capacity of the battery pack, $C_{bat}$, and a corresponding charge and discharge factor (i.e. the ``C-factor''), $C_{f}$, to also limit the maximum charge and discharge rate\footnote{Nominal charge and discharge powers are calculated from the ``C-factor'' and the capacity of the battery. For example, a 12.5kWh battery with a C-factor of 1.6(h$^{-1}$) would have a maximum dis/charge rate of 20kW ($=12.5 \cdot 1.6$).}.
-Furthermore, the power electronics unit that regulates the three-phase power flow into and out of the BESS is limited by its power ratings, $P_{bat}$, which must not be exceeded.
-Corresponding conversion losses within the power electronics unit lead to a limited BESS round-trip efficiency, $\eta$, where $\eta \in (0, 1]$.
+Furthermore, the power electronics unit that regulates the three-phase power flow into and out of the ESMU is limited by its power ratings, $P_{bat}$, which must not be exceeded.
+Corresponding conversion losses within the power electronics unit lead to a limited ESMU round-trip efficiency, $\eta$, where $\eta \in (0, 1]$.
 Self-discharge losses inside the battery pack are also included as the ratio $\mu$, where $\mu \in (0, 1]$.
 This ratio expresses how much energy is lost over time, due to the battery's imperfect means of storing energy.
 
-The dynamics of BESS are modelled over discrete time, $t$ where $t \in \mathbb{Z}_{\geq0}$, by simulating the transition from one State of Charge (SOC) to the next.
+The dynamics of ESMU are modelled over discrete time, $t$ where $t \in \mathbb{Z}_{\geq0}$, by simulating the transition from one State of Charge (SOC) to the next.
 A finite sampling period between each simulation's time-step is defined and notated as $\Delta t$, and this sample period represents the highest temporal resolution used in the context of this work, i.e. sub-half-hourly resolution.
 Change in State of Charge, i.e. $\delta SOC(t)$, can then be defined as the difference between the current State of Charge, $SOC(t)$, and the subsequent State of Charge, $SOC(t+\Delta t)$.
 When combining this definition with the self-discharge loss, the following SOC equation can be formulated:
@@ -47,15 +47,15 @@ When combining this definition with the self-discharge loss, the following SOC e
 \input{_chapter2/equ/soc-equation}
 
 Hence, $\delta SOC(t)$ is the result of charging or discharging the battery by consuming or releasing energy.
-The amount of energy that flows into or out of the BESS is equal to the active power, $p(t)$, that is applied over the sampling period $\Delta t$.
+The amount of energy that flows into or out of the ESMU is equal to the active power, $p(t)$, that is applied over the sampling period $\Delta t$.
 Yet $\delta SOC(t)$ is not equal to this consumed energy, due to the imperfect round-trip efficiency.
-In order to act like a load in the LV network, positive power is associated to charging and negative power is associated to discharging the BESS.
-Therefore, the sign of the BESS power indicates the direction of the flowing energy, and based upon this direction of energy flow, the true amount of stored charge can be calculated by using the aforementioned round-trip efficiency, $\mu$.
-In order to correctly inject or absorb power into or from the network, BESS power is given and battery power, $p_{bat}(t)$, is derived and defined as follows:
+In order to act like a load in the LV network, positive power is associated to charging and negative power is associated to discharging the ESMU.
+Therefore, the sign of the ESMU power indicates the direction of the flowing energy, and based upon this direction of energy flow, the true amount of stored charge can be calculated by using the aforementioned round-trip efficiency, $\mu$.
+In order to correctly inject or absorb power into or from the network, ESMU power is given and battery power, $p_{bat}(t)$, is derived and defined as follows:
 
 \input{_chapter2/equ/battery-power}
 
-As power electronics approach ideal performance, $\mu$ tends towards one, however a value of $0.95$ is chosen for the model to coincide with the technical specifications of the deployed BESS units.
+As power electronics approach ideal performance, $\mu$ tends towards one, however a value of $0.95$ is chosen for the model to coincide with the technical specifications of the deployed ESMU units.
 Knowing both the power at street- and at the battery-level, the amount of energy injected into the battery during $\Delta t$ can be determined:
 
 \input{_chapter2/equ/soc-equation-from-battery-power}
@@ -67,32 +67,32 @@ Combining Equation \ref{ch2:equ:soc-equation}, \ref{ch2:equ:battery-power} and \
 For the purpose of the simulation, it is assumed that the battery is initially charged up to 50\%.
 Hence, the initial conditions of this model are defined as $SOC(0) = 0.5$, which makes the model valid for a time span of $t \geq 0$.
 
-\subsection{Load data and BESS scheduling}
+\subsection{Load data and ESMU scheduling}
 
 \nomenclature[J]{$k(t)$}{Sampling time conversion function, linking sub-half hourly samples $t$ at sampling period $\Delta r$ to half-hourly period $30 \Delta t$}
 
-Having established the BESS model, the procedure to generate a corresponding schedule is explained in this section.
+Having established the ESMU model, the procedure to generate a corresponding schedule is explained in this section.
 Following common scheduling practice and for the reasons mentioned in the literature review, this schedule is generated at half-hourly temporal resolution.
-Since BESS operates at a sub-half-hourly period, i.e. with a sampling period of $\Delta t$, the schedule's period is denoted as multiple of that, e.g. $30\Delta t$ when $\Delta t$ is defined as one minute.
+Since ESMU operates at a sub-half-hourly period, i.e. with a sampling period of $\Delta t$, the schedule's period is denoted as multiple of that, e.g. $30\Delta t$ when $\Delta t$ is defined as one minute.
 These two sampling periods introduce the requirement of having to synchronise the two, i.e. half-hourly and sub-half-hourly periods.
 For clarity, a conversion function, $k(t)$, is therefore defined that links the sub-half-hourly timing, $t$, to its corresponding half-hourly sample:
 
 \input{_chapter2/equ/sample-conversion-function}
 
-Having established a means of synchronising the two sampling periods, the wanted behaviour of the BESS schedule is defined next.
+Having established a means of synchronising the two sampling periods, the wanted behaviour of the ESMU schedule is defined next.
 For simplicity linear forwarding was chosen, which means that the power assigned at e.g. $t=1$ remains constant over the scheduling period of $30\Delta t$, until $t=31$.
-With this assumption, the BESS's SOC can be calculated for each $t$ despite the scheduled power profile only having been defined for every 30$^\text{th}$ $t$.
-Furthermore, with this second assumption, not only every sub-half-hourly BESS power can be derived from its half-hourly schedule, but it also enables the calculation of every SOC, i.e. $SOC(t)$ is well defined.
+With this assumption, the ESMU's SOC can be calculated for each $t$ despite the scheduled power profile only having been defined for every 30$^\text{th}$ $t$.
+Furthermore, with this second assumption, not only every sub-half-hourly ESMU power can be derived from its half-hourly schedule, but it also enables the calculation of every SOC, i.e. $SOC(t)$ is well defined.
 
-\nomenclature[J]{$p_\text{for}(k(t))$}{Half-hourly load forecast that is used for computing the BESS schedule, where $p_\text{for}(k(t))\in\mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}_\text{for}$}{Half-hourly load forecast vector that is used for computing the BESS schedule, where $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$}
+\nomenclature[J]{$p_\text{for}(k(t))$}{Half-hourly load forecast that is used for computing the ESMU schedule, where $p_\text{for}(k(t))\in\mathbb{Z}$}
+\nomenclature[J]{$\textbf{p}_\text{for}$}{Half-hourly load forecast vector that is used for computing the ESMU schedule, where $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$}
 \nomenclature[J]{$p_\text{sch}(k(t))$}{Half-hourly schedule that is generated from the load forecast, where $p_\text{sch}(k(t))\in\mathbb{Z}$}
 \nomenclature[J]{$\textbf{p}_\text{sch}$}{Half-hourly schedule vector that is generated from the load forecast, where $(p_\text{sch}(k(t))) = \textbf{p}_\text{sch}$}
 
-For the generation of the BESS schedule a load forecast, $\textbf{p}_\text{for}$, was required; here $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$.
-This forecast, similar to the BESS schedule, is also at half-hourly temporal resolution and is provided by SSEN as part of the NTVV research project.
-The task at hand is to find a half-hourly BESS schedule, $\textbf{p}_\text{sch}$, where $(p_\text{sch}(k(t))) = \textbf{p}_\text{sch}$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
-In order to generate this optimised BESS schedule, a metric quantifying improvements had to be defined first.
+For the generation of the ESMU schedule a load forecast, $\textbf{p}_\text{for}$, was required; here $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$.
+This forecast, similar to the ESMU schedule, is also at half-hourly temporal resolution and is provided by SSEN as part of the NTVV research project.
+The task at hand is to find a half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, where $(p_\text{sch}(k(t))) = \textbf{p}_\text{sch}$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
+In order to generate this optimised ESMU schedule, a metric quantifying improvements had to be defined first.
 The only remaining problem is to find a half-hourly schedule, $\textbf{p}_\text{sch}$, which is done through by minimising several cost-functions.
 
 In this work, three cost-functions are used that quantify the network improvements, yielded by $\textbf{p}_\text{sch}$.
@@ -130,12 +130,12 @@ The final cost therefore addresses the interim power volatility by aiming to min
 \input{_chapter2/equ/cost-tra}
 
 Minimising this final cost has a smoothening effect on the improved half-hourly power profile, since a profile with no transients is by definition a flat smooth profile.
-All three cost functions are summaries into a single global cost function, where only the half-hourly BESS schedule, $\textbf{p}_\text{sch}$, is used as an input and the forecast, $\textbf{p}_\text{for}$, is kept as constant:
+All three cost functions are summaries into a single global cost function, where only the half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, is used as an input and the forecast, $\textbf{p}_\text{for}$, is kept as constant:
 
 \nomenclature[J]{$\zeta(\textbf{p})$}{Global cost for a given power profile $\textbf{p}$}
 \input{_chapter2/equ/cost-global}
 
-Subject to BESS constraints, this global cost function is minimised using a standard solver (i.e. Sequential Quadratic Programming - SQP) to yield a BESS schedule that is optimised for the given forecast:
+Subject to ESMU constraints, this global cost function is minimised using a standard solver (i.e. Sequential Quadratic Programming - SQP) to yield a ESMU schedule that is optimised for the given forecast:
 
 \input{_chapter2/equ/cost-minimisation}
 
@@ -145,12 +145,12 @@ For the work at hand, a value of 0.1 was chosen.
 
 \input{_chapter2/fig/cost-sample}
 
-As repetitively mentioned, the BESS that results from this scheduling mechanism is at half-hourly resolution and has therefore limited impact on sub-half-hourly load variation.
-To visualise this limitation, a singe day's BESS schedule was generated from its corresponding forecast as defined in Equation \ref{ch2:equ:cost-minimisation}, and plotted in Figure \ref{ch2:fig:cost-sample}.
-In this simple comparison, the noticeable discrepancy between the half-hourly BESS schedule and the actual, sub-half-hourly demand can be observed.
+As repetitively mentioned, the ESMU that results from this scheduling mechanism is at half-hourly resolution and has therefore limited impact on sub-half-hourly load variation.
+To visualise this limitation, a singe day's ESMU schedule was generated from its corresponding forecast as defined in Equation \ref{ch2:equ:cost-minimisation}, and plotted in Figure \ref{ch2:fig:cost-sample}.
+In this simple comparison, the noticeable discrepancy between the half-hourly ESMU schedule and the actual, sub-half-hourly demand can be observed.
 Furthermore, noticeable disparity in peak duration, magnitude and volatility can be noted.
-This discrepancy and disparity emphasise the incompatibility issues between half-hourly BESS schedules and the actual sub-half-hourly load.
-As previously discussed, benefits of BESS were intended to mitigate sub-half-hourly load volatility, yet this cannot be achieved when solely applying half-hourly BESS schedules in an off-line manner.
+This discrepancy and disparity emphasise the incompatibility issues between half-hourly ESMU schedules and the actual sub-half-hourly load.
+As previously discussed, benefits of ESMU were intended to mitigate sub-half-hourly load volatility, yet this cannot be achieved when solely applying half-hourly ESMU schedules in an off-line manner.
 Therefore, in the next section, the control strategy to add an on-line component is explained.
 
 

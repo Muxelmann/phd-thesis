@@ -24,48 +24,61 @@
 %Whilst network reinforcement would certainly address immediate issues of current network capacity constraints, it is also the more expensive and disruptive option.
 %More specifically, customer will need to deal with outages during periods of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
 %Therefore, alternatives to defer or avoid network reinforcements have been sought and assessed \cite{Harrison2007, Zangs2016a, VanderKlauw2016d, Greenwood2017}.
-%Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (BESS) \cite{Wade2010}.
-%BESS has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
+%Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (ESMU) \cite{Wade2010}.
+%ESMU has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
 %
-%Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
+%Installing ESMU on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
 %Regulating voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015}, or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
-%Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control can be split into two complementing yet unmarried approaches:
+%Whilst the questions regarding locating and scaling of ESMU have mostly been addressed, ESMU control can be split into two complementing yet unmarried approaches:
 %\begin{enumerate*}
-%	\item ``off-line'' control, using load forecasts and BESS schedules; and
+%	\item ``off-line'' control, using load forecasts and ESMU schedules; and
 %	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods.
 %\end{enumerate*}
 %
-%Off-line control uses historic data to predict future load patterns, which are used to schedule BESS operation accordingly.
-%Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had a relatively high forecast error due to the inherent difficulty of predicting future loads, which ultimately limits the ability of given BESS schedule to i.e. reduce peaks.
-%This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS, or it frequently re-evaluates BESS schedules, as done by Wang et.al \cite{Wang2014a}, where BESS control is adjusted after each decision epoch.
-%Despite load forecasts being imperfect, forecasts remain a key component for scheduling BESS thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
+%Off-line control uses historic data to predict future load patterns, which are used to schedule ESMU operation accordingly.
+%Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate ESMU schedules, had a relatively high forecast error due to the inherent difficulty of predicting future loads, which ultimately limits the ability of given ESMU schedule to i.e. reduce peaks.
+%This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing ESMU, or it frequently re-evaluates ESMU schedules, as done by Wang et.al \cite{Wang2014a}, where ESMU control is adjusted after each decision epoch.
+%Despite load forecasts being imperfect, forecasts remain a key component for scheduling ESMU thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
 %Furthermore, most day-ahead forecast only forecast at a temporal resolution down to half-hourly periods.
-%As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating BESS operating schedules.
+%As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating ESMU operating schedules.
 %Nonetheless, sub-half-hourly load volatility imposes the biggest stress on the network and cannot be addressed when using this kind of half-hourly forecast, which is why on-line control has been considered as an alternative to off-line control.
 %
 %One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
-%Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed.
+%Since this kind of control runs the risk of reaching shortage or surplus of ESMU stored energy, modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed.
 %However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to current network demand and does not respond to general trends or upcoming load events.
 %To address these shortcomings SPC has been extended, using short-term load predictions by implementing Model Predictive Control (MPC).
 %Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
 %Implementing increasingly complex MPC to support on-line control is therefore a strong research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
 
-Previously, the battery's 
+\nomenclature[G]{SPC}{Set-Point Control}
+\nomenclature[G]{MPC}{Mode-Predict Control}
+\nomenclature[G]{PID}{Proportional Integrating Derivative (control)}
 
-In this paper a sub-half-hourly BESS schedule adjustment method is proposed that unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
-Unlike previous work in the field, the proposed approach therefore reverses the control paradigm, and instead of supporting on-line control with real-time load forecasts, forecast driven schedules are adjusted using on-line measurements.
-This is achieved by first scheduling BESS operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour, and modifying this schedule using MPC, which comprises of a lightweight AR model to assure real-time deployability.
-These two systems are linked using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness, regardless of forecast erroneousness.
-All BESS schedules are generated under the constraints of a realistic BESS model, and all demand measurements and corresponding forecasts used in this work are based on real data, provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
+
+In the preceding chapter an Energy Storage Management Unit (ESMU) is used to improve network operation.
+This improvement is achieved by optimally adjusting the device's scheduled three-phase powers.
+Any improvement is indicated by reduction of cost functions, which are tied to key network parameters.
+By focusing on different costs and repetitively optimising and simulating the ESMU powers, shows the extend by which the device can improve the network's operation.
+However, this improvement is limited by the constraint of having to obey the underlying half-hourly ESMU schedule, despite applying adjustments at a sub-half-hourly level.
+
+In the following chapter, this limiting constraint is lifted, and the corresponding sub-half-hourly ESMU schedule adjustment method is proposed.
+This method unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
+Unlike previous work in the field, the proposed approach reverses the traditional control paradigm to compensate for schedule inaccuracies.
+To reiterate, these traditional approaches implemented on-line control mechanisms, e.g. Set-Point Control (SPC), in combination with prediction models in order to adjust and prepare ESMU for future load trends.
+In this presented work however, instead of supporting on-line control with real-time load predictions, forecast driven schedules are adjusted using on-line measurements.
+This is achieved by first scheduling ESMU operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter \ref{ch1}, and then modifying this schedule using MPC.
+In this case, MPC is comprised of of a lightweight AR model to assure real-time deployability.
+These two control signals are unified using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness, regardless of the forecast's erroneousness.
+All ESMU schedules are generated under the constraints of a realistic ESMU model, and all demand measurements and corresponding forecasts used in this work are based on real data, provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
 Results are generated from this realistic (i.e. provided) network load with corresponding load forecasts, and cases are compared against the original and a baseline load case (i.e. traditional off-line control).
 It is shown that, even under these imperfect forecast conditions, the proposed schedule adjustment method can successfully reduce sub-half-hourly peaks.
 In fact, whilst the probability distribution of the baseline case sat around an average of 1.78kW peak reduction, the proposed method increased the reduction to 5.24kW.
 Since this proposed control method is the natural extension of our previous work in \cite{Zangs2016}, it is hereon referred to as ``dynamic control''.
 
-The paper is organised as follows:
-In Section \ref{ch2:sec:system-explanation} of this paper, all constituent system components including BESS model, forecast acquisition and BESS schedule generation are explained.
-%Cost functions to generate optimised half-hourly BESS schedules are formulated, containing well established parameters like the Peak-to-Average Ratio (PAR) or ``Min-Max'' difference, which have been widely used in DER scheduling and operation \cite{Liu2014, Deng2015, Bayram2015, Zangs2016a}.
-Section \ref{ch2:sec:control-of-bess} presents the dynamic control, including the dual PID setup and MPC.
+The chapter is organised as follows:
+In Section \ref{ch2:sec:system-explanation}, all constituent system components including ESMU model, forecast acquisition and ESMU schedule generation are explained.
+%Cost functions to generate optimised half-hourly ESMU schedules are formulated, containing well established parameters like the Peak-to-Average Ratio (PAR) or ``Min-Max'' difference, which have been widely used in DER scheduling and operation \cite{Liu2014, Deng2015, Bayram2015, Zangs2016a}.
+Section \ref{ch2:sec:control-of-ESMU} presents the dynamic control, including the dual PID setup and MPC.
 Section \ref{ch2:sec:case-studies} outlines the different case studies that were used to compare the performance of the dynamic control.
 In Section \ref{ch2:sec:results}, all results from these case studies are presented and discussed.
 Finally, conclusion and the future work are described in Section \ref{ch2:sec:summary}.

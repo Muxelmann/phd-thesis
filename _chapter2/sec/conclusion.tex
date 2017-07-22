@@ -1,22 +1,22 @@
 \section{Summary}
 \label{ch2:sec:summary}
 
-In this paper a dynamic control method is proposed that adjusts half-hourly Battery Energy Storage System (BESS) schedules on a sub-half-hourly basis in order to minimise otherwise neglected sub-half-hourly power spikes without risking a shortage or surplus of BESS stored energy.
-Reason behind this were, that traditional load forecasts usually lack in accuracy and temporal resolution, making it hard to schedule BESS in an optimal manner.
-Recent research implements derivatives of Set-Point Control (SPC), which is typically guided by a short-term Model Predictive Control (MPC) mechanisms to address both load volatility and to prepare BESS for upcoming load spikes.
-However, those approaches do not utilise the information, quality and operational certainty that would be provided by load forecasts and BESS schedules.
-The proposed dynamic control addresses this shortcoming by approaching the problem from the opposite direction: i.e. it adjusts a predetermined BESS schedule based on two linked PID compensators.
+In this chapter a dynamic control method is proposed that adjusts half-hourly Energy Storage Management Unit (ESMU) schedules on a sub-half-hourly basis in order to minimise otherwise neglected sub-half-hourly power spikes without risking a shortage or surplus of ESMU stored energy.
+Reason behind this were, that traditional load forecasts usually lack in accuracy and temporal resolution, making it hard to schedule ESMU in an optimal manner.
+Recent research implements derivatives of Set-Point Control (SPC), which is typically guided by a short-term Model Predictive Control (MPC) mechanisms to address both load volatility and to prepare ESMU for upcoming load spikes.
+However, those approaches do not utilise the information, quality and operational certainty that would be provided by load forecasts and ESMU schedules.
+The proposed dynamic control addresses this shortcoming by approaching the problem from the opposite direction: i.e. it adjusts a predetermined ESMU schedule based on two linked PID compensators.
 
-The first compensator was designed to minimise the deviation form the prescheduled BESS's State Of Charge (SOC) profile, and the second compensator was designed to minimise the load volatility.
+The first compensator was designed to minimise the deviation form the prescheduled ESMU's State Of Charge (SOC) profile, and the second compensator was designed to minimise the load volatility.
 For the latter compensator to operate however, a short-term predictive model was used to estimate the load power in the immediate future, i.e. the next time step.
 Different light weight and well established mechanisms were used to implement this predictive model in order to assure real-time operation and robustness of the system.
 
 Simulating these different models to guide schedule adjustments yielded positive results for each test case that used dynamic control.
-In fact, dynamic control outperformed the baseline case in nearly every case, where the baseline case is the scenario of applying a traditional half-hourly BESS schedule in an off-line manner.
+In fact, dynamic control outperformed the baseline case in nearly every case, where the baseline case is the scenario of applying a traditional half-hourly ESMU schedule in an off-line manner.
 Whilst this baseline operation did also increase peak load under severe forecast errors, the best performing dynamic control case was able to reduce the probability of increasing peak loads by a factor of 3.12.
-It is worth mentioning, that this improvement was yielded despite the fact that all cases used the same underlying and imperfect BESS schedule.
+It is worth mentioning, that this improvement was yielded despite the fact that all cases used the same underlying and imperfect ESMU schedule.
 
-The work presented here, demonstrates how imperfect BESS schedules may still be used to yield more beneficial impacts.
-With future deployment of BESS throughout Low-Voltage power distribution networks, advanced BESS control is necessary to assure their impact is in accordance to volatile demand.
+The work presented here, demonstrates how imperfect ESMU schedules may still be used to yield more beneficial impacts.
+With future deployment of ESMU throughout Low-Voltage power distribution networks, advanced ESMU control is necessary to assure their impact is in accordance to volatile demand.
 Control, like the one proposed here, can take into account the complete range of demand volatility and, when implemented correctly, defers or avoid network reinforcement altogether.
 This is particularly true since ongoing electrification of UK heat and transport sectors change consumers' electricity consumption and increase stress on power distribution networks.

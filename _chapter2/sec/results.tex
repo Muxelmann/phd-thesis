@@ -1,7 +1,7 @@
 \section{Results and discussion}
 \label{ch2:sec:results}
 
-The proposed cases are used to control power flow of the BESS using 24 days of uninterrupted sub-half-hourly load record.
+The proposed cases are used to control power flow of the ESMU using 24 days of uninterrupted sub-half-hourly load record.
 At first, the time-series improvements are presented, where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
 Then, the daily peak reduction across the entire dataset is presented, following by a probability density plot to better compare these findings.
 
@@ -9,11 +9,11 @@ Then, the daily peak reduction across the entire dataset is presented, following
 
 \input{_chapter2/fig/day-peak}
 
-A single day was plotted in Figure \ref{ch2:fig:day-peak}, which shows the time-series improvements, yielded by the BESS operation.
-For visual clarity, Figure \ref{ch2:subfig:day-peak-total} and \ref{ch2:subfig:day-peak-zoomed} show, respectively, the entire day and a zoomed in version of the BESS impact.
-It can be observed, that the unmodified demand profile, i.e. the original case (case \textbf{O}), and the case where scheduled half-hourly BESS operation is applied, i.e. the  baseline case (\textbf{B}), result in noticeably higher load peaks than any of the three adjustment cases.
-More specifically, the original peak reduction (which is equal to the scheduled BESS power) was 1.8kW (3.9\% reduction), whereas the average peak reduction when adjusting BESS operation was 9.6kW (20.6\% reduction).
-Furthermore, figure \ref{ch2:subfig:day-peak-total} highlights the volatility of the underlying data, which was not included in the half-hourly BESS schedule.
+A single day was plotted in Figure \ref{ch2:fig:day-peak}, which shows the time-series improvements, yielded by the ESMU operation.
+For visual clarity, Figure \ref{ch2:subfig:day-peak-total} and \ref{ch2:subfig:day-peak-zoomed} show, respectively, the entire day and a zoomed in version of the ESMU impact.
+It can be observed, that the unmodified demand profile, i.e. the original case (case \textbf{O}), and the case where scheduled half-hourly ESMU operation is applied, i.e. the  baseline case (\textbf{B}), result in noticeably higher load peaks than any of the three adjustment cases.
+More specifically, the original peak reduction (which is equal to the scheduled ESMU power) was 1.8kW (3.9\% reduction), whereas the average peak reduction when adjusting ESMU operation was 9.6kW (20.6\% reduction).
+Furthermore, figure \ref{ch2:subfig:day-peak-total} highlights the volatility of the underlying data, which was not included in the half-hourly ESMU schedule.
 
 Interestingly, both the standard AR and the exogenous AR estimation models, that were used in case \textbf{II}, performed very similar and show little to no significant difference in peak reduction performance.
 Equally noteworthy is the fact, that the simplest prediction methods of them all, i.e. the method of ``assuming a power repetition occurs'', like in case \textbf{I}, yields good results, too.
@@ -33,8 +33,8 @@ Hence, the next section compares the daily peak load reduction from the applicat
 In Figure \ref{ch2:fig:daily-peaks}, every day's power peak was extracted, similar to the procedure used for Figure \ref{ch2:fig:day-peak}.
 Here, however, both the actual power peaks as well as the relative power improvements, i.e. in comparison to the original power peak, were plotted.
 This was done in Figure \ref{ch2:subfig:daily-peaks} and Figure \ref{ch2:subfig:daily-peaks-percentage}, respectively.
-From both plots, it can be seen that controlling BESS using the proposed dynamic control lowers peak load, especially when the underlying BESS schedule originally worsened and increased peak load.
-Such behaviour can be observed for e.g. days six, where the half-hourly BESS schedule worsened the actual load peak, yet BESS schedule adjustment mechanisms compensated for this error.
+From both plots, it can be seen that controlling ESMU using the proposed dynamic control lowers peak load, especially when the underlying ESMU schedule originally worsened and increased peak load.
+Such behaviour can be observed for e.g. days six, where the half-hourly ESMU schedule worsened the actual load peak, yet ESMU schedule adjustment mechanisms compensated for this error.
 Nonetheless, having a larger set of peak reduction results to compare the dynamic control's performance against the baseline cases, sensitivity to the underlying power prediction approaches become apparent, too.
 For example, case \textbf{I}, using the simplest prediction mechanism, underperformed on day 23 and worsened the peak power.
 In order to get a better idea of the general peak reduction performance when applying case \textbf{I}, \textbf{II} or \textbf{III}, the Probability Density Function was estimated and plotted in the following section.
@@ -47,13 +47,13 @@ Using standard kernel density estimation, the PDF was plotted in Figure \ref{ch2
 The data used to generate these plots is the same data shown in Figure \ref{ch2:fig:daily-peaks}.
 Now, the probability of a peak power occurring is linked to the magnitude of this peak.
 It can be seen that case \textbf{O} has the highest probability around a load peak of 45kW, whilst case \textbf{B} has its highest probability around a load peak of 42kW.
-This indicates that even the pure half-hourly BESS schedule had a positive impact on reducing load peaks.
+This indicates that even the pure half-hourly ESMU schedule had a positive impact on reducing load peaks.
 When adjusting the schedule based with the use of the proposed dynamic control, this peak was lowered further.
 
 \input{_chapter2/fig/peak-diff-pdf}
 
 Figure \ref{ch2:fig:peak-diff-pdf} takes this analysis even further, where only the difference in peak load to the original case, case \textbf{O}, was plotted.
-Now, BESS impact can easily be seen, since a high probability of positive peak load reduction indicates a beneficial impact of the BESS operation, whereas a negative peak load reduction (i.e. increased peak load) indicates a worsening performance.
+Now, ESMU impact can easily be seen, since a high probability of positive peak load reduction indicates a beneficial impact of the ESMU operation, whereas a negative peak load reduction (i.e. increased peak load) indicates a worsening performance.
 As expected, case \textbf{O} has a slight positive impact on the system, whilst a cumulative probability of more than 25\% (i.e. area under curve of case \textbf{O} to the left of 0kW) suggests that the peak might be worsened one in four times.
 Using dynamic control with its simplest prediction method however, i.e. case \textbf{I}, lowered this probability to only 11.8\%, with the AR model in case \textbf{II} performing best at only 8\%.
 

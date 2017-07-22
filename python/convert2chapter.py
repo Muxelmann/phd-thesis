@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python
 import os
 
 
@@ -16,6 +16,7 @@ def convert_tex(p):
 
 		content = content.replace('[width=\linewidth]', '')
 		content = content.replace('\\begin{table}[htb]\\centering', '\\begin{table}\\centering')
+		content = content.replace('\\nomenclature{', '\\nomenclature[J]{')
 
 
 		content = content.replace('\\begin{figure}[htb]\\centering', '\\begin{figure}\\centering')
