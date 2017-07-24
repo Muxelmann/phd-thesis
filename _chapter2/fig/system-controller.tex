@@ -11,12 +11,12 @@
 	% Define nodes
     \path
     (0,0)
-    node [box, minimum width=5cm](network) {Network}
-    node [box, below of=network, yshift=5mm](battery) {Battery}
+    node [box, minimum width=5cm, yshift=0mm](network) {Network}
+    node [box, below of=network, yshift=0mm](battery) {Battery}
     node [box, fill=green!20, below left of=battery, yshift=-20mm, xshift=-10mm](pid_soc) {PID$_1$}
     node [box, fill=green!20, below right of=battery, yshift=-20mm, xshift=10mm](pid_p) {PID$_2$}
-    node [box, fill=blue!20, below of=pid_soc, yshift=-10mm](schedule) {Schedule}
-    node [box, fill=green!20, below of=pid_p, yshift=-10mm](mpc) {MPC};
+    node [box, fill=blue!20, below of=pid_soc, yshift=-15mm](schedule) {Schedule}
+    node [box, fill=green!20, below of=pid_p, yshift=-15mm](mpc) {MPC};
 	% Draw lines
 	\draw [->] (battery) to (network);
 	\draw [->, bend right] (pid_soc) to node[left, pos=0.4, xshift=-1mm] {$p_{1}(t+\Delta t)$} (battery);
@@ -27,9 +27,9 @@
 	\draw [->] (mpc) to node[pos=0.25] {$\hat{p}_\text{net}(t+\Delta t)$} (pid_p);
 	\draw [->, bend left] (network.0) to [out=80, in=100] node[right, pos=0.1, xshift=2mm, yshift=1mm] {$p_\text{net}(t)$} (mpc.0);
 	
-	\draw (-4, -6.25) node [right] {Controller};
+	\draw (-5, -6.75) node [right] {Controller};
 	
-	\draw [dashed] (-4, -3) -- (4, -3) -- (4, -6) -- (-4, -6) -- (-4, -3);
+	\draw [dashed] (-5, -3.5) -- (5, -3.5) -- (5, -6.5) -- (-5, -6.5) -- (-5, -3.5);
 %	\draw [->, bend right] (schedule.180) to (controller.90);
 %	\draw [->] (network) to (mpc);
 %	\draw [->] (mpc) to (controller);

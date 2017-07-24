@@ -7,39 +7,39 @@
 	minimum height=2em,%
 	minimum width=2em,%
 ]
-\begin{tikzpicture}[node distance=2cm, shorten >= 1pt, >=stealth', auto, scale=0.9, transform shape]
+\begin{tikzpicture}[node distance=2cm, shorten >= 1pt, >=stealth', auto, scale=1.0, transform shape]
 	\pgfmathsetmacro\N{4}
 
 	% Draw input nodes
     \draw
     (0, 0) node [](input) {$p(t)$}
-    (1, 0) node [](input_1) {};
+    (2, 0) node [](input_1) {};
     % Draw output nodes
     \draw
-    (6.5, 0) node [](output) {$\hat{p}(t+\Delta t)$}
-    (5, 0) node [](output_1) {};
+    (9.5, 0) node [](output) {$\hat{p}(t+\Delta t)$}
+    (7, 0) node [](output_1) {};
     % Draw main adder node
-    \draw (3, 0) node [circle, draw](adder_main) {+};
+    \draw (4.5, 0) node [circle, draw](adder_main) {+};
     % Link input, adder and output
     \draw [->] (input) to (adder_main);
     \draw [->] (adder_main) to (output);
     % Draw AR model nodes
-    \foreach[count=\i, evaluate=\i as \l using int(\i*2)] \n in {1,2,...,\N}
+    \foreach[count=\i, evaluate=\i as \l using int(\i*3)] \n in {1,2,...,\N}
 	{
 		\ifthenelse{\n<\N}
 		{
-	    	\draw (1, 1-\l) node [box](z_a\n) {${t-\Delta t}$};
-	    	\draw (1, -\l) node [](half_a\n) {};
-	    	\draw (1.8, -\l) node [box](a\n) {$a_\n$};
+	    	\draw (2, 1.5-\l) node [box](z_a\n) {${t-\Delta t}$};
+	    	\draw (2, -\l) node [](half_a\n) {};
+	    	\draw (2.8, -\l) node [box](a\n) {$a_\n$};
 	    	
-	    	\draw (5, 1-\l) node [box](z_b\n) {${t-\Delta t}$};
-	    	\draw (5, -\l) node [](half_b\n) {};
-	    	\draw (4.2, -\l) node [box](b\n) {$b_\n$};
+	    	\draw (7, 1.5-\l) node [box](z_b\n) {${t-\Delta t}$};
+	    	\draw (7, -\l) node [](half_b\n) {};
+	    	\draw (6.2, -\l) node [box](b\n) {$b_\n$};
 	    	
-	    	\draw (3, -\l) node [circle, draw](adder_\n) {+};
+	    	\draw (4.5, -\l) node [circle, draw](adder_\n) {+};
     	}{
-	    	\draw (1, 1.95-\l) node [](z_a\n) {};
-	    	\draw (5, 1.95-\l) node [](z_b\n) {};
+	    	\draw (2, 2.95-\l) node [](z_a\n) {};
+	    	\draw (7, 2.95-\l) node [](z_b\n) {};
     	}
     	\ifthenelse{\n=1}
     	{
