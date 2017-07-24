@@ -4,6 +4,7 @@
 The proposed cases are used to control power flow of the ESMU using 24 days of uninterrupted sub-half-hourly load record.
 At first, the time-series improvements are presented, where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
 Then, the daily peak reduction across the entire dataset is presented, following by a probability density plot to better compare these findings.
+In the end, the ARX model's impact on the peak reduction performance is assessed.
 
 \subsection{Time-series analysis}
 
@@ -60,6 +61,8 @@ Using dynamic control with its simplest prediction method however, i.e. case \te
 Beside the reduced probability of missing or worsening peak load, the probability of having a larger positive impact is also increased when using the dynamic control.
 Whilst the probability of reducing load peaks by 1.7kW or more was at 50\% for case \textbf{B}, case \textbf{I} increased this probability to 77.7\%, case \textbf{II} to 84.5 5\% (AR) / 83.1\% (ARX), and case \textbf{III} to 79.8\%.
 When comparing the three dynamic control cases with each other, Figure \ref{ch2:fig:peak-diff-pdf} indicates that case \textbf{II} using an AR model for MPC performed best at reducing peak loads.
+
+\subsection{Impact of varying ARX model length}
 
 
 

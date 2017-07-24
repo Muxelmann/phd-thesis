@@ -57,9 +57,9 @@
 
 In the preceding chapter an Energy Storage Management Unit (ESMU) is used to improve network operation.
 This improvement is achieved by optimally adjusting the device's scheduled three-phase powers.
-Any improvement is indicated by reduction of cost functions, which are tied to key network parameters.
-By focusing on different costs and repetitively optimising and simulating the ESMU powers, shows the extend by which the device can improve the network's operation.
-However, this improvement is limited by the constraint of having to obey the underlying half-hourly ESMU schedule, despite applying adjustments at a sub-half-hourly level.
+Any improvement is indicated by a cost reduction, where the underlying cost functions are tied to changes in key network parameters.
+The extend to which ESMU is able to improve network operation is then shown by focusing on the minimisation of different cost functions and repetitively optimising and simulating the distribution network.
+However, this network improvement is limited by the constraint of having to obey the underlying half-hourly ESMU schedule, despite applying adjustments at a sub-half-hourly level.
 
 In the following chapter, this limiting constraint is lifted, and the corresponding sub-half-hourly ESMU schedule adjustment method is proposed.
 This method unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
@@ -78,7 +78,7 @@ Since this proposed control method is the natural extension of our previous work
 The chapter is organised as follows:
 In Section \ref{ch2:sec:system-explanation}, all constituent system components including ESMU model, forecast acquisition and ESMU schedule generation are explained.
 %Cost functions to generate optimised half-hourly ESMU schedules are formulated, containing well established parameters like the Peak-to-Average Ratio (PAR) or ``Min-Max'' difference, which have been widely used in DER scheduling and operation \cite{Liu2014, Deng2015, Bayram2015, Zangs2016a}.
-Section \ref{ch2:sec:control-of-ESMU} presents the dynamic control, including the dual PID setup and MPC.
+Section \ref{ch2:sec:control-of-esmu} presents the dynamic control, including the dual PID setup and MPC.
 Section \ref{ch2:sec:case-studies} outlines the different case studies that were used to compare the performance of the dynamic control.
 In Section \ref{ch2:sec:results}, all results from these case studies are presented and discussed.
 Finally, conclusion and the future work are described in Section \ref{ch2:sec:summary}.
