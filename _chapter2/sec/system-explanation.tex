@@ -27,10 +27,10 @@ Also the load data acquisition, forecasting and ESMU schedule generation are out
 \nomenclature[J]{$T$}{Number of samples during the entire simulation, where $T \in \mathbb{Z}_{>0}$}
 \nomenclature[J]{$\Delta t$}{Sub-half-hourly sample period, where $\Delta t \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$SOC(t)$}{Scheduled state of charge at sample $t$}
-\nomenclature[J]{$p(t)$}{ESMU power at time $t$, where $(p(t)) = \textbf{p}$ and $p(t) \in \mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}$}{ESMU power vector, where $(p(t)) = \textbf{p}$}
-\nomenclature[J]{$p_{bat}(t)$}{Battery power at time $t$, which is derived form $p(t)$, where $(p_{bat}(t)) = \textbf{p}_{bat}$ and $p(t) \in \mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}_{bat}$}{Battery power vector, where $(p_{bat}(t)) = \textbf{p}_{bat}$}
+\nomenclature[J]{$p(t)$}{ESMU power at time $t$, where $\textbf{p} = (p(t))$ and $p(t) \in \mathbb{Z}$}
+\nomenclature[J]{$\textbf{p}$}{ESMU power vector, where $\textbf{p} = (p(t))$}
+\nomenclature[J]{$p_{bat}(t)$}{Battery power at time $t$, which is derived form $p(t)$, where $\textbf{p}_{bat} = (p_{bat}(t))$ and $p(t) \in \mathbb{Z}$}
+\nomenclature[J]{$\textbf{p}_{bat}$}{Battery power vector, where $\textbf{p}_{bat} = (p_{bat}(t))$}
 
 The ESMU model is based on the physical system that was deployed by SSEN during the NTVV project.
 Since this model is the same model as the one used in the preceding chapter, which has been explained in detail in Section \ref{ch1:subsec:battery-model}, only the model's final equation (as well as all used parameters) are detailed, hence foregoing the re-deriving of the same battery storage model.
@@ -91,13 +91,13 @@ With this assumption, the ESMU's SOC can be calculated for each $t$ despite the 
 Furthermore, with this second assumption, not only every sub-half-hourly ESMU power can be derived from its half-hourly schedule, but it also enables the calculation of every SOC, i.e. $SOC(t)$ is well defined.
 
 \nomenclature[J]{$p_\text{for}(k(t))$}{Half-hourly load forecast that is used for computing the ESMU schedule, where $p_\text{for}(k(t))\in\mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}_\text{for}$}{Half-hourly load forecast vector that is used for computing the ESMU schedule, where $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$}
+\nomenclature[J]{$\textbf{p}_\text{for}$}{Half-hourly load forecast vector that is used for computing the ESMU schedule, where $\textbf{p}_\text{for} = (p_\text{for}(k(t)))$}
 \nomenclature[J]{$p_\text{sch}(k(t))$}{Half-hourly schedule that is generated from the load forecast, where $p_\text{sch}(k(t))\in\mathbb{Z}$}
-\nomenclature[J]{$\textbf{p}_\text{sch}$}{Half-hourly schedule vector that is generated from the load forecast, where $(p_\text{sch}(k(t))) = \textbf{p}_\text{sch}$}
+\nomenclature[J]{$\textbf{p}_\text{sch}$}{Half-hourly schedule vector that is generated from the load forecast, where $\textbf{p}_\text{sch} = (p_\text{sch}(k(t)))$}
 
-For the generation of the ESMU schedule a load forecast, $\textbf{p}_\text{for}$, was required; here $(p_\text{for}(k(t))) = \textbf{p}_\text{for}$.
+For the generation of the ESMU schedule a load forecast, $\textbf{p}_\text{for}$, was required; here $\textbf{p}_\text{for} = (p_\text{for}(k(t)))$.
 This forecast, similar to the ESMU schedule, is also at half-hourly temporal resolution and is provided by SSEN as part of the NTVV research project.
-The task at hand is to find a half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, where $(p_\text{sch}(k(t))) = \textbf{p}_\text{sch}$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
+The task at hand is to find a half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, where $\textbf{p}_\text{sch} = (p_\text{sch}(k(t)))$, that improves the shape of the underlying forecast, e.g. by reducing load peaks.
 In order to generate this optimised ESMU schedule, a metric quantifying improvements had to be defined first.
 The only remaining problem is to find a half-hourly schedule, $\textbf{p}_\text{sch}$, which is done through by minimising several cost-functions.
 

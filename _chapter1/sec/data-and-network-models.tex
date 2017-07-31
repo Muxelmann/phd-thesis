@@ -8,7 +8,7 @@ In the end, the scheduling procedure is detailed.
 \subsection{Load profiles}
 
 \nomenclature[I]{$s_\text{net}(t)$}{Apparent network load at time $t$, where $s_\text{net}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $(s_{\text{load},i}(t)) = \textbf{s}_\text{load}(t)$ and $s_{\text{load},i}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $\textbf{s}_\text{load}(t) = (s_{\text{load},i}(t))$ and $s_{\text{load},i}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\textbf{s}_\text{load}(t)$}{Apparent load power vector of all loads at time $t$, where $\textbf{s}_\text{load}(t) \in \mathbb{C}^{I}$ (Chapter \ref{ch1})}
 
 Alongside the LV Test Case model, the IEEE published 100 minutely demand profiles; each profile lasting 24h.
@@ -51,14 +51,14 @@ However, control instructions that are sent to the ESMU system should not reques
 \nomenclature[I]{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\eta$}{Round-trip efficiency of power electronics, where $\eta \in (0, 1]$ (Chapter \ref{ch1})}
 \nomenclature[I]{$p_\text{bat}(t)$}{Single-phase active battery power at time $t$, where $p_\text{bat}(t) \in \mathbb{R}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power at time $t$, where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$ and $\textbf{s}_\text{ESMU}(t) \in \mathbb{C}^{\Phi}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $\textbf{s}_\text{ESMU}(t) \in \mathbb{C}^{\Phi}$ (Chapter \ref{ch1})}
 
 In order to simulate this ESMU system and its energy storing behaviour, a model is developed from the given device specifications.
 This model includes an charge-discharge efficiency, $\eta$, and standby losses, $\mu$.
 $\eta$ is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\%, i.e. $\eta = 0.98$.
 $\mu$ on the other hand is linked to the nominal power drawn by the battery's control system as well as the battery's self-discharge rate.
-With the charge-discharge efficiency, $\eta$, the battery charge-discharge power, $p_\text{bat}(t)$, can be calculated for any given ESMU power, $\textbf{s}_\text{ESMU}(t)$ (where $(s_{\text{ESMU},\phi}(t)) = \textbf{s}_\text{ESMU}(t)$).
+With the charge-discharge efficiency, $\eta$, the battery charge-discharge power, $p_\text{bat}(t)$, can be calculated for any given ESMU power, $\textbf{s}_\text{ESMU}(t)$ (where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$).
 
 \input{_chapter1/equ/battery-power-definition}
 
@@ -115,13 +115,13 @@ This is done with the synchronisation function $k(t)$, which links the original 
 \nomenclature[I]{$K$}{Number of sample periods over which the sub-half-hourly is to be downsampled, where $K \in \mathbb{Z}_{>0}$ and $\frac{T_\text{sch}}{K} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$k(t)$}{Synchronisation function used to downsample the sub-half-hourly profile (Chapter \ref{ch1})}
 \nomenclature[I]{$T_\text{sch}$}{Scheduling horizon, where $T_\text{sch} \in \mathbb{Z}_{>0}$ (Chapter \ref{ch1})}
-\nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $(s^*_\text{net}(t)) = \textbf{s}^*_\text{net}$ and $s^*_\text{net}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$ and $s^*_\text{net}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
 \nomenclature[I]{$\textbf{s}^*_\text{net}$}{Half-hourly network load, where $\textbf{s}^*_\text{net} \in \mathbb{C}^{\frac{T_\text{sch}}{K}}$ (Chapter \ref{ch1})}
 
 Here, $\Delta t$ is the sub-half-hourly sampling period of the simulation, and $K$ is the duration of the half-hourly time-slot, i.e. number of sub-half-hourly periods within the half-hourly slot.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $T_\text{sch} \overset{!}{=} \alpha K \text{ where } \alpha \in \mathbb{Z}_{>0}$.
 Otherwise, the sub-half-hourly profile cannot be divided into a set of equal length time-slots, where each time-slot is of length $K\Delta t$.
-Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $(s^*_\text{net}(t)) = \textbf{s}^*_\text{net}$), is defined as follows:
+Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$), is defined as follows:
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 

@@ -17,13 +17,13 @@ The output of each compensator is a corrective battery power component that, whe
 Each PID compensator also receives a feedback signal to compute the internal error states.
 More specifically, PID$_1$ receives the most recent SOC value that is obtained from the ESMU model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (e.g. through measurements by substation monitoring).
 
-\nomenclature[J]{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $(p_\text{net}(t)) = \textbf{p}_{net}$ and $p_\text{net}(t) \in \mathbb{R}$}
+\nomenclature[J]{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $\textbf{p}_{net} = (p_\text{net}(t))$ and $p_\text{net}(t) \in \mathbb{R}$}
 \nomenclature[J]{$SOC^*(t)$}{Battery's state of charge at sample $t$, where $SOC^*(t) \in [0, 1]$}
 \nomenclature[J]{$E_\text{SOC}(t)$}{Error in state of charge at sample $t$, where $E_\text{SOC}(t) \in \mathbb{R}$}
 \nomenclature[J]{$E_{p}(t)$}{Difference between current and predicting network power at sample $t$, where $E_{p}(t) \in \mathbb{R}$}
 \nomenclature[J]{$\hat{p}_\text{net}(t+\Delta t)$}{Predicted next network power at sample $t$}
-\nomenclature[J]{$\boldsymbol{\alpha}$}{PID weight vector for compensator PID$_1$, where $\boldsymbol{\alpha} = \{\alpha_P, \alpha_I, \alpha_D\}$ and $\boldsymbol{\alpha} \in \mathbb{R}^3$}
-\nomenclature[J]{$\boldsymbol{\beta}$}{PID weight vector for compensator PID$_2$, where $\boldsymbol{\beta} = \{\beta_P, \beta_I, \beta_D\}$ and $\boldsymbol{\beta} \in \mathbb{R}^3$}
+\nomenclature[J]{$\boldsymbol{\alpha}$}{PID weight vector for SOC compensator PID$_1$, where $\boldsymbol{\alpha} = \{\alpha_P, \alpha_I, \alpha_D\}$ and $\boldsymbol{\alpha} \in \mathbb{R}^3$}
+\nomenclature[J]{$\boldsymbol{\beta}$}{PID weight vector for MPC compensator PID$_2$, where $\boldsymbol{\beta} = \{\beta_P, \beta_I, \beta_D\}$ and $\boldsymbol{\beta} \in \mathbb{R}^3$}
 \nomenclature[J]{$\textbf{a}$}{Weight vector for compensator input regression of the AR model, where $\textbf{a} = \mathbb{R}^{N}$}
 \nomenclature[J]{$\textbf{b}$}{Weight vector for compensator output regression of the AR model, where $\textbf{b} = \mathbb{R}^{N}$}
 \nomenclature[J]{$N$}{Number of regressors of the AR model, where $N \in \mathbb{Z}_{>0}$}
@@ -108,7 +108,7 @@ Figure \ref{ch2:fig:mpc-arx} graphically captures the standard AR model's functi
 
 \input{_chapter2/equ/mpc-arx}
 
-Values of the two weight vectors $\textbf{a}$ and $\textbf{b}$, where $(a_i) = \textbf{a}$ and $(b_i) = \textbf{b}$, are determined during runtime using the standard adaptive least squares algorithm.
+Values of the two weight vectors $\textbf{a}$ and $\textbf{b}$, where $\textbf{a} = (a_i)$ and $\textbf{b} = (b_i)$, are determined during runtime using the standard adaptive least squares algorithm.
 This algorithm dynamically adjusts $\textbf{a}$ and $\textbf{b}$ to minimise the prediction error at each time-step.
 Beside finding optimised values for $\textbf{a}$ and $\textbf{b}$, the model's number of regressors, $N$, is also predicted to impact the model's performance ($N$ is also referred to as the ``model length'').
 The example in Figure \ref{ch2:fig:mpc-arx} represents a symmetric model where $N=3$.
