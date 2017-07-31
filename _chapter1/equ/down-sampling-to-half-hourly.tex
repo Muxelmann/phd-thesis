@@ -1,4 +1,8 @@
 \begin{equation}
-	s^{*}_\text{net}(t) = \frac{1}{K}\sum_{\tau=k(t)K}^{(k(t)+1)K-1}s_\text{net}(\tau) \text{ where } K \in \mathbb{Z}_{>0}
+\begin{split}
+	s^{*}_\text{net}(t) =& \frac{1}{K}\sum_{\tau=\alpha(t)}^{\beta(t)}s_\text{net}(\tau) \text{ where } K \in \mathbb{Z}_{>0} \\
+	&\text{and } \alpha(t) := k(t)K \\
+	&\text{and } \beta(t) := (k(t)+1)K-1
+\end{split}
 	\label{ch1:equ:down-sampling-to-half-hourly}
 \end{equation}

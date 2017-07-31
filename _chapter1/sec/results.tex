@@ -1,7 +1,7 @@
 \section{Results and Discussion}
 \label{ch1:sec:results-and-discussion}
 
-In this section, all results are presented and briefly discussed.
+In this section, all results are presented and discussed.
 Each of the three assessments in this section focuses on improvements in voltage level, improvements in network efficiency (i.e. power quality and network losses), and improvements in resource utilisation.
 Hence, only a subset of all results is included, but the complete set of results has been appended to this Thesis in Appendix \ref{appx-a:ch1}.
 
@@ -9,7 +9,7 @@ Hence, only a subset of all results is included, but the complete set of results
 \label{ch1:subsec:time-series-analysis}
 
 The ESMU's largest impact on network voltage levels can be noticed at the ESMU's PCC.
-Consequently, any adjustments to the ESMU powers should become most noticeable, too.
+Consequently, any adjustments to the ESMU powers should become noticeable.
 This impact can clearly be observed in Figure \ref{ch1:fig:ts-esmu-voltages}.
 
 \input{_chapter1/fig/ts-esmu-voltages}
@@ -89,7 +89,14 @@ All cases are compared and plotted in Figure \ref{ch1:fig:boxplot-overall-improv
 
 \input{_chapter1/fig/boxplot-overall-improvements}
 
-In this figure, it can be seen that the most significant cost related impact on the network is yielded, when improving phase unbalance, neutral power and power factor costs.
+This figure shows the how the cost reduction is distributed.
+In this case, the cost reduction, i.e. $-\delta\zeta(\alpha)$, is the change in cost from the \textit{normal} ESMU operation case to \textit{minimisation} operation cases.
+Due to the different scales however, the improvements are difficult to observe.
+Therefore, this cost reduction has been normalised in regards to the \textit{normal} ESMU operation case and is replotted in Figure \ref{ch1:fig:boxplot-relative-improvements}.
+
+\input{_chapter1/fig/boxplot-relative-improvements.tex}
+
+In this figure, it can be seen that the most significant cost related impact on the network is yielded, when improving voltage deviation, phase unbalance and power factor costs.
 Reason for this noticeably larger impact is due to ESMU being able to assign its scheduled active power to all three phases in an optimal manner, as long as the predetermined half-hourly schedule is obeyed.
 It is this obedience constraint, that limits the extend by which all other key network parameters can be impacted.
 Reactive power on the other hand is only indirectly constrained by the ESMU schedule.

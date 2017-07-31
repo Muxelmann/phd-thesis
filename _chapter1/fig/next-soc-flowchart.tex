@@ -29,7 +29,7 @@
 
 	% Define nodes
     \node (power_esmu) [input] {$\textbf{s}_\text{ESMU}(t)$};
-    \node (is_charging) [decision, right of=power_esmu] {charging\footnotemark[2]};
+    \node (is_charging) [decision, right of=power_esmu] {charging};
     \node (charging) [state, above right of=is_charging] {$\times\eta$};
     \node (discharging) [state, below right of=is_charging] {$\times\frac{1}{\eta}$};
     \node (power_battery) [result, below right of=charging] {$p_\text{bat}(t)$};
@@ -65,5 +65,3 @@
 \caption{Flowchart to calculate the next SOC (i.e. $SOC(t+\Delta t)$) based on current ESMU power (i.e. $\textbf{s}_\text{ESMU}(t)$) and current SOC (i.e. $SOC(t)$)}
 \label{ch1:fig:next-soc-flowchart}
 \end{figure}
-
-\footnotetext[2]{In the flowchart ``charging'' implies that $\hat{s}_\text{ESMU}(t) \geq 0$ as explained in Equation \ref{ch1:equ:battery-power-definition}.}

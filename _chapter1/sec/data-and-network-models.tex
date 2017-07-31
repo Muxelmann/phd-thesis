@@ -119,13 +119,13 @@ This is done with the synchronisation function $k(t)$, which links the original 
 \nomenclature[I]{$\textbf{s}^*_\text{net}$}{Half-hourly network load, where $\textbf{s}^*_\text{net} \in \mathbb{C}^{\frac{T_\text{sch}}{K}}$ (Chapter \ref{ch1})}
 
 Here, $\Delta t$ is the sub-half-hourly sampling period of the simulation, and $K$ is the duration of the half-hourly time-slot, i.e. number of sub-half-hourly periods within the half-hourly slot.
-It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $T_\text{sch} \overset{!}{=} \alpha K \text{ where } \alpha \in \mathbb{Z}_{>0}$.
+It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $a := \frac{K}{T_\text{sch}} \text{ where } a \in \mathbb{Z}_{>0}$.
 Otherwise, the sub-half-hourly profile cannot be divided into a set of equal length time-slots, where each time-slot is of length $K\Delta t$.
 Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$), is defined as follows:
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
-Now, over the period from $k(t)K$ to $(k(t)+1)K-1$, are power values are equal.
+Now, over the period from $\alpha(t)$ to $\beta(t)$, are power values are equal.
 To illustrate the difference between the original sub-half-hourly network load and the resulting half-hourly demand, both profiles are plotted in Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}.
 In this figure, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
 When generating ESMU schedules these variations are neglected and thus the unwanted peak power demands cannot be sufficiently compensated.

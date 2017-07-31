@@ -68,7 +68,7 @@
 	\foreach \i [evaluate=\i as \k using int(round(\i-1))] in {0,1,2,...,10}
 	{
 		\pgfmathsetmacro\x{1.5*\i}
-		\pgfmathsetmacro\y{-\i*0.5};
+		\pgfmathsetmacro\y{-\i};
 		
 		\ifnum1>\k
 			\ifnum0=\i
