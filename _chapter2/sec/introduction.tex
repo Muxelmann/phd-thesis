@@ -1,57 +1,8 @@
 \section{Overview}
 \label{ch2:sec:overview}
 
-%Outages are still very frequent in the UK. 
-%According to the UK energy regulator \textit{OFGEM}, on average 45\% of all customers experienced service disruptions in the period 2015-16 \cite{Ofgem2017}.
-%Whilst unanticipated outages due to severe winter weather lead to \pounds39 million worth of damages \cite{Ofgem2014}, network upgrades and repairs however contributed the larger amount of customer interruptions and customer minutes lost.
-%Such planned outages are intentions to strengthen networks and mitigate system overloads, due to increasing demand for electricity.
-%This demand increase is only accelerated since major focus of UK energy policies has been put on transitioning towards a low carbon economy \cite{HMGovernment2009, RoyalAcademyofEngineering2010}.
-%Particularly the decarbonisation of heat and transport sectors are two areas of significant strategic focus and Low Carbon Technology (LCT) such as photovoltaic installations, electric vehicles and heat pumps are expected to contribute significantly to this transition.
-%
-%However, as adaptation of these LCTs increases and they start to penetrate power distribution networks, stress on these networks will continue to increase even further, which may result in additional service disruptions.
-%Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks to exceed their operational constraints even at relatively low national rate of LCT adaption \cite{Poghosyan2014}.
-%Traditional network planning approaches to circumvent constraint violations, follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
-%This ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions that are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
-%To make things worse, LV networks in the UK are generally unmonitored once installed.
-%Distribution Network Operators (DNOs) have become aware of this issue and are developing updated planning strategies involving ``smart'' and ``flexible'' electricity grids.
-%However, in situ equipment that will become subject to the same adaptation of LCT needs to be managed actively via innovation in the use of existing and new technologies; otherwise both frequency of service disruptions and customer minutes lost will increase alongside the proliferation of LCTs \cite{Ault2008a}.
-%
-%Two solutions exist, allowing DNOs to support LV network's operation: 
-%\begin{enumerate*}
-%	\item reinforcement of in situ network assets;
-%	\item deployment of network support equipment.
-%\end{enumerate*}
-%Whilst network reinforcement would certainly address immediate issues of current network capacity constraints, it is also the more expensive and disruptive option.
-%More specifically, customer will need to deal with outages during periods of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
-%Therefore, alternatives to defer or avoid network reinforcements have been sought and assessed \cite{Harrison2007, Zangs2016a, VanderKlauw2016d, Greenwood2017}.
-%Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (ESMU) \cite{Wade2010}.
-%ESMU has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
-%
-%Installing ESMU on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
-%Regulating voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015}, or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
-%Whilst the questions regarding locating and scaling of ESMU have mostly been addressed, ESMU control can be split into two complementing yet unmarried approaches:
-%\begin{enumerate*}
-%	\item ``off-line'' control, using load forecasts and ESMU schedules; and
-%	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods.
-%\end{enumerate*}
-%
-%Off-line control uses historic data to predict future load patterns, which are used to schedule ESMU operation accordingly.
-%Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate ESMU schedules, had a relatively high forecast error due to the inherent difficulty of predicting future loads, which ultimately limits the ability of given ESMU schedule to i.e. reduce peaks.
-%This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing ESMU, or it frequently re-evaluates ESMU schedules, as done by Wang et.al \cite{Wang2014a}, where ESMU control is adjusted after each decision epoch.
-%Despite load forecasts being imperfect, forecasts remain a key component for scheduling ESMU thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
-%Furthermore, most day-ahead forecast only forecast at a temporal resolution down to half-hourly periods.
-%As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating ESMU operating schedules.
-%Nonetheless, sub-half-hourly load volatility imposes the biggest stress on the network and cannot be addressed when using this kind of half-hourly forecast, which is why on-line control has been considered as an alternative to off-line control.
-%
-%One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
-%Since this kind of control runs the risk of reaching shortage or surplus of ESMU stored energy, modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed.
-%However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to current network demand and does not respond to general trends or upcoming load events.
-%To address these shortcomings SPC has been extended, using short-term load predictions by implementing Model Predictive Control (MPC).
-%Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
-%Implementing increasingly complex MPC to support on-line control is therefore a strong research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
-
 \nomenclature[G]{SPC}{Set-Point Control}
-\nomenclature[G]{MPC}{Mode-Predict Control}
+\nomenclature[G]{MPC}{Model-Predict Control}
 \nomenclature[G]{PID}{Proportional Integrating Derivative (control)}
 
 

@@ -4,10 +4,6 @@ DIRS     = $(shell find * -type d -not -path "$(TMP)/*" -print)
 UNAME_S  = $(shell uname)
 MAIN     = main
 
-ifeq ($(UNAME_S),Linux)
-$(error Linux not supported...)
-endif
-
 
 .PHONY: all
 all:
@@ -31,4 +27,7 @@ setup:
 ifeq ($(UNAME_S),Darwin)
 	command -v mactex >/dev/null 2>&1 && brew upgrade mactex || brew install mactex
 else ifeq($(UNAME_S),Linux)
+	sudo apt install texlive-full
+else
+	$(error System \"$(UNAME_S)\" is not supported...)
 endif
