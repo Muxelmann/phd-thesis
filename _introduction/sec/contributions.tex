@@ -1,3 +1,32 @@
-\section{Contributions and publications}
+\section{Contributions}
 \label{ch-introduction:sec:contributions}
 
+The literature that is reviewed in Chapter \ref{ch-literature} introduces the key contributions surrounding the control of energy storage in power distribution networks, and therefore supports the thesis problem statement in Section \ref{ch-introduction:sec:problem-statement}.
+This review concludes by identifying gaps in literature which are used as starting points to formulate the research objectives and resulting research contributions.
+These contributions are summarised as follows:
+
+\begin{itemize}
+	\item
+	A selection of key network parameters is identified and their corresponding cost functions are formulated, to allow indication of the operational performance of a LV network.
+	These key network parameters are based on both realistic as well as theoretical parameters.
+	\item
+	A procedure to generate optimised half-hourly BESS schedules through the use of day-ahead forecasts is presented.
+	This procedure uses cost functions that are based on the well established ``Peak-to-Average Ratio'' as well as the power transient and difference between minimum and maximum power to achieve a ``valley-filling'' and ``peak-shaving'' behaviour.
+	\item
+	A realistic BESS model is constructed in order to capture the dynamics and technical limitations of the battery units (i.e. Energy Storage and Management Unit - ESMU) that were used throughout the field trials conducted by \textit{SSEN}.
+	\item
+	An iterative closed-loop power adjustment method is presented, which controls a DNO owned storage devices in such a way that its three-phase power improves LV network operation.
+	This improvement is achieved by using the device's flexibility in assigning active power to the three phases, and by using the remaining capacity of power electronics to inject or absorb reactive power, whilst obeying to an underlying half-hourly BESS schedule.
+	\item
+	A dynamic control mechanism to merge half-hourly BESS schedules with an on-line power prediction mechanism (i.e. Model Predictive Control) is presented, that minimises both the imminent sub-half-hourly load peaks as well as the day-ahead half-hourly load peaks.
+	This minimisation is achieved by merging schedules that are based on load forecasts with an autoregressive model that is fed by real load data.
+	\item
+	A charge scheduling algorithm for multiple, distributed BESSs to prevent charging spikes is developed.
+	This algorithm is subjected to both synchronised message passing as well as desynchronised message passing to asses the difference in algorithm performance and convergence.
+	\item
+	A stochastic EV behavioural model to generate minutely charge demand for a fleet of EVs is developed.
+	For particular levels of EV uptake, this model is used to generate additional network load since EVs are expected to be charged at home.
+	\item
+	Improvement of the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm to achieve cooperative behaviour of multiple BESSs.
+	Using this algorithm enables distributed control without the need for an underlying communications infrastructure.
+\end{itemize}
