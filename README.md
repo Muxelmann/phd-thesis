@@ -1,5 +1,7 @@
 # My PhD Thesis
 
+[![Build Status](https://travis-ci.com/Muxelmann/phd-thesis.svg?token=7cNEpzpigEcqdnzKv74q&branch=master)](https://travis-ci.com/Muxelmann/phd-thesis)
+
 ## Preview
 
 ![](https://github.com/Muxelmann/phd-thesis/raw/master/README/cover.png)
@@ -10,11 +12,11 @@
 
 1. [ ] Abstract
 - [x] Declaration
-- [ ] Acknowledgements
+- [x] Acknowledgements
 - [x] Table of Contents
 - [x] Table of Figures
 - [x] Abbreviations & Nomenclature
-- [ ] Introduction
+- [x] Introduction
 - [ ] Literature Review of Storage Control
 - [x] Improving network performance by adjusting battery operation at sub-half-hourly resolution
 - [ ] Real-Time Adjustment of Battery Operation using MPC Guided Schedule Deviation
