@@ -27,10 +27,8 @@ setup:
 ifeq ($(UNAME_S),Darwin)
 	@ # command -v mactex >/dev/null 2>&1 && brew upgrade mactex || brew install mactex
 	brew tap caskroom/cask
-ifneq ($(shell brew ls --versions mactex),)
-	brew upgrade mactex
-else
-	brew install mactex
+ifeq ($(shell brew ls --versions mactex),)
+	brew -v install --force caskroom/cask/mactex
 endif
 else ifeq($(UNAME_S),Linux)
 	sudo apt install texlive-full
