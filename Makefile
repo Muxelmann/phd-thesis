@@ -32,7 +32,7 @@ ifeq ($(shell brew ls --versions mactex),)
 endif
 else ifeq($(UNAME_S),Linux)
 	sudo apt update
-	sudo apt install texlive-latex-extra
+	sudo apt install texlive-full
 else
 	$(error System \"$(UNAME_S)\" is not supported...)
 endif
