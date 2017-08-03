@@ -1,0 +1,9 @@
+language: ruby
+sudo: required
+os:
+- Linux
+# - osx
+before_script:
+- make setup
+script:
+- make
