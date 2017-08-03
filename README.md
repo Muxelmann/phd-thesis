@@ -27,7 +27,7 @@
 
 ### Appendices
 
-1. [ ] A1 : Additional results
+- [ ] A1 : Additional results
 - [ ] A2 : Multi-agent system information
 - [ ] A3 : Stochastic EV model
 - [ ] A4 : OpenDSS interface
