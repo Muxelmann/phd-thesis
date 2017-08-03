@@ -31,7 +31,8 @@ ifeq ($(shell brew ls --versions mactex),)
 	brew -v install --force caskroom/cask/mactex
 endif
 else ifeq($(UNAME_S),Linux)
-	sudo apt install texlive-full
+	sudo apt update
+	sudo apt install texlive-latex-extra
 else
 	$(error System \"$(UNAME_S)\" is not supported...)
 endif
