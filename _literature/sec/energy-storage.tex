@@ -1,29 +1,66 @@
 \section{Energy storage projects in LV application}
 \label{ch-literature:sec:energy-storage}
 
-According to the Department of Energy's global energy storage database, there are more than 1200 energy storage projects, and as of 2016 27 of those are installed in the UK; they accumulate to a UK energy storage capacity of 33GWh \cite{Garton2016}.
-61\% of all global energy storage projects use electro-chemical energy storage technology, and 49\% of those energy storage projects use Battery Energy Storage Systems (BESS) that are rated at less than 250kW.
-Their corresponding small form-factor makes such BESS suitable for deployment in distribution networks, and as shown in the energy storage database 131 of these projects are indeed used for LV network support \cite{DOE-GESD}.
+The challenge for DNOs to manage their distribution networks is caused by the DER's and LCT's difficult predictability, their volatile nature, and the weakness of the network into which they are deployed \cite{Woyte2006, Mohd2008a, Koureoumpezis2010, Bravo2015}.
+Improved network management methods that are summarised under the term ``smart grid'' have thus become increasingly popular to counteract the negative impact from DERs (e.g. roof-top solar PV) and LCTs (e.g. EVs) \cite{Panteli2015}.
+When however deferring the reinforcement or retrofitting of network assets to construct such a smart grid, deployment of BESS can provide a significant contribution to the integration of DERs and LCTs \cite{Grillo2012, Rowe2014a, Li2016, Hosseina2016a}.
+As a result, DNOs have begun trialling of BESS across their distribution network to better their understanding and potential contribution \cite{NTVV2016, Lyons2015a, Ferreira2013a}.
+%For the scope of reviewing BESS projects and applications in the LV network, both stationary and mobile BESS, i.e. vehicle-to-grid (V2G) enabled EVs, are considered.
+To meet statutory and physical restrictions, voltage control and the power flow problem are two identified key challenges.
 
-Different roles for energy storage have already been surveyed in Section \ref{ch-introduction:subsec:role-of-energy-storage-a-survey}. 
-In this section however, Section \ref{ch-literature:sec:energy-storage}, applications within the LV networks are reviewed, since BESS impact on distribution networks is the main focus of the research that is presented in this thesis.
-Projects and findings concerning the integration of LCTs is addressed in this literature review with particular emphasis on voltage control mechanisms and power flow management.
+%\subsection{Voltage control}
 
-\subsubsection{Voltage control}
+\nomenclature[G]{OLTC}{On-Line Tap-Changer}
 
-\nomenclature[G]{RER}{Renewable Energy Resource}
+As already mentioned in Section \ref{ch-literature:sec:topology-of-lv-network}, UK distribution networks operate at 230V and have a statutory tolerance band of +10\% and -6\%.
+Due to the varying load on the network, these voltages can deviate significantly.
+Although todays deviation may not exceed the high-voltage or low-voltage thresholds, conduction losses and imperfect network conditions result in a lower overall system efficiency.
+Traditionally, On-Line Tap-Changers (OLTC) are used to raise and lower voltages across the entire network to counteract such voltage deviations \cite{Sun2009}.
+However, such a hierarchical voltage control with OLTCs has its limited applicability, especially in cases where the voltage deviation significantly differs for several branches of a feeding network \cite{Zangs2016}.
+Installing a BESS at a strategic location, i.e. closer to the regions where voltage deviation takes place, and controlling the device to best suit the network's requirements is generally applicable and the commercially more viable alternative \cite{Liserre2010}.
 
-Due to the volatile nature of Renewable Energy Resources (RERs), management of BESS has become an active field of research \cite{Grillo2012, Rowe2014a, Li2016, Hosseina2016a}, in order to guarantee the supply of electric energy.
-In cases where these RERs are not located in a centralised location like traditional power plants, but spread throughout the distribution network, issues arising from Distributed Energy Resources (DERs) need to be addressed, too.
-Such issues include voltage deviation, phase unbalance and power factor degradation.
+As stated by Wade et al. \cite{Wade2009, Wade2010}, allocation of the BESS's limited storage capacity so it can solve the voltage problem most effectively is still a sophisticated challenge.
+Nonetheless, by installing a 200kWh unit that is rated at 600kW in a project that was carried out with \textit{EDF Energy}, they showed the potential of BESS in a network to provide targeted voltage support.
+Their results indicate a reduced voltage variation by 2.4\% and a complete elimination of any ``out-of-limit'' voltage events.
+A demonstration project in Germany that was titled ``More Microgrids'' used four 180kWh batteries and demonstrated how both voltage stability as well as grid independence could be improved \cite{Overbeeke2010}.
+In this project a collection of holiday homes were fitted with a distributed PV system that is capable of generating a peak power of 315kW, and BESS was used to maximise the utility from this generation.
+However, due to the relatively small size of the network, due to the different behavioural patterns of holiday home occupants, and due to the different means of connecting customers to the German three-phase network, voltage deviation and phase unbalance issues were less dominant than on a UK distribution feeder.
+An equally sized project entitled ``GROWDERS'' also used multiple BESS in the LV network, but they contributed to frequency and thermal constraints as well as voltage stability \cite{GROWDERS2011}.
+Such large BESS can easily address network issues even when operating in ``islanded mode'', i.e. when disconnected form the grid.
+Results from these early field trials show how BESS store the excess PV power for usage during later times.
+But once the capacity limits were reached, neither high or low voltage events could be omitted.
+Such a result does indicate that not only the sizing, but also the BESS control method is of importance.
 
-Challenges arising from DERs have been summarised in \cite{Ferreira2013a, Bravo2015}, where the most dominant challenge of limiting voltage deviation is being discusses.
-In their studies, both local and global voltage control approaches are compared against an unmanaged BESS operation scenario, and through simulations of power distribution networks it is shown how voltage levels can be brought back within the statutory voltage band.
-In the UK, this statutory voltage band is defined in the Electricity Supply Quality and Continuity Regulation (ESQRC) and ranges around 230V by +10\% and -6\%, i.e. 253V and 216V, respectively.
+%\subsection{Power flow management}
 
-Electrical storage demonstration projects that took place within the UK have been summarised by Lyons et.al. in \cite{Lyons2015a}.
+Nonetheless, voltage violations that require strong voltage support have not yet been encountered in any of these projects.
+Instead, choosing the correct control method for optimised power flow management is more important, since excessive power flow can cause operational issues that can eventually lead to outages\footnote{%
+In fact, according to the UK energy regulator \textit{OFGEM}, on average 45\% of all customers experienced service disruptions in the period 2015-16 \cite{Ofgem2017}.
+Whilst unanticipated outages due to severe winter weather did lead to \pounds39 million worth of damages, network upgrades to prevent outages and repairs after outages had happened, did however contributed the larger amount of customer interruptions and customer minutes lost \cite{Ofgem2014}.%
+}.
+To prevent future power flow from exceeding the system's capacity, BESS has been proposed to function as an instantaneous reserve \cite{Kunisch1986a, Kunisch1986}.
+The resulting droop control method uses local voltage and frequency measurements to infer the current loading and stress of the network to issue corresponding BESS control instructions \cite{Engler2005a}.
+Droop control is founded on the assumption that network frequency will drop as demand begins to exceed supply, and that voltages along the distribution feeder drop more significantly if load is increased.
+Yet as already stated in Section \ref{ch-literature:sec:topology-of-lv-network}, reversed power flow voltage levels are not a reliable source of network stress information.
+This problem was also encountered by Riffonneau et al. in \cite{Riffonneau2011}, where they control BESS to solve an optimal power flow problem for grid connected PV systems.
+Ultimately, they were able to achieve 13\% gain on electricity bills by implementing a rule-based dynamic programming optimiser, and shave peak power by successfully integrating PV.
+However, they do not consider reactive power management.
+Although injection of reactive power can yield benefits to the distribution network, the reason behind excluding it was due to the potential conflicts that may arise with the proposed control method; as it relies on voltage measurements.
+Using BESS to reallocate PV generation for maximised self-consumption \cite{SaniHassan2017} or to achieve ``peak-shaving'' behaviour \cite{Bennett2015a, DePaola2016} has seen continued interest in the field of BESS power flow management.
+
+Aiming to address both voltage and power flow problems, \textit{Scottish and Southern Electricity Networks} (SSEN) became the first UK network operator to trial street-level BESS deployment in the LV network, where they installed 500kWh worth of storage in Bracknell, UK \cite{SSEN2016}.
+This capacity was achieved by 25 Energy Storage Management Units (ESMUs) that each had cascadable 12.5kWh Energy Storage Units (ESUs).
+These ESUs were connected to the distribution network via a three-phase 36kW Power Electronic Units (PEUs) to both manage the batteries and perform filtering operations.
+The aim of this so called \textit{New Thames Valley Vision} (NTVV) project was to understand potential benefits, practicalities and costs of installing street-level BESS.
+In the beginning, the main problem of finding an optimal deployment location for the ESMUs, to achieve their best possible impact on system voltages had to be addressed.
+Yunusov et al. in \cite{Yunusov2016} worked in collaboration with \textit{SSEN}, and they assessed different BESS locations in several networks and found that a location 4/7 to 2/3 down the feeder yields the best overall impact on voltage levels.
+However, their findings also show that this location can vary significantly when not only focusing on voltage support; i.e. proximity to the feeding substation was of greater importance when reducing system overloads or losses.
+The considered BESS control methods and those implemented in the NTVV project are reviewed in the next section, Section \ref{ch-literature:sec:control-of-energy-storage}.
 
 
-the opposite side of the spectrum, voltage drop due to new distributed loads, e.g. Electric Vehicles (EVs), 
+
+
+
+
 
 
