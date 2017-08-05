@@ -1,13 +1,52 @@
 \section{Control of energy storage and its applications}
 \label{ch-literature:sec:control-of-energy-storage}
 
-% - Control of energy storage and its applications
-%   - Open-loop and closed-loop control
-%   - Distributed control
+Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
+Regulating voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015}, or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
+Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control still remains and can be split into two complementing yet unmarried approaches:
+
+\begin{enumerate}
+	\item ``off-line'' control, using load forecasts and BESS schedules; and
+	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods.
+\end{enumerate}
+
+These two control approaches and their missing link are discussed and compared next, in Section \ref{ch-literature:subsec:open-loop-and-closed-loop-control}.
+Section \ref{ch-literature:subsec:centralised-and-distributed-control} then discusses different approaches of controlling multiple BESS, since control of a multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
 
 \subsection{Open-loop and closed-loop control}
 \label{ch-literature:subsec:open-loop-and-closed-loop-control}
 
+Off-line control uses historic data to predict future load patterns, which are used to schedule BESS operation accordingly.
+Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had relatively high forecast errors due to the inherent difficulty of predicting future loads.
+These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
+This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017}, where uncertainty of wind power was taken into account when scheduling and sizing BESS, or it frequently re-evaluates BESS schedules, as done by Wang et al \cite{Wang2014a}, where BESS control is adjusted after each decision epoch.
+Despite load forecasts being imperfect, forecasts remain a key component for scheduling BESS thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
+Furthermore, most day-ahead forecast only predict at a temporal resolution down to half-hourly periods.
+As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating BESS operating schedules.
+Nonetheless, sub-half-hourly load volatility imposes the biggest stress on the network and cannot be addressed when using this kind of half-hourly forecast, which is why on-line control has been considered as an alternative to off-line control.
+
+One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
+Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed.
+However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
+To address these shortcomings SPC has been extended, using short-term load predictions by implementing Model Predictive Control (MPC).
+Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
+Implementing increasingly complex MPC to support on-line control is therefore a strong research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
+
+Existing literature addresses the usage of energy storage units in low-voltage distribution networks to assure voltage security \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}.
+An approach used by, e.g., Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads.
+Yet, these kinds of storage control systems do require communication infrastructures to relay the network information and control instructions.
+This requirement has also been addressed in the comprehensive review on storage allocation and application methods by Hatziargyriou et al. \cite{Hatziargyriou2015}.
+In the presented work, a control algorithm is proposed that removes the need for such an inter-BESS communication, since it only uses local voltage measurements to infer the network operation.
+Yet, to prevent conflicting device behaviour, the underlying coordination mechanism is of particular importance. Assuring convergence, the AIMD algorithm is perfectly suited for such coordinated control.
+
+Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
+AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
+
+For instance, such an algorithm was first proposed for EV charging by St{\"{u}}dli et al. \cite{Studli2012}, requiring a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}. Later, their work was further developed to include vehicle-to-grid applications with reactive power support \cite {Studli2015}. The battery control algorithm proposed in this paper builds upon the algorithm used by Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile derived from network models. Similar to the work by Xia et al. \cite{Xia2014}, who utilised local voltage measurements to adjust the charging rate, only voltage measurements at the batteries' connection sites were used in this work to control the batteries' operations.
 
 \subsection{Centralised and distributed control}
 \label{ch-literature:subsec:centralised-and-distributed-control}
+
+
+
+Multi-Agent Systems (MAS) have also been used in several studies to yield voltage support \cite{Baran2007}
