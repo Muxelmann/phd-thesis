@@ -6,4 +6,4 @@ os:
 before_script:
 - make setup
 script:
-- make
+- make all

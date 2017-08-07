@@ -14,10 +14,6 @@ BIB_OK   = n
 endif
 
 
-.PHONY: blub
-blub:
-	echo $(BIB_OK)
-
 .PHONY: all
 all:
 	mkdir -p $(addprefix $(TMP)/,$(DIRS))
@@ -31,6 +27,7 @@ ifeq ($(BIB_OK),f)
 	pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-directory=$(TMP) $(MAIN).tex
 endif
 	cp $(TMP)/$(MAIN).pdf .
+
 
 .PHONY: clean
 clean:
