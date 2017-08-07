@@ -1,36 +1,61 @@
 \section{Control of energy storage and its applications}
 \label{ch-literature:sec:control-of-energy-storage}
 
-Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
+Installing BESS at a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
 Regulating voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015}, or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
-Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control still remains and can be split into two complementing yet unmarried approaches:
+Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control still remains an open question and can be split into two complementing yet unmarried approaches:
 
 \begin{enumerate}
 	\item ``off-line'' control, using load forecasts and BESS schedules; and
 	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods.
 \end{enumerate}
 
-These two control approaches and their missing link are discussed and compared next, in Section \ref{ch-literature:subsec:open-loop-and-closed-loop-control}.
-Section \ref{ch-literature:subsec:centralised-and-distributed-control} then discusses different approaches of controlling multiple BESS, since control of a multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
+These two control approaches have evolved from two different fields of active network management.
+Nonetheless, both approaches hold significant benefits to the operational performance of power distribution networks and neither of the two can be neglected.
+Therefore, Section \ref{ch-literature:subsec:off-line-and-on-line-control} addresses and discusses the two control approaches and their missing link.
 
-\subsection{Open-loop and closed-loop control}
-\label{ch-literature:subsec:open-loop-and-closed-loop-control}
+The current form of the NTVV project focuses on controlling a single BESS in the LV distribution network.
+However, the uptake of household connected BESS will increase the number of distributed systems, which need to be managed cooperatively.
+Therefore, Section \ref{ch-literature:subsec:centralised-and-distributed-control} reviews and discusses different control approaches for distributed BESS, since the control of multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
+
+\subsection{Off-line and on-line control}
+\label{ch-literature:subsec:off-line-and-on-line-control}
 
 Off-line control uses historic data to predict future load patterns, which are used to schedule BESS operation accordingly.
 Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had relatively high forecast errors due to the inherent difficulty of predicting future loads.
 These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
-This reason is why recent research either includes uncertainty, like the work by Baker et al. \cite{Baker2017}, where uncertainty of wind power was taken into account when scheduling and sizing BESS, or it frequently re-evaluates BESS schedules, as done by Wang et al \cite{Wang2014a}, where BESS control is adjusted after each decision epoch.
-Despite load forecasts being imperfect, forecasts remain a key component for scheduling BESS thanks to work like that by Rowe et al. \cite{Rowe2014a}, where a filtering mechanism was proposed for scheduling algorithms to reduce peak load in LV networks in spite of forecast errors.
-Furthermore, most day-ahead forecast only predict at a temporal resolution down to half-hourly periods.
-As pointed out by Haben et al. \cite{Poghosyan2014, Haben2014}, forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution, which is why they have become the standard for generating BESS operating schedules.
-Nonetheless, sub-half-hourly load volatility imposes the biggest stress on the network and cannot be addressed when using this kind of half-hourly forecast, which is why on-line control has been considered as an alternative to off-line control.
+This is why recent research either includes uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
+Other work frequently re-evaluates BESS schedules to control and adjust its schedules after completing individual decision epochs \cite{Wang2014a}.
+Nonetheless, load forecasting remain a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
+This fact was emphasised by Rowe et al. in \cite{Rowe2014a}, and they developed a filtering mechanism for scheduling algorithms to reduce peak load in LV networks in spite the presence of forecast errors.
+They also highlight the fact that most day-ahead load forecast only predict at a temporal resolution down to half-hourly periods.
+The reason behind this choice was pointed out by Haben et al. in \cite{Poghosyan2014, Haben2014}, as they argue that forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution.
+Therefore, half-hourly forecasts have become the standard for generating any resource commitment and resource operation schedules.
+However, sub-half-hourly load volatility imposes the biggest stress on the network and it is this volatility that cannot be addressed when relying on half-hourly forecast alone.
+Therefore, on-line control has been considered as an alternative to off-line control.
 
 One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
-Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control \cite{Gybel2012} and ramp-rate control \cite{Such2012} were proposed.
+Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control and ramp-rate control were proposed \cite{Gybel2012, Blaabjerg2006, Malesani1990, Such2012}.
+In \cite{Such2012}, Such and Hill showed how a ramp controlled BESS could smoothen the volatile power from wind generation.
+Furthermore, their work shows how reverse power flow can be completely omitted through the use of on-line BESS control.
 However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
-To address these shortcomings SPC has been extended, using short-term load predictions by implementing Model Predictive Control (MPC).
+
+In order to address these shortcomings SPC has been extended by using short-term load predictions through the implementation of Model Predictive Control (MPC).
 Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
-Implementing increasingly complex MPC to support on-line control is therefore a strong research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
+The increasing complexity of MPC yields a better prediction performance.
+For instance, Reihani et al. in \cite{Reihani2016} use the most recent 20 minutes of load information with a complex-valued ANN to predict the next 20 minutes of minutely load variations.
+Since their raw forecasts were more erratic than the actual load profile, a Kalman filter was implemented to smoothen the MPC's output, yet this step introduced significant discrepancies between the actual and the forecasted load.
+Therefore, they increased MPC complexity even further by taking into account parallel time-series, i.e. they considered the same 20 minutes from previous days in the prediction mechanism.
+This addition produced significantly better results and they shaved daily peaks by around 300kW.
+Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
+
+Finding a way of combining both scheduled BESS operation, which is executed at half-hourly resolution, with a responsive correction mechanism is therefore an open research question that has not yet been addressed.
+Objectives 1 and 2, as outlined in Section \ref{ch-introduction:sec:problem-statement}, and their corresponding chapters, respectively Chapter \ref{ch1} and Chapter \ref{ch2}, address this question in two ways.
+First, by assessing the ability to apply scheduled BESS operation onto a three-phase network in a sub-half-hourly manner, yet without modifying its underlying half-hourly schedule.
+Then, the scheduling constraint is lifted by allowing an operational tolerance in order.
+
+\subsection{Centralised and distributed control}
+\label{ch-literature:subsec:centralised-and-distributed-control}
 
 Existing literature addresses the usage of energy storage units in low-voltage distribution networks to assure voltage security \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}.
 An approach used by, e.g., Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads.
@@ -43,10 +68,5 @@ Originally, AIMD algorithms were applied to congestion management in communicati
 AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
 
 For instance, such an algorithm was first proposed for EV charging by St{\"{u}}dli et al. \cite{Studli2012}, requiring a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}. Later, their work was further developed to include vehicle-to-grid applications with reactive power support \cite {Studli2015}. The battery control algorithm proposed in this paper builds upon the algorithm used by Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile derived from network models. Similar to the work by Xia et al. \cite{Xia2014}, who utilised local voltage measurements to adjust the charging rate, only voltage measurements at the batteries' connection sites were used in this work to control the batteries' operations.
-
-\subsection{Centralised and distributed control}
-\label{ch-literature:subsec:centralised-and-distributed-control}
-
-
 
 Multi-Agent Systems (MAS) have also been used in several studies to yield voltage support \cite{Baran2007}
