@@ -65,8 +65,8 @@ However, a few examples of potential benefits from BESS include the regulation o
 Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control can be split into two complementing yet unmarried approaches:
 
 \begin{enumerate}
-	\item ``off-line'' control, using load forecasts and BESS schedules, and
-	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods.
+	\item ``off-line'' control, using load forecasts and BESS schedules \cite{Cecati2011, Chaouachi2013, Palma-Behnke2013, Khodaei2014}, and
+	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods \cite{Salinas2013, Huang2013, Huang2014a, Sun2014a}.
 \end{enumerate}
 
 Furthermore, with the anticipated uptake of household BESS, mechanisms to control several storage systems also need to be considered.
@@ -149,7 +149,24 @@ And lastly, if a renewable resource was committed for longer periods of time, ye
 \subsection{Smart control}
 \label{ch-introduction:subsec:smart-control}
 
-\hl{WRITE THIS}
+\nomenclature[G]{IoT}{Internet of Things}
+
+As already mentioned in Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, off-line and on-line control strategies exist to manage BESS.
+This traditional control often dealt with the dispatch of a single energy entity, but due to the distributed nature of the expected LCT uptake, methods to result in cooperative behaviour needed to be proposed.
+With the penetration of smart meters and communication-enabled devices in the so called ``Internet of Things`` (IoT), power systems have the potential of becoming interlinked networks of smart devices, too.
+So called ``smart control'' mechanisms complement the traditional off-line and on-line control strategies and are of great research interest to enable the uptake of distributed LCTs.
+
+For example, ``smart charging'' is a key term that summarises EV charging mechanisms where the limited network capacity causes multiple EVs to share the available resource amongst themselves \cite{Sortomme2011, Vaya2012, Garcia-Villalobos2014}.
+Intelligently limiting the EVs' maximum charging rates prevents them from adding unnecessary stress onto the network at the cost of longer charging times.
+A similar key term is the so called ``smart grid'' where distributed resources communicate and cooperate in order to e.g. shed load using Demand Side Response (DSR) or maintain micrigrid operation in fault situations \cite{Samadi2012, Liu2014, Liang2014}.
+The fundamental problem that is addressed in the research field of smart control is to find an optimal balance between network benefits and customer cost.
+Also, the fundamental requirement for the successful realisation of smart control is the reliable exchange of information amongst the partaking smart entities.
+
+Hence, smart control does not only require robust control mechanisms, but also a robust communications infrastructure.
+Literature, which is reviewed in Chapter \ref{ch-literature}, shows that all control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume a robust communication infrastructure.
+For instance, this requirement is assumed when messages are received without delay and immediately after dispatched or when a single control instruction result in the synchronised reaction of all entities.
+In reality however, the strength of the communication link may vary with e.g. weather or current network traffic, and fixed message delays and exact device synchronisation can no longer be guaranteed.
+Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communications infrastructure is of interest.
 
 \subsection{Challenges to control BESS}
 \label{ch-introduction:subsec:motivation}
@@ -161,7 +178,7 @@ Modern battery technology allows the storage of electrical energy in ever-decrea
 As shown in the literature review in Chapter \ref{ch-literature}, methods of controlling BESS to optimise power flow have been of great research interest.
 However, the impact on particular key parameters of the three-phase networks still need to be investigated.
 Subsequently, the challenge of applying real-time corrections to BESS schedules in order to decrease peak demand whilst obeying to technical and operational constraints is also a remaining research question.
-Also, since the expected uptake of distributed BESS through proliferation of household storage solutions (e.g. to counteract the impact of EVs) requires sophisticated coordination mechanisms, two additional research challenges have been identified.
+Also, since the expected uptake of distributed LCTs through proliferation of household storage solutions (e.g. to counteract the impact of EVs) requires sophisticated coordination mechanisms, two additional research challenges have been identified.
 The first challenge focuses on improving cooperating device behaviour despite communication disturbances (i.e. through message desynchronisation), and the second builds upon the findings from key network improvements to construct a functioning BESS control mechanism despite the absence of a telecommunications infrastructure.
 
 
