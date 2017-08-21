@@ -17,15 +17,26 @@ The scale of this energy transition becomes becomes particularly apparent when r
 \input{_introduction/fig/electricity-demand-forecast}
 
 Figure \ref{ch-introduction:fig:electricity-demand-forecast} shows the predicted increase in demand for electric energy when following the UK's 2020 and 2050 goals in reducing green-house emissions.
-According to this projection, the annual energy demand will increase by more than 40THh by the year 2040, if the ``Gone Green'' approach is implemented.
+According to this projection, the annual energy demand will increase by more than 40TWh by the year 2040, if the ``Gone Green'' approach is implemented.
 This trend is expected despite increasing device efficiencies, since the shift from oil and gas to electricity, i.e. the electrification, offset these gains.
 
 \input{_introduction/fig/electricity-demand-change-forecast}
 
-When breaking down the change in demand for electricity, as done in Figure \ref{ch-introduction:fig:electricity-demand-change-forecast}, one can observe how industry sectors are expected to decrease energy consumption, yet the residential and commercial sectors will dominantly increase their demand.
-To make things worse, those two sectors are typically situated at the network edge, i.e. in the LV distribution network.
+\nomenclature[G]{CREST}{Centre for Renewable Energy Systems Technology}
+
+When breaking down the change in demand for electricity, as done in Figure \ref{ch-introduction:fig:electricity-demand-change-forecast}, one can observe how industry sectors are expected to decrease their energy consumption.
+Yet residential and commercial sectors are expected to increase their demand and outweigh the industry's energy savings.
+Their negative impact on the distribution network is only amplified, since loads in the residential and commercial sectors are typically situated at the network edge, i.e. in the LV distribution network.
 This part of the network is its weakest part, since its assets were designed to caters for small powers between 315kVA to 500kVA \cite{EDS08-0115}.
-Therefore, strict regulation is in place to assure continuous operation without violating any operating constraints. 
+A study based on the findings from \textit{Electricity North West} in \cite{ElectricityNorthWestLtd2014} emphasises the issues that result from residential increase in demand for electricity, of e.g. voltage deviation due to an uptake of LCTs.
+The voltage deviation and corresponding power profiles are shown in Figure \ref{ch-introduction:fig:lct-impact}, which was produced by simulating several loads on the IEEE LV Test Case power distribution feeder.
+Loads were modelled at high resolution, using the \textit{Centre for Renewable Energy Systems Technology} (CREST) dwelling model \cite{Richardson2010a} and a subset of loads was adjusted using a normal and Rayleigh distribution for solar irradiance and home-charging EVs, respectively.
+The results in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
+
+\input{_introduction/fig/lct-impact}
+
+Such a voltage drop behaviour was achieved with a relatively low rate of LCT adaptation in the residential environment, therefore strict regulation is in place to assure continuous operation without violating any operating constraints.
+Otherwise additional voltage deviation, unbalanced network operation or potential asset overloads could be the result.
 
 Traditional network planning approaches, that were used to circumvent constraint violations, follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
 This ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions that are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
@@ -41,7 +52,7 @@ Two solutions exist, allowing DNOs to support LV network's operation:
 	\item reinforcement of in situ network assets;
 	\item deployment of network support equipment.
 \end{enumerate*}
-Whilst network reinforcement would certainly address immediate issues of current network capacity constraints, it is also the more expensive and disruptive option.
+Whilst network reinforcement would certainly address immediate issues of current network capacity constraints, this approach is also the more expensive and disruptive option.
 More specifically, customer will need to deal with outages during periods of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
 Therefore, alternatives to defer or avoid network reinforcements have been sought and assessed \cite{Harrison2007, Zangs2016a, VanderKlauw2016d, Greenwood2017}.
 Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (BESS) \cite{Wade2010}.
