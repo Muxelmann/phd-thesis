@@ -1,4 +1,4 @@
-\section{Background}
+\section{Background and motivation}
 \label{ch-introduction:sec:background}
 
 % - Background
@@ -31,14 +31,15 @@ This part of the network is its weakest part, since its assets were designed to 
 A study based on the findings from \textit{Electricity North West} in \cite{ElectricityNorthWestLtd2014} emphasises the issues that result from residential increase in demand for electricity, of e.g. voltage deviation due to an uptake of LCTs.
 The voltage deviation and corresponding power profiles are shown in Figure \ref{ch-introduction:fig:lct-impact}, which was produced by simulating several loads on the IEEE LV Test Case power distribution feeder.
 Loads were modelled at high resolution, using the \textit{Centre for Renewable Energy Systems Technology} (CREST) dwelling model \cite{Richardson2010a} and a subset of loads was adjusted using a normal and Rayleigh distribution for solar irradiance and home-charging EVs, respectively.
-The results in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
+The findings in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
 
 \input{_introduction/fig/lct-impact}
 
 Such a voltage drop behaviour was achieved with a relatively low rate of LCT adaptation in the residential environment, therefore strict regulation is in place to assure continuous operation without violating any operating constraints.
 Otherwise additional voltage deviation, unbalanced network operation or potential asset overloads could be the result.
 
-Traditional network planning approaches, that were used to circumvent constraint violations, follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
+Traditional network planning approaches to follow these regulation were used to circumvent constraint violations.
+These approaches follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
 This ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions that are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
 To make things worse, LV networks in the UK are generally unmonitored once installed.
 Distribution Network Operators (DNOs) have become aware of this issue and are developing updated planning strategies involving ``smart'' and ``flexible'' electricity grids \cite{Fang2012}.
@@ -90,7 +91,7 @@ Nowadays, storage can also tap into emerging revenue streams and perform additio
 As identified in several review articles \cite{Chen2009, Katsanevakis2017, Guney2017}, the key roles and applications of energy storage systems, regardless of profitability in the current market situation, can be identified as follows:
 
 \textbf{Energy shifting - arbitrage}: This function uses the difference in energy price to yield revenue.
-More specifically, as energy pricing is expected to become more dynamic and responsive to current energy demand, storage is controlled to charge when energy prices are low and discharge when energy prices are high \cite{Chen2009, Leou2012}.
+More specifically, as energy pricing is expected to become more dynamic and responsive to current energy demand and generation, storage is controlled to charge when energy prices are low and discharge when energy prices are high \cite{Chen2009, Leou2012}.
 Such dynamic pricing schemes are expected to emerge due to significant changes in demand at morning and evening peaks \cite{Koohi-Kamali2013}.
 
 \textbf{Supply capacity}: In order to meet future energy demand, energy suppliers commit their resources in advance.
@@ -108,13 +109,13 @@ Since modern energy storage systems can absorb and inject both active and reacti
 \textbf{Grid stability}: To make the grid more resilient to network faults (e.g. short-circuit or loss of a large generator), or to overcome scheduled network outages, energy storage can be used as an intermittent energy source \cite{Kundur1993}.
 To provide optimal operation conditions for energy generators, storage can support rotor angle stability and voltage stability by injecting active and reactive power at the point of common coupling \cite{Chakraborty2012, Kolluri2002}.
 Furthermore, sub-synchronous resonance and harmonic interference can also be reduced \cite{Wang1994}.
-This coupling resonance may occur between electrical and mechanical systems, can damage the mechanical structure due to repetitive stresses and strains.
+This coupling resonance can occur between electrical and mechanical systems and can damage the mechanical structure due to repetitive stresses and strains.
 
 \textbf{Upgrade deferral}: As already stated in Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, both transmission and distribution systems would have to be upgraded unless energy storage could provide network-support functions.
 By deferring network upgrades, network assets will be used more efficiently, and customer disruptions will be avoided \cite{Sayer2007, Eyer2010a}.
 Furthermore, in areas where the expected load has already been met and growth has levelled out, deployed energy storage is flexible enough to provide alternative functions (unlike other network assets) \cite{Huff2013}.
 
-\textbf{Transmission charges}: In scenarios where generators are charged to use transmission systems, energy storage could take advantage of the price structure to maximise the profit from the generated energy \cite{Sayer2007, Leou2012}.
+\textbf{Transmission charges}: In scenarios where generators are charged to use transmission systems (due to the capacity limitations of the transmission system), energy storage could take advantage of the price structure to maximise the profit from the generated energy \cite{Sayer2007, Leou2012}.
 
 \textbf{Congestion relief}: High congestion at substations of heavily loaded transmission or distribution lines can be tackled by co-located energy storage units \cite{Saez-de-Ibarra2013a, Kulkarni2005}.
 This can be achieved by e.g. shaving peak load or relaxing the energy requirements from distributed generation \cite{Reihani2016, Gerards2016d}.
@@ -125,7 +126,7 @@ Traditionally, these power supplies were diesel backup generators, but modern en
 \textbf{Power quality}: Sub-cycle and harmonic distortions on can severely deteriorate power quality, since they can have unwanted effects on connected equipment (similar to the issue of sub-synchronous resonance at the generation side).
 Energy storage with modern power electronics could be capable of providing power filtering functions that suppress those distortion \cite{Putrus2007}.
 This feature could be of particular interest to LV networks in the UK, since customers are arbitrarily connected to a single phase of a three-phase network.
-Therefore, the discrepancy of power quality between the phases is even larger, yet free energy storage resources could even address this issue \cite{Miret2009} (especially when considering household connected units).
+Therefore, the discrepancy of power quality between the phases is even larger, yet available energy storage resources could even address this issue \cite{Miret2009} (especially when considering household connected units).
 
 
 \textbf{Time-of-use energy charges}: A hurdle to DSM through flexible tariffs or TOU tariffs is the reason that consumers would have to adjust their energy consumption based on external price signals, which many are do not want to do.
@@ -145,17 +146,23 @@ Since their availability, i.e. for solar PV, may not align with periods of high 
 Furthermore, by discharging energy storage during times of low renewable generation, e.g. due to cloud cover or varying wind \cite{Jewell1987}, a continuous supply of energy can be assured - i.e. renewables ``smoothing''.
 And lastly, if a renewable resource was committed for longer periods of time, yet the associated energy forecasts overestimated its generation capacity, storage can supply the gap to avoid balancing charges - i.e. renewables ``firming'' \cite{Chakraborty2012}.
 
-\subsection{Motivation}
+\subsection{Smart control}
+\label{ch-introduction:subsec:smart-control}
+
+\hl{WRITE THIS}
+
+\subsection{Challenges to control BESS}
 \label{ch-introduction:subsec:motivation}
 
-From the extensive catalogue of possible roles for energy storage in the electricity grid that was presented in Section \ref{ch-introduction:subsec:role-of-energy-storage-a-survey}, the focus of this research is put on helping DNOs to manage and operate their power distribution networks.
-More specifically, battery energy storage is the main focus since is has the potential to defer or even mitigate expensive network reinforcements.
+From the extensive catalogue of possible roles for energy storage in the electricity grid that was presented in Section \ref{ch-introduction:subsec:role-of-energy-storage-a-survey}, the focus of the research in this thesis is put on aiding DNOs to manage and operate their power distribution networks.
+More specifically, battery energy storage is the main focus since is has the potential to defer or even mitigate costly network reinforcements.
 Modern battery technology allows the storage of electrical energy in ever-decreasing form factory, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
 
-However, methods of controlling BESS to maximise their positive impact on particular key parameters of three-phase networks still need to be investigated.
-Furthermore, how real-time corrections can be applied to BESS schedules in order to increase peak reduction performance whilst obeying to technical and operational constraints is also an open research question.
-Last but not least, the expected uptake of distributed BESS through proliferation of household storage solutions (e.g. to counteract the impact of EVs) also raises important research questions.
-The ones that are addressed in this thesis focus on improving cooperating device behaviour despite communication disturbances (i.e. through message desynchronisation) or the absence of a telecommunications infrastructure.
+As shown in the literature review in Chapter \ref{ch-literature}, methods of controlling BESS to optimise power flow have been of great research interest.
+However, the impact on particular key parameters of the three-phase networks still need to be investigated.
+Subsequently, the challenge of applying real-time corrections to BESS schedules in order to decrease peak demand whilst obeying to technical and operational constraints is also a remaining research question.
+Also, since the expected uptake of distributed BESS through proliferation of household storage solutions (e.g. to counteract the impact of EVs) requires sophisticated coordination mechanisms, two additional research challenges have been identified.
+The first challenge focuses on improving cooperating device behaviour despite communication disturbances (i.e. through message desynchronisation), and the second builds upon the findings from key network improvements to construct a functioning BESS control mechanism despite the absence of a telecommunications infrastructure.
 
 
 
