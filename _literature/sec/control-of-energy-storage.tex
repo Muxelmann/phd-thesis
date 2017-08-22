@@ -135,21 +135,3 @@ To not impose additional requirements onto consumer devices, and instead maximis
 Previous research is therefore extended by the presented work, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
 By proposing an approach to ensure that unavoidable voltage drops along the feeder do not skew the control decisions, and by taking the into consideration voltage oscillations that are caused by demand variation, objective 4, as outlined in Section \ref{ch-introduction:sec:problem-statement}, is addressed.
 In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information, and hence does not require such an extensive communications infrastructure.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%Research with more of an economic focus includes the development of fiscal mechanisms, e.g. embedded in game-theory-based energy scheduling for smart loads \cite{Mohsenian-Rad2010}, using multiple time-of-use tariffs to incentivise charging at optimal times \cite{Deilami2011, Karfopoulos2013} or managing entities in a price-based control scheme \cite{Masoum2015}. However, these papers mainly discuss benefits for individual shareholders, as economic Demand Side Management (DSM) strategies may not yield reliable performance and equality in all competitive markets when they are highly deregulated \cite{Xu2015b}. Instead, by putting emphasis on fairness when controlling the network's demand response in a distributed manner, focus has moved towards more hypothetical market solutions \cite{Fan2012}. Since DSM algorithms developed in this area of research are highly reliant on parameter optimisation to perform optimally, to optimise the scheduling performance, control and machine learning approaches have resulted, e.g. involving heuristic reinforcement learning \cite{Vandael2015}.
-%
-%
-%
-%However, such BESS control systems do require string communication infrastructures to relay the network information and control instructions, and those requirements are often neglected in research
-%This requirement has also been addressed in the comprehensive review on storage allocation and application methods by Hatziargyriou et al. \cite{Hatziargyriou2015}.
-%In the presented work, a control algorithm is proposed that removes the need for such an inter-BESS communication, since it only uses local voltage measurements to infer the network operation.
-%Yet, to prevent conflicting device behaviour, the underlying coordination mechanism is of particular importance. Assuring convergence, the AIMD algorithm is perfectly suited for such coordinated control.
-%
-%Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
-%AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
-%
-%For instance, such an algorithm was first proposed for EV charging by St{\"{u}}dli et al. \cite{Studli2012}, requiring a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}. Later, their work was further developed to include vehicle-to-grid applications with reactive power support \cite {Studli2015}. The battery control algorithm proposed in this paper builds upon the algorithm used by Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile derived from network models. Similar to the work by Xia et al. \cite{Xia2014}, who utilised local voltage measurements to adjust the charging rate, only voltage measurements at the batteries' connection sites were used in this work to control the batteries' operations.
-
