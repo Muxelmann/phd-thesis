@@ -5,8 +5,7 @@ UNAME_S  = $(shell uname)
 MAIN     = main
 BIB      = thesis.bib
 
-BIB_OK   = $(shell test -f $(BIB_FILE) && echo y || echo n)
-
+BIB_OK   = $(shell test -f $(BIB) && echo y || echo n)
 
 .PHONY: all
 all:
@@ -23,11 +22,6 @@ ifeq ($(BIB_OK),y)
 	pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-directory=$(TMP) $(MAIN).tex
 endif
 	cp $(TMP)/$(MAIN).pdf .
-
-
-.PHONY: test
-test:
-	echo $(BIB_OK)
 
 
 .PHONY: clean
