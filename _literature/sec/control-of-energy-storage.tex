@@ -86,7 +86,7 @@ But with the deployment of smart meters, network enabled appliances and controll
 In fact, in the majority of existing literature that uses BESS in distribution networks focuses on voltage security \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}, power flow management \cite{Guerrero2008, Wang2016} and management of flexible loads \cite{Gill2014, Dolan2012}.
 For instance, the approach used by Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads, and Marra et al. in \cite{Marra2013} go even further and use information sharing between PV and BESS in order to limit voltage deviation.
 Both research teams were able to stabilise the network, and Marras et al. even increased the voltage margin by an additional 6.1V.
-The reasons why the usage of distributed and hierarchical control systems have become this attractive include lighter computational load for all control systems through abstraction at higher control levels and improved system stability, security and redundancy \cite{Guerrero2013}.
+The reasons why the usage of distributed and hierarchical control systems have become this attractive include lighter computational load for all control systems through abstraction at higher control levels and improved system stability, security and redundancy \cite{Guerrero2013, Guerrero2013a}.
 
 Approaches and topologies to manage the flow of information within these control systems are classified by Bidram et al. in \cite{Bidram2014}, where they separate the real network, i.e. the \textit{physical layer}, from Information and Communication Technology (ITC), i.e. the \textit{cyber communication layer}.
 This separation allowed them to represent any distributed power system as a system of multiple cooperating entities, i.e. intelligent agents that form a so called Multi-Agent System (MAS).
@@ -108,6 +108,7 @@ Assessing the impact of introducing such a desynchronisation has therefore becom
 Objective 3, as outlined in Section \ref{ch-introduction:sec:problem-statement}, addresses this research question by subjecting a smart charging algorithm to both a synchronised and a desynchronised MAS environment.
 
 \subsection{Communication-less control}
+\label{ch-literature:subsec:communication-less-control}
 
 Another method of implementing a distributed system is to not use any kind of communications infrastructure, since this infrastructure may not always be installed despite being a common assumption when controlling distributed BESS \cite{Hatziargyriou2015}.
 Such communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
@@ -116,7 +117,6 @@ At the current rate of EV uptake, which is anticipated to increase with improved
 The already mentioned ICT reliant distributed control methods aim to circumvent these issues, using Demand Side Management (DSM) strategies that are based on e.g. game theory \cite{Mohsenian-Rad2010}, time-of-use tariffs \cite{Deilami2011, Surles2012}, or other pricing signals \cite{Masoum2015}.
 Without ICT however, none of them can be implemented and instead an indirect method must be sought.
 
-\nomenclature[G]{DER}{Distributed Energy Resource}
 \nomenclature[G]{AIMD}{Additive Increase Multiplicative Decrease}
 \nomenclature[G]{V2G}{Vehicle to Grid}
 

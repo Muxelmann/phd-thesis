@@ -3,22 +3,18 @@ TMP      = .tmp
 DIRS     = $(shell find * -type d -not -path "$(TMP)/*" -print)
 UNAME_S  = $(shell uname)
 MAIN     = main
-BIB      = library.bib
+BIB      = thesis.bib
 
-BIB_OK   = $(shell test -h $(BIB) && echo h)
-ifeq ($(BIB_OK),)
-BIB_OK   = $(shell test -f $(BIB) && echo f)
-endif
-ifeq ($(BIB_OK),)
-BIB_OK   = n
-endif
+BIB_OK   = $(shell test -f $(BIB_FILE) && echo y || echo n)
 
 
 .PHONY: all
 all:
 	mkdir -p $(addprefix $(TMP)/,$(DIRS))
 	pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-directory=$(TMP) $(MAIN).tex
-ifeq ($(BIB_OK),f)
+	@ echo "file $(shell test -f $(BIB) && echo y || echo n)"
+	@ echo "link $(shell test -h $(BIB) && echo y || echo n)"
+ifeq ($(BIB_OK),y)
 	cp $(BIB) $(TMP)
 	cd $(TMP) && bibtex $(MAIN)
 	pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-directory=$(TMP) $(MAIN).tex
@@ -27,6 +23,11 @@ ifeq ($(BIB_OK),f)
 	pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-directory=$(TMP) $(MAIN).tex
 endif
 	cp $(TMP)/$(MAIN).pdf .
+
+
+.PHONY: test
+test:
+	echo $(BIB_OK)
 
 
 .PHONY: clean
