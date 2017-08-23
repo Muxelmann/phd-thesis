@@ -28,18 +28,23 @@ Subsequently, all case studies and metrics that are used to assess the MAS perfo
 \subsection{MAS Implementation}
 \label{ch3:subsec:implementation}
 
-The MAS was written in Java and implemented on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
-Here, 
+The MAS was implemented in Java and ran on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
+In Figure \ref{ch3:fig:agent-implementation}, the complete structure and communications procedure is explained.
 
 \input{_chapter1/fig/agent-implementation}
+
+Here, the laboratory workstation uploads the simulation task to a submit node.
+This node starts a certain number of workers, which in turn run the Java agent software to communicate with each other and to schedule the charging of their simulated EVs.
+One of the workers is chosen to be the supplier, that obtains the network load data from a remote data store and propagates this information in a synchronised manner.
+In the diagram in Figure \ref{ch3:fig:agent-implementation}, all bold arrows indicate the inter-agent communication, the solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software launches.
 
 \subsection{MAS Desynchronisation}
 \label{ch3:subsec:desynchronisation}
 
 Operating the agents in a desynchronised manner can be achieved in two distinct ways.
-Either, any idle state that is interrupted by the synchronising signal is removed, or agents operate within a fixed execution loop and continue after each agent's loop timer expired.
-
-The former option would be the easier option to implement
+Either, any idle state that is interrupted by the synchronising signal (which is shown in Figure \ref{ch3:fig:agent-synchronisation}) is removed, or agents are launched with a random jitter and operate in an execution loop of a fixed time.
+Although the first approach would result in a quick simulation execution, only the second way of desynchronising agents is compliant with the compute cluster's terms of usage.
+Therefore, the latter way was implemented uses and each agent was equipped with its individual loop timer to regulate its execution.
 
 \subsection{Cases and Performance Metrics}
 \label{ch3:subsec:cases-and-metrics}
