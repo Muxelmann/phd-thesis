@@ -39,10 +39,14 @@ Since this kind of control runs the risk of reaching shortage or surplus of BESS
 In \cite{Such2012}, Such and Hill showed how a ramp controlled BESS could smoothen the volatile power from wind generation.
 Furthermore, their work shows how reverse power flow can be completely omitted through the use of on-line BESS control.
 However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
-Also, incorrect set-point thresholds of insufficient network impact can also lead to an excess or shortage in BESS supply.
+Also, incorrect set-point thresholds of insufficient network impact can also lead to an excess or shortage in BESS supply, which is shown in the example Figure \ref{ch-literature:fig:spc}.
 
-\hl{ADD FIGURE TO SHOW BADLY CHOSEN SET-POINT THRESHOLD}
+\input{_literature/fig/spc}
 
+In the example in Figure \ref{ch-literature:fig:spc}, a BESS is operated to compensate for demand fluctuations.
+The top figure (Fig. \ref{ch-literature:subfig:spc-ok}) represents the BESS operation when the SPC threshold is perfectly chosen.
+The top figure (Fig. \ref{ch-literature:subfig:spc-bad}) shows the same operation but with a SPC threshold deviation of 1kW.
+In the latter scenario, BESS experiences a shortage of supply at peak demand time (zero-crossing arund 20:00), which would prevent the device from supplying its peak-shaving functions.
 In order to address these shortcomings SPC has been extended by using short-term load predictions through the implementation of Model Predictive Control (MPC).
 Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
 The increasing complexity of MPC yields a better prediction performance.
