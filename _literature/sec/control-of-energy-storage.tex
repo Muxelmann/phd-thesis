@@ -24,7 +24,7 @@ Therefore, Section \ref{ch-literature:subsec:centralised-and-distributed-control
 Off-line control uses historic data to predict future load patterns, which are used to schedule BESS operation accordingly.
 Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had relatively high forecast errors due to the inherent difficulty of predicting future loads.
 These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
-This is why recent research either includes uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
+This is why recent research begun including uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
 Other work frequently re-evaluates BESS schedules to control and adjust its schedules after completing individual decision epochs \cite{Wang2014a}.
 Nonetheless, load forecasting remain a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
 This fact was emphasised by Rowe et al. in \cite{Rowe2014a}, and they developed a filtering mechanism for scheduling algorithms to reduce peak load in LV networks in spite the presence of forecast errors.
@@ -35,10 +35,13 @@ However, sub-half-hourly load volatility imposes the biggest stress on the netwo
 Therefore, on-line control has been considered as an alternative to off-line control.
 
 One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
-Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control and ramp-rate control were proposed \cite{Gybel2012, Blaabjerg2006, Malesani1990, Such2012}.
+Since this kind of control runs the risk of reaching shortage or surplus of BESS stored energy, modifications like hysteresis control and ramp-rate control were proposed \cite{Gybel2012, Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
 In \cite{Such2012}, Such and Hill showed how a ramp controlled BESS could smoothen the volatile power from wind generation.
 Furthermore, their work shows how reverse power flow can be completely omitted through the use of on-line BESS control.
 However, this kind of on-line control is less effective in addressing daily demand peaks, since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
+Also, incorrect set-point thresholds of insufficient network impact can also lead to an excess or shortage in BESS supply.
+
+\hl{ADD FIGURE TO SHOW BADLY CHOSEN SET-POINT THRESHOLD}
 
 In order to address these shortcomings SPC has been extended by using short-term load predictions through the implementation of Model Predictive Control (MPC).
 Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
@@ -67,9 +70,11 @@ The monitoring and control of any distributed system, and hence of any power net
 \end{enumerate}
 
 \nomenclature[G]{IoT}{Internet of Things}
+\nomenclature[G]{SCADA}{Supervisory Control And Data Acquisition}
 
 In traditional power system control, systems 1 and 2 are grouped into the distributed measuring system and systems 3 and 4 are grouped into a centralised controller \cite{Nelson1985}.
 Therefore, a bidirectional flow of information had to exist in order to control and assure operation of the underlying physical network.
+Supervisory Control And Data Acquisition (SCADA) is the typical control architecture that enables the implementation of this bidirectional information flow.
 Tokyo is a showcase of implementing such a centralised control system.
 In 1990, \textit{Tokyo Electric Power Co.} (TEPCO) and \textit{Toshiba} presented their latest installation of a centrally managed power distribution network that could deliver 43GW of power to the entire city of Tokyo.
 All control instructions were generated from TEPCO's central dispatching centre, which took into account measurements from a network of 819 nodes and 938 branches.
@@ -84,7 +89,7 @@ But with the deployment of smart meters, network enabled appliances and controll
 In fact, in the majority of existing literature that uses BESS in distribution networks focuses on voltage security \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}, power flow management \cite{Guerrero2008, Wang2016} and management of flexible loads \cite{Gill2014, Dolan2012}.
 For instance, the approach used by Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads, and Marra et al. in \cite{Marra2013} go even further and use information sharing between PV and BESS in order to limit voltage deviation.
 Both research teams were able to stabilise the network, and Marras et al. even increased the voltage margin by an additional 6.1V.
-The reasons why the usage of distributed and hierarchical control systems have become this attractive include lighter computational load for all control systems through abstraction at higher control levels and improved system stability, security and redundancy \cite{Guerrero2013}.
+The reasons why the usage of distributed and hierarchical control systems have become this attractive include lighter computational load for all control systems through abstraction at higher control levels and improved system stability, security and redundancy \cite{Guerrero2013, Guerrero2013a}.
 
 Approaches and topologies to manage the flow of information within these control systems are classified by Bidram et al. in \cite{Bidram2014}, where they separate the real network, i.e. the \textit{physical layer}, from Information and Communication Technology (ITC), i.e. the \textit{cyber communication layer}.
 This separation allowed them to represent any distributed power system as a system of multiple cooperating entities, i.e. intelligent agents that form a so called Multi-Agent System (MAS).
@@ -101,26 +106,35 @@ Computer scientists would describe an agents as a component that gathers and col
 For this very reason has MAS seen increasing attention in the power and energy engineering discipline, where the agents' goals were focusing on integration of DERs \cite{Al-Hinai2004, Dimeas2005, Vasirani2013, Dou2017, Gomez-Sanz2014}, matching of demand and supply \cite{Kok2005}, restoring the power distribution network \cite{Li2012}, reconfiguring the network to reduce unbalance \cite{Ding2016}, integration of EVs \cite{Lopez2011, Karfopoulos2013, Ramachandran2013, GrauUnda2014} and providing voltage support \cite{Baran2007}.
 Standardisation across MAS was established by the Foundation for Intelligent Physical Agents (FIPA), yet as explored by Catterson et al. in \cite{Catterson2005}, the underlying versatility of different MAS makes integration very challenging.
 Also, as the number of independent elements becomes ubiquitous, requirements for a strong telecommunications infrastructure become equally important \cite{Hatziargyriou2015}.
-So far, synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks need not be synchronised \cite{He2017}.
-
+So far, synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks may not automatically be synchronised \cite{He2017}.
 Assessing the impact of introducing such a desynchronisation has therefore become part of the research that is presented in this thesis.
-Objective 3, as outlined in Section \ref{ch-introduction:sec:problem-statement}, addresses this research question and objective 4 aims to avoid the need for any ICT infrastructure.
-To no longer rely on a strong communications infrastructure, an improved Additive Increase Multiplicative Decrease (AIMD) algorithm is proposed that uses local bus measurements and network specific control parameters to control distributed BESS that are located in several LV networks.
+Objective 3, as outlined in Section \ref{ch-introduction:sec:problem-statement}, addresses this research question by subjecting a smart charging algorithm to both a synchronised and a desynchronised MAS environment.
 
+\subsection{Communication-less control}
+\label{ch-literature:subsec:communication-less-control}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%Research with more of an economic focus includes the development of fiscal mechanisms, e.g. embedded in game-theory-based energy scheduling for smart loads \cite{Mohsenian-Rad2010}, using multiple time-of-use tariffs to incentivise charging at optimal times \cite{Deilami2011, Karfopoulos2013} or managing entities in a price-based control scheme \cite{Masoum2015}. However, these papers mainly discuss benefits for individual shareholders, as economic Demand Side Management (DSM) strategies may not yield reliable performance and equality in all competitive markets when they are highly deregulated \cite{Xu2015b}. Instead, by putting emphasis on fairness when controlling the network's demand response in a distributed manner, focus has moved towards more hypothetical market solutions \cite{Fan2012}. Since DSM algorithms developed in this area of research are highly reliant on parameter optimisation to perform optimally, to optimise the scheduling performance, control and machine learning approaches have resulted, e.g. involving heuristic reinforcement learning \cite{Vandael2015}.
-%
-%
-%
-%However, such BESS control systems do require string communication infrastructures to relay the network information and control instructions, and those requirements are often neglected in research
-%This requirement has also been addressed in the comprehensive review on storage allocation and application methods by Hatziargyriou et al. \cite{Hatziargyriou2015}.
-%In the presented work, a control algorithm is proposed that removes the need for such an inter-BESS communication, since it only uses local voltage measurements to infer the network operation.
-%Yet, to prevent conflicting device behaviour, the underlying coordination mechanism is of particular importance. Assuring convergence, the AIMD algorithm is perfectly suited for such coordinated control.
-%
-%Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
-%AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
-%
-%For instance, such an algorithm was first proposed for EV charging by St{\"{u}}dli et al. \cite{Studli2012}, requiring a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}. Later, their work was further developed to include vehicle-to-grid applications with reactive power support \cite {Studli2015}. The battery control algorithm proposed in this paper builds upon the algorithm used by Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile derived from network models. Similar to the work by Xia et al. \cite{Xia2014}, who utilised local voltage measurements to adjust the charging rate, only voltage measurements at the batteries' connection sites were used in this work to control the batteries' operations.
+Another method of implementing a distributed system is to not use any kind of communications infrastructure, since this infrastructure may not always be installed despite being a common assumption when controlling distributed BESS \cite{Hatziargyriou2015}.
+Such communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
+The current procedure of charging EVs is a perfect example of such a system, since their charging commences immediately after they have been plugged into the grid.
+At the current rate of EV uptake, which is anticipated to increase with improved driving range, reduced cost of purchase and greater emphasis on leading an environmentally-friendly lifestyle \cite{Shah2015}, so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
+The already mentioned ICT reliant distributed control methods aim to circumvent these issues, using Demand Side Management (DSM) strategies that are based on e.g. game theory \cite{Mohsenian-Rad2010}, time-of-use tariffs \cite{Deilami2011, Surles2012}, or other pricing signals \cite{Masoum2015}.
+Without ICT however, none of them can be implemented and instead an indirect method must be sought.
 
+\nomenclature[G]{AIMD}{Additive Increase Multiplicative Decrease}
+\nomenclature[G]{V2G}{Vehicle to Grid}
+
+A communication-less form of controlling Distributed Energy Resources (DERs) is the already mentioned Set-Point Control (SPC) \cite{Leadbetter2012}.
+Using traditional SPC on multiple identically-configured DERs can provice an optimal operation conditions, if each DER's control parameters (e.g., bus voltage) were shared \cite{Thieblemont2017a}.
+But in a communication-less environment this requirement cannot be satisfied, which is why DER control algorithms have to be improved to prevent, for example, devices located furthest from the substation from being used more frequently than others.
+The algorithm to be improved for controlling several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
+Unlike traditional SPC or hysteresis control like in \cite{Jiang2007}, where a fuel-cell's bus voltage was used as input to a ramp control for active power sharing, AIMD (like MAS) has its roots in computer science.
+Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
+The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
+One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
+Later, their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work relied on an ITC infrastructure, too.
+
+To not impose additional requirements onto consumer devices, and instead maximise the utility of energy storage, an improved AIMD algorithm with individually tuned control parameters is proposed as part of the research in this thesis.
+%As stated by Thieblemont et al. in \cite{Thieblemont2017a}: ``\textit{Energy storage systems play a crucial role in decreasing building energy consumption during peak periods and expanding the use of renewable energies in buildings and communities}''.
+Previous research is therefore extended by the presented work, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
+By proposing an approach to ensure that unavoidable voltage drops along the feeder do not skew the control decisions, and by taking the into consideration voltage oscillations that are caused by demand variation, objective 4, as outlined in Section \ref{ch-introduction:sec:problem-statement}, is addressed.
+In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information, and hence does not require such an extensive communications infrastructure.
