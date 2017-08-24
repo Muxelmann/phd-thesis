@@ -28,21 +28,47 @@ Subsequently, all case studies and metrics that are used to assess the MAS perfo
 \subsection{MAS Implementation}
 \label{ch3:subsec:implementation}
 
-The MAS was written in Java and implemented on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
-Here, 
+The MAS was implemented in Java and ran on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
+In Figure \ref{ch3:fig:agent-implementation}, the complete structure and communications procedure is explained.
 
 \input{_chapter1/fig/agent-implementation}
+
+Here, the laboratory workstation uploads the simulation task to a submit node.
+This node starts a certain number of workers, which in turn run the Java agent software to communicate with each other and to schedule the charging of their simulated EVs.
+One of the workers is chosen to be the supplier, that obtains the network load data from a remote data store and propagates this information in a synchronised manner.
+In the diagram in Figure \ref{ch3:fig:agent-implementation}, all bold arrows indicate the inter-agent communication, the solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software launches.
 
 \subsection{MAS Desynchronisation}
 \label{ch3:subsec:desynchronisation}
 
 Operating the agents in a desynchronised manner can be achieved in two distinct ways.
-Either, any idle state that is interrupted by the synchronising signal is removed, or agents operate within a fixed execution loop and continue after each agent's loop timer expired.
+Either, any idle state that is interrupted by the synchronising signal (which is shown in Figure \ref{ch3:fig:agent-synchronisation}) is removed, or agents are launched with a random jitter and operate in an execution loop of a fixed time.
+Although the first approach would result in a quick simulation execution, only the second way of desynchronising agents is compliant with the compute cluster's terms of usage.
+Therefore, the latter way was implemented uses and each agent was equipped with its individual loop timer to regulate its execution.
 
-The former option would be the easier option to implement
+The desynchronised agents are launched in succession and immediately begun their scheduling task.
+To simulate communication irregularities, a jitter was added to the delay between successive agent launches.
+The resulting MAS then consisted of a completely desynchronised collection of agents, i.e. none of the agent's loop execution is aligned or dependent on any other agent's loop execution.
+This successful desynchronisation can be observed in Figure \ref{ch3:fig:agent-desynchronisation}, where the supplier agent never receives more than one message at once.
+
+\input{_chapter3/fig/agent-desynchronisation}
 
 \subsection{Cases and Performance Metrics}
 \label{ch3:subsec:cases-and-metrics}
+
+\subsection{Synchronised vs Desynchronised Implementation}
+
+Whilst the synchronised and desynchronised implementation of the algorithm do not differ in the scheduling method, their updating process distinguishes them.
+For the synchronised implementation, the algorithm performs the network's demand update (i.e. Equ. \ref{ch3:equ:updated-demand-profile}) after all EVs have sent their updated charging profiles.
+However, in the desynchronised implementation of updates are sent immediately and without regarding the compute state of other agents.
+To achieve this, all physical agents would dispatch their brokers simultaneously, which could be accomplished in two ways:
+
+\begin{enumerate}
+	\item All agents were launched at the same time and a long enough waiting delay was introduced after the algorithm rescheduled. Once the waiting period has passed, all agents broadcast their new charging profile and acquire the new net demand after another waiting preset delay. Despite the additional time requirements added to the algorithm, all agents would have synchronised network information and schedule in a synchronised manner.
+	\item Alternatively, a synchronisation ping was sent from the substation once all agents' charging profiles were received. Whilst this method does not cause additional system delays, it adds additional strain onto the communications infrastructure. Due to the a sufficiently equipped communications network, this approach was chosen here.
+\end{enumerate}
+
+In contrast, for the asynchronous implementation, the agent update is broadcasted as soon as an EV has found its updated charging profile. No synchronisation mechanism is required and only the agent's solving speed limits the system's performance. The pseudo random delay between agent's solving time causes each agent to obtain an already modified load profile when querying the substations. By introducing this distorted network load to all EVs, the algorithm's initialisation and all consecutive iterations schedule the charging load differently.
 
 
 

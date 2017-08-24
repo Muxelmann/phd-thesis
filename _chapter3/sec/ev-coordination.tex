@@ -1,14 +1,10 @@
 \section{Coordination of EV charging}
 \label{ch3:sec:ev-coordination}
 
-In this section, an algorithm for EV charging is presented, which is later implemented in both a synchronised and desynchronised case.
-Real load data is used in combination with EV demand to evaluate the performance of the algorithm at preventing new power spikes from occurring.
-Convergence of the algorithm is studied and convergence criteria as well as rate of convergence are presented, too.
-
-The structure of this section is as follows.
-First, the means and assumptions for calculating EV demand is defined.
-Then the real load data is introduced and explained.
-The EV scheduling algorithm is introduced next, before the performance parameters are presented.
+In this section, an algorithm for EV charging is presented, which is implemented in both a synchronised and desynchronised case.
+The Irish load dataset \cite{IrishData2002} is used in combination with EV energy demand to test the proposed smart-charging algorithm.
+Performance of the algorithm at preventing new power spikes from occurring is then assessed with the use of standard performance metrics.
+Finally, to study the convergence of the algorithm, a convergence criteria as well as rate of convergence are presented, too.
 
 \subsection{EV Demand}
 
@@ -18,15 +14,15 @@ The EV scheduling algorithm is introduced next, before the performance parameter
 \nomenclature[K]{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
 \nomenclature[K]{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
 \nomenclature[K]{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $\textbf{p}_{\text{EV},u,n} = (p_{\text{EV},u,n}(t))$ (Chapter \ref{ch3})}
 
 \nomenclature[K]{$P_{\text{min},u}$}{Minimum EV charging power (Chapter \ref{ch3})}
 \nomenclature[K]{$P_{\text{min},u}$}{Maximum EV charging power (Chapter \ref{ch3})}
 
-EVs were modelled as loads that, over the course of a scheduling horizon, $T_\text{sch}$, each need to consume a certain amount of energy, $E_u$, to simulate charging their batteries.
-Each EV, i.e. $u$, is part of a fleet of charging and coordinated EVs, i.e. $u \in [1, \dots, U]$.
-Unlike typical loads (e.g. households), EVs do not have a predetermined load profile in this simulation and are therefore flexible to schedule their demand at each time $t$ a $p_{\text{EV},u,n}(t)$, where $p_{\text{EV},u,n}(t) \in \textbf{p}_{\text{EV},u,n}$.
-In other words, they can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_\text{sch}$.
+In order to simulate the charging of an EV's battery, each EV, $u$, was modelled as a load that, over the course of a scheduling horizon, $T_\text{sch}$ where $T_\text{sch} \in \mathbb{Z}^{>0}$, needs to consume a certain amount of energy, $E_u$.
+A predetermined number of EVs, $U$, makes up a coordinated fleet of charging EVs, i.e. $u \in \{1, \dots, U\}$.
+Unlike typical load profiles (e.g. household load profiles), EVs are modelled to not have a predetermined load shape and they are therefore flexible to schedule their demand, $p_{\text{EV},u,n}(t)$, at each moment time $t$, where $\textbf{p}_{\text{EV},u,n} = (p_{\text{EV},u,n}(t))$.
+In other words, EVs can autonomously assign their own charging plan over the predetermined number of future time-slots, $T_\text{sch}$.
 Due to limitations in on-board power electronics, each EV's maximum charge rate, $P_{\text{max},u}$, is restricted and may not be exceeded.
 Equally, in order to meet the EV's charging demand over the scheduling horizon, $T_\text{sch}$, a soft minimum charging power, $P_{\text{min},u}$ is also introduced:
 
