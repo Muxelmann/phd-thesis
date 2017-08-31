@@ -1,17 +1,13 @@
 \section{Background and motivation}
 \label{ch-introduction:sec:background}
 
-% - Background
-%   - Electricity grid
-%   - Role of energy storage - a survey
-
 Today's society and economy are highly dependent on the continuous availability of energy, or more specifically: electric energy.
-Demand for electricity has increased over the past decades, and this trend is expected to continue into the future \cite{HMGovernment2009}.
-This demand increase is only accelerated since major focus of UK energy policies has been put on transitioning towards a low carbon economy \cite{RoyalAcademyofEngineering2010}.
+In the UK, demand for electricity has increased over the past decades, and this trend is expected to continue into the future \cite{HMGovernment2009}.
+This demand increase is only accelerated since a major focus of UK energy policies has been put on transitioning towards a low carbon economy \cite{RoyalAcademyofEngineering2010}.
 Particularly the decarbonisation of heat and transport sectors are two areas of significant strategic focus and Low Carbon Technology (LCT) such as Photo-Voltaic (PV) installations, electric vehicles and heat pumps are expected to contribute significantly to this transition.
 
 However, as adaptation of these LCTs increases and they start to penetrate power distribution networks, stress on these networks will continue to increase even further, which may result in additional service disruptions.
-Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks to exceed their operational constraints even at relatively low national rate of LCT adaption \cite{Poghosyan2014}.
+Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks exceeding their operational constraints even at relatively low national rate of LCT adaption \cite{Poghosyan2014}.
 The scale of this energy transition becomes becomes particularly apparent when referring to the UK's future energy scenarios that compare the predicted future load scenarios.
 
 \input{_introduction/fig/electricity-demand-forecast}
@@ -29,11 +25,12 @@ Yet residential and commercial sectors are expected to increase their demand and
 Their negative impact on the distribution network is only amplified, since loads in the residential and commercial sectors are typically situated at the network edge, i.e. in the LV distribution network.
 This part of the network is its weakest part, since its assets were designed to caters for small powers between 315kVA to 500kVA \cite{EDS08-0115}.
 A study based on the findings from \textit{Electricity North West} in \cite{ElectricityNorthWestLtd2014} emphasises the issues that result from residential increase in demand for electricity, of e.g. voltage deviation due to an uptake of LCTs.
-The voltage deviation and corresponding power profiles are shown in Figure \ref{ch-introduction:fig:lct-impact}, which was produced by simulating several loads on the IEEE LV Test Case power distribution feeder.
-Loads were modelled at high resolution, using the \textit{Centre for Renewable Energy Systems Technology} (CREST) dwelling model \cite{Richardson2010a} and a subset of loads was adjusted using a normal and Rayleigh distribution for solar irradiance and home-charging EVs, respectively.
-The findings in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
-
-\input{_introduction/fig/lct-impact}
+As the number of PV installations is expected to grow, the voltage deviation magnitude and frequency is also going to increase \cite{Woyte2006}.
+%The voltage deviation and corresponding power profiles are shown in Figure \ref{ch-introduction:fig:lct-impact}, which was produced by simulating several loads on the IEEE LV Test Case power distribution feeder.
+%Loads were modelled at high resolution, using the \textit{Centre for Renewable Energy Systems Technology} (CREST) dwelling model \cite{Richardson2010a} and a subset of loads was adjusted using a normal and Rayleigh distribution for solar irradiance and home-charging EVs, respectively.
+%The findings in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
+%
+%\input{_introduction/fig/lct-impact}
 
 Such a voltage drop behaviour was achieved with a relatively low rate of LCT adaptation in the residential environment, therefore strict regulation is in place to assure continuous operation without violating any operating constraints.
 Otherwise additional voltage deviation, unbalanced network operation or potential asset overloads could be the result.
@@ -44,6 +41,39 @@ This ADMD method has remained the same for many years and uses historical load a
 To make things worse, LV networks in the UK are generally unmonitored once installed.
 Distribution Network Operators (DNOs) have become aware of this issue and are developing updated planning strategies involving ``smart'' and ``flexible'' electricity grids \cite{Fang2012}.
 However, in situ equipment that will become subject to the same adaptation of LCT needs to be managed actively via innovation in the use of existing and new technologies; otherwise both frequency of service disruptions and customer minutes lost will increase alongside the proliferation of LCTs \cite{Ault2008a}.
+
+
+\subsection{Topology and challenges of the UK low-voltage power distribution network}
+\label{ch-introduction:subsec:topology-of-lv-network}
+
+Today's UK electricity network has grown over the past century and is based on an interconnected high-voltage gird.
+The largest part of this grid is also known as the transmission network, which connects centralised power stations to distribution networks.
+Those distribution networks supply electricity to all loads across the mainland of the UK, including industrial, urban and rural customers\footnote[1]{Some small and remote UK islands like the Shetland islands are not connected to this national grid and have their separate electricity infrastructure. Therefore they are not considered as part of this thesis since the study of this kind of network lies outside the research scope.}.
+
+The entire structure of the network is a three-phase Alternating Current (AC) system since this allowed easy voltage level conversion with the use of transformers, i.e. without the need of power electronics.
+In the UK, the highest voltage level for generation and transmission is 400kV.
+Such a high voltage requires a relatively small current to transmit the generated bulk power, which in turn reduces conduction losses and maximises the efficiency of the high-voltage network.
+Regional supply points step-down this high voltage to 132kV\footnote[1]{In some cases regional supply points provide 127kV instead of 132kV.} to deliver power to Distribution Network Operators (DNOs).
+From the primary level of the distribution network and onwards, this so called medium-voltage is stepped down to 33kV, then 11kV and finally 400V, in order to cater for heavy industry, medium clients and household sized customers, respectively.
+
+\nomenclature[G]{DER}{Distributed Energy Resource}
+\nomenclature[G]{ADMD}{After Diversity Maximum Demand}
+\nomenclature[G]{OLTC}{On-Line Tap-Changer}
+
+Primary substations in the UK are equipped with regulation equipment, e.g. On-Line Tap-Changers (OLTC), to increase or decrease the voltage on the secondary transformer side depending on the current level of demand.
+Secondary transformers do not have such regulating equipment and instead apply a constant voltage conversion ratio which is set according to the network's typical demand.
+This aim of this network regulation is to keep distribution level voltages within their statutory operating bands, i.e. 230V +10\% -6\% for the LV network as specified by the Electricity Supply Quality and Continuity Regulation (ESQRC) \cite{HealthandSafetyExecutive2002} and Engineering Recommendation G59 \cite{EnergyNetworksAssociation2013}.
+In the UK, all households are connected to one of the three phases of the 230V distribution network.
+To achieve a balanced network, each customer's phase allocation is chosen at random.
+Also, throughout the majority of the power network's development period, customers were light consumptive loads, which meant that a reasonably predictable power flew from higher voltage levels towards the lower voltage levels.
+Therefore, traditional network planning approaches to circumvent constraint violations, follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
+However, this ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions, which are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
+
+Firstly, because the injection of power from Distributed Energy Resources (DERs), e.g. rooftop solar PV, can reverse the power flow, and secondly, because large and volatile electrified products, e.g. home-charging Electric Vehicles (EVs), are predicted to significantly increase demand at peak times.
+Such technologies have significant impact on the voltage stability \cite{Petinrin2016}, and combined with the expected increased in phase unbalance, traditional network management methods may no longer be able to effectively mitigate their negative impact.
+This means that in situ equipment needs to be managed actively via innovation in the use of existing and new technologies; otherwise not only the frequency of constraint violations will increase, but also the frequency of service disruptions and customer minutes lost is expected to rise alongside the proliferation of LCTs \cite{Ault2008a}.
+One such innovative technology, which is the main focus of the presented research, is the installation and management of battery storage \cite{Chen2009}, which is reviewed in the following section.
+
 
 \subsection{Solutions to mitigate impact of LCT}
 \label{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}
@@ -60,7 +90,7 @@ Most promising alternatives are to install flexible and controllable Distributed
 BESS has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
 
 Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
-Roles for BESS are addressed in the subsequent section, i.e. Section \ref{ch-introduction:subsec:role-of-energy-storage-a-survey}.
+Roles for BESS are addressed in the subsequent section, i.e. Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}.
 However, a few examples of potential benefits from BESS include the regulation of voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak loads to relieve stress from the installed network assets \cite{Bennett2015}, and reducing phase unbalance to increase network efficiency \cite{Wang2015b} .
 Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control can be split into two complementing yet unmarried approaches:
 
@@ -74,77 +104,6 @@ For instance, several industry leaders propose to store solar energy in order to
 Without rooftop PV installations, batteries need work in a cooperative manner to not impose additional strain onto the network.
 The full review of storage control strategies to achieve both off-line and on-line, as well as centralised/individual and distributed battery control is presented in Section \ref{ch-literature:sec:control-of-energy-storage}.
 
-\subsection{Role of energy storage - a survey}
-\label{ch-introduction:subsec:role-of-energy-storage-a-survey}
-
-
-\input{_introduction/fig/storage-financial-benefits}
-
-The idea of using energy storage in the electricity grid has been discussed for quite some time, and its important role in future energy systems has already been identified in the 70s \cite{Kalhammer1979}.
-As the name suggests, electrical energy storage systems have the ability to both consume, store, and release electrical energy by converting it into a different form of energy.
-Depending on the rate at which energy can be consumed and released, i.e. the system's power, as well as the amount of energy that can be stored, i.e. system's capacity, different functions can be provided.
-A study for the Department Of Energy (DOE) showed that, when correctly exploited, these functions can yield direct financial benefits of \$157.56 billion over an estimated 10 year system lifecycle \cite{Eyer2010a}.
-Figure \ref{ch-introduction:fig:storage-financial-benefits} shows these benefits in relation to their typical discharge period, and links them to their associated functions, too.
-Here, Time Of Use (TOU) energy cost management yields the largest economic profit, yet from a historical point of view, bulk energy storage has played the most important role in the energy system.
-
-Nowadays, storage can also tap into emerging revenue streams and perform additional functions.
-As identified in several review articles \cite{Chen2009, Katsanevakis2017, Guney2017}, the key roles and applications of energy storage systems, regardless of profitability in the current market situation, can be identified as follows:
-
-\textbf{Energy shifting - arbitrage}: This function uses the difference in energy price to yield revenue.
-More specifically, as energy pricing is expected to become more dynamic and responsive to current energy demand and generation, storage is controlled to charge when energy prices are low and discharge when energy prices are high \cite{Chen2009, Leou2012}.
-Such dynamic pricing schemes are expected to emerge due to significant changes in demand at morning and evening peaks \cite{Koohi-Kamali2013}.
-
-\textbf{Supply capacity}: In order to meet future energy demand, energy suppliers commit their resources in advance.
-Doing so allows them to plan for their operation and solve the economic dispatch problem.
-With increasing demand, the supply volume will have to increase, too.
-However, it is predicted that energy storage can defer or even avoid investments in power plants, assuming they are sized accrodingly (i.e. several 100MW)\cite{Dobie1998}.
-Bulk energy storage was the first choice to support supply capacity.
-One example is pumped hydro-electric energy storage, which has seen a global growth of 127GW since 1979 \cite{Rehman2015, Barbour2015, Barbour2016}.
-
-\textbf{Ancillary services}: These services are of interest to transmission and distribution system operators since they support the operation of their networks.
-For example, load following and frequency regulation are two complementing applications of that address the imbalance between demand and supply \cite{Bevrani2011}.
-In case of a severe imbalance that resulted in network outage, black start is also a function that can be supplied by energy storage \cite{Cole1995, Kashem2007}.
-Since modern energy storage systems can absorb and inject both active and reactive power, they can also provide voltage support \cite{Kulkarni2005}.
-
-\textbf{Grid stability}: To make the grid more resilient to network faults (e.g. short-circuit or loss of a large generator), or to overcome scheduled network outages, energy storage can be used as an intermittent energy source \cite{Kundur1993}.
-To provide optimal operation conditions for energy generators, storage can support rotor angle stability and voltage stability by injecting active and reactive power at the point of common coupling \cite{Chakraborty2012, Kolluri2002}.
-Furthermore, sub-synchronous resonance and harmonic interference can also be reduced \cite{Wang1994}.
-This coupling resonance can occur between electrical and mechanical systems and can damage the mechanical structure due to repetitive stresses and strains.
-
-\textbf{Upgrade deferral}: As already stated in Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, both transmission and distribution systems would have to be upgraded unless energy storage could provide network-support functions.
-By deferring network upgrades, network assets will be used more efficiently, and customer disruptions will be avoided \cite{Sayer2007, Eyer2010a}.
-Furthermore, in areas where the expected load has already been met and growth has levelled out, deployed energy storage is flexible enough to provide alternative functions (unlike other network assets) \cite{Huff2013}.
-
-\textbf{Transmission charges}: In scenarios where generators are charged to use transmission systems (due to the capacity limitations of the transmission system), energy storage could take advantage of the price structure to maximise the profit from the generated energy \cite{Sayer2007, Leou2012}.
-
-\textbf{Congestion relief}: High congestion at substations of heavily loaded transmission or distribution lines can be tackled by co-located energy storage units \cite{Saez-de-Ibarra2013a, Kulkarni2005}.
-This can be achieved by e.g. shaving peak load or relaxing the energy requirements from distributed generation \cite{Reihani2016, Gerards2016d}.
-
-\textbf{Service reliability}: In areas where a string grid connection is required to assure e.g. industry operations, an ``uninterruptible power supply'' may be required.
-Traditionally, these power supplies were diesel backup generators, but modern energy storage technology can provide similar services at lower cost \cite{Schoenung2001} (particularly when including alternative revenue streams).
-
-\textbf{Power quality}: Sub-cycle and harmonic distortions on can severely deteriorate power quality, since they can have unwanted effects on connected equipment (similar to the issue of sub-synchronous resonance at the generation side).
-Energy storage with modern power electronics could be capable of providing power filtering functions that suppress those distortion \cite{Putrus2007}.
-This feature could be of particular interest to LV networks in the UK, since customers are arbitrarily connected to a single phase of a three-phase network.
-Therefore, the discrepancy of power quality between the phases is even larger, yet available energy storage resources could even address this issue \cite{Miret2009} (especially when considering household connected units).
-
-
-\textbf{Time-of-use energy charges}: A hurdle to DSM through flexible tariffs or TOU tariffs is the reason that consumers would have to adjust their energy consumption based on external price signals, which many are do not want to do.
-Energy storage could however decouple the consumer form these tariffs and allow them to continue with their normal lifestyle \cite{Khani2014}.
-Additionally, when exploiting the energy price difference, storage could even supply arbitrage functions to some customers and reduce their electricity bill \cite{Nair2010a}.
-For customers with local generation, e.g. PV installation, their bill can be reduction even further.
-This would be done by storing the generated energy until a period of high energy prices arises.
-At this time energy storage could release the energy to maximise self-consumption \cite{Luthander2016}.
-
-\textbf{Demand charges}: Larger customers, i.e. industrial and commercial loads, are not only charged for their total energy demand, but also their for their largest continuous power demand \cite{Oudalov2007, Mackey2013}.
-Therefore, a factory that may use a relatively small amount of energy over a comparatively short amount of time, is billed accordingly.
-After all, the infrastructure to deliver the required power needs to be installed and maintained.
-In this scenario, energy storage could reduce the intermittent power demand without significantly increasing the total energy demand, and therefore reduce demand charges for larger customers \cite{Aghaei2013}.
-
-\textbf{Renewables integration}: Unlike traditional energy sources, renewables have are highly volatile and have limited availability.
-Since their availability, i.e. for solar PV, may not align with periods of high demand, i.e. during morning and evening, arbitrage functions may be provided to maximise the use of renewable generation - i.e. renewables ``shifting'' \cite{Zakeri2015}.
-Furthermore, by discharging energy storage during times of low renewable generation, e.g. due to cloud cover or varying wind \cite{Jewell1987}, a continuous supply of energy can be assured - i.e. renewables ``smoothing''.
-And lastly, if a renewable resource was committed for longer periods of time, yet the associated energy forecasts overestimated its generation capacity, storage can supply the gap to avoid balancing charges - i.e. renewables ``firming'' \cite{Chakraborty2012}.
 
 \subsection{Smart control}
 \label{ch-introduction:subsec:smart-control}
@@ -171,7 +130,7 @@ Therefore, not only smart control algorithms, but also their sensitivity to the 
 \subsection{Challenges to control BESS}
 \label{ch-introduction:subsec:motivation}
 
-From the extensive catalogue of possible roles for energy storage in the electricity grid that was presented in Section \ref{ch-introduction:subsec:role-of-energy-storage-a-survey}, the focus of the research in this thesis is put on aiding DNOs to manage and operate their power distribution networks.
+From the extensive catalogue of possible roles for energy storage in the electricity grid that was presented in Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}, the focus of the research in this thesis is put on aiding DNOs to manage and operate their power distribution networks.
 More specifically, battery energy storage is the main focus since is has the potential to defer or even mitigate costly network reinforcements.
 Modern battery technology allows the storage of electrical energy in ever-decreasing form factory, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
 
