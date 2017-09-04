@@ -7,26 +7,15 @@ These contributions are summarised as follows:
 
 \begin{itemize}
 	\item
-	A selection of key parameters for the LV network is identified and their corresponding cost functions are formulated, to give an indication of the operational performance of the underlying system.
-	These key network parameters are based on both realistic parameters (i.e. hypothetically obtainable in reality) as well as theoretical parameters (i.e. only obtainable in simulations).
+	An iterative closed-loop power adjustment method is presented, which controls a DNO owned storage devices in such a way that its three-phase power flow improves LV network operation.
+	This contribution is the result of \ref{objective-1} and is achieved by using the device's flexibility in assigning active power to the three phases, and by using the remaining capacity of power electronics to inject or absorb reactive power, whilst obeying to an underlying half-hourly BESS schedule.
 	\item
-	A procedure to generate optimised half-hourly BESS schedules through the use of day-ahead forecasts is presented.
-	This procedure uses cost functions that are based on the well established ``Peak-to-Average Ratio'' as well as the power transient and difference between minimum and maximum power to achieve a ``valley-filling'' and ``peak-shaving'' behaviour.
+	A dynamic control method to merge off-line BESS scheduled control with an on-line power prediction mechanism (i.e. Model Predictive Control) is developed to minimises both the imminent sub-half-hourly load peaks as well as the day-ahead half-hourly load peaks.
+	This contribution is the result of \ref{objective-2} and is achieved by merging schedules that are based on real load forecasts with an autoregressive model that is fed by real load data.
 	\item
-	A BESS model is constructed in order to capture the dynamics and technical limitations of the battery units (i.e. Energy Storage and Management Unit - ESMU) that were used throughout the field trials conducted by \textit{SSEN}.
+	A robust charge scheduling algorithm for multiple, distributed entities is developed to prevent charging spikes from adding excessive stress onto the distribution network which would otherwise experience capacity shortages.
+	This contribution is the result of \ref{objective-3} and is achieved by implementing a ``Multi-Agent System'' (discussed in the literature review in Section \ref{ch-literature:subsec:centralised-and-distributed-control}) on a compute cluster to compare algorithm performance for both synchronised and desynchronised message exchange.
 	\item
-	An iterative closed-loop power adjustment method is presented, which controls a DNO owned storage devices in such a way that its three-phase power improves LV network operation.
-	This improvement is achieved by using the device's flexibility in assigning active power to the three phases, and by using the remaining capacity of power electronics to inject or absorb reactive power, whilst obeying to an underlying half-hourly BESS schedule.
-	\item
-	A dynamic control mechanism to merge half-hourly BESS schedules with an on-line power prediction mechanism (i.e. Model Predictive Control) is presented, that minimises both the imminent sub-half-hourly load peaks as well as the day-ahead half-hourly load peaks.
-	This minimisation is achieved by merging schedules that are based on load forecasts with an autoregressive model that is fed by real load data.
-	\item
-	A charge scheduling algorithm for multiple, distributed BESSs to prevent charging spikes is developed.
-	This algorithm is subjected to both synchronised message passing as well as desynchronised message passing to asses the difference in algorithm performance and convergence.
-	\item
-	A stochastic EV behavioural model to generate minutely charge demand for a fleet of EVs is developed.
-	For particular levels of EV uptake, this model is used to generate additional network load since EVs are expected to be charged at home.
-	\item
-	Improvement of the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm to achieve cooperative behaviour of multiple BESSs.
-	Using this algorithm enables distributed control without the need for an underlying communications infrastructure.
+	A communication-less distributed control method is developed that improves the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm to achieve cooperative behaviour of multiple BESSs in order to mitigate the impact of co-located ``dumb-charging'' EVs.
+	This contribution is the result of \ref{objective-4} and is achieved by individually assigning control parameters to all BESS whilst using local voltage measurements to infer the current network status.
 \end{itemize}
