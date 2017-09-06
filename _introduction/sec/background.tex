@@ -4,27 +4,25 @@
 Today's society and economy are highly dependent on the continuous availability of energy, or more specifically: electric energy.
 In the UK, demand for electricity has increased over the past decades, and this trend is expected to continue into the future \cite{HMGovernment2009}.
 This demand increase is only accelerated since a major focus of UK energy policies has been put on transitioning towards a low carbon economy \cite{RoyalAcademyofEngineering2010}.
-Particularly the decarbonisation of heat and transport sectors are two areas of significant strategic focus and Low Carbon Technology (LCT) such as Photo-Voltaic (PV) installations, electric vehicles and heat pumps are expected to contribute significantly to this transition.
+Particularly the decarbonisation of heat and transport sectors are two areas of significant strategic focus and Low Carbon Technology (LCT) such as Photo-Voltaic (PV) installations, Electric Vehicles (EVs) and heat pumps are expected to contribute significantly to this transition.
 
 \nomenclature[G]{FES}{Future Energy Scenarios}
 
-However, as adaptation of these LCTs increases and they start to penetrate power distribution networks, stress on these networks will continue to increase even further, which may result in additional service disruptions.
-Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks exceeding their operational constraints even at relatively low national rate of LCT adaption \cite{Poghosyan2014}.
-The scale of this energy transition becomes becomes particularly apparent when referring to the UK's Future Energy Scenarios (FES) that compare the predicted future load scenarios.
+As adaptation of these LCTs increases and they start to penetrate power distribution networks, stress on these networks will also continue to increase, which is expected to result in operating issues that can eventually lead to additional service disruptions.
+Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain Low-Voltage (LV) networks exceeding their operational constraints, even at relatively low national rate of LCT adaption \cite{Poghosyan2014}.
+The scale of this energy transition becomes becomes particularly apparent when referring to the UK's 2017 Future Energy Scenarios (FES) that compare the predicted future load scenarios.
 
 \input{_introduction/fig/electricity-demand-residential}
 
 Figure \ref{ch-introduction:fig:electricity-demand-residential} shows the predicted increase in annual residential electricity demand, where the market driven scenario (i.e. ``Consumer Power'') shows the largest increase until 2050.
-When putting more emphasis on environmental concerns, the ``Two Degrees`` scenario emerges, which refers to the international plan of limiting global temperature increase to two degrees (previously known as the ``Gone Green`` scenario).
-According to the FES 2017, those two scenarios enable a continuing growth of the UK economy, but put very different emphasis on climate issues.
+When putting more emphasis on environmental concerns, the  ``Two Degrees`` scenario emerges - this scenario refers to the internation of limiting global temperature increase to two degrees (previous FES reports referred to this scenario as ``Gone Green``).
+According to the FES 2017, those two scenarios enable a continuing growth of the UK economy, but put very different emphasis on decarbonisation targets.
 Although the rise in demand for electricity is projected to differ by more than 30TWh in 2050 if the ``Two Degrees`` scenario is achieved, the aforementioned uptake of LCTs like Electric Vehicles (EVs) is expected to put a noticeable stain onto the power network in both scenarios.
-
-This trend is expected despite increasing device efficiencies, since the shift from oil and gas to electricity, i.e. the electrification, offset these gains.
 
 \input{_introduction/fig/electricity-demand-ev}
 
-Focusing on the electrification of personal transport, Figure \ref{ch-introduction:fig:electricity-demand-ev} shows that both the ``Consumer Power'' and the ``Two Degrees'' scenario will add more than 30TWh of annual energy demand by 2045.
-Since most of these EVs are expected to charge at home and at similar times, aggregating effects are feared to not only exhaust national energy supply capabilities, but also power distribution networks.
+Focusing on the electrification of personal transport by introducing EVs into the electricity demand, Figure \ref{ch-introduction:fig:electricity-demand-ev} shows that both the ``Consumer Power'' as well as the ``Two Degrees'' scenario will add more than 30TWh of annual energy demand by 2045.
+Since most of these EVs are expected to charge at home and (at least initially) at similar times, aggregating effects are feared to not only exhaust national energy supply capabilities, but also power distribution capacities.
 
 \input{_introduction/fig/electricity-peak-demand}
 
@@ -32,23 +30,26 @@ Since most of these EVs are expected to charge at home and at similar times, agg
 \nomenclature[G]{ENW}{Electricity North West}
 
 Figure \ref{ch-introduction:fig:electricity-peak-demand} supports this worry since uncontrolled proliferation of LCTs and EVs, as shown in the ``Consumer Power'' scenario, will add more than 20GW of demand onto today's peak power levels.
+Such a rise in peak demand would exceed today's supply capacities, especially since the new energy mix and decommissioning of fossil fuelled power plants have resulted in this year's winter capacity margin to only lie between 3.7GW and 4.9GW \cite{NationalGrid2017a}.
 Although FES 2017 expects the ``Two Degrees'' scenario to also show an increase in peak power, better coordination and control is expected to mitigate half of the 20GW peak increase.
-Whilst UK power transmission networks are being upgraded and will be capable of handling this increased power demand, the increasing stress on the distribution network still remains.
+From this point of view, today's narrow capacity margins could already cater for nearly half of the increase in peak demand that is expected to occur in 33 years, i.e. 2050.
+Whilst UK power transmission networks are being upgraded and will therefore be capable of handling this increased power demand, the increasing stress on the distribution network still remains.
 This is due to the fact that loads in the residential and commercial sectors are typically situated at the network edge, i.e. in the LV distribution network.
 
-\subsection{Topology and challenges of the UK low-voltage power distribution network}
+\subsection{Topology and challenges of the UK electricity network}
 \label{ch-introduction:subsec:topology-of-lv-network}
 
 The UK electricity network in today's form has grown over the past century and is based on an interconnected high-voltage gird.
 Its largest part is also known as the transmission network, which connects remote power stations to distribution networks.
-Those distribution networks supply electricity to all loads across the mainland of the UK, including industrial, urban and rural customers\footnote[1]{Some small and remote UK islands like the Shetland islands are not connected to this national grid and have their separate electricity infrastructure. Therefore they are not considered as part of this thesis since the study of this kind of network lies outside the research scope.}.
+Those distribution networks supply electricity to all loads across the mainland of the UK, including industrial, urban and rural customers\footnote{Some small and remote UK islands like the Shetland islands are not connected to this national grid and have their separate electricity infrastructure. Therefore they are not considered as part of this thesis since the study of this kind of network lies outside the research scope.}.
 
 The entire structure of the electricity network is a three-phase Alternating Current (AC) system since this allows easy voltage level conversion with the use of transformers, i.e. without the need of power electronics.
 In the UK, the highest voltage level for generation and transmission is 400kV.
 Such a high voltage requires a relatively small current to transmit the generated bulk power, which in turn reduces conduction losses and maximises the efficiency of the high-voltage network.
-Regional supply points step-down this high voltage to 132kV\footnote[1]{In some cases regional supply points provide 127kV instead of 132kV.} to deliver power to Distribution Network Operators (DNOs).
-From the primary level of the distribution network and onwards, this so called medium-voltage is stepped down to 33kV, then 11kV and finally 400V, in order to cater for heavy industry, medium clients and household sized customers, respectively.
-In the UK, all households are connected to one of the three phases of the 230V distribution network, and to achieve a balanced network, each customer's phase allocation is chosen at random.
+Regional supply points step-down this high voltage to 132kV\footnote{In some cases regional supply points provide 127kV instead of 132kV.} to deliver power to Distribution Network Operators (DNOs).
+From the primary level of the distribution network and onwards, this so called medium-voltage is stepped down to 33kV, then 11kV and finally 400V phase to phase (P2P), in order to cater for heavy industry, medium clients and household sized customers, respectively.
+In the UK, all households are connected to one of the three phases of the distribution network and therefore are supplied at a nominal voltage of 230V (phase to neutral - P2N).
+To achieve a balanced network, each customer's phase allocation is chosen at random.
 
 \nomenclature[G]{DER}{Distributed Energy Resource}
 \nomenclature[G]{ADMD}{After Diversity Maximum Demand}
@@ -63,51 +64,38 @@ More specifically, in the ENW lead project 200 LV networks in the UK were monito
 Initial findings showed that even in today's distribution networks, 15\% of all monitored substations experienced reverse power flow, 4.5\% substations reported high voltages (i.e. above 253V), and only 2\% substations reported occasional low voltages (i.e. below 216V).
 With the voltage drop assumption however, customers in these network were still believed to be operating at BSEN50160 compliant voltages.
 Models to assess the LCT headroom indicated that the first issue is always voltage deviation and thermal or capacity limits are of second concern.
-This finding is based on the fact that, LV networks are rarely managed in an active manner, hence as the number of PV installations is expected to grow, the voltage deviation magnitude and frequency is also going to increase \cite{Woyte2006}.
-%The voltage deviation and corresponding power profiles are shown in Figure \ref{ch-introduction:fig:lct-impact}, which was produced by simulating several loads on the IEEE LV Test Case power distribution feeder.
-%Loads were modelled at high resolution, using the \textit{Centre for Renewable Energy Systems Technology} (CREST) dwelling model \cite{Richardson2010a} and a subset of loads was adjusted using a normal and Rayleigh distribution for solar irradiance and home-charging EVs, respectively.
-%The findings in Figure \ref{ch-introduction:fig:lct-impact} show how uncontrolled home-charging of EVs significantly reduces voltages in the network, and although solar injection does lead to voltage rises along the feeder, unbalanced injection increases voltage deviation even further.
-%
-%\input{_introduction/fig/lct-impact}
-The observed voltage deviation behaviour was caused despite a relatively low rate of LCT adaptation in the residential environment.
-Therefore strict regulation is in place to assure continuous operation without violating any operating constraints.
+This finding is based on the fact that, LV networks are highly resistive and rarely managed in an active manner; hence as the number of PV installations is expected to grow, the voltage deviation magnitude and frequency is also going to increase \cite{Woyte2006}.
+Since the expected voltage deviation was caused despite a relatively low rate of LCT adaptation in the residential environment, strict regulation has been put in place to assure continuous operation without violating any operating constraints.
 Otherwise additional voltage deviation, unbalanced network operation or potential asset overloads could be the result.
 
-Traditional network planning approaches that have been used by DNOs to expand and install network assets were designed to circumvent constraint violations in order to follow these regulation.
+Traditional network planning approaches that have been used by DNOs to expand and install network assets were designed to circumvent such constraint violations in order to follow the aforementioned standards and regulations.
 The most common approach follows the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
 This ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions that are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
 To make things worse, LV networks in the UK are generally unmonitored once installed.
 Distribution Network Operators (DNOs) have become aware of this issue and are developing updated planning strategies involving ``smart'' and ``flexible'' electricity grids \cite{Fang2012}.
 However, in situ equipment that will become subject to the same adaptation of LCT needs to be managed actively via innovation in the use of existing and new technologies; otherwise both frequency of service disruptions and customer minutes lost will increase alongside the proliferation of LCTs \cite{Ault2008a}.
-%
-%Also, throughout the majority of the power network's development period, customers were light consumptive loads, which meant that a reasonably predictable power flew from higher voltage levels towards the lower voltage levels.
-%Therefore, traditional network planning approaches to circumvent constraint violations, follow the commonly used practice of aggregating a large number of customers and designing the power delivery network to cater for their largest probable demand, i.e. the After Diversity Maximum Demand (ADMD) method \cite{Richardson2010a}.
-%However, this ADMD method has remained the same for many years and uses historical load analysis and standard growth assumptions, which are both no longer valid in this unprecedented LCT uptake scenario \cite{Yunusov2016}.
-%
-%Firstly, because the injection of power from Distributed Energy Resources (DERs), e.g. rooftop solar PV, can reverse the power flow, and secondly, because large and volatile electrified products, e.g. home-charging Electric Vehicles (EVs), are predicted to significantly increase demand at peak times.
-%Such technologies have significant impact on the voltage stability \cite{Petinrin2016}, and combined with the expected increased in phase unbalance, traditional network management methods may no longer be able to effectively mitigate their negative impact.
-%This means that in situ equipment needs to be managed actively via innovation in the use of existing and new technologies; otherwise not only the frequency of constraint violations will increase, but also the frequency of service disruptions and customer minutes lost is expected to rise alongside the proliferation of LCTs \cite{Ault2008a}.
 One such innovative technology, which is the main focus of the presented thesis, is the installation and management of battery storage \cite{Chen2009}.
-The following section is going to introduce the main technology solutions and explain why battery energy storage was chosen as part of the research that was carried out in this PhD project.
+The following section is going to introduce the favoured solutions and explain why battery energy storage was chosen as part of the research that was carried out in this PhD.
 
 
 \subsection{Solutions to mitigate impact of LCT}
 \label{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}
 
-Two solutions exist, allowing DNOs to support LV network's operation: 
+The two most favoured solutions that allow DNOs to support LV network operation are:
 \begin{enumerate*}
-	\item reinforcement of in situ network assets;
-	\item deployment of network support equipment.
+	\item the reinforcement of in situ network assets or
+	\item the deployment of network support equipment.
 \end{enumerate*}
 Whilst network reinforcement would certainly address immediate issues of current network capacity constraints, this approach is also the more expensive and disruptive option.
-More specifically, customer will need to deal with outages during periods of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
+More specifically, customers will need to deal with outages during periods of asset upgrades (e.g. transformer upgrade and line re-conductoring after secondary transformers' tap settings have been adjusted).
 Therefore, alternatives to defer or avoid network reinforcements have been sought and assessed \cite{Harrison2007, Zangs2016a, VanderKlauw2016d, Greenwood2017}.
 Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (BESS) \cite{Wade2010}.
 BESS has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
 
 Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
-Roles for BESS are addressed in the subsequent section, i.e. Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}.
-However, a few examples of potential benefits from BESS include the regulation of voltages to stay within statutory operating bands \cite{Yang2014}, shaving peak loads to relieve stress from the installed network assets \cite{Bennett2015}, and reducing phase unbalance to increase network efficiency \cite{Wang2015b} .
+Roles for energy storage in general are extensively reviewed in Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}.
+A few examples of potential benefits from BESS do however include the regulation of voltages in order to to operate within statutory voltage bands \cite{Yang2014}, shaving peak loads to relieve stress from the installed network assets \cite{Bennett2015}, and reducing phase unbalance to increase network efficiency \cite{Wang2015b}.
+These three examples all implement a similar control paradigm, where BESS is charged during periods of low demand and discharged at peak demand periods in order to achieve the best possible impact.
 Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control can be split into two complementing yet unmarried approaches:
 
 \begin{enumerate}
@@ -115,46 +103,46 @@ Whilst the questions regarding locating and scaling of BESS have mostly been add
 	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods \cite{Salinas2013, Huang2013, Huang2014a, Sun2014a}.
 \end{enumerate}
 
-Furthermore, with the anticipated uptake of household BESS, mechanisms to control several storage systems also need to be considered.
-For instance, several industry leaders propose to store solar energy in order to support charging of EVs \cite{Baumann2017}.
-Without rooftop PV installations, batteries need work in a cooperative manner to not impose additional strain onto the network.
-The full review of storage control strategies to achieve both off-line and on-line, as well as centralised/individual and distributed battery control is presented in Section \ref{ch-literature:sec:control-of-energy-storage}.
-
+These two control approaches are reviewed in detail in Section \ref{ch-literature:subsec:off-line-and-on-line-control}.
+Also, with the anticipated uptake of household BESSs and DERs, mechanisms to control and coordinate multiple storage systems have also grown in popularity \cite{Mokhtari2013, Sarker2015, Baker2016a, Baumann2017}.
+The example proposing to store solar energy in order to support charging of EVs in \cite{Baumann2017} is particularly interesting since it shows a well coordinated home system that does not impose any additional load onto the power distribution network.
+These findings also highlight that without rooftop PV installations (or any co-located energy resource for that matter), distributed storage systems need work in a cooperative manner to avoid adding strain onto the network.
+Control methods that are capable of coordinating DERs by letting devices make intelligent control decisions have been summarised under the keyword ``smart control''.
 
 \subsection{Smart control}
 \label{ch-introduction:subsec:smart-control}
 
 \nomenclature[G]{IoT}{Internet of Things}
 
-As already mentioned in Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, off-line and on-line control strategies exist to manage BESS.
+As already mentioned in the previous section, Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, off-line and on-line control strategies exist to manage BESS.
 This traditional control often dealt with the dispatch of a single energy entity, but due to the distributed nature of the expected LCT uptake, methods to result in cooperative behaviour needed to be proposed.
 With the penetration of smart meters and communication-enabled devices in the so called ``Internet of Things`` (IoT), power systems have the potential of becoming interlinked networks of smart devices, too.
-So called ``smart control'' mechanisms complement the traditional off-line and on-line control strategies and are of great research interest to enable the uptake of distributed LCTs.
+So called ``smart control'' mechanisms complement the traditional off-line and on-line control strategies and are of great research interest to enable the uptake of distributed LCTs, since these strategies remove the single point of failure, reduce computational burden from centralised controllers and allow individual devices to respond intelligently and quickly to local events like sudden voltage drops or capacity notifications.
 
-For example, ``smart charging'' is a key term that summarises EV charging mechanisms where the limited network capacity causes multiple EVs to share the available resource amongst themselves \cite{Sortomme2011, Vaya2012, Garcia-Villalobos2014}.
-Intelligently limiting the EVs' maximum charging rates prevents them from adding unnecessary stress onto the network at the cost of longer charging times.
-A similar key term is the so called ``smart grid'' where distributed resources communicate and cooperate in order to e.g. shed load using Demand Side Response (DSR) or maintain micrigrid operation in fault situations \cite{Samadi2012, Liu2014, Liang2014}.
-The fundamental problem that is addressed in the research field of smart control is to find an optimal balance between network benefits and customer cost.
-Also, the fundamental requirement for the successful realisation of smart control is the reliable exchange of information amongst the partaking smart entities.
+For example the ``smart charging'' key term summarises EV charging mechanisms where the limited distribution network capacity causes multiple EVs to share the available resource amongst themselves \cite{Sortomme2011, Vaya2012, Garcia-Villalobos2014}.
+However without any network load information EV coordination may still exhaust the network's capacity, even when EVs are intelligently limiting their maximum charging rates.
+Limiting their charge rates based upon the current network demand as well as their own energy needs is a more sophisticated control option \cite{Karfopoulos2013}.
+A similar key term is the so called ``smart grid'' where DER communicate and cooperate in order to e.g. shed load using Demand Side Response (DSR) or maintain microgrid operation in fault situations \cite{Samadi2012, Liu2014, Liang2014}.
+However, the fundamental requirement for the successful realisation of any smart control method is the reliable exchange of information amongst the smart entities that operate within the power network.
 
-Hence, smart control does not only require robust control mechanisms, but also a robust communications infrastructure.
-Literature, which is reviewed in Chapter \ref{ch-literature}, shows that all control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume a robust communication infrastructure.
-For instance, this requirement is assumed when messages are received without delay and immediately after dispatched or when a single control instruction result in the synchronised reaction of all entities.
+Therefore smart control does not only require robust control mechanisms, but also a robust communications infrastructure.
+In Section \ref{ch-literature:subsec:centralised-and-distributed-control}, literature that reviews and compares both centralised control methods with distributed control paradigms will show the implicit need to synchronise the coordination of multiple smart devices.
+It will be shown that all underlying control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume such a robust communication infrastructure.
+For instance, this requirement is assumed when messages are received without delay and immediately after being dispatched or when a single control instruction result in the synchronised reaction of all controlled entities.
 In reality however, the strength of the communication link may vary with e.g. weather or current network traffic, and fixed message delays and exact device synchronisation can no longer be guaranteed.
-Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communications infrastructure is of interest.
+Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communications infrastructure is of interest, and the research question can be risen whether communication desynchronisation can result in equal or better coordination performance; i.e. in reducing peak load.
 
-\subsection{Challenges to control BESS}
-\label{ch-introduction:subsec:motivation}
+The alternative to relying on telecommunication in order to coordinate DERs is to remove the requirement for device communication altogether.
+For instance, communication-less control of multiple power devices has been of particular interest in noisy environments like ships \cite{Baldwin2004}, or islanded power networks that do not have strong telecommunication capabilities \cite{Diaz2017}.
+Whilst these control methods support network operation, they have not been designed to take device operation into account.
+More specifically, in a network where devices like household-connected BESS are no longer owned by DNOs, the interest of guaranteeing a certain lifetime may surpass the need to provide network support operation.
+Therefore, distributed and communication-less control strategies need to assure a more equal device utilisation to spread to burden onto the entire collection of DERs.
+Otherwise, batteries situated at the end of the distribution network experience the largest voltage swing are therefore likely to cycle more than those batteries located closer to the substation where voltages are more stable.
+Hence, following the review of several communication-less control methods in Section \ref{ch-literature:subsec:communication-less-control}, an improved distributed and communication-less BESS control algorithm is proposed that takes this neglected equality into account. 
 
-From the extensive catalogue of possible roles for energy storage in the electricity grid that was presented in Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}, the focus of the research in this thesis is put on aiding DNOs to manage and operate their power distribution networks.
-More specifically, battery energy storage is the main focus since is has the potential to defer or even mitigate costly network reinforcements.
-Modern battery technology allows the storage of electrical energy in ever-decreasing form factory, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
-
-As shown in the literature review in Chapter \ref{ch-literature}, methods of controlling BESS to optimise power flow have been of great research interest.
-However, the impact on particular key parameters of the three-phase networks still need to be investigated.
-Subsequently, the challenge of applying real-time corrections to BESS schedules in order to decrease peak demand whilst obeying to technical and operational constraints is also a remaining research question.
-Also, since the expected uptake of distributed LCTs through proliferation of household storage solutions (e.g. to counteract the impact of EVs) requires sophisticated coordination mechanisms, two additional research challenges have been identified.
-The first challenge focuses on improving cooperating device behaviour despite communication disturbances (i.e. through message desynchronisation), and the second builds upon the findings from key network improvements to construct a functioning BESS control mechanism despite the absence of a telecommunications infrastructure.
+%\subsection{Summary of challenges to control BESS}
+%\label{ch-introduction:subsec:summary-of-challenges}
+%
 
 
 

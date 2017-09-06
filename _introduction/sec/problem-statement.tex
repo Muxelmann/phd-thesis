@@ -1,18 +1,29 @@
 \section{Problem statement and research objectives}
 \label{ch-introduction:sec:problem-statement}
 
-With a non-uniformly increasing demand across LV networks, DNOs need to identify and develop BESS control algorithms in order to support their network operation; instead of reinforcing network assets.
-Whilst the core research which is presented in literature (in Chapter \ref{ch-literature}) consists of identifying network management methods and their performance weighted against computational resources and robustness, the research presented here limits its scope on technical issues regarding impact on network operation.
-Therefore, the aim of this thesis is to develop improved control methods that combine benefits from off-line and on-line control for BESSs that are deployed in the LV distribution network.
-This aim is achieved by assessing the impact of several BESS adjustment methods on different key network parameters, and by developing a dynamic control method to adjust predetermined BESS schedules.
-Furthermore, a performance assessment of distributed energy resources when subjected to a desynchronised communication environment is carried out, before proposing a communication-less real-time control method for distributed BESSs.
+The focus of the research presented in this thesis is put on aiding DNOs to manage and operate their power distribution networks by installing energy storage into their distribution networks in order to counteract the effects from electrification of heat and transport sectors as well as the decarbonisation of the grid itself.
+More specifically, BESS is the main focus since it is a rapidly improving technology that has the potential to defer or even mitigate costly network reinforcements.
+Modern battery technology allows the storage of electrical energy in ever-decreasing form factors, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
+As shown in the literature review in Chapter \ref{ch-literature}, methods to control BESS, e.g. in order to optimise power flow, have been and still are of great research interest.
 
-In accordance to the identified key features that motivate the conducted research (introduced in Section \ref{ch-introduction:sec:background}), a set of objectives is presented in order to achieve the aim of contributing to the existing field:
+Therefore, the aim of this thesis is to present a contribution in BESS control to improve grid operation and reliance, when deploying it in the UK LV distribution network.
+Given the already established control approaches of ``off-line'' and ``on-line'' control, merging the two in order to take advantage of BESS schedules and real-time information is still an open research challenge.
+Subsequently, applying real-time corrections to BESS schedules in order to decrease peak demand whilst obeying to technical and operational constraints is also an identified research challenge.
+Since the expected uptake of distributed LCTs and DERs through proliferation of household-connected storage solutions (e.g. to support PV integration or to counteract EV impacts) requires ``smart'' coordination mechanisms.
+When requiring communication to implement this smart coordination, another challenge exists in developing algorithms that function despite communication disturbances (i.e. through message desynchronisation).
+Lastly, in the case where communication-less coordination of distributed devices is sought, the challenge of assuring equal device usage whilst providing network support (e.g. to guarantee a minimum lifetime) has also been identified.
 
-\begin{enumerate}
-	\item Develop a control mechanism for a single BESS to further improve three-phase network operation without deviating from its predetermined BESS schedule.
-	\item Extend the control mechanism to reducing sub-half-hourly load peaks by dynamically adjusting the underlying half-hourly BESS schedules.
-	\item Develop and compare operation of a charge scheduling algorithm for multiple BESSs in a synchronised and desynchronised communications environment.
-	\item Develop a control strategy for distributed BESSs by individually assigning control parameters to an extended charge-discharge-algorithm.
+In accordance to these identified key challenges that motivate the conducted research, a set of objectives is presented in order to achieve the aim of contributing to the existing field:
+
+\begin{enumerate}[
+labelindent=*,
+style=multiline,
+leftmargin=*,
+label=\textbf{Objective \arabic*}
+]
+	\item \label{objective-1} Develop a control mechanism for a single BESS to further improve three-phase network operation without deviating from its predetermined BESS schedule.
+	\item \label{objective-2} Develop a control mechanism that dynamically adjusts BESS schedules to reducing load peaks by combining both off-line and on-line control.
+	\item \label{objective-3} Develop and compare operation of a charge scheduling algorithm for multiple entities in a synchronised and desynchronised communications environment.
+	\item \label{objective-4} Develop a control strategy for distributed BESSs by individually assigning control parameters to an extended charge-discharge-algorithm.
 \end{enumerate}
 
