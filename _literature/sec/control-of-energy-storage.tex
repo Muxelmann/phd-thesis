@@ -94,7 +94,7 @@ The UK power network is also a centrally managed system that has seen an increas
 
 
 \nomenclature[G]{FIPA}{Foundation for Intelligent Physical Agents}
-\nomenclature[G]{ITC}{Information and Communication Technology}
+\nomenclature[G]{ICT}{Information and Communication Technology}
 
 But with the deployment of smart meters, network enabled appliances and controllable LCTs that can be part of the a so called ``Internet of Things'' (IoT), system complexity is expected to increase beyond the capabilities of a single central management centre, which is why research began focusing on distributed control mechanisms \cite{Vovos2007, Guerrero2008, Bidram2014, Toledo2013, Marra2013, Gill2014, Dolan2012, Atia2016, Bidram2012, Wang2016}.
 For example, Vovos et al. in \cite{Vovos2007} compared centralised and distributed systems for voltage control and showed how they can yield a 86\% gain (using centralised control) and 72\% gain (using distributed control) in connectible capacity.
@@ -147,24 +147,27 @@ Lastly, developing control methods for distributed system that do not rely on a 
 So called communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
 The current procedure of charging EVs is a perfect example of such a system, since their charging commences immediately after they have been plugged into the grid.
 At the current rate of EV uptake, which is anticipated to increase with improved driving range, reduced cost of purchase and greater emphasis on leading an environmentally-friendly lifestyle \cite{Shah2015}, so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
-The already mentioned ICT reliant distributed control methods aim to circumvent these issues, using Demand Side Management (DSM) strategies that are based on e.g. game theory \cite{Mohsenian-Rad2010}, time-of-use tariffs \cite{Deilami2011, Surles2012}, or other pricing signals \cite{Masoum2015}.
-Without ICT however, none of them can be implemented and instead an indirect method must be sought.
+ICT reliant distributed control methods aim to circumvent these issues by using Demand Side Management (DSM) strategies.
+In \cite{Mohsenian-Rad2010} for example, Mohsenian-Rad et al. based developed a DSM mechanism that was based on game theory where multiple users engaged in the energy market to minimise the Peak-to-Average Ratio (PAR) of the resulting demand profile.
+Their results show that both minimising financial cost or the PAR of the resulting demand profile resulted in a 21.86\% reduction in PAR, when compared to a scenario without scheduling the energy consumer.
+But minimising PAR resulted in only a 7.31\% reduction in energy cost, whilst minimising cost directly lead to a 19.64\% reduction, despite the identically improvements in demand profile.
+However, this approach highly relies on ICT, as do similar DSM approaches that use e.g. time-of-use tariffs \cite{Deilami2011, Surles2012} or other pricing signals \cite{Masoum2015}.
+None of them can be implemented without ICT and instead an indirect method must be sought.
 
 \nomenclature[G]{AIMD}{Additive Increase Multiplicative Decrease}
 \nomenclature[G]{V2G}{Vehicle to Grid}
 
 A communication-less form of controlling Distributed Energy Resources (DERs) is the already mentioned Set-Point Control (SPC) \cite{Leadbetter2012}.
-Using traditional SPC on multiple identically-configured DERs can provice an optimal operation conditions, if each DER's control parameters (e.g., bus voltage) were shared \cite{Thieblemont2017a}.
+Using traditional SPC on multiple identically-configured DERs can provide an optimal operation conditions, if each DER's control parameters (e.g., bus voltage) were shared \cite{Thieblemont2017a}.
 But in a communication-less environment this requirement cannot be satisfied, which is why DER control algorithms have to be improved to prevent, for example, devices located furthest from the substation from being used more frequently than others.
-The algorithm to be improved for controlling several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
+The algorithm that is to be extended to control several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
 Unlike traditional SPC or hysteresis control like in \cite{Jiang2007}, where a fuel-cell's bus voltage was used as input to a ramp control for active power sharing, AIMD (like MAS) has its roots in computer science.
 Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
-The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power from the substation's transformer.
+The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power throughput capacity of the substation's transformer.
 One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
-Later, their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work relied on an ITC infrastructure, too.
-
-To not impose additional requirements onto consumer devices, and instead maximise the utility of energy storage, an improved AIMD algorithm with individually tuned control parameters is proposed as part of the research in this thesis.
-%As stated by Thieblemont et al. in \cite{Thieblemont2017a}: ``\textit{Energy storage systems play a crucial role in decreasing building energy consumption during peak periods and expanding the use of renewable energies in buildings and communities}''.
-Previous research is therefore extended by the presented work, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
-By proposing an approach to ensure that unavoidable voltage drops along the feeder do not skew the control decisions, and by taking the into consideration voltage oscillations that are caused by demand variation, \ref{objective-4}, as outlined in Section \ref{ch-introduction:sec:problem-statement}, is addressed.
-In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information, and hence does not require such an extensive communications infrastructure.
+Later, their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work relied on an ICT infrastructure, too.
+Therefore, the question whether a truly communication-less dynamic control method can be developed, mitigating voltage deviation and capacity limitations, is still remaining research problem.
+More specifically, this control method should not only avoid to impose any ICT requirements, but it should also aim to equalise the utilisation of all controlled devices, which is not guaranteed by the traditional AIMD algorithm.
+\ref{objective-4}, as outlined in Section \ref{ch-introduction:sec:problem-statement}, aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to not skew the algorithm's control decisions.
+Previous research is therefore extended, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
+In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information or any communication infrastructure for that matter.
