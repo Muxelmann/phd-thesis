@@ -14,15 +14,15 @@ Yet when the system complexity exceeds the available computational resource, the
 As a result, control is being distributed using different implementations of MAS, e.g. Internet of Things (IoT) or Virtual Power Plant (VPP), where several intelligent agents collaborate to improve the network's operation.
 However, all developed algorithms either explicitly or implicitly assume synchronisation amongst all control entities, which need not be the case in reality.
 Assessing how information desynchronisation impacts the performance of a distributed algorithm is still an open research question.
-Objective 3 and 4 as outlined in Section \ref{ch-introduction:sec:problem-statement} address this question by performing the assessment and developing an algorithm that no longer depends on communication systems.
+ref{objective-3} and 4 as outlined in Section \ref{ch-introduction:sec:problem-statement} address this question by performing the assessment and developing an algorithm that no longer depends on communication systems.
 
 To summarise, the problems that arises from the identified gaps in literature are:
 
 \begin{itemize}
-	\item how to assign pre-scheduled BESS powers to three-phase networks in order to yield the largest positive impact on the underlying network (objective 1),
-	\item how to adjust a half-hourly BESS schedule, which is based on a realistic and erroneous load forecast, based on sub-half-hourly power variations (objective 2),
-	\item how large the impact will be on the performance of a distributed control algorithm when information or message passing amongst the control entities becomes desynchronised (objective 3), and
-	\item how multiple BESS can be coordinated in a communication-less environment whilst contributing to voltage stability and thermal constraints without allocating their resources unevenly (objective 4).
+	\item how to assign pre-scheduled BESS powers to three-phase networks in order to yield the largest positive impact on the underlying network (\ref{objective-1}),
+	\item how to adjust a half-hourly BESS schedule, which is based on a realistic and erroneous load forecast, based on sub-half-hourly power variations (\ref{objective-2}),
+	\item how large the impact will be on the performance of a distributed control algorithm when information or message passing amongst the control entities becomes desynchronised (\ref{objective-3}), and
+	\item how multiple BESS can be coordinated in a communication-less environment whilst contributing to voltage stability and thermal constraints without allocating their resources unevenly (\ref{objective-4}).
 \end{itemize}
 
 Despite some of the literature including aspects of the proposed research, none of them answer the research questions that are identified above.
