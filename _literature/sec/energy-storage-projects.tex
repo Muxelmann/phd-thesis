@@ -27,6 +27,7 @@ and Scottish Power in \cite{ScottishPower2016} where 1MWh of distributed batteri
 Nonetheless, from lessons learnt and aiming to meet statutory and physical restrictions under the future load changes, voltage control and the power flow problem have been identified as the two key challenges for DNOs \cite{Ferreira2013a, Shi2015}.
 
 \subsection{Voltage control}
+\label{ch-literature:subsec:voltage-control}
 
 LV distribution networks in the UK operate at 230V Phase to Neutral (P2N) or 400V Phase to Phase (P2P) and have a statutory tolerance band of +10\% and -6\%.
 Due to the varying load on the network, these voltages can deviate significantly.
@@ -54,6 +55,7 @@ Also, the majority of low-voltage events on the UK distribution networks, i.e. w
 Therefore, the complementing task of choosing correct control methods to optimally manage the network's power flow is also important.
 
 \subsection{Power flow management}
+\label{ch-literature:subsec:power-flow-management}
 
 Interest in BESS control for power flow management has grown since improved measurement equipments in LV substations is more reliable and precise than traditional smart meter readings, but also since excessive power flow is the main cause for operational issues which do eventually lead to system overloads and outages\footnote{
 In fact, according to the UK energy regulator \textit{OFGEM}, on average 45\% of all customers experienced service disruptions in the period 2015-16 \cite{Ofgem2017}.
@@ -61,8 +63,11 @@ Whilst unanticipated outages due to severe winter weather did lead to \pounds39 
 } \cite{Putrus2009, Pillai2010}.
 To prevent future power flow from exceeding the system's capacity, BESS has been proposed to function as an instantaneous reserve \cite{Kunisch1986a, Kunisch1986}.
 Resulting methods like BESS droop control use local voltage and frequency measurements to infer the latest loading and stress on the network to issue corresponding BESS control instructions \cite{Engler2005a}.
-The initial simulations in \cite{Engler2005a} showed how droop control can effectively remove reactive power demand and thus free the corresponding resource.
-Droop control is founded on the assumption that network frequency will drop as demand begins to exceed supply, and that voltages along the distribution feeder drop more significantly when load is increased.
+The initial simulations in \cite{Engler2005a} showed how droop control can effectively remove reactive power demand and thus free the corresponding resource. 
+Conventional droop control was designed to inject reactive power into high voltage transmission lines to counteract voltage drops and inject active power to counteract phase shift \cite{Tayab2017}.
+This control mechanism works since the impedance of high voltage transmission networks is more inductive than resistive.
+LV distribution networks on the other hand are more resistive in nature.
+Droop control for the LV applications is therefore founded on the assumption that network frequency will drop as demand begins to exceed supply, and that voltages along the distribution feeder drop more significantly when load is increased.
 Yet as already stated in Section \ref{ch-introduction:subsec:topology-of-lv-network}, reversed power flow can raise voltage levels, which makes such droop control methods less reliable and potentially unsuitable for LV network support.
 This problem was also encountered by Riffonneau et al. in \cite{Riffonneau2011}, where they control BESS to solve an optimal power flow problem for grid connected PV systems.
 Ultimately, they were able to achieve a 13\% reduction of electricity bills by implementing a rule-based dynamic programming optimiser, and they reduced peak power by successfully integrating PV.
@@ -80,7 +85,8 @@ In the beginning, the main problem of finding an optimal deployment location for
 Yunusov et al. and Rowe et al. worked in collaboration with \textit{SSEN}, and they assessed different BESS locations in several networks \cite{Yunusov2016, Rowe2014, Rowe2014a}.
 They found that a location 4/7 to 2/3 down the feeder yields the best overall impact on voltage levels.
 However, their findings also show that this location can vary significantly when not only focusing on voltage support; i.e. proximity to the feeding substation was of greater importance when reducing the system's overloads or distribution losses.
-The considered BESS control methods and those implemented in the NTVV project are reviewed in the next section, Section~\ref{ch-literature:sec:control-of-energy-storage}.
+Also, the chosen control system had significant impact on the BESS performance, which is why more emphasis has been put on BESS control instead of locating or constructing BESS.
+Therefore, a review of BESS control methods including those that are implemented in the NTVV project are presented in the next section, Section~\ref{ch-literature:sec:control-of-energy-storage}.
 
 
 
