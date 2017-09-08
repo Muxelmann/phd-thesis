@@ -1,32 +1,33 @@
 \section{Summary of gaps in literature}
 \label{ch-literature:sec:literature-gaps}
 
-\hl{THIS SECTION SUMMARISES LITERATURE, ITS GAPS AND LINKS THEM TO OBJECTIVES}
-
-The UK's electrification of the heat and transport sector, and its introduction of LCTs into the LV distribution network is expected to put significant strain onto the installed assets.
-Through integration of distributed renewable generation the additional load is aimed to be reduced, however renewable volatility makes their integration a significant challenge.
-To support the integration of DERs and LCTs by addressing operational constraints, i.e. voltage bands and thermal limits, BESS has been deployed.
-Whilst research has already focused on sizing, locating and operating BESS, BESS operation can still be split into two unlinked categories: off-line control or forecast driven control and on-line control or Model Predictive Control (MPC).
+In this chapter, Chapter \ref{ch-literature}, the current and future roles for energy storage have been laid out.
+When focusing on BESS applications that support DNO owned networks, i.e. to enable the integration of LCTs and DERs within the LV distribution network without the need for network reinforcements, two key functions have emerged:
+\begin{enumerate*}
+	\item limiting voltage deviation to within statutory regulations, and
+	\item avoid thermal constraints by solving the power flow problem.
+\end{enumerate*}
+Since DNOs had little experience with using BESS in their LV networks, several research projects and field trials were undertaken over the past decade.
+So far, this research has already focused on sizing, locating and operating BESS.
+From the presented literature, BESS control methods can be split into two  categories that still remain unlinked: off-line control (e.g. scheduled or forecast driven control) and on-line control (e.g. SPC or MPC).
 Whereas off-line control takes into account daily load trends (i.e. at half-hourly resolution), it cannot compensate for load volatility due to DERs and LTCs (i.e. at sub-half-hourly resolution).
 On-line control methods on the other hand are designed to react quickly when system changes occur (i.e. at sub-half-hourly resolution), but they cannot efficiently include daily or weekly load patterns (i.e. at half-hourly resolution) due to the increase in model complexity.
-On the basis of the gaps in literature, as highlighted above, and the problem statement that is stated in Section \ref{ch-introduction:sec:problem-statement}, research objectives 1 and 2 have been derived.
-
-Furthermore, as the number of distributed entities increases throughout the grid, methods to manage those entities need to become more sophisticated.
-Yet when the system complexity exceeds the available computational resource, then centralised control cannot deliver real-time instructions.
-As a result, control is being distributed using different implementations of MAS, e.g. Internet of Things (IoT) or Virtual Power Plant (VPP), where several intelligent agents collaborate to improve the network's operation.
-However, all developed algorithms either explicitly or implicitly assume synchronisation amongst all control entities, which need not be the case in reality.
-Assessing how information desynchronisation impacts the performance of a distributed algorithm is still an open research question.
-ref{objective-3} and 4 as outlined in Section \ref{ch-introduction:sec:problem-statement} address this question by performing the assessment and developing an algorithm that no longer depends on communication systems.
-
+On the basis of the gaps in literature, as highlighted in the literature review, Chapter \ref{ch-literature}, and the problem statement of this thesis, which is stated in Section \ref{ch-introduction:sec:problem-statement}, research \ref{objective-1} and \ref{objective-2} were derived.
+Furthermore, as the number of DERs increases throughout the grid, methods to manage them need to become more sophisticated, too.
+%Yet when system complexity exceeds the available computational resource, then centralised control cannot deliver real-time instructions.
+%As a result, control is being distributed using different implementations of MAS, e.g. Internet of Things (IoT) or Virtual Power Plant (VPP), where several intelligent agents collaborate to improve the network's operation.
+However, all developed algorithms to control DERs either explicitly or implicitly assume synchronisation amongst all controlled entities, which need not be the case in reality.
+Assessing how information desynchronisation impacts the performance of a distributed algorithm is still an open research question that is adressed by \ref{objective-3}.
+\ref{objective-4} aims to extend a distributed control algorithm by developing an method that no longer depends on communication systems.
 To summarise, the problems that arises from the identified gaps in literature are:
 
 \begin{itemize}
-	\item how to assign pre-scheduled BESS powers to three-phase networks in order to yield the largest positive impact on the underlying network (\ref{objective-1}),
-	\item how to adjust a half-hourly BESS schedule, which is based on a realistic and erroneous load forecast, based on sub-half-hourly power variations (\ref{objective-2}),
-	\item how large the impact will be on the performance of a distributed control algorithm when information or message passing amongst the control entities becomes desynchronised (\ref{objective-3}), and
-	\item how multiple BESS can be coordinated in a communication-less environment whilst contributing to voltage stability and thermal constraints without allocating their resources unevenly (\ref{objective-4}).
+	\item how to assign pre-scheduled BESS half-hourly power profiles to a three-phase network at sub-half-hourly resolution in order to yield the largest positive impact for the underlying power distribution system (\ref{objective-1}),
+	\item how to adjust a half-hourly BESS schedule, which is based on a realistic but erroneous load forecast, based on sub-half-hourly load variations to minimise daily peak demands at both temporal resolutions (\ref{objective-2}),
+	\item how large the impact will be on the performance of a scheduling and control algorithm when information exchange or message passing amongst the distributed control entities becomes desynchronised (\ref{objective-3}), and
+	\item how multiple BESS can be coordinated in a communication-less environment to circumvent the need for ICT whilst contributing to voltage stability and thermal constraints without allocating their energy resources unevenly (\ref{objective-4}).
 \end{itemize}
 
 Despite some of the literature including aspects of the proposed research, none of them answer the research questions that are identified above.
 The novelty of the research in this thesis consists of combining on-line and off-line control, as well as to assess and extend the control of distributed BESS.
-All contributions and publications, as presented in Section \ref{ch-introduction:sec:contributions} and \ref{ch-introduction:sec:publications}, respectively, reflect upon the novelty of the presented research against the objectives and gaps in literature.
+All contributions and corresponding publications, as outlined in Section \ref{ch-introduction:sec:contributions} and \ref{ch-introduction:sec:publications}, respectively, reflect upon the novelty of the presented research against the objectives, their aim and gaps in literature upon which they are founded.
