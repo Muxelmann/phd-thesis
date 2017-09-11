@@ -2,76 +2,84 @@
 \label{ch3:sec:distributed-systems}
 
 As discussed in the literature review in Chapter \ref{ch-literature}, several mechanisms exist to decentralise control of DERs.
-Due to their reactivity, pro-activeness and social ability, the Multi Agent System (MAS) distinguished itself from traditional software and hardware systems, which is also why it was also chosen for the coordination of smart EV charging.
+For their reactivity, pro-activeness, social ability and flexibility however, the Multi Agent System (MAS) distinguished itself from traditional software and hardware systems, which is why it was also chosen for the coordination of smart EV charging.
 Several agent package implementations exist, each following different interaction paradigms.
-These paradigms include ``Belief, Desire and Intention'' (BDI), neutral behaviour or other specialised functionality \cite{Luck2004}.
-From this catalogue of MAS paradigms, the Java Agent Development Framework (JADE) was chosen, since it natively implements the Foundation for Intelligent Physical Agent (FIPA) specification \cite{JADE-website, FIPA-agent-specs}.
+Some of these paradigms include ``Belief, Desire and Intention'' (BDI), neutral behaviour or other specialised functionality \cite{Luck2004}.
+From the catalogue of MAS paradigms, the Java Agent Development Framework (JADE) was chosen, since it natively implements the Foundation for Intelligent Physical Agent (FIPA) specification \cite{JADE-website, FIPA-agent-specs}.
 Furthermore, JADE is an application independent package that has become quite popular, as seen by the increasing number of publications \cite{Karfopoulos2013, Eddy2011, Kuo2013, Mocci2014, Li2017}.
 
-In this work, multiple virtual trading agents are used to negotiate their corresponding EV's charging profile with other trading agents.
-Tying virtual agents to a physical entity is not new \cite{Dimeas2005, Nguyen2011, Nagata2011, Nagata2012}, yet in previous work these agents directly controlled the entity whilst the agents in the presented work negotiate schedules that will be applied after schedule ratification.
-So called ``broker'' agents, following the Brokering Interaction Protocol (BIP), are implemented to facilitate this trading process.
-The brokers communicate with each other by following the Contact-Net Protocol (CNP).
-In addidion, all FIPA protocols are based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure, and possibly include different agent packages, too.
-High level explanations of all protocols that were used in this implementation of FIPA agents are included in Appendix \ref{appx-b:multi-agent-systems}.
+In this work, multiple virtual trading agents are used to negotiate their corresponding EV charging profile with other trading agents.
+Tying virtual agents to a physical entity is not new \cite{Dimeas2005, Nguyen2011, Nagata2011, Nagata2012}, and allows a clear decoupling of the data storing and interacting entities.
+In previous work however, physical agents directly controlled the virtual entities whilst the agents in the presented work negotiate schedules that will be applied after schedule ratification.
+Therefore, the physical agent is never notified of any intermediate charging profile and only receives the final schedule.
+Scheduling and inter-agent communication is achieved by so called ``broker'' agents that follow the Brokering Interaction Protocol (BIP) to serve the final charging profile when requested.
+It is those broker agents that communicate and negotiate with each other by following the Contact-Net Protocol (CNP).
+All these FIPA protocols are based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure since it standardises the communication ontology and schemas.
+Following this standard also opens the possibility of including different agent packages into the scheduling mechanism, but this lies outside the work's scope.
+Explanations of all protocols that were used in this implementation of FIPA agents are included in Appendix \ref{appx-b:multi-agent-systems}.
 In this work, each broker is linked to a single EV and negotiates its charging profile over the aforementioned scheduling horizon, $T_\text{sch}$.
 This link is shown in Figure \ref{ch3:fig:agent-network}.
 
 \input{_chapter3/fig/agent-network}
 
-In the example in Figure \ref{ch3:fig:agent-network}, a single supplier with two brokers (one for selling and one for buying, i.e. ``undoing'', energy) acts as the energy source, and two loads represent the charging EVs that dispatch their two brokers (i.e. to ``allocate'' and ``undo'' charging demand).
-With this kind of system architecture, charging spikes are designed to be mitigated, since all loads and their corresponding brokers execute the previously defined smart charging algorithm.
+The example in Figure \ref{ch3:fig:agent-network} shows the structure of a MAS with three physical agents and six virtual agents.
+A supplier and two loads are the physical agents and two charging EVS, respectively, which dispatch two brokers each.
+One of the brokers is for buying energy, i.e. ``allocating'' energy, and the other one for selling energy, i.e. ``undoing'' energy.
+With this kind of system architecture, the scheduling algorithm can be executed to mitigate potential charging spikes.
 
-Since the architecture of MAS has now been defined, the means of implementing and desynchronising them is explained.
-Subsequently, all case studies and metrics that are used to assess the MAS performance are defined.
+How this MAS is implemented, synchronised and desynchronised is explained in the following sections, Section \ref{ch3:subsec:implementation} and Section \ref{ch3:subsec:desynchronisation}, respectively.
+Subsequently, in Section \ref{ch3:subsec:cases-and-metrics}, all case studies and performance metrics that are used to assess the MAS performance are outlined.
 
 \subsection{MAS Implementation}
 \label{ch3:subsec:implementation}
 
-The MAS was implemented in Java and ran on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former ``\textit{School of Systems Engineering}'').
-In Figure \ref{ch3:fig:agent-implementation}, the complete structure and communications procedure is explained.
+The MAS is implemented in Java and runs on a parallel compute cluster (i.e. the \textit{HTCondor} cluster at the former \textit{School of Systems Engineering} at the \textit{University of Reading}).
+How the compute cluster was used to realise multiple agents is shown in Figure \ref{ch3:fig:agent-implementation}.
 
 \input{_chapter1/fig/agent-implementation}
 
-Here, the laboratory workstation uploads the simulation task to a submit node.
-This node starts a certain number of workers, which in turn run the Java agent software to communicate with each other and to schedule the charging of their simulated EVs.
-One of the workers is chosen to be the supplier, that obtains the network load data from a remote data store and propagates this information in a synchronised manner.
-In the diagram in Figure \ref{ch3:fig:agent-implementation}, all bold arrows indicate the inter-agent communication, the solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software launches.
+In this figure, Figure \ref{ch3:fig:agent-implementation}, at the laboratory workstation, a collection of MAS simulations is compiled in order to extensively cover the algorithm's operating spectrum.
+More specifically, 10000 repetitions of the scheduling algorithm are queued for a single base load, but with different $\alpha$ and $\beta$ parameters.
+Therefore, the algorithm's parameter sensitivity is probed at a resolution of 0.01 for both $\alpha$ and $\beta$, i.e. $\alpha \in \{0.01, 0.02, \dots, 1.00\}$ and $\beta \in \{0.01, 0.02, \dots, 1.00\}$.
+This queue of 10000 simulations is then submitted to the \textit{HTCondor} master node, which schedules the execution of each simulation to its pool of workers.
+Each worker internally simulates an instance of the MAS and stores its outputs to a fast networked storage, which also serves as the worker's data source
+Given the 1540 load profiles from the Irish dataset and assuming a typical distribution network of 55 customers, a theoretical limit of $6.11\times10^{101}$ simulations would exist.
+Due to the limited time and size of the available worker pool (ca. 200 workers), a total number of $1.5\times10^{7}$ MAS simulations is chosen to yield a sufficiently accurate estimate of the algorithm's performance.
+For all submitted simulations a relatively high EV uptake of 20\% was chosen in order to maximise the effect of badly scheduled EV charging, and in order to give the algorithm a larger energy volume when adjusting the EV charging schedules.
+Also, in the diagram in Figure \ref{ch3:fig:agent-implementation}, all bold arrows indicate fast data transmissions (used to acquire and store the datasets that are used for each MAS simulation), solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software messages to submit and launch the MAS simulations.
 
 \subsection{MAS Desynchronisation}
 \label{ch3:subsec:desynchronisation}
 
-Operating the agents in a desynchronised manner can be achieved in two distinct ways.
-Either, any idle state that is interrupted by the synchronising signal (which is shown in Figure \ref{ch3:fig:agent-synchronisation}) is removed, or agents are launched with a random jitter and operate in an execution loop of a fixed time.
-Although the first approach would result in a quick simulation execution, only the second way of desynchronising agents is compliant with the compute cluster's terms of usage.
-Therefore, the latter way was implemented uses and each agent was equipped with its individual loop timer to regulate its execution.
+Originally, the smart-charging algorithm was intended to run in a synchronised MAS environment, as shown in Figure \ref{ch3:fig:agent-synchronisation}.
+However, when aiming to desynchronise this operation, two distinct ways exist:
+Either, any idle state that is interrupted by the synchronising signal (which is shown in Figure \ref{ch3:fig:agent-synchronisation}) is removed and agent execution continues immediately, or agents are launched with a random jitter and operate in an execution loop with a fixed time delay.
+Although the first approach would result in the quickest simulation execution, it still would require a synchronised start since one agent would already finish all algorithm iterations by the time a second agent joins the MAS.
+Therefore, only the second way yields a truly desynchronised agent execution that still guarantees that all agents partake in the scheduling process.
+Furthermore, using this jitter and therefore extending the execution time of each simulation makes the algorithm compliant with the compute cluster's terms of usage, since it would otherwise threaten to overload \textit{HTCondor} at managing the submission and data transfer between all workers.
 
-The desynchronised agents are launched in succession and immediately begun their scheduling task.
-To simulate communication irregularities, a jitter was added to the delay between successive agent launches.
+In order to implement the second way of desynchronising agents, each agent is equipped with its individual loop timer that regulates its execution behaviour.
+All agents are launched in quick succession and immediately begin their enumeration and scheduling tasks.
+Desynchronisation amongst all agents is then achieved by introducing a jitter to both the agents' loop timers and the period between successive agent launches.
 The resulting MAS then consisted of a completely desynchronised collection of agents, i.e. none of the agent's loop execution is aligned or dependent on any other agent's loop execution.
-This successful desynchronisation can be observed in Figure \ref{ch3:fig:agent-desynchronisation}, where the supplier agent never receives more than one message at once.
+An example of this desynchronisation mechanism is presented in Figure \ref{ch3:fig:agent-desynchronisation}.
 
 \input{_chapter3/fig/agent-desynchronisation}
+
+From Figure \ref{ch3:fig:agent-desynchronisation}, the successful desynchronisation can be observed since the supplier never receives more than one message at a time.
+Whilst the synchronised and desynchronised algorithm implementation do not differ in the scheduling method, their updating procedure does distinguish them.
+More specifically, for the synchronised implementation, the algorithm obtains the complete demand (i.e. Equ. \ref{ch3:equ:updated-demand-profile}) after all EVs have sent their updated charging profiles.
+The desynchronised implementation on the other hand receives intermittent updates of the network demand.
+To investigate the difference in performance a set of cases and performance metrics are defined in the following section, Section~\ref{ch3:subsec:cases-and-metrics}.
 
 \subsection{Cases and Performance Metrics}
 \label{ch3:subsec:cases-and-metrics}
 
-\subsection{Synchronised vs Desynchronised Implementation}
+\hl{PAR and TRA as performance metrics}
 
-Whilst the synchronised and desynchronised implementation of the algorithm do not differ in the scheduling method, their updating process distinguishes them.
-For the synchronised implementation, the algorithm performs the network's demand update (i.e. Equ. \ref{ch3:equ:updated-demand-profile}) after all EVs have sent their updated charging profiles.
-However, in the desynchronised implementation of updates are sent immediately and without regarding the compute state of other agents.
-To achieve this, all physical agents would dispatch their brokers simultaneously, which could be accomplished in two ways:
+\hl{Convergence per iteration as stability metric}
 
-\begin{enumerate}
-	\item All agents were launched at the same time and a long enough waiting delay was introduced after the algorithm rescheduled. Once the waiting period has passed, all agents broadcast their new charging profile and acquire the new net demand after another waiting preset delay. Despite the additional time requirements added to the algorithm, all agents would have synchronised network information and schedule in a synchronised manner.
-	\item Alternatively, a synchronisation ping was sent from the substation once all agents' charging profiles were received. Whilst this method does not cause additional system delays, it adds additional strain onto the communications infrastructure. Due to the a sufficiently equipped communications network, this approach was chosen here.
-\end{enumerate}
-
-In contrast, for the asynchronous implementation, the agent update is broadcasted as soon as an EV has found its updated charging profile. No synchronisation mechanism is required and only the agent's solving speed limits the system's performance. The pseudo random delay between agent's solving time causes each agent to obtain an already modified load profile when querying the substations. By introducing this distorted network load to all EVs, the algorithm's initialisation and all consecutive iterations schedule the charging load differently.
-
-
-
+\hl{Time series case and $\alpha$ $\beta$ probing case}
 
 
 
