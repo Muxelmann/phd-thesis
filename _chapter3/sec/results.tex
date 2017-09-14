@@ -1,2 +1,23 @@
 \section{Results and Discussion}
 \label{ch3:sec:results}
+
+\subsection{Time-series evolution}
+\label{ch3:subsec:time-series-evolution}
+
+The objective of the smart-charging algorithm is to distribute the charging demand of a fleet of EVs over the underlying base demand in such a way that no additional demand spikes are produced.
+After assigning each EV's energy demand to its initially known demand trough, the algorithm produces a new demand spike since all EVs are charging simultaneously.
+Through repetitive iterations and reallocating a portion of the assigned energy to different demand troughs, the algorithm is then able to spread all EVs' demands to form a flat demand profile in the end.
+This process is shown in Figure \ref{ch3:fig:time-series}.
+
+\input{_chapter3/fig/time-series/time-series}
+
+Here, the first algorithm iteration is shown in Figure \ref{ch3:subfig:time-series-1}, where allocated power profile produces two new morning spikes of around 200kW and subsequently 110kW.
+The second iteration however reduces these spikes by the factor $\alpha$ (i.e $0.2$) and redistributes the undone charging powers over the new power profile.
+Figure \ref{ch3:subfig:time-series-2} shows this reduction and reallocation.
+Figure \ref{ch3:subfig:time-series-3} is the third iteration that reduces and redistributes the peaks even further.
+In the end, i.e. when $n=N$, the resulting power profile becomes as flat as possible, which is shown in Figure \ref{ch3:subfig:time-series-last}.
+Throughout these iterations, it can be observed how the peak load in the total power, i.e. $\textbf{p}_n$, reduces and it can be observed how the changes in charging power, i.e. $\textbf{p}_{n+1}-\textbf{p}_n$, reduce in variance, which indicates that the algorithm works for the chosen parameters of $\alpha$ and $\beta$.
+However, different parameters of $\alpha$ and $\beta$ do impact the performance of this synchronised algorithm execution, as shown in Figure \ref{ch3:fig:oscillation}.
+
+\input{_chapter3/fig/oscillation/oscillation}
+
