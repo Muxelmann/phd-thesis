@@ -8,16 +8,16 @@ Finally, to study the convergence of the algorithm, a convergence criteria as we
 
 \subsection{EV Demand}
 
-\nomenclature[K]{$T_\text{sch}$}{Scheduling horizon for EV charging, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$u$}{EV unit number, where $u \in [1, \dots, U]$ (Chapter \ref{ch3})}
-\nomenclature[K]{$n$}{Iteration number of EV scheduling algorithm, where $N \in [1, \dots, N]$ (Chapter \ref{ch3})}
-\nomenclature[K]{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $\textbf{p}_{\text{EV},u,n} = (p_{\text{EV},u,n}(t))$ (Chapter \ref{ch3})}
+\nomenclature[K]{$T_\text{sch}$}{Scheduling horizon for EV charging, where $T_\text{sch} \in \mathbb{Z}^{>0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$u$}{EV unit number, where $u \in [1, \dots, U]$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$n$}{Iteration number of EV scheduling algorithm, where $N \in [1, \dots, N]$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$U$}{Number of EVs that need to be scheduled, where $U \in \mathbb{Z}^{>0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$N$}{Number of algorithm iterations to schedule multiple EVs, where $N \in \mathbb{Z}^{>0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$p_{\text{EV},u,n}(t)$}{Scheduled EV charging power, for EV $u$ at algorithm iteration $n$ for time $t$, where $p_{\text{EV},u,n}(t) \in \mathbb{R}^{\geq 0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$\textbf{p}_{\text{EV}, u, n}$}{Scheduled EV charging power vector, for EV $u$ at algorithm iteration $n$, where $\textbf{p}_{\text{EV},u,n} = (p_{\text{EV},u,n}(t))$ (Chapter~\ref{ch3})}
 
-\nomenclature[K]{$P_{\text{min},u}$}{Minimum EV charging power (Chapter \ref{ch3})}
-\nomenclature[K]{$P_{\text{min},u}$}{Maximum EV charging power (Chapter \ref{ch3})}
+\nomenclature[K]{$P_{\text{min},u}$}{Minimum EV charging power (Chapter~\ref{ch3})}
+\nomenclature[K]{$P_{\text{min},u}$}{Maximum EV charging power (Chapter~\ref{ch3})}
 
 In order to simulate the charging of an EV's battery, each EV, $u$, was modelled as a load that over the course of a scheduling horizon, $T_\text{sch}$ where $T_\text{sch} \in \mathbb{Z}^{>0}$, needs to consume a certain amount of energy, $E_u$.
 A predetermined number of EVs, $U$, makes up a coordinated fleet of charging EVs, i.e. $u \in \{1, \dots, U\}$.
@@ -34,7 +34,7 @@ Using MAS, EVs utilise their agent systems to purchase energy quantities for eac
 
 \subsection{Base Load}
 
-\nomenclature[K]{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$ (Chapter~\ref{ch3})}
 
 To represent real power consumption in simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
 This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\Delta t = 0.5$ hours.
@@ -76,10 +76,10 @@ This behaviour is shown in Figure~\ref{ch3:fig:valley-filling}, where several it
 
 \input{_chapter3/fig/valley-filling}
 
-\nomenclature[K]{$p_{\text{base},n}(t)$}{Base load at time $t$, where $p_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\textbf{p}_{\text{base},n}$}{Base load vector, where $p_{\text{base},n}(t) \in \textbf{p}_{\text{base},n}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\hat{p}_{\text{base},n}(t)$}{Temporary demand at time $t$, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\hat{\textbf{p}}_{\text{base},n}$}{Temporary demand vector, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \hat{\textbf{p}}_{\text{base},n}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$p_{\text{base},n}(t)$}{Base load at time $t$, where $p_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$\textbf{p}_{\text{base},n}$}{Base load vector, where $p_{\text{base},n}(t) \in \textbf{p}_{\text{base},n}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$\hat{p}_{\text{base},n}(t)$}{Temporary demand at time $t$, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$\hat{\textbf{p}}_{\text{base},n}$}{Temporary demand vector, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \hat{\textbf{p}}_{\text{base},n}$ (Chapter~\ref{ch3})}
 
 For every iteration in Figure~\ref{ch3:fig:valley-filling}, charging profiles are added onto a base network load, $\textbf{p}_{base,n}$, where $p_{base,n}(t) \in \textbf{p}_{base,n}$.
 This base load is shown as the bold black line and does not change throughout EV scheduling.
@@ -90,8 +90,8 @@ This spike is seen on an updated or temporary demand profile, $\hat{\textbf{p}}_
 
 \input{_chapter3/equ/updated-demand-profile}
 
-\nomenclature[K]{$\hat{p}_{\text{EV}, u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}_{\text{EV}, u, n}(t) \in \textbf{Z}^{\geq0}$ (Chapter \ref{ch3})}
-\nomenclature[K]{$\hat{\textbf{p}}_{\text{EV}, u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}_{\text{EV}, u, n}(t) \in \hat{\textbf{p}}_{\text{EV}, u, n}$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\hat{p}_{\text{EV}, u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}_{\text{EV}, u, n}(t) \in \textbf{Z}^{\geq0}$ (Chapter~\ref{ch3})}
+\nomenclature[K]{$\hat{\textbf{p}}_{\text{EV}, u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}_{\text{EV}, u, n}(t) \in \hat{\textbf{p}}_{\text{EV}, u, n}$ (Chapter~\ref{ch3})}
 
 For the next iteration $n+1$, i.e. Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}_{\text{EV},n-1}$ is ``undone''.
 Subsequently, the spike in the resulting $\hat{\textbf{p}}_{\text{base}, n}$ is reduced, yet the energy that has been undone needs to be reallocated.
@@ -112,7 +112,7 @@ Following the similar procedure as for the first iteration, $\hat{E}_{u,n}$ need
 
 \input{_chapter3/equ/valley-filling-equation.tex}
 
-\nomenclature[K]{$\beta$}{Allocation parameter to assign a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\beta \in (0, 1]$ (Chapter \ref{ch3})}
+\nomenclature[K]{$\beta$}{Allocation parameter to assign a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\beta \in (0, 1]$ (Chapter~\ref{ch3})}
 
 Here, a maximum ``allocation'' parameter, $\beta$, where $\beta \in (0, 1]$ limits the power that may be allocated to any successive time-slot, $\tau$.
 To not exceed the EV's maximum charging power, any value in the charging vector, $\textbf{p}_{\text{EV},u,n}$, is capped to $P_{\text{max},u}$.

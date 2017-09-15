@@ -6,18 +6,18 @@
 \nomenclature[G]{PID}{Proportional Integrating Derivative (control)}
 
 
-In the preceding chapter, Chapter \ref{ch1}, an Energy Storage Management Unit (ESMU) is used to improve network operation.
+In the preceding chapter, Chapter~\ref{ch1}, an Energy Storage Management Unit (ESMU) is used to improve network operation.
 This improvement is achieved by optimally adjusting the device's scheduled three-phase powers.
 Any improvement is indicated by a cost reduction, where the underlying cost functions are tied to changes in key network parameters.
 The extend to which ESMU is able to improve network operation is then shown by focusing on the minimisation of different cost functions and repetitively optimising and simulating the distribution network.
 However, this network improvement is limited by the constraint of having to obey the underlying half-hourly ESMU schedule, despite applying adjustments at a sub-half-hourly level.
 
-In the subsequent chapter, Chapter \ref{ch2}, research \ref{objective-2} is addressed (it is outlined in Section~\ref{ch-introduction:sec:problem-statement}) by removing these limiting constraint and proposing a corresponding sub-half-hourly ESMU schedule adjustment method.
+In the subsequent chapter, Chapter~\ref{ch2}, research \ref{objective-2} is addressed (it is outlined in Section~\ref{ch-introduction:sec:problem-statement}) by removing these limiting constraint and proposing a corresponding sub-half-hourly ESMU schedule adjustment method.
 This method unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
 Unlike previous work in the field, the proposed approach reverses the traditional control paradigm to compensate for schedule inaccuracies.
 To reiterate, these traditional approaches implemented on-line control mechanisms, e.g. Set-Point Control (SPC), in combination with prediction models in order to adjust and prepare ESMU for future load trends.
 In this presented work however, instead of supporting on-line control with real-time load predictions, forecast driven schedules are adjusted using on-line measurements.
-This is achieved by first scheduling ESMU operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter \ref{ch1}, and then modifying this schedule using MPC.
+This is achieved by first scheduling ESMU operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter~\ref{ch1}, and then modifying this schedule using MPC.
 In this case, MPC is comprised of of a lightweight AR model to assure real-time deployability.
 These two control signals are unified using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness, regardless of the forecast's erroneousness.
 All ESMU schedules are generated under the constraints of a realistic ESMU model, and all demand measurements and corresponding forecasts used in this work are based on real data, provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
