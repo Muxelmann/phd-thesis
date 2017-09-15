@@ -3,14 +3,14 @@
 
 In this section, all results are presented and discussed.
 Each of the three assessments in this section focuses on improvements in voltage level, improvements in network efficiency (i.e. power quality and network losses), and improvements in resource utilisation.
-Hence, only a subset of all results is included, but the complete set of results has been appended to this Thesis in Appendix \ref{appx-a:ch1}.
+Hence, only a subset of all results is included, but the complete set of results has been appended to this Thesis in Appendix~\ref{appx-a:ch1}.
 
 \subsection{Time Series Analysis}
 \label{ch1:subsec:time-series-analysis}
 
 The ESMU's largest impact on network voltage levels can be noticed at the ESMU's PCC.
 Consequently, any adjustments to the ESMU powers should become noticeable.
-This impact can clearly be observed in Figure \ref{ch1:fig:ts-esmu-voltages}.
+This impact can clearly be observed in Figure~\ref{ch1:fig:ts-esmu-voltages}.
 
 \input{_chapter1/fig/ts-esmu-voltages}
 
@@ -21,24 +21,24 @@ But during the rest of the day when network load increases, the ESMU is unable t
 The reason behind this behaviour that the ESMU has allocated its resources to serve for the underlying half-hourly ESMU schedule.
 Therefore, the remaining resources that could provide voltage support during periods of low demand become limited during periods of high demand.
 Combined with the fact that the LV distribution networks are more resistive than inductive (i.e. unlike HV transmission networks), adjusting only being able to adjust the ESMU's reactive powers to stabilise voltage levels, has an even smaller impact.
-Nonetheless, due to some continuous yet small availability of power resource, ESMU is able to boost voltages to some extent at all times. In Figure \ref{ch1:subfig:ts-esmu-voltage-cost}, this can be seen since the associated cost has always been reduced in comparison to the \textit{base} and \textit{normal} cases.
+Nonetheless, due to some continuous yet small availability of power resource, ESMU is able to boost voltages to some extent at all times. In Figure~\ref{ch1:subfig:ts-esmu-voltage-cost}, this can be seen since the associated cost has always been reduced in comparison to the \textit{base} and \textit{normal} cases.
 
 The ability to support voltage levels at the ESMU's PCC is interesting, yet supporting voltage levels at all buses throughout the network is more relevant since some of these buses are linked to customers, for which it is essential to maintain a constant voltage level.
 Therefore, the results assess both the highest and lowest voltage level that is recorded throughout the network.
 
 \input{_chapter1/fig/ts-all-voltages}
 
-In Figure \ref{ch1:subfig:ts-all-voltages}, despite no voltage violations taking place due to the already boosted substation voltage, the ESMU's positive impact can be observed.
+In Figure~\ref{ch1:subfig:ts-all-voltages}, despite no voltage violations taking place due to the already boosted substation voltage, the ESMU's positive impact can be observed.
 Here, the difference between highest and lowest voltage in the network is noticeably reduced at all times, and their average voltage is brought closer to a nominal voltage level.
 The ESMU's function to support the network in providing more stable voltage levels at customer endpoints is therefore met.
-This fact is also supported by the associated cost plot in Figure \ref{ch1:subfig:ts-all-voltages-cost}, where a reduction in cost can be observed at all times.
+This fact is also supported by the associated cost plot in Figure~\ref{ch1:subfig:ts-all-voltages-cost}, where a reduction in cost can be observed at all times.
 
 
 \input{_chapter1/fig/ts-phase-unbalance}
 
 Beside providing stable voltage levels, power quality should also be upheld to assure that distribution networks operate as efficient as possible.
 The first power related parameter that indicates network efficiency is phase unbalance.
-In Figure \ref{ch1:subfig:ts-phase-unbalance}, the power value of the highest and lowest loaded corresponding phases is plotted over time.
+In Figure~\ref{ch1:subfig:ts-phase-unbalance}, the power value of the highest and lowest loaded corresponding phases is plotted over time.
 At all times, the sub-half-hourly adjustments of the ESMU's schedule did reduce the underlying phase imbalance.
 This is achieved by redistributing power from the most loaded phase to the least loaded phases; hence utilising the unused capacity of the lighter loaded phases.
 As expected, the associated cost has been noticeably lowered in comparison to the \textit{base} and \textit{normal} cases.
@@ -49,7 +49,7 @@ One such strain that is being put onto the network, is increased neutral power f
 
 \input{_chapter1/fig/ts-neutral-power}
 
-For the results that are plotted in Figure \ref{ch1:fig:ts-neutral-power}, neutral power flow is minimised through the adjustment of ESMU powers.
+For the results that are plotted in Figure~\ref{ch1:fig:ts-neutral-power}, neutral power flow is minimised through the adjustment of ESMU powers.
 It can be seen, that for the \textit{normal} case, neutral power is not affected at all.
 Reason for this result is the choice of evenly assigning the scheduled ESMU power to all three phases.
 Therefore, neither phase unbalance nor loading of the neutral conductor is being taken into account.
@@ -57,21 +57,21 @@ For the \textit{minimisation} case however, loading of the neutral conductor is 
 
 \input{_chapter1/fig/ts-power-factor}
 
-Unlike neutral phase unbalance and neutral loading, power factor on the other hand is impacted just by introducing the half-hourly ESMU schedule, as shown in Figure \ref{ch1:fig:ts-power-factor}.
+Unlike neutral phase unbalance and neutral loading, power factor on the other hand is impacted just by introducing the half-hourly ESMU schedule, as shown in Figure~\ref{ch1:fig:ts-power-factor}.
 Whilst the choice of a static power factor for all loads in the \textit{normal} case resulted in a constant power throughout the day, half-hourly ESMU intervention in the \textit{base} case results in a noticeable power factor variation.
 This variation is however successfully reduced throughout the entire day for the \textit{minimisation} case, in comparison to the \textit{normal} cases.
 
 \input{_chapter1/fig/ts-losses}
 
 The final parameter that indicates system efficiency are the distribution losses.
-Figure \ref{ch1:fig:ts-losses} shows the reduction in distribution losses that were achieved when adjusting the ESMU powers accordingly.
+Figure~\ref{ch1:fig:ts-losses} shows the reduction in distribution losses that were achieved when adjusting the ESMU powers accordingly.
 In fact, an additional 6.42\% energy savings is achieved, simply by adjusting the ESMU's power injection and absorption behaviour, when comparing the \textit{base} and \textit{minimisation} cases.
 Although this amount of energy may seem negligibly small, these saving can amount to a noticeable level of savings on a national scale, which can potentially benefit the entire power network.
 Nonetheless, measuring losses is difficult and costly, which is why attempting to do so will likely outweigh the benefits.
 
 Instead, a better way of relieving stress from the power network is to minimise its assets utilisation by mitigating demand spikes.
 Since the ESMU was constraint not to deviate from its underlying half-hourly schedule, only phase related demand differences could be addressed.
-Hence the impact of correcting those phase differences is bare noticeable, which can be seen in Figure \ref{ch1:fig:ts-all-line-utilisation}.
+Hence the impact of correcting those phase differences is bare noticeable, which can be seen in Figure~\ref{ch1:fig:ts-all-line-utilisation}.
 
 \input{_chapter1/fig/ts-all-line-utilisation}
 
@@ -85,14 +85,14 @@ Nonetheless, throughout the entire day, ESMU was still able to reduce line utili
 In order to gage whether the sub-half-hourly ESMU power adjustment results in a statistical difference in network performance, a box-plot was generated to compare each \textit{minimisation} with the corresponding \textit{normal} case.
 Hence, the underlying data for each box-plot represents the difference between the \textit{minimisation} case's costs and the \textit{normal} case's costs, i.e. when operating without adjusting ESMU powers.
 Therefore, any positive difference in cost indicates an improvement to the system's performance, whilst a negative difference would imply a worsening.
-All cases are compared and plotted in Figure \ref{ch1:fig:boxplot-overall-improvements}, and the complete set of box-plots (showing the ``cross-cost difference'') is included in Appendix \ref{appx-a:ch1:additional-difference-analysis}.
+All cases are compared and plotted in Figure~\ref{ch1:fig:boxplot-overall-improvements}, and the complete set of box-plots (showing the ``cross-cost difference'') is included in Appendix~\ref{appx-a:ch1:additional-difference-analysis}.
 
 \input{_chapter1/fig/boxplot-overall-improvements}
 
 This figure shows the how the cost reduction is distributed.
 In this case, the cost reduction, i.e. $-\delta\zeta(\alpha)$, is the change in cost from the \textit{normal} ESMU operation case to \textit{minimisation} operation cases.
 Due to the different scales however, the improvements are difficult to observe.
-Therefore, this cost reduction has been normalised in regards to the \textit{normal} ESMU operation case and is replotted in Figure \ref{ch1:fig:boxplot-relative-improvements}.
+Therefore, this cost reduction has been normalised in regards to the \textit{normal} ESMU operation case and is replotted in Figure~\ref{ch1:fig:boxplot-relative-improvements}.
 
 \input{_chapter1/fig/boxplot-relative-improvements.tex}
 
@@ -104,7 +104,7 @@ The only limit that applies to the ESMU's reactive power injection capabilities 
 Also, unlike active power, reactive power has a smaller impact on the LV network due to its physical property, i.e. being more resistive than inductive.
 Nonetheless, when each key network parameters became subject to their corresponding cost minimisation, all of them were impacted positively.
 
-In addition to the box-plots, the cross-cost improvements (whose box-plots are presented in the Appendix \ref{appx-a:ch1:additional-difference-analysis}), are calculated and tabulated in Table \ref{ch1:tab:cost-table}.
+In addition to the box-plots, the cross-cost improvements (whose box-plots are presented in the Appendix~\ref{appx-a:ch1:additional-difference-analysis}), are calculated and tabulated in Table~\ref{ch1:tab:cost-table}.
 This table includes the cumulative difference in cost between the \textit{normal} case and the \textit{minimisation} case.
 However, instead of only presenting the cost reduction that is yielded when minimising it, this table also includes all other resulting costs; i.e. the daily aggregated cost to be precise.
 This value is defined as the ``cumulative cost difference''.
@@ -116,7 +116,7 @@ For convenience, all positive cost reductions (i.e. network improvements) have b
 As expected, all entries along the diagonal are positive in cross-cost difference, i.e. where the evaluated cost is also the cost that was minimised.
 But beside this fact, one can also observe which cost minimisation has an impact on different costs.
 For example, adjusting the ESMU schedule to achieve the largest reduction in distribution losses (i.e. far right column) improves nearly all key network parameters, apart from substation voltage deviation.
-Furthermore, Table \ref{ch1:tab:cost-table} indicates that reducing battery voltage deviation, maximum voltage deviation, phase unbalance and neutral power (respectively, columns 3, 4, 5 and 6) have a noticeable impact on each other.
+Furthermore, Table~\ref{ch1:tab:cost-table} indicates that reducing battery voltage deviation, maximum voltage deviation, phase unbalance and neutral power (respectively, columns 3, 4, 5 and 6) have a noticeable impact on each other.
 Minimising any of these four costs does however not impact power factor, loading and losses (apart from reducing battery voltage deviation).
 
 Then again, although the impact on network improvements for some costs is easily determined and explained with the underlying physical properties of distribution systems, other impacts of minimising cost do not share this transparency.
@@ -135,11 +135,11 @@ To do so, the probability density functions (PDF) of the cross-cost differences 
 The underlying data is conditioned in order to meet all prerequisites that are necessary to perform the null hypothesis test, e.g. the standard $t$-test.
 These prerequisites include stationarity, low auto-correlation and high gaussianity of the underlying time-series.
 The procedure to meet these prerequisites is carried out without falsifying the data, which means that all applied conditioning operations were restricted to time-series division and linear transformation.
-Details on the exact data conditioning steps are outside the scope of this chapter, but for completeness they are included in Appendix \ref{appx-a:ch1:probability-density-analysis}.
+Details on the exact data conditioning steps are outside the scope of this chapter, but for completeness they are included in Appendix~\ref{appx-a:ch1:probability-density-analysis}.
 
 \input{_chapter1/tab/t-test-table}
 
-Table \ref{ch1:tab:t-test-table} presents the results from this analysis, where $p$-values have been tabulated and those cells with a value below $0.05$ have been highlighted.
-A similar pattern to that in the previous table can be seen (i.e. Table \ref{ch1:tab:cost-table}).
+Table~\ref{ch1:tab:t-test-table} presents the results from this analysis, where $p$-values have been tabulated and those cells with a value below $0.05$ have been highlighted.
+A similar pattern to that in the previous table can be seen (i.e. Table~\ref{ch1:tab:cost-table}).
 In this table however, instead of just comparing cross-cost reductions, statistical indications to support the significance of the findings is presented.
 In combination with the preceding table, one can therefore determine that e.g. the impact of optimising operation based on maximum voltage deviation has little to no significant impact on improvements in power factor, whilst adjusting ESMU powers to improve the network's power factor has the most significant statistical impact on the chosen key network parameters.

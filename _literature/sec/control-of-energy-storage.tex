@@ -12,11 +12,11 @@ Whilst the questions regarding locating and scaling of BESS have mostly been add
 
 These two control approaches have evolved from two different fields of active network management.
 Nonetheless, both approaches hold significant benefits to the operational performance of power distribution networks and neither of the two can be neglected.
-Therefore, Section \ref{ch-literature:subsec:off-line-and-on-line-control} addresses and discusses the two control approaches and their missing link.
+Therefore, Section~\ref{ch-literature:subsec:off-line-and-on-line-control} addresses and discusses the two control approaches and their missing link.
 
 The current form of the NTVV project focuses on controlling a single BESS in the LV distribution network.
 However, the uptake of household connected BESS will increase the number of distributed systems, which need to be managed cooperatively.
-Therefore, Section \ref{ch-literature:subsec:centralised-and-distributed-control} reviews and discusses different control approaches for distributed BESS, since the control of multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
+Therefore, Section~\ref{ch-literature:subsec:centralised-and-distributed-control} reviews and discusses different control approaches for distributed BESS, since the control of multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
 
 \subsection{Off-line and on-line control}
 \label{ch-literature:subsec:off-line-and-on-line-control}
@@ -36,7 +36,7 @@ Therefore, on-line control has been considered as an alternative to off-line con
 
 One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
 SPC achieves this behaviour by measuring some properties of the power system, e.g. voltage level or frequency, and comparing those values to an internal target value, i.e. the set-point.
-Droop control, as mentioned in Section \ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
+Droop control, as mentioned in Section~\ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
 A single set-point is however not suitable for a network that changes dynamically, which is why droop control was extended by Tayab et al. in \cite{Tayab2017} to become adaptive.
 Their research shows how conventional droop control runs the risk of allowing system frequency to drop to 48.4Hz (from a nominal 50Hz), whereas adaptive droop was capable of frequency restoration with little to no observable frequency variation.
 However, their system only injected reactive power into the system, yet BESS in LV distribution networks needs to provide active power from its limited energy resource.
@@ -59,8 +59,8 @@ This addition produced significantly better results and they shaved daily peaks 
 Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
 
 Therefore, finding a way of combining both off-line control, i.e. scheduled BESS operation which is executed at half-hourly resolution, with on-line control, i.e. a mechanism that is responsive to power system changes, allows the application of real-time corrections to the BESS schedule.
-Since this is still an open and ongoing research problem that has not yet been solved, \ref{objective-1} and \ref{objective-2}, as outlined in Section \ref{ch-introduction:sec:problem-statement}, aim to develop and present a control mechanism that utilises the benefits from scheduled and real-time control.
-The objectives' corresponding chapters are, respectively, Chapter \ref{ch1} and Chapter \ref{ch2}, and address this research problem in two stages.
+Since this is still an open and ongoing research problem that has not yet been solved, \ref{objective-1} and \ref{objective-2}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aim to develop and present a control mechanism that utilises the benefits from scheduled and real-time control.
+The objectives' corresponding chapters are, respectively, Chapter~\ref{ch1} and Chapter~\ref{ch2}, and address this research problem in two stages.
 At first the problem is addressed developing a framework to apply scheduled BESS operation to a three-phase network in a sub-half-hourly manner but without modifying its underlying half-hourly schedule.
 Secondly, this hard constraint is removed by developing and implementing a dynamic controller that allows an operational tolerance around the pre-computed BESS schedule in order to guide BESS operation without violating its energy storage limits, whilst maximising its flexibility to respond to sudden system changes.
 This a control system does however rely on a communications infrastructure in order to be implemented and deployed in reality.
@@ -136,9 +136,9 @@ They showed the inherent difficulty of combining different ontologies despite th
 Also, as the number of independent elements becomes ubiquitous, requirements for a strong telecommunications infrastructure become equally important \cite{Hatziargyriou2015}.
 So far, synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks may not automatically be synchronised \cite{He2017}.
 The impact of desynchronised information exchange on the performance of a MAS driven energy scheduling algorithm still remains an open research question.
-Therefore, assessing the impact of introducing such a desynchronisation has become part of the research that is presented in this thesis, and \ref{objective-3}, as outlined in Section \ref{ch-introduction:sec:problem-statement}, aims to answer this research question.
+Therefore, assessing the impact of introducing such a desynchronisation has become part of the research that is presented in this thesis, and \ref{objective-3}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aims to answer this research question.
 Regardless of the synchronised or desynchronised nature of the distributed control, they both do however require some kind of communications infrastructure, which may not always be present.
-Therefore, the next section, Section \ref{ch-literature:subsec:communication-less-control}, introduces control mechanisms where communication between devices is no longer a strong requirement.
+Therefore, the next section, Section~\ref{ch-literature:subsec:communication-less-control}, introduces control mechanisms where communication between devices is no longer a strong requirement.
 
 \subsection{Communication-less control}
 \label{ch-literature:subsec:communication-less-control}
@@ -168,6 +168,6 @@ One of the first proposed implementations for DER management was by St{\"{u}}dli
 Later, their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work relied on an ICT infrastructure, too.
 Therefore, the question whether a truly communication-less dynamic control method can be developed, mitigating voltage deviation and capacity limitations, is still remaining research problem.
 More specifically, this control method should not only avoid to impose any ICT requirements, but it should also aim to equalise the utilisation of all controlled devices, which is not guaranteed by the traditional AIMD algorithm.
-\ref{objective-4}, as outlined in Section \ref{ch-introduction:sec:problem-statement}, aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to not skew the algorithm's control decisions.
+\ref{objective-4}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to not skew the algorithm's control decisions.
 Previous research is therefore extended, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
 In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information or any communication infrastructure for that matter.

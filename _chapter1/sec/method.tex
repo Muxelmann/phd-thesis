@@ -1,7 +1,7 @@
 \section{Optimisation method}
 \label{ch1:sec:closed-loop-optimisation-method}
 
-Previously, in Section \ref{ch1:sec:key-network-parameters}, the key network parameters and associated cost functions have been established, and the data, models and schedule generation is explained in Section \ref{ch1:sec:data-and-network-models}.
+Previously, in Section~\ref{ch1:sec:key-network-parameters}, the key network parameters and associated cost functions have been established, and the data, models and schedule generation is explained in Section~\ref{ch1:sec:data-and-network-models}.
 The key network parameters that are used in this work are:
 
 \begin{itemize}
@@ -30,10 +30,10 @@ To simplify the notation, and since all key network parameters are outputs of th
 
 \input{_chapter1/fig/closed-loop-optimisation}
 
-\nomenclature[I]{$\delta\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power adjustment vector at time $t$, where $(\delta s_{\text{ESMU},\phi}(t)) = \delta \textbf{s}_\text{ESMU}(t)$ and $\delta \textbf{s}_\text{ESMU}(t) \in \mathbb{C}^\Phi$ (Chapter \ref{ch1})}
-\nomenclature[I]{$\delta s_{\text{ESMU}, \phi}(t)$}{Three-phase apparent ESMU power adjustment vector at time $t$, where $(\delta s_{\text{ESMU},\phi}(t)) = \delta \textbf{s}_\text{ESMU}(t)$ and $\delta s_{\text{ESMU},\phi}(t) \in \mathbb{C}$ (Chapter \ref{ch1})}
+\nomenclature[I]{$\delta\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power adjustment vector at time $t$, where $(\delta s_{\text{ESMU},\phi}(t)) = \delta \textbf{s}_\text{ESMU}(t)$ and $\delta \textbf{s}_\text{ESMU}(t) \in \mathbb{C}^\Phi$}
+\nomenclature[I]{$\delta s_{\text{ESMU}, \phi}(t)$}{Three-phase apparent ESMU power adjustment vector at time $t$, where $(\delta s_{\text{ESMU},\phi}(t)) = \delta \textbf{s}_\text{ESMU}(t)$ and $\delta s_{\text{ESMU},\phi}(t) \in \mathbb{C}$}
 
-The underlying method that performs the proposed closed-loop optimisation is shown in Figure \ref{ch1:fig:closed-loop-optimisation}.
+The underlying method that performs the proposed closed-loop optimisation is shown in Figure~\ref{ch1:fig:closed-loop-optimisation}.
 For each time-slot, $t$, the pre-scheduled ESMU power vector, $\textbf{s}_\text{ESMU}(t)$, is extracted and adjusted by an offset vector, $\delta \textbf{s}_\text{ESMU}(t)$.
 An optimal offset vector is found through iterative optimisation to minimise the global cost function, $\zeta(\boldsymbol{\alpha})$.
 This minimisation is achieved by repetitively running power flow simulations of the IEEE distribution feeder and adjusting $\delta\textbf{s}_\text{ESMU}(t)$.
@@ -48,7 +48,7 @@ Including the previously mentioned battery system constraints, which ensure that
 \label{ch1:subsec:method-execution}
 
 After having established what parameters the global cost focuses on when trying to improve network operation, and after having established how the closed-loop optimising method aims to achieve these improvements, the performance assessment procedure is introduced.
-The complete evaluation procedure and assessment is summarised in Figure \ref{ch1:fig:method-evaluation-flowchart}.
+The complete evaluation procedure and assessment is summarised in Figure~\ref{ch1:fig:method-evaluation-flowchart}.
 
 \input{_chapter1/fig/method-evaluation-flowchart}
 
@@ -61,7 +61,7 @@ Comparing results from the \textit{base} and \textit{normal} simulations does sh
 The remaining nine datasets are results of the nine different cost driven simulations, where the ESMU schedule is adjusted on a sub-half-hourly level for each simulation.
 This adjustment is designed to minimise one underlying cost-function, whilst conforming to the ESMU's overall half-hourly charging and discharging profile.
 In order to treat each cost-function separately $\boldsymbol{\alpha}$ is set to focus on each cost independently, e.g. by setting $\alpha_1 = 1 \text{ and } \alpha_2 = \alpha_3 = \dots = \alpha_9 = 0$.
-For simplicity, the flowchart in Figure \ref{ch1:fig:method-evaluation-flowchart} abbreviates the specific costs by only indicating which entry in the $\boldsymbol{\alpha}$ vector is set to $1$, e.g. $\zeta(\alpha_1=1)$.
+For simplicity, the flowchart in Figure~\ref{ch1:fig:method-evaluation-flowchart} abbreviates the specific costs by only indicating which entry in the $\boldsymbol{\alpha}$ vector is set to $1$, e.g. $\zeta(\alpha_1=1)$.
 
 Once all eleven simulations have completed, their corresponding datasets are assessed in an identical manner, so that their impact on network performance can be compared.
 This comparison is broken into three parts for all dataset:

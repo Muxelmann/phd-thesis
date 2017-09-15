@@ -14,14 +14,14 @@ The scale of this energy transition becomes becomes particularly apparent when r
 
 \input{_introduction/fig/electricity-demand-residential}
 
-Figure \ref{ch-introduction:fig:electricity-demand-residential} shows the predicted increase in annual residential electricity demand, where the market driven scenario (i.e. ``Consumer Power'') shows the largest increase until 2050.
+Figure~\ref{ch-introduction:fig:electricity-demand-residential} shows the predicted increase in annual residential electricity demand, where the market driven scenario (i.e. ``Consumer Power'') shows the largest increase until 2050.
 When putting more emphasis on environmental concerns, the  ``Two Degrees`` scenario emerges - this scenario refers to the internation of limiting global temperature increase to two degrees (previous FES reports referred to this scenario as ``Gone Green``).
 According to the FES 2017, those two scenarios enable a continuing growth of the UK economy, but put very different emphasis on decarbonisation targets.
 Although the rise in demand for electricity is projected to differ by more than 30TWh in 2050 if the ``Two Degrees`` scenario is achieved, the aforementioned uptake of LCTs like Electric Vehicles (EVs) is expected to put a noticeable stain onto the power network in both scenarios.
 
 \input{_introduction/fig/electricity-demand-ev}
 
-Focusing on the electrification of personal transport by introducing EVs into the electricity demand, Figure \ref{ch-introduction:fig:electricity-demand-ev} shows that both the ``Consumer Power'' as well as the ``Two Degrees'' scenario will add more than 30TWh of annual energy demand by 2045.
+Focusing on the electrification of personal transport by introducing EVs into the electricity demand, Figure~\ref{ch-introduction:fig:electricity-demand-ev} shows that both the ``Consumer Power'' as well as the ``Two Degrees'' scenario will add more than 30TWh of annual energy demand by 2045.
 Since most of these EVs are expected to charge at home and (at least initially) at similar times, aggregating effects are feared to not only exhaust national energy supply capabilities, but also power distribution capacities.
 
 \input{_introduction/fig/electricity-peak-demand}
@@ -29,7 +29,7 @@ Since most of these EVs are expected to charge at home and (at least initially) 
 \nomenclature[G]{CREST}{Centre for Renewable Energy Systems Technology}
 \nomenclature[G]{ENW}{Electricity North West}
 
-Figure \ref{ch-introduction:fig:electricity-peak-demand} supports this worry since uncontrolled proliferation of LCTs and EVs, as shown in the ``Consumer Power'' scenario, will add more than 20GW of demand onto today's peak power levels.
+Figure~\ref{ch-introduction:fig:electricity-peak-demand} supports this worry since uncontrolled proliferation of LCTs and EVs, as shown in the ``Consumer Power'' scenario, will add more than 20GW of demand onto today's peak power levels.
 Such a rise in peak demand would exceed today's supply capacities, especially since the new energy mix and decommissioning of fossil fuelled power plants have resulted in this year's winter capacity margin to only lie between 3.7GW and 4.9GW \cite{NationalGrid2017a}.
 Although FES 2017 expects the ``Two Degrees'' scenario to also show an increase in peak power, better coordination and control is expected to mitigate half of the 20GW peak increase.
 From this point of view, today's narrow capacity margins could already cater for nearly half of the increase in peak demand that is expected to occur in 33 years, i.e. 2050.
@@ -93,7 +93,7 @@ Most promising alternatives are to install flexible and controllable Distributed
 BESS has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
 
 Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
-Roles for energy storage in general are extensively reviewed in Section \ref{ch-literature:sec:role-of-energy-storage-a-survey}.
+Roles for energy storage in general are extensively reviewed in Section~\ref{ch-literature:sec:role-of-energy-storage-a-survey}.
 A few examples of potential benefits from BESS do however include the regulation of voltages in order to to operate within statutory voltage bands \cite{Yang2014}, shaving peak loads to relieve stress from the installed network assets \cite{Bennett2015}, and reducing phase unbalance to increase network efficiency \cite{Wang2015b}.
 These three examples all implement a similar control paradigm, where BESS is charged during periods of low demand and discharged at peak demand periods in order to achieve the best possible impact.
 Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control can be split into two complementing yet unmarried approaches:
@@ -103,7 +103,7 @@ Whilst the questions regarding locating and scaling of BESS have mostly been add
 	\item ``on-line'' control, using Set-Points Control (SPC), Model Predictive Control (MPC) or similar dynamic control methods \cite{Salinas2013, Huang2013, Huang2014a, Sun2014a}.
 \end{enumerate}
 
-These two control approaches are reviewed in detail in Section \ref{ch-literature:subsec:off-line-and-on-line-control}.
+These two control approaches are reviewed in detail in Section~\ref{ch-literature:subsec:off-line-and-on-line-control}.
 Also, with the anticipated uptake of household BESSs and DERs, mechanisms to control and coordinate multiple storage systems have also grown in popularity \cite{Mokhtari2013, Sarker2015, Baker2016a, Baumann2017}.
 The example proposing to store solar energy in order to support charging of EVs in \cite{Baumann2017} is particularly interesting since it shows a well coordinated home system that does not impose any additional load onto the power distribution network.
 These findings also highlight that without rooftop PV installations (or any co-located energy resource for that matter), distributed storage systems need work in a cooperative manner to avoid adding strain onto the network.
@@ -114,7 +114,7 @@ Control methods that are capable of coordinating DERs by letting devices make in
 
 \nomenclature[G]{IoT}{Internet of Things}
 
-As already mentioned in the previous section, Section \ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, off-line and on-line control strategies exist to manage BESS.
+As already mentioned in the previous section, Section~\ref{ch-introduction:subsec:solutions-to-mitigate-impact-of-lct}, off-line and on-line control strategies exist to manage BESS.
 This traditional control often dealt with the dispatch of a single energy entity, but due to the distributed nature of the expected LCT uptake, methods to result in cooperative behaviour needed to be proposed.
 With the penetration of smart meters and communication-enabled devices in the so called ``Internet of Things`` (IoT), power systems have the potential of becoming interlinked networks of smart devices, too.
 So called ``smart control'' mechanisms complement the traditional off-line and on-line control strategies and are of great research interest to enable the uptake of distributed LCTs, since these strategies remove the single point of failure, reduce computational burden from centralised controllers and allow individual devices to respond intelligently and quickly to local events like sudden voltage drops or capacity notifications.
@@ -126,7 +126,7 @@ A similar key term is the so called ``smart grid'' where DER communicate and coo
 However, the fundamental requirement for the successful realisation of any smart control method is the reliable exchange of information amongst the smart entities that operate within the power network.
 
 Therefore smart control does not only require robust control mechanisms, but also a robust communications infrastructure.
-In Section \ref{ch-literature:subsec:centralised-and-distributed-control}, literature that reviews and compares both centralised control methods with distributed control paradigms will show the implicit need to synchronise the coordination of multiple smart devices.
+In Section~\ref{ch-literature:subsec:centralised-and-distributed-control}, literature that reviews and compares both centralised control methods with distributed control paradigms will show the implicit need to synchronise the coordination of multiple smart devices.
 It will be shown that all underlying control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume such a robust communication infrastructure.
 For instance, this requirement is assumed when messages are received without delay and immediately after being dispatched or when a single control instruction result in the synchronised reaction of all controlled entities.
 In reality however, the strength of the communication link may vary with e.g. weather or current network traffic, and fixed message delays and exact device synchronisation can no longer be guaranteed.
@@ -138,7 +138,7 @@ Whilst these control methods support network operation, they have not been desig
 More specifically, in a network where devices like household-connected BESS are no longer owned by DNOs, the interest of guaranteeing a certain lifetime may surpass the need to provide network support operation.
 Therefore, distributed and communication-less control strategies need to assure a more equal device utilisation to spread to burden onto the entire collection of DERs.
 Otherwise, batteries situated at the end of the distribution network experience the largest voltage swing are therefore likely to cycle more than those batteries located closer to the substation where voltages are more stable.
-Hence, following the review of several communication-less control methods in Section \ref{ch-literature:subsec:communication-less-control}, an improved distributed and communication-less BESS control algorithm is proposed that takes this neglected equality into account. 
+Hence, following the review of several communication-less control methods in Section~\ref{ch-literature:subsec:communication-less-control}, an improved distributed and communication-less BESS control algorithm is proposed that takes this neglected equality into account. 
 
 %\subsection{Summary of challenges to control BESS}
 %\label{ch-introduction:subsec:summary-of-challenges}

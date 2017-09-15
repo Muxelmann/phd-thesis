@@ -4,8 +4,8 @@
 Due to the trends in energy demand, future network load is expected to increase in both magnitude and volatility.
 As a result, DNOs have two choices to address the issues that are expected to result from increased network stress.
 They can either invest in network reinforcement or install network support equipment.
-For several reasons, e.g. decommissioning cost, installation cost, service disruption, etc., which have been outlined in Chapter \ref{ch-introduction}, the installation of network support equipment was favoured.
-As also mentioned in Chapter \ref{ch-introduction}, \textit{SSEN} deployed and trialled an Energy Storage Management Unit (ESMU) in some of their Low-Voltage (LV) power distribution networks.
+For several reasons, e.g. decommissioning cost, installation cost, service disruption, etc., which have been outlined in Chapter~\ref{ch-introduction}, the installation of network support equipment was favoured.
+As also mentioned in Chapter~\ref{ch-introduction}, \textit{SSEN} deployed and trialled an Energy Storage Management Unit (ESMU) in some of their Low-Voltage (LV) power distribution networks.
 Within the scope of their trials, ESMU had to be controlled to benefit the network, without exceeding or violating any operational constraints.
 In order to achieve this kind of operation, ESMU operation had to be scheduled.
 During this kind of operation, the system either consumes or injects power, according to a predetermined plan that changes at regular intervals.
@@ -22,7 +22,7 @@ Our previous research focused on improving half-hourly network operation to e.g.
 However, in that research, sub-half-hourly demand variability has not been taken into account.
 Therefore, previously used performance parameters, and the corresponding measure of success, did not effectively quantify the ESMU's capability at mitigating negative impacts from this sub-half-hourly demand.
 
-Therefore, this chapter addresses \ref{objective-1} of this thesis (which is outlined in Section \ref{ch-introduction:sec:problem-statement}), and a closed-loop optimisation method is proposed that adjusts the ESMU's phase powers at a sub-half-hourly resolution in order to improve network operation, whilst maintaining the charging and discharging profile during the corresponding half-hourly period.
+Therefore, this chapter addresses \ref{objective-1} of this thesis (which is outlined in Section~\ref{ch-introduction:sec:problem-statement}), and a closed-loop optimisation method is proposed that adjusts the ESMU's phase powers at a sub-half-hourly resolution in order to improve network operation, whilst maintaining the charging and discharging profile during the corresponding half-hourly period.
 Unlike previous work in the field, this approach guarantees the correct execution of the predetermined ESMU schedule, despite allowing ESMU to respond to high-resolution variations in three-phase network load.
 
 In order to investigate how network operation may be improved, a collection of commonly used parameters are evaluated in a set of corresponding cost functions.
@@ -31,7 +31,7 @@ Then, all cost functions are combined as a weighted sum to form a global cost fu
 For each optimisation approach, power flow simulations are run on a standardised UK power distribution feeder model in the simulation environment OpenDSS.
 This chapter therefore addresses the research question, whether sub-half-hourly adjustments to scheduled ESMU operation can significantly improve measured key network parameters.
 
-The obtainment of key network parameters and their corresponding measure of improvement is explained next, in Section \ref{ch1:sec:key-network-parameters}.
-All acquired data and the power network models used for this piece of work are shown in Section \ref{ch1:sec:data-and-network-models}.
-Subsequently, the closed-loop optimisation method is presented in Section \ref{ch1:sec:closed-loop-optimisation-method}.
-At the end of this chapter, all results are presented and discussed in Section \ref{ch1:sec:results-and-discussion}, and a concluding summary is presented in in Section \ref{ch1:sec:summary}.
+The obtainment of key network parameters and their corresponding measure of improvement is explained next, in Section~\ref{ch1:sec:key-network-parameters}.
+All acquired data and the power network models used for this piece of work are shown in Section~\ref{ch1:sec:data-and-network-models}.
+Subsequently, the closed-loop optimisation method is presented in Section~\ref{ch1:sec:closed-loop-optimisation-method}.
+At the end of this chapter, all results are presented and discussed in Section~\ref{ch1:sec:results-and-discussion}, and a concluding summary is presented in in Section~\ref{ch1:sec:summary}.

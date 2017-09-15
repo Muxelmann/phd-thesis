@@ -3,13 +3,13 @@
 
 \input{_chapter2/fig/system-controller}
 
-This section explains the dynamic control (i.e. the controller block that is shown in Figure \ref{ch2:subfig:proposed-dynamic-control-system}), which contains the two PID compensators.
+This section explains the dynamic control (i.e. the controller block that is shown in Figure~\ref{ch2:subfig:proposed-dynamic-control-system}), which contains the two PID compensators.
 The first PID compensator is fed by the ESMU schedule, and the other is fed by the MPC load estimations.
 After the control system is detailed in this section, the auto-regressive models, which were used during the course of this research, are explained, too.
 
 \subsection{Dynamic control}
 
-The content of the dynamic control procedure is shown in Figure \ref{ch2:fig:system-controller}.
+The content of the dynamic control procedure is shown in Figure~\ref{ch2:fig:system-controller}.
 Here, two reference signals are used as inputs to the dynamic control.
 The first reference signal is the SOC profile derived from the ESMU scheduled, $SOC(t)$, and the second is an estimated future network power, $\hat{p}_\text{net}(t+\Delta t)$.
 These two inputs are fed into compensator PID$_1$ and compensator PID$_2$, respectively.
@@ -49,7 +49,7 @@ Compensator PID$_2$ on the other hand uses values from the present, past and fut
 
 \input{_chapter2/fig/power-transient-minimisation}
 
-Figure \ref{ch2:fig:power-transient-minimisation} summarises the time series computations for each power sample at times $t$, $t+\Delta t$, etc.
+Figure~\ref{ch2:fig:power-transient-minimisation} summarises the time series computations for each power sample at times $t$, $t+\Delta t$, etc.
 Ideally, PID$_2$ uses present power readings, $p_\text{net}(t)$, and a power value of the immediate future, i.e. $p_\text{net}(t+\Delta t)$, to compute a power error signal, which is to be reduced to a smallest possible value.
 This error signal is defined as:
 
@@ -79,15 +79,15 @@ Here, $\zeta^*(\alpha, \beta)$ is defined as:
 
 \input{_chapter2/equ/dynamic-cost}
 
-In Equation \ref{ch2:equ:cost-weights} and \ref{ch2:equ:dynamic-cost}, $\zeta^*(\alpha, \beta)$ represents the sub-half-hourly peak load during a day, when ESMU schedules are adjusted with the corresponding $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
+In Equation~\ref{ch2:equ:cost-weights} and Equation~\ref{ch2:equ:dynamic-cost}, $\zeta^*(\alpha, \beta)$ represents the sub-half-hourly peak load during a day, when ESMU schedules are adjusted with the corresponding $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
 Also, the same SOC tolerance that was used to generate the SOC schedule, i.e. $SOC_{tol}$, is included to prevent the solution from deviating off the prescheduled SOC profile.
 To generalise this solution for all load cases, a minimisation problem was formulated to solve multiple daily load profiles in order to find ideal $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
 This resulting set of $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights, therefore guaranteed a convergent and stable solutions.
-The details concerning these case studies themselves, are however outlined in Section \ref{ch2:sec:case-studies}.
+The details concerning these case studies themselves, are however outlined in Section~\ref{ch2:sec:case-studies}.
 
 \subsection{Model predictive control}
 
-As explained in the literature review in Chapter \ref{ch-literature}, Model Predictive Control (MPC) is favoured over Set-Point Control (SPC), since it takes into account time-series to produce a behaviour.
+As explained in the literature review in Chapter~\ref{ch-literature}, Model Predictive Control (MPC) is favoured over Set-Point Control (SPC), since it takes into account time-series to produce a behaviour.
 With this knowledge, MPC can be used to not only react to recent changes but also to counteract foreseen trends.
 Different approaches exist to obtain these foreseen trends and these approaches highly vary in accuracy, computational burden and robustness.
 Equally, the characteristics of underlying data which is used to train these models impacts their performances.
@@ -104,17 +104,17 @@ Since external forces can and often do impact the behaviour of the model, the AR
 
 \input{_chapter2/fig/mpc-arx}
 
-Figure \ref{ch2:fig:mpc-arx} graphically captures the standard AR model's function tree, which is also represented mathematically in the following equation:
+Figure~\ref{ch2:fig:mpc-arx} graphically captures the standard AR model's function tree, which is also represented mathematically in the following equation:
 
 \input{_chapter2/equ/mpc-arx}
 
 Values of the two weight vectors $\textbf{a}$ and $\textbf{b}$, where $\textbf{a} = (a_i)$ and $\textbf{b} = (b_i)$, are determined during runtime using the standard adaptive least squares algorithm.
 This algorithm dynamically adjusts $\textbf{a}$ and $\textbf{b}$ to minimise the prediction error at each time-step.
 Beside finding optimised values for $\textbf{a}$ and $\textbf{b}$, the model's number of regressors, $N$, is also predicted to impact the model's performance ($N$ is also referred to as the ``model length'').
-The example in Figure \ref{ch2:fig:mpc-arx} represents a symmetric model where $N=3$.
+The example in Figure~\ref{ch2:fig:mpc-arx} represents a symmetric model where $N=3$.
 This short length however is most likely insufficient in predicting $p(t+\Delta t)$, which is why several models of increasing lengths are assessed and compared.
 From this comparison, the impact of $N$ on the models' resulting values of $\hat{p}(t+\Delta t)$, and correspondingly on the performance of the dynamic controller can be discussed.
-Details about the cases for different model length are presented in the case studies in Section \ref{ch2:sec:case-studies}.
+Details about the cases for different model length are presented in the case studies in Section~\ref{ch2:sec:case-studies}.
 
 
 
