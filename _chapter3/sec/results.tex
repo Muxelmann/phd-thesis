@@ -42,7 +42,7 @@ Such clear behavioural differences for different pairs of $\alpha$ and $\beta$ i
 Whether this behaviour is till observed, and the question whether the algorithm still performs when introducing desynchronisation, is answered in the subsequent section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular}.
 
 
-\subsection{Algorithm performance for desynchronised operation - regular timing}
+\subsection{Algorithm performance for desynchronised operation with regular timing}
 \label{ch3:subsec:algorithm-performance-desynchronised-regular}
 
 \input{_chapter3/fig/time-series-desync/time-series-desync}
@@ -51,6 +51,34 @@ Looking at the evolution of the time-series when desynchronising the algorithm's
 Figure~\ref{ch3:fig:time-series-desync} shows this evolution for the same parameters as those chosen for Figure~\ref{ch3:fig:time-series}.
 The difference is however, that the assignment of charging powers lead to a significantly lower demand spike at the very beginning of executing the algorithm.
 Subsequent iterations then reduce this spike much broader than it has been the case when executing the algorithm in a synchronised manner.
+Therefore, more demand troughs are filled and a smoother profile is obtained much quicker, when compared to the synchronised case.
 
-\subsection{Algorithm performance for desynchronised operation - irregular timing}
+\input{_chapter3/fig/all-async-regular/all-async-regular}
+
+This behaviour becomes particularly apparent when looking at the full range of $\alpha$ and $\beta$ values.
+Figure~\ref{ch3:fig:all-async-regular} shows the same full range analysis as the figure in the previous section did, i.e. Figure~\ref{ch3:fig:all-sync}.
+When comparing them at the same scale, $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values (plotted in Figure~\ref{ch3:subfig:all-async-regular-par} and Figure~\ref{ch3:subfig:all-async-regular-tra}, respectively) have significantly lowered in magnitude.
+This indicates a much better performance of the algorithm across the entire range of $\alpha$ and $\beta$ parameters.
+Convergence rates (plotted in Figure~\ref{ch3:subfig:all-async-regular-par-conv} and Figure~\ref{ch3:subfig:all-async-regular-tra-conv}, respectively were however not impacted to the same extend.
+This indicates that the underlying execution of the algorithm still performs as intended, but the interplay between the agents that implement this algorithm changes the outcome of the aggregated result.
+The next step is to assess whether desynchronising the algorithm's execution by randomising the loop delays yields any further changes in algorithm performance and behaviour.
+Results from that step are presented in the following section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-irregular}.
+
+\subsection{Algorithm performance for desynchronised operation with irregular timing}
 \label{ch3:subsec:algorithm-performance-desynchronised-irregular}
+
+\input{_chapter3/fig/time-series-desync-irregular/time-series-desync-irregular}
+
+As shown in Figure~\ref{ch3:fig:time-series-desync-irregular}, the difference between regular and irregular loop delays when executing the smart-charging algorithm is barely noticeable.
+The interlaced querying still causes each agent to react to a slightly different network demand profile, which results in a varied power profile allocation.
+A functioning peak reduction behaviour is therefore a positive sign, since this irregular algorithm desynchronisation represents the worst algorithm deployment scenario.
+Performance and convergence do however need to be inspected for the complete range of $\alpha$ and $\beta$ values.
+
+\input{_chapter3/fig/all-async-irregular/all-async-irregular}
+
+Figure~\ref{ch3:fig:all-async-irregular} shows the results for this range of $\alpha$ and $\beta$ valued, when executing the algorithm on a desynchronised MAS with irregular loop delays.
+The values for $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ are still significantly lower than they were for the synchronised case, and do not differ much from the regular desynchronisation case.
+The same is true when comparing convergence, which indicates that the algorithm's underlying execution still performs as intended.
+
+
+
