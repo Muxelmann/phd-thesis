@@ -1,12 +1,15 @@
 \begin{table}\centering
-	\begin{tabular}{R{1cm} | C{2cm} C{2cm} | C{2cm} C{2cm}}
-		\multirow{2}{*}{$n$} & \multicolumn{2}{c|}{$\alpha=0.02$ and $\beta=0.20$} & \multicolumn{2}{c}{$\alpha=1.00$ and $\beta=1.00$} \\
-	  & $\zeta_\text{PAR}$ & $\zeta_\text{TRA}$ & $\zeta_\text{PAR}$ & $\zeta_\text{TRA}$\\
+	\begin{tabular}{r | C{2cm} C{2cm} | C{2cm} C{2cm}}
+		\multirow{2}{*}{iteration ($n$)} & \multicolumn{2}{c|}{$\alpha=0.02$ and $\beta=0.20$} & \multicolumn{2}{c}{$\alpha=1.00$ and $\beta=1.00$} \\
+	   & $\zeta_\text{PAR}$ & $\zeta_\text{TRA}$ & $\zeta_\text{PAR}$ & $\zeta_\text{TRA}$\\
 	  	\hline
           1 & 46.84 & 45.86 & 46.84 & 45.86\\          2 & 30.61 & 35.54 & 47.66 & 46.26\\          3 & 20.10 & 27.31 & 46.84 & 45.86\\          4 & 13.28 & 20.75 & 47.66 & 46.26\\          5 & 8.83  & 15.56 & 46.84 & 45.86\\          6 & 5.93  & 11.41 & 47.66 & 46.26\\          7 & 4.02  & 8.20  & 46.84 & 45.86\\          8 & 2.76  & 5.83  & 47.66 & 46.26\\          9 & 1.92  & 4.24  & 46.84 & 45.86\\         10 & 1.83  & 3.22  & 47.66 & 46.26\\
-   $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\		100 & 1.83  & 2.72  & 47.66 & 46.26
+   $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$\\		100 & 1.83  & 2.72  & 47.66 & 46.26\\
+   		\hline
+   		\hline
+   		convergence ($b$) & 0.47 & 0.32 & 0.00 & 0.00
 	\end{tabular}
-	\caption{Comparison of evolution of $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ for two $\alpha$ and $\beta$ parameter pairs.}
+	\caption{Comparison of $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ for two $\alpha$ and $\beta$ parameter pairs. Each value per iteration $n$ and the convergence $b$ is shown.}
 	\label{ch3:tab:pair-comparison}
 \end{table}
 

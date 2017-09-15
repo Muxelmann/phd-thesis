@@ -119,16 +119,21 @@ The estimate is obtained by fitting an exponential function to the series of $\z
 \input{_chapter3/equ/exponential-function}
 
 In Equation \ref{ch3:equ:performance-metrics-par}, $a$ is the zero-crossing point of this function and $b$ the rate of convergence.
-For the scope of this chapter, $x$ is limited to $x \geq 0$.
+For the scope of this chapter, $n$ is limited to $n \geq 0$.
+The size of $b$ indicates how fast the values converged, which is why $b$ is used as a convergence indicator.
 Values for $a$ and $b$ are found by reducing the error between the exponential function and the series of $\zeta_\text{PAR}$ or $\zeta_\text{TRA}$ values, i.e.:
 
 \input{_chapter3/equ/find-exponential}
 
 Results are therefore split into three parts.
-First the time-series power profiles for each configuration are being presented to give a proof of concept and to visualise the underlying outcomes.
-Secondly, a grid of the resulting performance and convergence metrics is produced to obtain an overview of the algorithm's performance for all performance and convergence metrics.
-In the end, the performance and convergence metrics are compared across the three different configurations.
-For this final comparison, the statistical QQ-Plot is used.
+In the first part, results are presented for the time-series evolution when using the algorithm in a synchronised MAS.
+Different $\alpha$ and $\beta$ values are used to explore and show the sensitivity of the algorithm.
+With this in mind the corresponding $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are presented to show their link to the underlying load profile's shape, and their convergence values, i.e. $b$ is also presented.
+Finally, a complete set of final $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values, as well as their convergence values, $b$, are plotted for the entire spectrum of $\alpha$ and $\beta$ pairs.
+This is to show the sensitivity of the algorithm for the complete range of $\alpha$ and $\beta$.
+The second step is then to introduce algorithm desynchronisation, but with regular loop delays, and repeat the complete analysis to compare it with the results in the first part.
+In the third and last part, the algorithm desynchronisation is changed so that the algorithm's loop delays are irregular.
+All results are once again compared to the preceding two parts of the results by following the same analysis.
 
 
 
