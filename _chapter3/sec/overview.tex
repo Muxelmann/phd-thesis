@@ -20,7 +20,7 @@ For this very reason has research predominantly focused on improving so called s
 In fact, during distributed EV scheduling, control instructions that may be broadcasted by one EV to inform all other scheduling EVs of e.g. an updated charging schedule, need not or cannot be received and responded to at the exact same time unless some synchronisation amongst all EVs is emplaced.
 A method to develop smart-charging algorithms that function in both synchronised and desynchronised environments does not yet exist.
 Therefore, this chapter, Chapter \ref{ch3}, first develops a smart-charging method for a synchronised fleet of EVs and then introduces message desynchronisation to assess the performance difference between the two environments.
-By doing so, Chapter \ref{ch3} addresses \ref{objective-3} of this thesis, which was outlined in Section \ref{ch-introduction:sec:problem-statement}, which aims to develop an EV scheduling method that is immune to message desynchronisation.
+By doing so, Chapter \ref{ch3} addresses \ref{objective-3} of this thesis, which was outlined in Section~\ref{ch-introduction:sec:problem-statement}, which aims to develop an EV scheduling method that is immune to message desynchronisation.
 
 It should be noted, that the charging of EVs is explicitly assessed instead of managing a collection of BESSs, since storage is able to release energy and thus provide grid support.
 Traditional EVs on the other hand do not have such capabilities\footnote{Research delving into Vehicle-to-Grid (V2G) support do consider reverse energy flow, yet this is not included in the work presented in this thesis.} and need to be coordinated in order to avoid home-charging related load spikes.
@@ -31,6 +31,6 @@ However, adding jitter to message broadcasting significantly changes the algorit
 Differences regarding rate of convergence and criteria for stability are most noticeable.
 Scheduling performance on the other hand does not deteriorate.
 The structure of this chapter is as follows:
-First, the EV demand and scheduling mechanism to coordinate the synchronised and desynchronised smart-charging is explained in Section \ref{ch3:sec:ev-coordination}.
-Next, in Section \ref{ch3:sec:distributed-systems}, the distributed control system for the chosen MAS is presented, alongside the two cases for synchronised and desynchronised information propagation.
-Section \ref{ch3:sec:results} presents and discusses the results from these two cases, upon which a conclusion is drawn in Section \ref{ch3:sec:summary}.
+First, the EV demand and scheduling mechanism to coordinate the synchronised and desynchronised smart-charging is explained in Section~\ref{ch3:sec:ev-coordination}.
+Next, in Section~\ref{ch3:sec:distributed-systems}, the distributed control system for the chosen MAS is presented, alongside the two cases for synchronised and desynchronised information propagation.
+Section~\ref{ch3:sec:results} presents and discusses the results from these two cases, upon which a conclusion is drawn in Section~\ref{ch3:sec:summary}.

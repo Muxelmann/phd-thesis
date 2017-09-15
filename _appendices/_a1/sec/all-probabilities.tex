@@ -1,7 +1,7 @@
 \subsection{Probability Density Analysis}
 \label{appx-a:ch1:probability-density-analysis}
 
-The details described in this section address the prerequisites for the performed null hypothesis test in Section \ref{ch1:subsec:probability-density-analysis}.
+The details described in this section address the prerequisites for the performed null hypothesis test in Section~\ref{ch1:subsec:probability-density-analysis}.
 These steps lie beyond the content of the corresponding chapter, yet have been included for completeness.
 Here, each step to condition the raw data for the $t$-test is explained in detail.
 
@@ -28,37 +28,37 @@ Since the steps apply to all data sets, only one is being presented in this appe
 
 \input{_appendices/_a1/fig/raw-data}
 
-Figure \ref{appx-a:ch1:fig:raw-data} shows the raw data of the two time-series that are going to be compared in the $t$-test.
+Figure~\ref{appx-a:ch1:fig:raw-data} shows the raw data of the two time-series that are going to be compared in the $t$-test.
 Since this data is very spiky and has many values located closely to zero, they are scaled using the $\log()$ function.
 
 \input{_appendices/_a1/fig/log-data}
 
-Figure \ref{appx-a:ch1:fig:log-data} shows this rescaled cost.
+Figure~\ref{appx-a:ch1:fig:log-data} shows this rescaled cost.
 It can be observed how differences, e.g. the increase in load during the morning hours, has become more apparent.
 Nonetheless, this data is still volatile and is averaged over $N$ values.
 
 \input{_appendices/_a1/fig/averaged-log-data}
 
-The two different levels in the data can clearly be observed in Figure \ref{appx-a:ch1:fig:averaged-log-data}.
+The two different levels in the data can clearly be observed in Figure~\ref{appx-a:ch1:fig:averaged-log-data}.
 This distinction in levels allows an easy separation of the data into two sections: \textit{morning} and \textit{afternoon}.
 
 \input{_appendices/_a1/fig/split-averaged-log-data}
 
-The preconditioned data in the two sections, that are highlighted in Figure \ref{appx-a:ch1:fig:split-averaged-log-data}, are now compared by computing their difference.
-Figure \ref{appx-a:ch1:fig:split-averaged-log-data-difference} shows this difference.
+The preconditioned data in the two sections, that are highlighted in Figure~\ref{appx-a:ch1:fig:split-averaged-log-data}, are now compared by computing their difference.
+Figure~\ref{appx-a:ch1:fig:split-averaged-log-data-difference} shows this difference.
 
 \input{_appendices/_a1/fig/split-averaged-log-data-difference}
 
 This difference is now auto-correlated and to indicate if any ``self-dependence'' (i.e. indicating auto-regression) is still present in the data.
-Results from both sections are shown in Figure \ref{appx-a:ch1:fig:section-auto-correlation}
+Results from both sections are shown in Figure~\ref{appx-a:ch1:fig:section-auto-correlation}
 
 \input{_appendices/_a1/fig/section-auto-correlation}
 
 Using the statistics package \textit{MINITAB}, the significance bounds are determined.
 If any auto-correlation value lies outside this bound, then the data still contains significant self-dependence and must be re-conditioned.
-In the case presented in Figure \ref{appx-a:ch1:fig:section-auto-correlation} however, the auto-correlation indices lie within the bounds for all lags.
+In the case presented in Figure~\ref{appx-a:ch1:fig:section-auto-correlation} however, the auto-correlation indices lie within the bounds for all lags.
 Therefore, the criteria for the $t$-test are met and the data can be assessed.
-In this case, the $t$-test resulted in $p<0.001$, which is the same value that is used in the ``Probability Density Analysis'' Section \ref{ch1:sec:results-and-discussion}.
+In this case, the $t$-test resulted in $p<0.001$, which is the same value that is used in the ``Probability Density Analysis'' Section~\ref{ch1:sec:results-and-discussion}.
 
 
 

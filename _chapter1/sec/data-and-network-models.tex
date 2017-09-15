@@ -19,7 +19,7 @@ The apparent network power, $s_\text{net}(t)$, is therefore defined for each tim
 \input{_chapter1/equ/sub-half-hourly-network-load}
 
 This demand profile does not take into account the distribution losses.
-Nonetheless, it functions as a simple time-series to schedule ESMU operation, which is detailed in Section \ref{ch1:subsec:esmu-scheduling}.
+Nonetheless, it functions as a simple time-series to schedule ESMU operation, which is detailed in Section~\ref{ch1:subsec:esmu-scheduling}.
 
 \subsection{Network model}
 \label{ch1:subsec:standardised-network-model}
@@ -91,11 +91,11 @@ Similar to the energy dynamics, the SOC dynamics can therefore be defined as:
 
 \input{_chapter1/equ/next-state-of-charge}
 
-When summarising $\hat{s}_\text{ESMU}(t) = \text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t)\right\}$ and combining Equation \ref{ch1:equ:battery-power-definition} with Equation \ref{ch1:equ:next-state-of-charge}, then the battery model's full dynamics can be defined as:
+When summarising $\hat{s}_\text{ESMU}(t) = \text{Re}\left\{\sum_{\phi=1}^{\Phi}s_{\text{ESMU},\phi}(t)\right\}$ and combining Equation~\ref{ch1:equ:battery-power-definition} with Equation~\ref{ch1:equ:next-state-of-charge}, then the battery model's full dynamics can be defined as:
 
 \input{_chapter1/equ/next-state-of-charge-2}
 
-A flowchart to visually represent the developed battery model, is included in Figure \ref{ch1:fig:next-soc-flowchart}.
+A flowchart to visually represent the developed battery model, is included in Figure~\ref{ch1:fig:next-soc-flowchart}.
 In this figure, all green and blue fields indicate, respectively, model inputs and results.
 The white states represent operations applied onto those inputs and results and in the end yield the output, i.e. the yellow field.
 
@@ -126,7 +126,7 @@ Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
 Now, over the period from $\alpha(t)$ to $\beta(t)$, are power values are equal.
-To illustrate the difference between the original sub-half-hourly network load and the resulting half-hourly demand, both profiles are plotted in Figure \ref{ch1:fig:sub-half-horuly-demand-comparison}.
+To illustrate the difference between the original sub-half-hourly network load and the resulting half-hourly demand, both profiles are plotted in Figure~\ref{ch1:fig:sub-half-horuly-demand-comparison}.
 In this figure, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
 When generating ESMU schedules these variations are neglected and thus the unwanted peak power demands cannot be sufficiently compensated.
 
@@ -156,12 +156,12 @@ The resulting half-hourly ESMU power, $\textbf{s}^*_\text{ESMU}$, could then be 
 
 For the work presented in this chapter, the supplied half-hourly network load (or forecast) was obtained from sub-half-hourly data.
 Treating it as a forecast with perfect foresight does not skew the already imperfect schedule performance, which is obtained when applying the resulting half-hourly schedule to sub-half-hourly load.
-Figure \ref{ch1:fig:improved-network-power} shows a sample day, where the impact of this half-hourly ESMU schedule becomes apparent.
+Figure~\ref{ch1:fig:improved-network-power} shows a sample day, where the impact of this half-hourly ESMU schedule becomes apparent.
 
 \input{_chapter1/fig/improved-network-power}
 
-This figure shows the positive impact on the half-hourly profile (i.e. in Figure \ref{ch1:subfig:improved-half-hourly-network-power}), which is particularly dominant during the evening peak load.
-However, the impact on the actual sub-half-hourly demand (i.e. in Figure \ref{ch1:subfig:improved-sub-half-hourly-network-power}) has a much larger demand spike during the morning hours, which is not that strongly addressed.
+This figure shows the positive impact on the half-hourly profile (i.e. in Figure~\ref{ch1:subfig:improved-half-hourly-network-power}), which is particularly dominant during the evening peak load.
+However, the impact on the actual sub-half-hourly demand (i.e. in Figure~\ref{ch1:subfig:improved-sub-half-hourly-network-power}) has a much larger demand spike during the morning hours, which is not that strongly addressed.
 When compared, the ideal peak power shaving dropped from 9.46kW to only 6.36kW.
 Nonetheless, the overall improvement yielded by the ESMU schedule can still be noticed. 
 The method of how to adjust the ESMU's phase powers to mitigate the impact of such volatile load spikes is addressed in the following section.

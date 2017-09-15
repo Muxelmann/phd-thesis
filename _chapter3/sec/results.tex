@@ -2,41 +2,55 @@
 \label{ch3:sec:results}
 
 \subsection{Algorithm performance for synchronised operation}
-\label{ch3:subsec:algorithm-performance-for-synchronised-operation}
+\label{ch3:subsec:algorithm-performance-synchronised}
 
 The objective of the smart-charging algorithm is to distribute the charging demand of a fleet of EVs over the underlying base demand in such a way that no additional demand spikes are produced.
 After assigning each EV's energy demand to its initially known demand trough, the algorithm produces a new demand spike since all EVs are charging simultaneously.
 Through repetitive iterations and reallocating a portion of the assigned energy to different demand troughs, the algorithm is then able to spread all EVs' demands to form a flat demand profile in the end.
-This process is shown in Figure \ref{ch3:fig:time-series}.
+This process is shown in Figure~\ref{ch3:fig:time-series}.
 
 \input{_chapter3/fig/time-series/time-series}
 
-Here, the first algorithm iteration is shown in Figure \ref{ch3:subfig:time-series-1}, where allocated power profile produces two new morning spikes of around 200kW and subsequently 110kW.
+Here, the first algorithm iteration is shown in Figure~\ref{ch3:subfig:time-series-1}, where allocated power profile produces two new morning spikes of around 200kW and subsequently 110kW.
 The second iteration however reduces these spikes by the factor $\alpha$ (i.e $0.2$) and redistributes the undone charging powers over the new power profile.
-Figure \ref{ch3:subfig:time-series-2} shows this reduction and reallocation.
-Figure \ref{ch3:subfig:time-series-3} is the third iteration that reduces and redistributes the peaks even further.
-In the end, i.e. when $n=N$, the resulting power profile becomes as flat as possible, which is shown in Figure \ref{ch3:subfig:time-series-last}.
+Figure~\ref{ch3:subfig:time-series-2} shows this reduction and reallocation.
+Figure~\ref{ch3:subfig:time-series-3} is the third iteration that reduces and redistributes the peaks even further.
+In the end, i.e. when $n=N$, the resulting power profile becomes as flat as possible, which is shown in Figure~\ref{ch3:subfig:time-series-last}.
 Throughout these iterations, it can be observed how the peak load in the total power, i.e. $\textbf{p}_n$, reduces and it can be observed how the changes in charging power, i.e. $\textbf{p}_{n+1}-\textbf{p}_n$, reduce in variance, which indicates that the algorithm works for the chosen parameters of $\alpha$ and $\beta$.
-However, different parameters of $\alpha$ and $\beta$ do impact the performance of this synchronised algorithm execution, as shown in Figure \ref{ch3:fig:oscillation}.
+However, different parameters of $\alpha$ and $\beta$ do impact the performance of this synchronised algorithm execution, as shown in Figure~\ref{ch3:fig:oscillation}.
 
 \input{_chapter3/fig/oscillation/oscillation}
 
 \input{_chapter3/tab/pair-comparison}
 
-Whereas the $\alpha$ and $\beta$ parameters use to produce the results in Figure \ref{ch3:fig:time-series} reduced the power spike, those parameters in \ref{ch3:fig:oscillation} did not, where $\alpha = \beta = 1.0$.
+Whereas the $\alpha$ and $\beta$ parameters use to produce the results in Figure~\ref{ch3:fig:time-series} reduced the power spike, those parameters in \ref{ch3:fig:oscillation} did not, where $\alpha = \beta = 1.0$.
 In fact, an oscillating behaviour can be observed since the initially applied power profile is completely undone and completely reassigned onto a different demand trough.
 Since this produces similar peaks, the same procedure repeats and reassigns the complete power profile back to the original demand troughs.
 In the end, these charging spikes could never be fully mitigated and the algorithm did not smoothen the total demand.
 This issue becomes more evident when comparing the $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are compared for both parameter pairs.
 The evolution of $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$, as tabulated in Table \ref{ch3:tab:pair-comparison}, shows this difference in performance and convergence of the algorithm when subjected to different values of $\alpha$ and $\beta$.
 Therefore, multiple parameter pairs across the entire range of $\alpha$ and $\beta$ are studied to determine how the algorithm performs for each given pair.
-The results for the synchronised algorithm performance are plotted in Figure \ref{}.
+The results for the synchronised algorithm performance are plotted in Figure~\ref{ch3:fig:all-sync}.
 
-But the use of tables becomes impractical due to the large choice of $\alpha$ and $\beta$ values.
-Instead, the final values for $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ and the convergence, based on the decay as assumed by an exponential function, is assessed.
-This assessment is undertaken in the subsequent section, Section~\ref{ch3:subsec:parameter-performance-assessment}.
+\input{_chapter3/fig/all-sync/all-sync}
 
-\subsection{Parameter performance assessment}
-\label{ch3:subsec:parameter-performance-assessment}
+Figure~\ref{ch3:subfig:all-sync-par} and Figure~\ref{ch3:subfig:all-sync-tra} show how the final values for both $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ were lowest when either $\alpha$ or $\beta$ was chosen closer to zero.
+This result coincides with the finding that hard reduction and reallocation lead to an oscillating behaviour of the algorithm.
+Similarly, the convergence of those two performance metrics, as shown in Figure~\ref{ch3:subfig:all-sync-par-conv} and Figure~\ref{ch3:subfig:all-sync-tra-conv}, was best when $\alpha$ approached one and $\beta$ approached zero.
+This behaviour is by design, since a larger value of $\alpha$ increases the rate at which the currently applied peak is reduced, whilst a smaller value of $\beta$ limits the amount that can be reallocated for each time slot.
+Such clear behavioural differences for different pairs of $\alpha$ and $\beta$ indicate an optimal operation region of the algorithm within the north-east quadrant of the plot.
+Whether this behaviour is till observed, and the question whether the algorithm still performs when introducing desynchronisation, is answered in the subsequent section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular}.
 
-\subsection{Statistical performance comparison}
+
+\subsection{Algorithm performance for desynchronised operation - regular timing}
+\label{ch3:subsec:algorithm-performance-desynchronised-regular}
+
+\input{_chapter3/fig/time-series-desync/time-series-desync}
+
+Looking at the evolution of the time-series when desynchronising the algorithm's execution shows significant differences already.
+Figure~\ref{ch3:fig:time-series-desync} shows this evolution for the same parameters as those chosen for Figure~\ref{ch3:fig:time-series}.
+The difference is however, that the assignment of charging powers lead to a significantly lower demand spike at the very beginning of executing the algorithm.
+Subsequent iterations then reduce this spike much broader than it has been the case when executing the algorithm in a synchronised manner.
+
+\subsection{Algorithm performance for desynchronised operation - irregular timing}
+\label{ch3:subsec:algorithm-performance-desynchronised-irregular}
