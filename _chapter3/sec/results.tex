@@ -1,8 +1,8 @@
 \section{Results and Discussion}
 \label{ch3:sec:results}
 
-\subsection{Time-series evolution for synchronise operation}
-\label{ch3:subsec:time-series-evolution}
+\subsection{Algorithm performance for synchronised operation}
+\label{ch3:subsec:algorithm-performance-for-synchronised-operation}
 
 The objective of the smart-charging algorithm is to distribute the charging demand of a fleet of EVs over the underlying base demand in such a way that no additional demand spikes are produced.
 After assigning each EV's energy demand to its initially known demand trough, the algorithm produces a new demand spike since all EVs are charging simultaneously.
@@ -21,16 +21,17 @@ However, different parameters of $\alpha$ and $\beta$ do impact the performance 
 
 \input{_chapter3/fig/oscillation/oscillation}
 
+\input{_chapter3/tab/pair-comparison}
+
 Whereas the $\alpha$ and $\beta$ parameters use to produce the results in Figure \ref{ch3:fig:time-series} reduced the power spike, those parameters in \ref{ch3:fig:oscillation} did not, where $\alpha = \beta = 1.0$.
 In fact, an oscillating behaviour can be observed since the initially applied power profile is completely undone and completely reassigned onto a different demand trough.
 Since this produces similar peaks, the same procedure repeats and reassigns the complete power profile back to the original demand troughs.
 In the end, these charging spikes could never be fully mitigated and the algorithm did not smoothen the total demand.
 This issue becomes more evident when comparing the $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are compared for both parameter pairs.
+The evolution of $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$, as tabulated in Table \ref{ch3:tab:pair-comparison}, shows this difference in performance and convergence of the algorithm when subjected to different values of $\alpha$ and $\beta$.
+Therefore, multiple parameter pairs across the entire range of $\alpha$ and $\beta$ are studied to determine how the algorithm performs for each given pair.
+The results for the synchronised algorithm performance are plotted in Figure \ref{}.
 
-\input{_chapter3/tab/pair-comparison}
-
-The evolution of $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$, as tabulated in Table \ref{ch3:tab:pair-comparison}, shows this difference in performance.
-Therefore, multiple parameter pairs should be studied to determine how the algorithm performs for each given parameter pair.
 But the use of tables becomes impractical due to the large choice of $\alpha$ and $\beta$ values.
 Instead, the final values for $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ and the convergence, based on the decay as assumed by an exponential function, is assessed.
 This assessment is undertaken in the subsequent section, Section~\ref{ch3:subsec:parameter-performance-assessment}.
