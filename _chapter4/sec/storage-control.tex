@@ -1,0 +1,129 @@
+\section{Storage Control}
+\label{ch4:sec:storage-control}
+
+In this section, the control of the energy storage system is explained. Firstly, the additive increase multiplicative decrease algorithm is presented, and its decision mechanism is explained in full. Then, the voltage referencing, used for AIMD+, is outlined.
+
+\subsection{Additive Increase Multiplicative Decrease}
+
+The proposed distributed battery storage control is shown in Algorithm~\ref{alg-aimd}. The parameter $\alpha$ denotes the size of the power's additive increase step, and $\beta$ denotes the size of the multiplicative decrease step. It is worth mentioning that $\alpha$ linearly increases and $\beta$ exponentially decreases, both charging and discharging powers, where discharging power is represented as a negative power flow, i.e., energy released by the battery. The constants $V_{max}$ and $V_{thr}$ are the maximum historic voltage value and the set-point threshold used to regulate the total demand. In the case when the total demand is too high, the local voltages will fall below $V_{thr}$, and the batteries reduce their charging power and start discharging. This behaviour reduces total demand on the feeder. At simulation start, $V_{max}$ is set to the nominal voltage of the substation transformer, i.e., 240 V, and $V_{thr}$ is set to a fraction of $V_{max}$, which was found by solving a balanced power flow analysis. The variable $V(t)$ is the battery's local bus voltage, and $P_{max}$ denotes the maximum charging/discharging power of the battery. The charging and discharging power of the batteries is increased in proportion to the available headroom on the network, which is inferred from the local voltage measurement $V(t)$, to avoid any sudden overloading of the substation transformer.
+
+%\begin{algorithm}[H]
+% \caption{Compute battery power.}
+% \label{alg-aimd}
+% \begin{algorithmic}[1]
+% \State $R(t) = (V(t) - V_{thr})/(V_{max} - V_{thr})$ \Comment{Defines the rate for the current voltage reading}\vspace{5pt}
+%\If {$V(t) \geq V_{thr}$} \Comment{Given the voltage levels are nominal...}\vspace{5pt}
+% \If {$SOC < SOC_{max}$} \Comment{...and the battery is not fully charged...}\vspace{5pt}
+% \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase the charging power}\vspace{5pt}
+% \Else \Comment{If the battery has fully charged...}\vspace{5pt}
+% \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \If {$P(t) < 0$} \Comment{If the battery has been discharging...}\vspace{5pt}
+% \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the discharging power by $\beta$}\vspace{5pt}
+% \EndIf \vspace{5pt}
+% \Else \Comment{If voltage levels are not nominal...}\vspace{5pt}
+% \If {$SOC > SOC_{min}$} \Comment{...and battery is charged sufficiently...}\vspace{5pt}
+% \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase discharge power}\vspace{5pt}
+% \Else \Comment{If the battery is not sufficiently charged...}\vspace{5pt}
+% \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \If {$P(t) > 0$} \Comment{If the battery has been charging...}\vspace{5pt}
+% \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the charging power by $\beta$}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \State $P(t) = \textbf{signum}(P(t)) \times \textbf{min}\{|P(t)|,P_{max}\}$ \Comment{Limit the power to battery specifications}
+% \end{algorithmic}
+%\end{algorithm}
+
+The algorithm itself, as shown in Algorithm~\ref{alg-aimd}, contains two decision levels. The first determines whether the network is over- or under-loaded by comparing the local bus voltage, $V(t)$, to the battery's set-point threshold, $V_{thr}$. In the event that the network is not under high load, the battery's SOC is compared to its operation limit to check whether the battery can charge, i.e., $SOC$ \textless $SOC_{max}$. If there is enough charging capacity left, then the battery's charging power is linearly increased following Line 4. If the battery was previously discharging, the related discharging power is exponentially reduced (Line 9) to reflect the multiplicative decrease.
+
+The second decision level is entered when the network is under load. Here, the discharging power is linearly increased if the battery has enough energy stored, i.e., $SOC$ \textgreater $SOC_{min}$ (Line 13). Additionally, if the battery was previously charging, then its charging power is multiplicatively reduced (Line 18). The direction of the charging/discharging power adjustment is determined by the first decision level, as well as the threshold proximity ratio $R(t)$. As the battery's bus voltage, $V(t)$, approaches the threshold voltage, $V_{thr}$, this ratio tends to zero and, hence, stops the battery operation. Therefore, oscillatory hunting is effectively mitigated. The last step of the algorithm (Line 21) assures that the battery charge/discharge power is within its device rating.
+
+\subsection{Reference Voltage Profile}
+
+When using a fixed voltage threshold, the difference in the location and load of each customer results in the over-utilisation of batteries located at the feeder end. Similar to Papaioannou et al. \cite{Papaioannou2015}, yet for the control of BESS instead of EV charging, a reference voltage profile is proposed, which is produced by performing a power flow analysis of the network under maximum demand. An example of a fixed threshold and reference voltage profile is shown in Figure~\ref{fig-ref-voltage-plot}.
+
+In the AIMD+, consumers located at the head of the feeder are allocated a higher voltage threshold, while those towards the end of the feeder have similar voltage thresholds to that of the fixed threshold. This replicates the expected voltage drop along the length of the feeder, hence resulting in a more equal utilisation of battery storage units that are located at those distances. The voltage threshold is set in such a way as to limit the maximum voltage drop to 3\% at the end of the feeder.
+
+\begin{figure}\centering
+ \includegraphics[width=0.90\textwidth]{foo}
+ \caption{A plot showing the difference between the fixed voltage threshold (AIMD) and the reference voltage profile (AIMD+).}
+ %There is no explanation for Multiplication sign in the capition.
+ \label{fig-ref-voltage-plot}
+\end{figure}
+
+\section{Scenarios and Comparison Metrics}
+\label{sec-scenarios-and-comparison-metrics}
+
+In this section, several scenarios are explained that were used to test the performance of the battery control algorithm. Following that is the definition of three comparison metrics. These metrics quantify the improvements caused by the different algorithms in comparison to the worst case scenario.
+
+\subsection{Test Cases and Scenarios}
+\label{subsec-cases}
+
+In all simulations, the EVs plug-in on arrival and charge at their nominal charging rate until fully charged. The BESS devices were chosen to have a capacity of 7 kWh with a maximum power rating of 2 kW (battery specifications are based on the Tesla Powerwall \cite{Powerwall2015}).
+%footnote.
+Four excerpt cases were defined with different levels of EV and storage uptakes, these are as follows:
+\begin{enumerate}[label=\textbf{\Alph*}, leftmargin=2.2em, labelsep=5.5mm]
+\item A baseline scenario, where only household demand is used.
+\item A worst case scenario, in which EV uptake is 100\% and no BESS is used.
+\item An AIMD scenario, in which EV uptake is 100\% and each household has a battery energy storage device. Here, each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
+\item An AIMD+ scenario, in which EV uptake is 100\%, and each household has a battery energy storage device. Here, each battery was controlled using the AIMD+ algorithm using the optimised reference voltage profile.
+\end{enumerate}
+
+A storage uptake of 100\% was adopted to represent the worst case scenario. In addition to the four defined scenarios, a full set of simulations was performed with EV and storage uptake combinations of 0\% to 100\% in steps of 10\%.
+
+\subsection{Performance Metric Definition}
+\label{subsec-metrics}
+
+To obtain comparable performance metrics, three parameters are defined. These parameters capture the improvements in voltage violation mitigation, line overload reduction and the equality of battery usage. All excerpt performance metrics were calculated based on simulations from the IEEE EU LV Test feeder for reproducibility.
+
+\subsubsection{Parameter for Voltage Improvement}
+
+The first parameters are $\zeta^{*}_\textbf{C}$ and $\zeta^{*}_\textbf{D}$ for, respectively, Cases {C} and {D}, and calculate the magnitude of the voltage level improvement by comparing two voltage frequency distributions. More specifically, they find the difference between these probability distributions and compute a weighted sum. Here, the weighting, $\delta^{*}(v)$, emphasises the voltage level improvements that deviate further from the nominal substation voltage $V_{ss}$. If the resulting weighted sum is negative, then the obtained voltage frequency distribution was improved in comparison to the associated worst case scenario. In contrast, a positive number would indicate a worse outcome. The performance metric $\zeta^{*}_\textbf{C}$ is defined as follows.
+\begin{equation}
+ \zeta^*_\textbf{C} := \sum_{v = V_{min}}^{V_{max}} \delta^{*}(v) \left[P_\textbf{B}(v) - P_\textbf{C}(v)\right]
+ \label{equ-voltage-metric}
+\end{equation}
+
+Here, $V_{min}$ is the lowest recorded voltage, and $V_{max}$ is the highest recorded voltage. $P_\textbf{B}(v)$ is the voltage probability distribution of the worst case scenario (Case {B}), and $P_\textbf{C}(v)$ is the voltage probability distributions of Case {C} (i.e., the case with maximum EV and AIMD storage uptake). Similarly, the parameter $\zeta_\textbf{D}^*$ therefore compares Case {D}, i.e., the AIMD+ case, with Case {B}.
+
+The aforementioned factor, $\delta^{*}(v)$, scales down the summation in Equation (\ref{equ-voltage-metric}) for voltages within the nominal operating band, where no voltage violations take place. Voltage violations on the other hand are scaled up to increase their impact on the summation. This scaling was produced using a linear function, with its minimum at $V_{ss}$, that is defined as:
+\begin{equation}
+ \delta^{*}(v) := 
+ \begin{cases} 
+ \frac{V_{ss} - v}{V_{ss} - V_{low}} & \text{if } v \leq V_{ss} \\
+ \frac{v - V_{ss}}{V_{high} - V_{ss}} & \text{otherwise}
+ \end{cases}
+\end{equation}
+
+$V_{low}$ and $V_{high}$ are defined as the lower and upper limits of the nominal operation voltage band, respectively. In general, the proposed voltage comparison parameter, $\zeta^*$, shows an improvement in voltage distribution when it is negative, whereas a positive value implies a voltage distribution with more voltage violations.
+
+\subsubsection{Parameter for Line Overload Reduction}
+
+Similar to measuring the voltage level improvements, all line utilisation probability distributions between the storage and worst case scenarios were compared. This follows a similar equation to before, but uses a different scaling factor, as described in Equation (\ref{equ-voltage-metric}):
+\begin{equation}
+ \zeta_\textbf{C}^{**} := \sum_{c = 0}^{C_{max}} \delta^{**}(c) \left[P_\textbf{C}(c) - P_\textbf{B}(c)\right]
+ \label{equ-utilisation-metric}
+\end{equation}
+
+Here, $C_{max}$ is the highest line utilisation. $P_\textbf{B}(c)$ and $P_\textbf{C}(c)$ present the line utilisation probability distributions for Cases {B} and {C}, respectively, and $\delta^{**}(c)$ is the associated scaling factor. Since the relationship between line current and ohmic losses is quadratic, this scaling factor is defined as an exponential function that amplifies the impact of line currents beyond the line's nominal rating.
+\begin{equation}
+ \delta^{**}(c) = 
+ \begin{cases} 
+ \left(\frac{c}{1-C_{min}}\right)^2 & \text{if } c \geq C_{min} \\
+ 0 & \text{otherwise}
+ \end{cases}
+\end{equation}
+
+The capacity scale modifier, $C_{min}$, defines from where the scaling should start and has been set to $0.5$ for this work as only line utilisation above $0.5$ p.u. was considered. Therefore, a reduction in line overloads would give a negative $\zeta^{**}$, whereas a positive value implies a higher line utilisation, i.e., worse results.
+
+\subsubsection{Parameter for the Improvement of Battery Cycling}
+\label{subsubsec-zeta-3}
+
+The final metric, $\zeta^{***}$, gives an indication of the inequality of battery cycling (one battery cycle is defined as a full discharge and charge of the battery at maximum operating power, i.e., $P_{max}$) across all battery units. It does this by computing the the ratio between the peak and mean battery cycling. This Peak-to-Average Ratio (PAR) of batteries' cycling is defined in the following equation.
+\begin{equation}
+ \zeta_\textbf{C}^{***} := \frac{\max \left|C_\textbf{C}\right|}{B^{-1} \sum_{b=1}^B{\left|c_\textbf{C}^b\right|}}
+ \label{equ-par}
+\end{equation}
+
+Here, $B$ is the number of batteries, and $c_\textbf{C}^b$ is the total cycling of battery $b$ during Scenario {C}. $C_\textbf{C}$ is a vector of $\mathbb{R}_{\geq 0}^{B}$ that contains all batteries' cycling values, i.e., $c_\textbf{C}^b \in C_\textbf{C}$. Equally, the battery cycling for Scenario {D} would be captured by $\zeta_\textbf{D}^{***}$. In the unlikely event of an equal cycling of all batteries, $\zeta^{***}$ will have a value of one. Yet, as batteries are operated differently, the value of $\zeta^{***}$ is likely to be greater than one. Therefore, a resulting PAR closer to one implies a more equal and therefore fairer utilisation of the deployed batteries.
