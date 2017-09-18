@@ -1,0 +1,53 @@
+\section{Storage Control}
+\label{ch4:sec:storage-control}
+
+In this section, the control of the energy storage system is explained. Firstly, the additive increase multiplicative decrease algorithm is presented, and its decision mechanism is explained in full. Then, the voltage referencing, used for AIMD+, is outlined.
+
+\subsection{Additive Increase Multiplicative Decrease}
+
+The proposed distributed battery storage control is shown in Algorithm~\ref{alg-aimd}. The parameter $\alpha$ denotes the size of the power's additive increase step, and $\beta$ denotes the size of the multiplicative decrease step. It is worth mentioning that $\alpha$ linearly increases and $\beta$ exponentially decreases, both charging and discharging powers, where discharging power is represented as a negative power flow, i.e., energy released by the battery. The constants $V_{max}$ and $V_{thr}$ are the maximum historic voltage value and the set-point threshold used to regulate the total demand. In the case when the total demand is too high, the local voltages will fall below $V_{thr}$, and the batteries reduce their charging power and start discharging. This behaviour reduces total demand on the feeder. At simulation start, $V_{max}$ is set to the nominal voltage of the substation transformer, i.e., 240 V, and $V_{thr}$ is set to a fraction of $V_{max}$, which was found by solving a balanced power flow analysis. The variable $V(t)$ is the battery's local bus voltage, and $P_{max}$ denotes the maximum charging/discharging power of the battery. The charging and discharging power of the batteries is increased in proportion to the available headroom on the network, which is inferred from the local voltage measurement $V(t)$, to avoid any sudden overloading of the substation transformer.
+
+%\begin{algorithm}[H]
+% \caption{Compute battery power.}
+% \label{alg-aimd}
+% \begin{algorithmic}[1]
+% \State $R(t) = (V(t) - V_{thr})/(V_{max} - V_{thr})$ \Comment{Defines the rate for the current voltage reading}\vspace{5pt}
+%\If {$V(t) \geq V_{thr}$} \Comment{Given the voltage levels are nominal...}\vspace{5pt}
+% \If {$SOC < SOC_{max}$} \Comment{...and the battery is not fully charged...}\vspace{5pt}
+% \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase the charging power}\vspace{5pt}
+% \Else \Comment{If the battery has fully charged...}\vspace{5pt}
+% \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \If {$P(t) < 0$} \Comment{If the battery has been discharging...}\vspace{5pt}
+% \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the discharging power by $\beta$}\vspace{5pt}
+% \EndIf \vspace{5pt}
+% \Else \Comment{If voltage levels are not nominal...}\vspace{5pt}
+% \If {$SOC > SOC_{min}$} \Comment{...and battery is charged sufficiently...}\vspace{5pt}
+% \State $P(t) = P(t-\tau) + \alpha P_{max} R(t)$ \Comment{...increase discharge power}\vspace{5pt}
+% \Else \Comment{If the battery is not sufficiently charged...}\vspace{5pt}
+% \State $P(t) = 0$ \Comment{...shut off}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \If {$P(t) > 0$} \Comment{If the battery has been charging...}\vspace{5pt}
+% \State $P(t) = \beta P(t-\tau)$ \Comment{...reduce the charging power by $\beta$}\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \EndIf\vspace{5pt}
+% \State $P(t) = \textbf{signum}(P(t)) \times \textbf{min}\{|P(t)|,P_{max}\}$ \Comment{Limit the power to battery specifications}
+% \end{algorithmic}
+%\end{algorithm}
+
+The algorithm itself, as shown in Algorithm~\ref{alg-aimd}, contains two decision levels. The first determines whether the network is over- or under-loaded by comparing the local bus voltage, $V(t)$, to the battery's set-point threshold, $V_{thr}$. In the event that the network is not under high load, the battery's SOC is compared to its operation limit to check whether the battery can charge, i.e., $SOC$ \textless $SOC_{max}$. If there is enough charging capacity left, then the battery's charging power is linearly increased following Line 4. If the battery was previously discharging, the related discharging power is exponentially reduced (Line 9) to reflect the multiplicative decrease.
+
+The second decision level is entered when the network is under load. Here, the discharging power is linearly increased if the battery has enough energy stored, i.e., $SOC$ \textgreater $SOC_{min}$ (Line 13). Additionally, if the battery was previously charging, then its charging power is multiplicatively reduced (Line 18). The direction of the charging/discharging power adjustment is determined by the first decision level, as well as the threshold proximity ratio $R(t)$. As the battery's bus voltage, $V(t)$, approaches the threshold voltage, $V_{thr}$, this ratio tends to zero and, hence, stops the battery operation. Therefore, oscillatory hunting is effectively mitigated. The last step of the algorithm (Line 21) assures that the battery charge/discharge power is within its device rating.
+
+\subsection{Reference Voltage Profile}
+
+When using a fixed voltage threshold, the difference in the location and load of each customer results in the over-utilisation of batteries located at the feeder end. Similar to Papaioannou et al. \cite{Papaioannou2015}, yet for the control of BESS instead of EV charging, a reference voltage profile is proposed, which is produced by performing a power flow analysis of the network under maximum demand. An example of a fixed threshold and reference voltage profile is shown in Figure~\ref{fig-ref-voltage-plot}.
+
+In the AIMD+, consumers located at the head of the feeder are allocated a higher voltage threshold, while those towards the end of the feeder have similar voltage thresholds to that of the fixed threshold. This replicates the expected voltage drop along the length of the feeder, hence resulting in a more equal utilisation of battery storage units that are located at those distances. The voltage threshold is set in such a way as to limit the maximum voltage drop to 3\% at the end of the feeder.
+
+\begin{figure}\centering
+ \includegraphics[width=0.90\textwidth]{foo}
+ \caption{A plot showing the difference between the fixed voltage threshold (AIMD) and the reference voltage profile (AIMD+).}
+ %There is no explanation for Multiplication sign in the capition.
+ \label{fig-ref-voltage-plot}
+\end{figure}
