@@ -1,0 +1,75 @@
+\section{Scenarios and Comparison Metrics}
+\label{ch4:sec:scenarios-and-comparison-metrics}
+
+In this section, several scenarios are explained that were used to test the performance of the battery control algorithm. Following that is the definition of three comparison metrics. These metrics quantify the improvements caused by the different algorithms in comparison to the worst case scenario.
+
+\subsection{Test Cases and Scenarios}
+\label{subsec-cases}
+
+In all simulations, the EVs plug-in on arrival and charge at their nominal charging rate until fully charged. The BESS devices were chosen to have a capacity of 7 kWh with a maximum power rating of 2 kW (battery specifications are based on the Tesla Powerwall \cite{Powerwall2015}).
+%footnote.
+Four excerpt cases were defined with different levels of EV and storage uptakes, these are as follows:
+\begin{enumerate}[label=\textbf{\Alph*}, leftmargin=2.2em, labelsep=5.5mm]
+\item A baseline scenario, where only household demand is used.
+\item A worst case scenario, in which EV uptake is 100\% and no BESS is used.
+\item An AIMD scenario, in which EV uptake is 100\% and each household has a battery energy storage device. Here, each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
+\item An AIMD+ scenario, in which EV uptake is 100\%, and each household has a battery energy storage device. Here, each battery was controlled using the AIMD+ algorithm using the optimised reference voltage profile.
+\end{enumerate}
+
+A storage uptake of 100\% was adopted to represent the worst case scenario. In addition to the four defined scenarios, a full set of simulations was performed with EV and storage uptake combinations of 0\% to 100\% in steps of 10\%.
+
+\subsection{Performance Metric Definition}
+\label{subsec-metrics}
+
+To obtain comparable performance metrics, three parameters are defined. These parameters capture the improvements in voltage violation mitigation, line overload reduction and the equality of battery usage. All excerpt performance metrics were calculated based on simulations from the IEEE EU LV Test feeder for reproducibility.
+
+\subsubsection{Parameter for Voltage Improvement}
+
+The first parameters are $\zeta^{*}_\textbf{C}$ and $\zeta^{*}_\textbf{D}$ for, respectively, Cases {C} and {D}, and calculate the magnitude of the voltage level improvement by comparing two voltage frequency distributions. More specifically, they find the difference between these probability distributions and compute a weighted sum. Here, the weighting, $\delta^{*}(v)$, emphasises the voltage level improvements that deviate further from the nominal substation voltage $V_{ss}$. If the resulting weighted sum is negative, then the obtained voltage frequency distribution was improved in comparison to the associated worst case scenario. In contrast, a positive number would indicate a worse outcome. The performance metric $\zeta^{*}_\textbf{C}$ is defined as follows.
+\begin{equation}
+ \zeta^*_\textbf{C} := \sum_{v = V_{min}}^{V_{max}} \delta^{*}(v) \left[P_\textbf{B}(v) - P_\textbf{C}(v)\right]
+ \label{equ-voltage-metric}
+\end{equation}
+
+Here, $V_{min}$ is the lowest recorded voltage, and $V_{max}$ is the highest recorded voltage. $P_\textbf{B}(v)$ is the voltage probability distribution of the worst case scenario (Case {B}), and $P_\textbf{C}(v)$ is the voltage probability distributions of Case {C} (i.e., the case with maximum EV and AIMD storage uptake). Similarly, the parameter $\zeta_\textbf{D}^*$ therefore compares Case {D}, i.e., the AIMD+ case, with Case {B}.
+
+The aforementioned factor, $\delta^{*}(v)$, scales down the summation in Equation (\ref{equ-voltage-metric}) for voltages within the nominal operating band, where no voltage violations take place. Voltage violations on the other hand are scaled up to increase their impact on the summation. This scaling was produced using a linear function, with its minimum at $V_{ss}$, that is defined as:
+\begin{equation}
+ \delta^{*}(v) := 
+ \begin{cases} 
+ \frac{V_{ss} - v}{V_{ss} - V_{low}} & \text{if } v \leq V_{ss} \\
+ \frac{v - V_{ss}}{V_{high} - V_{ss}} & \text{otherwise}
+ \end{cases}
+\end{equation}
+
+$V_{low}$ and $V_{high}$ are defined as the lower and upper limits of the nominal operation voltage band, respectively. In general, the proposed voltage comparison parameter, $\zeta^*$, shows an improvement in voltage distribution when it is negative, whereas a positive value implies a voltage distribution with more voltage violations.
+
+\subsubsection{Parameter for Line Overload Reduction}
+
+Similar to measuring the voltage level improvements, all line utilisation probability distributions between the storage and worst case scenarios were compared. This follows a similar equation to before, but uses a different scaling factor, as described in Equation (\ref{equ-voltage-metric}):
+\begin{equation}
+ \zeta_\textbf{C}^{**} := \sum_{c = 0}^{C_{max}} \delta^{**}(c) \left[P_\textbf{C}(c) - P_\textbf{B}(c)\right]
+ \label{equ-utilisation-metric}
+\end{equation}
+
+Here, $C_{max}$ is the highest line utilisation. $P_\textbf{B}(c)$ and $P_\textbf{C}(c)$ present the line utilisation probability distributions for Cases {B} and {C}, respectively, and $\delta^{**}(c)$ is the associated scaling factor. Since the relationship between line current and ohmic losses is quadratic, this scaling factor is defined as an exponential function that amplifies the impact of line currents beyond the line's nominal rating.
+\begin{equation}
+ \delta^{**}(c) = 
+ \begin{cases} 
+ \left(\frac{c}{1-C_{min}}\right)^2 & \text{if } c \geq C_{min} \\
+ 0 & \text{otherwise}
+ \end{cases}
+\end{equation}
+
+The capacity scale modifier, $C_{min}$, defines from where the scaling should start and has been set to $0.5$ for this work as only line utilisation above $0.5$ p.u. was considered. Therefore, a reduction in line overloads would give a negative $\zeta^{**}$, whereas a positive value implies a higher line utilisation, i.e., worse results.
+
+\subsubsection{Parameter for the Improvement of Battery Cycling}
+\label{subsubsec-zeta-3}
+
+The final metric, $\zeta^{***}$, gives an indication of the inequality of battery cycling (one battery cycle is defined as a full discharge and charge of the battery at maximum operating power, i.e., $P_{max}$) across all battery units. It does this by computing the the ratio between the peak and mean battery cycling. This Peak-to-Average Ratio (PAR) of batteries' cycling is defined in the following equation.
+\begin{equation}
+ \zeta_\textbf{C}^{***} := \frac{\max \left|C_\textbf{C}\right|}{B^{-1} \sum_{b=1}^B{\left|c_\textbf{C}^b\right|}}
+ \label{equ-par}
+\end{equation}
+
+Here, $B$ is the number of batteries, and $c_\textbf{C}^b$ is the total cycling of battery $b$ during Scenario {C}. $C_\textbf{C}$ is a vector of $\mathbb{R}_{\geq 0}^{B}$ that contains all batteries' cycling values, i.e., $c_\textbf{C}^b \in C_\textbf{C}$. Equally, the battery cycling for Scenario {D} would be captured by $\zeta_\textbf{D}^{***}$. In the unlikely event of an equal cycling of all batteries, $\zeta^{***}$ will have a value of one. Yet, as batteries are operated differently, the value of $\zeta^{***}$ is likely to be greater than one. Therefore, a resulting PAR closer to one implies a more equal and therefore fairer utilisation of the deployed batteries.
