@@ -72,16 +72,16 @@ After this synchronisation event, the next algorithm iteration is initiated and 
 Since all subsequent iterations are similar to the one shown in Figure~\ref{ch3:fig:agent-synchronisation}, only the two querying messages of the  second iteration are shown.
 
 Although timing and message exchange has been defined, the mechanism to allocate and reallocate charging powers in order to achieve a valley filling behaviour has not yet been defined.
-This behaviour is shown in Figure~\ref{ch3:fig:valley-filling}, where several iterations numbered $n$ are shown, and for each subsequent iteration, some amount of prescheduled power is reallocated to different time-slots.
+This behaviour is shown in Figure~\ref{ch3:fig:valley-filling-procedure}, where several iterations numbered $n$ are shown, and for each subsequent iteration, some amount of prescheduled power is reallocated to different time-slots.
 
-\input{_chapter3/fig/valley-filling}
+\input{_chapter3/fig/valley-filling-procedure}
 
 \nomenclature[K]{$p_{\text{base},n}(t)$}{Base load at time $t$, where $p_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$}
 \nomenclature[K]{$\textbf{p}_{\text{base},n}$}{Base load vector, where $p_{\text{base},n}(t) \in \textbf{p}_{\text{base},n}$}
 \nomenclature[K]{$\hat{p}_{\text{base},n}(t)$}{Temporary demand at time $t$, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \mathbb{Z}^{\geq0}$}
 \nomenclature[K]{$\hat{\textbf{p}}_{\text{base},n}$}{Temporary demand vector, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}_{\text{base},n}(t) \in \hat{\textbf{p}}_{\text{base},n}$}
 
-For every iteration in Figure~\ref{ch3:fig:valley-filling}, charging profiles are added onto a base network load, $\textbf{p}_{base,n}$, where $p_{base,n}(t) \in \textbf{p}_{base,n}$.
+For every iteration in Figure~\ref{ch3:fig:valley-filling-procedure}, charging profiles are added onto a base network load, $\textbf{p}_{base,n}$, where $p_{base,n}(t) \in \textbf{p}_{base,n}$.
 This base load is shown as the bold black line and does not change throughout EV scheduling.
 For any iteration, the charging profile during iteration number $n$, for EV $u$, is defined as $\textbf{p}_n$ (where $p_{u,n}(t) \in \textbf{p}_n$).
 During the first iteration however, i.e. Figure~\ref{ch3:subfig:valley-filling-1} where $n=1$, this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met, i.e. at time-slot $\tau$ where $\tau = \text{argmin}(\textbf{p}_\text{base})$.
