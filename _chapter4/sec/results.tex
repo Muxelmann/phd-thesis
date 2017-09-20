@@ -59,7 +59,13 @@ As they are located closer to the substation, they do not measure a sufficient b
 This behaviour causes a number of line overloads at the very beginning of the simulated days.
 The AIMD+ algorithm on the other hand, with its adjusted thresholds, is more responsive to non-optimal network operation and, therefore, increases the charging rate gradually.
 
-This gradual adjustment is based on the fact that the bus voltages in the AIMD+ algorithm are closer to their nominal voltages (i.e., bus voltages found by simulating the feeder with its equally-distributed nominal load) than they are in the conventional AIMD case. A greater voltage disparity, which is the case in AIMD, causes a prolonged additive adjustment to the battery's power. This prolonged adjustment is particularly apparent for batteries situated at the bottom of the feeder, as their voltage measurements deviate the furthest from the substation voltage level. AIMD+ on the other hand prevents this behaviour by setting the voltage threshold based on the network's nominal voltage drop, which is dependent on the distance between the BESS and its feeding substation. As a result, the set-point voltage thresholds at the bottom of the feeder are lower than those closer to the substation. Hence, the additive power adjustment is equalised along the entire feeder. Therefore, by applying these individualised control thresholds, the sensitivity of the algorithm is corrected, whilst successfully mitigating the severity of line overloads.
+This gradual adjustment is based on the fact that the bus voltages in the AIMD+ algorithm are closer to their nominal voltages (i.e., bus voltages found by simulating the feeder with its equally-distributed nominal load) than they are in the conventional AIMD case.
+A greater voltage disparity, which is the case in AIMD, causes a prolonged additive adjustment to the battery's power.
+This prolonged adjustment is particularly apparent for batteries situated at the bottom of the feeder, as their voltage measurements deviate the furthest from the substation voltage level.
+AIMD+ on the other hand prevents this behaviour by setting the voltage threshold based on the network's nominal voltage drop, which is dependent on the distance between the BESS and its feeding substation.
+As a result, the set-point voltage thresholds at the bottom of the feeder are lower than those closer to the substation.
+Hence, the additive power adjustment is equalised along the entire feeder.
+Therefore, by applying these individualised control thresholds, the sensitivity of the algorithm is corrected, whilst successfully mitigating the severity of line overloads.
 
 \input{_chapter4/fig/utilisation-aimd-compare}
 
@@ -77,61 +83,31 @@ This immunity and well-controlled power flow caused little to no additional stra
 
 \subsection{Battery Utilisation Analysis}
 
-In this part of the analysis, the batteries' fairness of usage was evaluated. The battery power profiles were recorded; excerpts are plotted in Figure~\ref{fig-battery-utilisation-power} and are arranged by distance from the substation.
+\input{_chapter4/fig/storage-aimd}
 
+In this part of the analysis, the batteries' fairness of usage was evaluated. The battery power profiles were recorded; excerpts are plotted in Figure~\ref{ch4:fig:storage-aimd} and are arranged by distance from the substation.
+In this figure, it can be seen that only half of the deployed storage devices were active in \ref{ch4:case-c} (AIMD control), whereas all devices are utilised in \ref{ch4:case-d} (AIMD+ control).
+From the recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation, giving an average daily cycling value.
+This value is plotted for each load in Figure~\ref{ch4:subfig:storage-aimd-cycling-compare}. The corresponding statistical analysis is presented in Figure~\ref{ch4:subfig:storage-aimd-cycling-stats}.
 
-\begin{figure}\centering
- \subfloat[]{%
- \includegraphics[width=0.5\textwidth]{foo}%
- \label{subfig-battery-utilisation-power-f}%
- }
- \subfloat[]{%
- \includegraphics[width=0.5\textwidth]{foo}%
- \label{subfig-battery-utilisation-power-r}%
- \caption{Battery power profiles of each load's battery storage device over four days for (a) \ref{ch4:case-c}, 60\% EV and 100\% AIMD (kW); (b) \ref{ch4:case-d}, 60\% EV and 100\% AIMD+ (kW).}
- \label{fig-battery-utilisation-power}
-\end{figure}
+\input{_chapter4/fig/storage-aimd-cycling}
 
-In this figure, it can be seen that only half of the deployed storage devices were active in \ref{ch4:case-c} (AIMD control), whereas all devices are utilised in \ref{ch4:case-d} (AIMD+ control). From the recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation, giving an average daily cycling value. This value is plotted for each load in Figure~\ref{fig-battery-cycling}a. The corresponding statistical analysis is presented in Figure~\ref{fig-battery-cycling}b.
+These two plots show the under-usage of AIMD controlled batteries, as well as the variance in battery usage under AIMD and AIMD+ control.
+In fact, under AIMD control, 20 out of 55 batteries experienced a cycling of less than 10\% per day, whereas the remaining devices were utilised fully.
+This discrepancy causes the $\zeta_\textbf{C}^{***}$ value to be noticeably larger than $\zeta_\textbf{D}^{***}$.
+A more detailed comparison is given when plotting the Peak-to-Average Ratios (PAR) of the batteries' daily cycling over the full range of EV and storage uptake scenarios; these plots are shown in Figure~\ref{ch4:fig:storage-aimd-par}.
+Section~\ref{ch4:subsec:performance-metric-definition} gave the detail on all performance metrics, including $\zeta^{***}$, i.e. PAR, which is defined in Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}.
 
+\input{_chapter4/fig/storage-aimd-par}
 
-\begin{figure}[!h]\centering
- \subfloat[]{%
- \includegraphics[height=0.25\textwidth]{foo}%
- \label{subfig-battery-cycling-excerpt}%
- }
- \hspace{5mm}
- \subfloat[]{%
- \includegraphics[height=0.25\textwidth]{foo}%
- \label{subfig-battery-cycling-summary}%
- \caption{Each load's battery cycling compared for (\textbf{a}) 60\% EV and 100\% AIMD and AIMD+ uptake  and (\textbf{b}) in a statistical context. Here, $\zeta_\textbf{C}^{***}=3.89$ and $\zeta_\textbf{D}^{***}=2.54$. ({a}) Battery cycling for each load; ({b}) statistic. }
- \label{fig-battery-cycling}
-\end{figure}
+The figure shows that for any EV uptake scenario, AIMD-controlled energy storage units were cycled less equally than the AIMD+ controlled devices.
+Results also show that with a low EV uptake, both the AIMD and AIMD+ algorithm performed worse; yet improved as EV uptake increased.
+Averaging the PARs for all batteries' SOC profiles over all EV uptake percentages yields a clear performance difference between AIMD and AIMD+.
+These resulting PARs, i.e., the $\zeta_\textbf{C}^{***}$ and $\zeta_\textbf{D}^{***}$ values for their corresponding storage uptake percentages, are presented in Figure~\ref{ch4:fig:storage-aimd-compare-par}.
 
-These two plots show the under-usage of AIMD controlled batteries, as well as the variance in battery usage under AIMD and AIMD+ control. In fact, under AIMD control, 20 out of 55 batteries experienced a cycling of less than 10\% per day, whereas the remaining devices were utilised fully. This discrepancy causes the $\zeta_\textbf{C}^{***}$ value to be noticeably larger than $\zeta_\textbf{D}^{***}$. A more detailed comparison is given when plotting the Peak-to-Average Ratios (PAR) of the batteries' daily cycling over the full range of EV and storage uptake scenarios; these plots are shown in Figure~\ref{fig-storage-par-large}. Section~\ref{subsubsec-zeta-3} gives the detail on the PAR, $\zeta^{***}$.
+\input{_chapter4/fig/storage-aimd-compare-par}
 
-
-\begin{figure}\centering
- \subfloat[]{%
- \includegraphics[width=0.5\textwidth]{foo}%
- \label{subfig-sotrage-AIMD1-uptake-cycling-par}%
- }
- \subfloat[]{%
- \includegraphics[width=0.5\textwidth]{foo}%
- \label{subfig-sotrage-AIMD2-uptake-cycling-par}%
- }
- \caption{Peak-to-Average Ratios (PAR) of the battery cycling profiles of each load's battery storage device over four days for (\textbf{a}) AIMD  and (\textbf{b}) AIMD+. ({a}) Cycling PAR for AIMD; ({b}) cycling PAR for AIMD+.}
- \label{fig-storage-par-large}
-\end{figure}
-
-The figure shows that for any EV uptake scenario, AIMD-controlled energy storage units were cycled less equally than the AIMD+ controlled devices. Results also show that with a low EV uptake, both the AIMD and AIMD+ algorithm performed worse; yet improved as EV uptake increased.
-
-Averaging the PARs for all batteries' SOC profiles over all EV uptake percentages yields a clear performance difference between AIMD and AIMD+. These resulting PARs, i.e., the $\zeta_\textbf{C}^{***}$ and $\zeta_\textbf{D}^{***}$ values for their corresponding storage uptake percentages, are presented in Figure~\ref{fig-storage-par}.
-
-\begin{figure}\centering
- \includegraphics{foo}
- \caption{The performance index $\zeta_\textbf{C}^{***}$ for AIMD storage and $\zeta_\textbf{D}^{***}$ for AIMD+ storage control against storage uptake.}
- \label{fig-storage-par}
-\end{figure}
-
-Although the AIMD controlled batteries were, on average, cycled less than the batteries controlled by the proposed AIMD+ algorithm, looking at the average produces a distorted understanding of the performance. In fact, as more than half of the assigned AIMD BESS devices never partook in the network control, a lower average cycling was expected to begin with. The variation in cycling across all batteries, or the cycling PAR, reveals the difference between usage and effective usage. A lower ratio indicates a better usage of the deployed batteries.
+Although the AIMD controlled batteries were, on average, cycled less than the batteries controlled by the proposed AIMD+ algorithm, looking at the average produces a distorted understanding of the performance.
+In fact, as more than half of the assigned AIMD BESS devices never partook in the network control, a lower average cycling was expected to begin with.
+The variation in cycling across all batteries, or the cycling PAR, reveals the difference between usage and effective usage.
+A lower ratio indicates a better usage of the deployed batteries.
