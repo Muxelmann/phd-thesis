@@ -36,12 +36,14 @@ And indeed, the findings indicate that the algorithm's converging behaviour is l
 However, when comparing the overall performance at avoiding charing peaks between the synchronised case (i.e. Figure~\ref{ch3:fig:all-sync}) and the fully desynchronised peak case (i.e. Figure~\ref{ch3:fig:all-async-irregular}), this parameter sensitivity is no longer observed.
 Chapter~\ref{ch3} therefore achieved \ref{objective-3} by developing and assessing the smart-charging algorithm in regards to communication desynchronisation.
 
-\hl{Link to next chapter}
-
-\hl{Explain what Ch 6 did and highlight the main findings}
+From the lessons learnt in Chapter~\ref{ch3}, and to circumvent the need to communications altogether, Chapter~\ref{ch4} proposes a communication-less control method for distributed BESS to reduce peak load, voltage deviation and unequal asset utilisation.
+This communication-less control is achieved by using individualised control parameters in an improved AIMD algorithm.
+Co-locating dynamic loads, i.e. uncoordinated EVs, to maximise the stress on the LV network that the BESS control algorithm had to mitigate.
+The results show that for different EV uptake levels, BESS could always yield improvements for both AIMD and the proposed AIMD+ control methods.
+However, as seen in Figure~\ref{ch4:fig:storage-aimd}, only the latter method did compensate uniformly across the LV network, since it took into account the network specific voltage characteristics.
+Therefore, the finding form the contribution to knowledge stated in Section~\ref{ch-introduction:sec:problem-statement} \ref{objective-4}.
 
 \hl{Make link back to all 4 chapters}
-
 
 The research that has been presented in this thesis is therefore beneficial to both industry and the academic research community.
 All objectives that were set out in the problem statement have been met and the aforementioned key contributions have been made.
