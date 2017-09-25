@@ -11,11 +11,15 @@ The simplicity of the energy storage model will limit the scope of the presented
 For instance, this model does not take into account any non-linear charging or discharging behaviours, nor does it consider operating temperature and heat radiation that would impact its dynamic efficiency.
 When anticipating to deploy the proposed BESS control algorithms that are presented in this thesis to an actual BESS, these limitations will need to be tested.
 
-\subsection{Demand data}
+\subsection{Data}
 
 All findings throughout the presented work were generated from historic demand data.
 This data has both limitations in temporal resolution and data length, which therefore limit the data's ability to capture all possible load scenarios at the necessary accuracy to guarantee correct algorithm operation.
 Since the entire work that is presented in this thesis relies on carrying out data driven simulations, using datasets with varying characteristics of demand profiles is necessary to assure the results cover a wide range of possibilities.
+
+Also, since historic demand data does not capture the expected change in energy consumption, accompanying demand models had to be developed that also rely on several fundamental assumptions.
+For instance, the stochastic EV charging model in Chapter~\ref{ch4} assumed that driving behaviour will not change, apart from the location where vehicles are being refuelled or recharged.
+Being unable to make exact predictions about future loads lead to the development of such models since preventive BESS control algorithms could not be showcased.
 
 \subsection{Network models}
 
