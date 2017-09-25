@@ -1,3 +1,32 @@
 \section{Knowledge Contribution}
 \label{ch-conclusion:knowledge-contribution}
 
+In Chapter~\ref{ch-literature}, the literature is reviewed that surrounds the current and present control methods of DNO owned storage devices on the LV network.
+This literature review supports the thesis problem statement in Section~\ref{ch-introduction:sec:problem-statement} since it concluded with the identified gaps in literature in which further investigation and research was deemed necessary and beneficial for both the industry and academic research community.
+All chapters that are presented in this thesis make contributions within these identified gaps, and these contributions are summarised here:
+
+\begin{itemize}
+	\item
+	In accordance with \ref{objective-1}, a closed-loop phasor adjustment method is presented to control DNO owned BESS to maximise its beneficial impact on key network parameters of the LV network.
+	Findings in Chapter~\ref{ch1} show how issues including e.g. voltage deviation, neutral currents, phase unbalance and losses can be individually reduced when adjusting BESS operation at a sub-half-hourly resolution, even when the device is constrained by an active power schedule at half-hourly time scale.
+	However, this constraint still imposes limitations to the otherwise flexible BESS operation, but it also shows the benefits that can be achieved despite this constraint.
+	\item
+	In accordance with \ref{objective-2}, a dynamic schedule correcting BESS control method is presented to control DNO owned BESS to maximise its capabilities at reducing both daily demand peaks, i.e. at half-hourly resolution, whilst also mitigating volatile load peaks, i.e. at sub-half-hourly resolution.
+	Findings in Chapter~\ref{ch2} show how the control method outperforms traditional BESS control and how the probability of reducing peak load can be noticeably increased.
+	However, to achieve this improvement, the implicit assumption of an ICT infrastructure could limited algorithm deployability when distributed across multiple devices.
+	\item
+	In accordance with \ref{objective-3}, a smart-charging algorithm for distributed control of an EV fleet was developed and deployed on a standardised MAS, which was desynchronised to assess the algorithm's performance.
+	Findings in Chapter~\ref{ch3} show that the execution of the algorithm becomes less dependent on the underlying control parameters executed in a desynchronised environment, yet the overall performance of the algorithm remains intact.
+	However, mitigating the need for ICT altogether would not only circumvent the issue of potential desynchronisation, but it would also lower deployment requirements and system cost.
+	\item
+	In accordance with \ref{objective-4}, a communication-less control method for distributed BESS was developed to assess its ability at reducing the negative impact from the charging of co-located EVs.
+	Findings in Chapter~\ref{ch4} show that the developed AIMD+ algorithm does not only reduce peak loads or voltage deviation, but it also equalises the asset utilisation across the entire feeder.
+	However, without any communication infrastructure, the performance of the proposed algorithm may be unable to address issues like e.g. phase unbalance, that have already been assessed in Chapter~\ref{ch1}.
+\end{itemize}
+
+
+
+
+
+
+
