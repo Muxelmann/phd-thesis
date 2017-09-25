@@ -1,3 +1,26 @@
 \section{Research Limits}
 \label{ch-conclusion:research-limits}
 
+Several assumptions have been made throughout this thesis, and these assumptions imposed limitations on the presented research.
+These limitations are discussed here, in the subsequent subsections.
+
+\subsection{Energy storage model}
+
+The developed model to capture the dynamics of the energy storage system was based on the system that was deployed during the NTVV project with SSEN.
+The simplicity of the energy storage model will limit the scope of the presented work when simulating the different storage control algorithms, especially when preparing for the deployment of an actual BESS.
+For instance, this model does not take into account any non-linear charging or discharging behaviours, nor does it consider operating temperature and heat radiation that would impact its dynamic efficiency.
+When anticipating to deploy the proposed BESS control algorithms that are presented in this thesis to an actual BESS, these limitations will need to be tested.
+
+\subsection{Demand data}
+
+All findings throughout the presented work were generated from historic demand data.
+This data has both limitations in temporal resolution and data length, which therefore limit the data's ability to capture all possible load scenarios at the necessary accuracy to guarantee correct algorithm operation.
+Since the entire work that is presented in this thesis relies on carrying out data driven simulations, using datasets with varying characteristics of demand profiles is necessary to assure the results cover a wide range of possibilities.
+
+\subsection{Network models}
+
+The dominant network model that was used throughout the research was a European LV model published by the IEEE.
+This so called ``LV Test Case'' complemented some of the in-house network models that were provided by SSEN, particularly since reproducibility of the findings could be assured.
+Different LV networks do however have noticeably different characteristics that can only be discovered and included in the research if the number of network models increases.
+Beside the shortage of EU network models, their accuracy cannot be guaranteed since old assets' electrical characteristics might have degraded.
+A higher number of detailed and accurate network models would thus allow the proposed algorithms to be tested on a larger variety of networks, which would in turn improve certainty that the proposed algorithms will function correctly if deployed.
