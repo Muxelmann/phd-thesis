@@ -17,17 +17,17 @@
 - [x] Table of Figures
 - [x] Abbreviations & Nomenclature
 - [x] Introduction
-- [ ] Literature Review of Storage Control
+- [x] Literature Review of Storage Control
 - [x] Improving network performance by adjusting battery operation at sub-half-hourly resolution
-- [ ] Real-Time Adjustment of Battery Operation using MPC Guided Schedule Deviation
-- [ ] Effects of Control Instruction Desynchronisation in a Distributed MAS of Smart-Charging Batteries
-- [ ] Cooperative Operation of Distributed Batteries without Communications Infrastructure Needs
+- [x] Real-Time Adjustment of Battery Operation using MPC Guided Schedule Deviation
+- [x] Effects of Control Instruction Desynchronisation in a Distributed MAS of Smart-Charging Batteries
+- [x] Cooperative Operation of Distributed Batteries without Communications Infrastructure Needs
 - [ ] Conclusion
 - [x] Bibliography
 
 ### Appendices
 
-- [ ] A1 : Additional results
+- [x] A1 : Additional results
 - [ ] A2 : Multi-agent system information
-- [ ] A3 : Stochastic EV model
-- [ ] A4 : OpenDSS interface
+- [ ] A3 : Stochastic EV model (optional)
+- [ ] A4 : OpenDSS interface (optional)
