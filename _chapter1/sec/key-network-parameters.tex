@@ -13,30 +13,30 @@ Determining the set of optimal solutions for the maximisation of a utility funct
 \nomenclature[I]{$T$}{Length of simulation, where $T \in \mathbb{Z}_{\geq0}$}
 
 With this in mind, the key network parameters are defined and their corresponding cost functions are introduced.
-In this piece of work, power flow simulations are run at discrete times, $t$, which are separated by a sampling period $\Delta t$. 
-The model used for these simulations is the IEEE LV Test Case, which consists of 906 three phase buses, resulting in a total of 2718 nodes.
+In this chapter, Chapter~\ref{ch1}, of work, power flow simulations are run at discrete times, $t$, which are separated by a sampling period $\Delta t$. 
+The model used for these simulations is the IEEE LV Test Case, i.e. a network consisting of 906 three phase buses which resulting in a total of 2718 observable nodes.
 For each node, complex currents and voltages can be obtained, making the number of parameters to chose from nearly inexhaustible.
 In reality however, a power distribution network can only be observed at a limited number of measuring points.
 For the NTVV project, these points were at the substation and the ESMU's Point of Common Coupling (PCC).
 Therefore, all derived network parameters that could be obtained in reality are seen as ``realistic parameters'', despite the fact that all key network parameters are extracted from power flow simulations.
-The remaining key network parameters, i.e. those that could not easily be obtained in reality, are therefore referred to as ``theoretical parameters''.
+The remaining key network parameters, i.e. those that could not easily be obtained in reality, are therefore referred to as ``theoretical parameters''\footnote{In literature, parameters are usually referred to as being ``observable'' or ``unobservable''. From a technical perspective however all simulated parameters are observable. Therefore a parallel to real life observability and unobservability is drawn with the keywords ``realistic'' and ``theoretical'', respectively.}.
 
 Due to the high number of these theoretical parameters, only a subset of them is used.
 The choice of parameters is based on their importance, role and impact on the actual network operation.
 A list of all key network parameters is presented below, and in this list all theoretical key network parameters are marked with a dagger ($\dagger$).
 
 \begin{itemize}
-	\item Voltages at substation transformer's secondary winding
-	\item Voltages at ESMU's PCC
-	\item Voltages at customer lateral$^{\dagger}$
-	\item Total power flow
-	\item Substation line utilisation
-	\item Maximum line utilisation$^{\dagger}$
-	\item Distribution losses$^{\dagger}$
+	\item Voltages at substation transformer's secondary winding, i.e. $\textbf{v}_{ss}(t)$
+	\item Voltages at ESMU's PCC, i.e. $\textbf{v}_\text{ESMU}(t)$
+	\item Voltages at customer lateral$^{\dagger}$, i.e. $\textbf{v}_\text{load}(t)$
+	\item Total power flow, i.e. $s_\text{net}(t)$
+	\item Substation line utilisation, i.e. $\textbf{i}_{ss}(t)$
+	\item Maximum line utilisation$^{\dagger}$, i.e. $\textbf{i}_\text{line}(t)$
+	\item Distribution losses$^{\dagger}$, i.e. $\textbf{s}_\text{losses}(t)$
 \end{itemize}
 
 
-The following three substations cover all key network parameters, by detailing the cost functions relating to: voltages, powers and currents.
+The following three subsections cover all key network parameters, by detailing the cost functions relating to: voltages, powers and currents.
 
 \subsection{Voltage related cost functions}
 \label{ch1:subsec:voltages-related-cost-functions}
@@ -103,7 +103,8 @@ In fact, $\textbf{v}_{ESMU}(t)$ is used with cost function, $\zeta_\text{voltage
 This is the same cost function (i.e. $\zeta_\text{voltage}(\textbf{v})$) that was used to asses the deviation in transformer voltage.
 Therefore, the resulting cost can be formulated as $\zeta_\text{voltage}(\textbf{v}_{ESMU}(t))$.
 The Electricity Safety, Quality and Continuity Regulations (ESQCR) define the statutory voltage range at UK electricity customers.
-However, monitoring those voltages to assure they lie within limits is unfeasible, which is why they are unknown in reality.
+However, monitoring those voltages to assure they lie within limits is unfeasible, since the installation of synchronised voltage measurement equipment at all loads implies significant cost.
+Therefore, in reality, these voltages are unknown.
 Nonetheless, in simulations all load voltages can easily be extracted, and since ESMU can impact all voltage levels to some degree, they are treated as theoretical key network parameters.
 
 To illustrate this load voltage drop, a snapshot OpenDSS simulation was run on the used network model with all load consuming  8kW of power\footnote{Whilst historic and recent loads may reach values of this magnitude quite infrequently, future customer demand with the aggregated effect home-charging of EVs is expeceted to yield extreme scenarios like this.}.
@@ -181,7 +182,7 @@ Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s}(t))$ rises with an i
 Additionally, to assess the effective utilisation of the power distribution network, deviation from a unity Power Factor (PF) is also formulated as a cost.
 PF is the ratio between active (p) and apparent power (s), and gives an indication of how much ``good'' power is being consumed by the system\footnote{Reactive power is used to maintain magnetic fields in rotating machines, yet this can be supplied by local reactive power compensators and thus need not occupy otherwise free power transmission resources.}.
 Experts would agree that keeping PF of a system close to unity indicates that it only requires active power to operate, which implies that uses the lowest possible amount of power transmission resources.
-In order to indicate the proximity to unity PF, a corresponding cost, $\zeta_\text{PF}(\textbf{s}_{ss}(t))$, us used, which is defined as:
+In order to indicate the proximity to unity PF, a corresponding cost, $\zeta_\text{PF}(\textbf{s}_{ss}(t))$, is used, which is defined as:
 
 \input{_chapter1/equ/power-factor}
 
@@ -193,12 +194,13 @@ This zero-sum also indicates, that no neutral current is flowing in the system.
 However, in an unbalanced system that operates at non-unity PF, the power transmitted through the neutral conductor can significantly deviate from zero.
 The negative impact of transmitting power through the neutral conductor is further amplified, since typical power distribution cables often use neutral conductors with significantly smaller cross-section areas than those used as line conductors.
 Results of any such additional power flow in the neutral conductor are further deviation of neutral voltages from ground, increased losses, and quicker exhaustion of the neutral conductor's power carrying capability (making the system become more prone to failures).
-To address this last point, a ``neutral load'' cost, $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, is defined:
+To address this last point, a ``neutral load'' cost, $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, is defined as follows:
 
 \input{_chapter1/equ/neutral-load}
 
-In this cost function, for a three-phase scenario, each single-phase power, $s_{\text{ss},\phi}(t)$, is therefore rotated by an integer multiple of $120^\circ$ in the complex plane, before adding them in order to obtain the neutral load vector.
-It is the magnitude of this apparent power vector is computed, which is then used as the resultant cost.
+Equation \ref{ch1:equ:neutral-load}, superimposes the three-phase network powers whilst rotating each power vector by an integer multiple of $120^\circ$ (i.e. $e^\frac{j2\pi \phi}{3}$ where $\phi = \{1, 2, 3\}$) in the complex plane.
+In a perfectly balanced scenario, the summation results in no neutral power, i.e. a value of zero, but for an unbalanced network, the magnitude value will be greater than zero.
+Therefore this magnitude of the neutral's apparent power vector is computed, which is then used as the resultant cost.
 Power losses have already been mentioned.
 In comparison to the losses of the entire electricity grid, losses in a LV distribution network are negligibly small.
 Nonetheless, the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, nobody pays for undelivered energy).

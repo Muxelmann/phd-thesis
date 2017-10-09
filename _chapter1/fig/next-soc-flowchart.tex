@@ -30,18 +30,18 @@
 	% Define nodes
     \node (power_esmu) [input] {$\textbf{s}_\text{ESMU}(t)$};
     \node (is_charging) [decision, right of=power_esmu] {charging};
-    \node (charging) [state, above right of=is_charging] {$\times\eta$};
-    \node (discharging) [state, below right of=is_charging] {$\times\frac{1}{\eta}$};
+    \node (charging) [state, above right of=is_charging] {$\eta$};
+    \node (discharging) [state, below right of=is_charging] {$\frac{1}{\eta}$};
     \node (power_battery) [result, below right of=charging] {$p_\text{bat}(t)$};
-    \node (sample) [state, right of=power_battery] {$\times \Delta t$};
+    \node (sample) [state, right of=power_battery] {$ \Delta t$};
     \node (change_energy_battery) [result, below of=sample, yshift=5mm] {$\Delta E_\text{bat}(t)$};
     \node (add) [state, below of=change_energy_battery, yshift=5mm] {$+$};
     \node (current_energy_battery) [result, left of=add] {$E_\text{bat}(t)$};
-    \node (multiply) [state, left of=current_energy_battery] {$\times C_\text{bat}$};
+    \node (multiply) [state, left of=current_energy_battery] {$ C_\text{bat}$};
     \node (current_soc) [input, left of=multiply] {$SOC(t)$};
-    \node (losses) [state, below of=add, yshift=5mm] {$\times \mu \Delta t$};
+    \node (losses) [state, below of=add, yshift=5mm] {$ \mu \Delta t$};
 	\node (next_energy) [result, left of=losses, xshift=-5mm] {$E_\text{bat}(t+\Delta t)$};
-	\node (divide) [state, left of=next_energy, xshift=-5mm] {$\div C_\text{bat}$};
+	\node (divide) [state, left of=next_energy, xshift=-5mm] {$\frac{1}{C_\text{bat}}$};
 	\node (next_soc) [output, left of=divide, xshift=-5mm] {$SOC(t+\Delta t)$};
 
 	% Draw lines
@@ -62,6 +62,6 @@
 	\draw [->] (divide) to (next_soc);
 	
 \end{tikzpicture}
-\caption{Flowchart to calculate the next SOC (i.e. $SOC(t+\Delta t)$) based on current ESMU power (i.e. $\textbf{s}_\text{ESMU}(t)$) and current SOC (i.e. $SOC(t)$)}
+\caption{Flowchart to calculate the next SOC (i.e. $SOC(t+\Delta t)$) based on current ESMU power (i.e. $\textbf{s}_\text{ESMU}(t)$ which is predefined) and current SOC (i.e. $SOC(t)$ which is predefined).}
 \label{ch1:fig:next-soc-flowchart}
 \end{figure}
