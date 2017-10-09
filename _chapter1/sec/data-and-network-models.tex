@@ -18,7 +18,7 @@ The apparent network power, $s_\text{net}(t)$, is therefore defined for each tim
 
 \input{_chapter1/equ/sub-half-hourly-network-load}
 
-This demand profile does not take into account the distribution losses.
+However, this demand profile does not take into account the distribution losses, since they are only known after performing the power flow simulations.
 Nonetheless, it functions as a simple time-series to schedule ESMU operation, which is detailed in Section~\ref{ch1:subsec:esmu-scheduling}.
 
 \subsection{Network model}
@@ -54,7 +54,7 @@ However, control instructions that are sent to the ESMU system should not reques
 \nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{C}$}
 \nomenclature[I]{$\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $\textbf{s}_\text{ESMU}(t) \in \mathbb{C}^{\Phi}$}
 
-In order to simulate this ESMU system and its energy storing behaviour, a model is developed from the given device specifications.
+In order to simulate this ESMU system and its energy storing behaviour, in this section, Section~\ref{ch1:subsec:battery-model}, an energy model is developed from the given device specifications.
 This model includes an charge-discharge efficiency, $\eta$, and standby losses, $\mu$.
 $\eta$ is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\%, i.e. $\eta = 0.98$.
 $\mu$ on the other hand is linked to the nominal power drawn by the battery's control system as well as the battery's self-discharge rate.
@@ -146,12 +146,15 @@ Therefore, three half-hourly costs regarding are used as, $\zeta_\text{PAR}(\tex
 \nomenclature[I]{$\zeta_\text{MMD}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the Minimum-Maximum Difference (MMD), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$}
 \nomenclature[I]{$\zeta_\text{TRA}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the power transients (TRA), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$}
 
-All three costs functions assess the sum of the half-hourly ESMU schedule, $\textbf{s}^*_\text{ESMU}$, and the half-hourly network load profile, $\textbf{s}^*_\text{net}$.
-Combined with all underlying model constraints, the following minimisation problem is defined:
+The half-hourly cost in Equation~\ref{ch1:equ:peak-to-average-definition} computes the ratio between the maximum network power and the mean network power.
+To normalise this value with a minimum value of zero, one is subtracted.
+Equation~\ref{ch1:equ:min-max-difference-definition} returns the difference between the largest and smallest network power, and Equation~\ref{ch1:equ:power-transients-definition} computes the change in network power over time.
+All three costs functions assess the sum of the half-hourly ESMU schedule, $\textbf{s}^*_\text{ESMU}$, and the half-hourly network load profile, $\textbf{s}^*_\text{net}$, and when they reach a value of zero, then a perfectly flat, i.e. valley-filled and peak-shaved profile is obtained.
+Combined with all underlying model constraints, the following minimisation problem is defined to aim and obtain such a flat power profile:
 
 \input{_chapter1/equ/scheduling-cost}
 
-For this piece of work, a Sequential Quadratic Programming (SQP) approach was chosen to solve this minimisation problem.
+To solve this minimisation problem, a Sequential Quadratic Programming (SQP) approach was chosen.
 The resulting half-hourly ESMU power, $\textbf{s}^*_\text{ESMU}$, could then be extrapolated using the same synchronisation function, $k(t)$, to yield a sub-half-hourly ESMU schedule.
 
 For the work presented in this chapter, the supplied half-hourly network load (or forecast) was obtained from sub-half-hourly data.

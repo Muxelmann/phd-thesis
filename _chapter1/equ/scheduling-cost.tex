@@ -1,6 +1,6 @@
 \begin{equation}
 \begin{split}
-	\min_{\textbf{s}^*_\text{ESMU}} & \left\{\zeta_\text{PAR}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net}) + \zeta_\text{MMD}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net}) + \zeta_\text{TRA}(\textbf{s}^*_\text{ESMU}, \textbf{s}^*_\text{net})\right\}\\
+	\min_{\textbf{s}^*_\text{ESMU}} & \left\{\zeta_\text{PAR}(\textbf{s}^*_\text{ESMU}+\textbf{s}^*_\text{net}) + \zeta_\text{MMD}(\textbf{s}^*_\text{ESMU}+\textbf{s}^*_\text{net}) + \zeta_\text{TRA}(\textbf{s}^*_\text{ESMU}+\textbf{s}^*_\text{net})\right\}\\
 	\text{s.t. }& \begin{cases}
 		p_\text{bat}(t) \leq C_f\times C_\text{bat}\\
 		\left|s_{\text{ESMU},\phi}(t)\right| \leq S_\text{rating} \forall \phi\\
