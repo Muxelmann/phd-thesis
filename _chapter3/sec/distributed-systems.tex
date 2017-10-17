@@ -46,7 +46,7 @@ Each worker internally simulates an instance of the MAS and stores its outputs t
 Given the 1540 load profiles from the Irish dataset and assuming a typical distribution network of 55 customers, a theoretical limit of $6.11\times10^{101}$ simulations would exist.
 Due to the limited time and size of the available worker pool (ca. 200 workers), a total number of $1.5\times10^{7}$ MAS simulations is chosen to yield a sufficiently accurate estimate of the algorithm's performance.
 For all submitted simulations a relatively high EV uptake of 20\% was chosen in order to maximise the effect of badly scheduled EV charging, and in order to give the algorithm a larger energy volume when adjusting the EV charging schedules.
-Also, in the diagram in Figure~\ref{ch3:fig:agent-implementation}, all bold arrows indicate fast data transmissions (used to acquire and store the datasets that are used for each MAS simulation), solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software messages to submit and launch the MAS simulations.
+Also, in the diagram in Figure~\ref{ch3:fig:agent-implementation}, all bold arrows indicate data transmissions that are faster than the lab PC connection (this connection is used to acquire and store the datasets that are used for each MAS simulation), solid arrow indicates the loading of simulation data, and the dotted arrows indicate the software messages to submit and launch the MAS simulations.
 
 \subsection{MAS Desynchronisation}
 \label{ch3:subsec:desynchronisation}
@@ -89,47 +89,54 @@ Therefore each case study executes up to 100 iterations after which the smart-ch
 Throughout the progress of executing the algorithm, every EV's charging profile is recorded for each iteration.
 Also, when the simulation terminates, the final aggregated charging profile is also recorded.
 Therefore, an information on the development of the total demand profile can be obtained for every singe algorithm iteration.
-The performance of the algorithm is then determined by quantifying the shape of the underlying demand profile.
+The performance of the algorithm is then determined by assessing the shape of the resulting demand profile by using the Peak-to-Average Ratio (PAR) and the Transient power metric (TRA).
 
-Similar to the previous chapters, Chapter~\ref{ch1} and Chapter~\ref{ch2}, the Peak-to-Average Ratio (PAR) and Transient powers (TRA) are used as performance metrics for the demand profile.
-The two metrics, respectively $\zeta_\text{PAR}(\textbf{p}_n)$ and $\zeta_\text{TRA}(\textbf{p}_n)$, where $\textbf{p}_n$ is the total demand profile, i.e. $\textbf{p}_n = \textbf{p}_\text{base} + \sum_{u=1}^U \textbf{p}_{\text{EV},u,n}$, for algorithm iteration $n$, and they are defined as follows:
+Similar to the previous chapters, Chapter~\ref{ch1} and Chapter~\ref{ch2}, the PAR and TRA values are used as performance metrics for the demand profile.
+There two metrics, respectively $\zeta^\text{PAR}(\textbf{p}^\text{net}_n)$ and $\zeta^\text{TRA}(\textbf{p}^\text{net}_n)$, have already been defined in those preceding chapters.
+Here, $\textbf{p}^\text{net}_n$ denotes the total network demand, i.e. $\textbf{p}^\text{net}_n = \textbf{p}^\text{base} + \sum_{u=1}^U \textbf{p}^\text{EV}_{u,n}$, for algorithm iteration $n$, and for convenience, the two parameter definitions are included in Equation~\ref{ch3:equ:performance-metrics-par} and Equation~\ref{ch3:equ:performance-metrics-tra}.
 
 \input{_chapter3/equ/performance-metrics}
 
-As the total demand $\textbf{p}_n$ becomes flatter, i.e. by filling valleys instead of adding peaks, the gap between mean and maximum demand reduces, decreasing the output of $\zeta_\text{PAR}$.
-However, if the total charging power of all EVs constructively superimposes at the same time, and if this additional power does not increase the daily demand peak, then $\zeta_\text{PAR}$ would still decrease despite the unwanted demand shape.
-Therefore, the change in power, i.e. the mean transient, is also taken into assessed by $\zeta_\text{TRA}$, which is lowered when the change in power is reduced and thus the profile becomes smooth.
+If the proposed scheduling algorithm successfully fills valleys and avoid adding new charging peaks, then the gap between mean and maximum demand reduces and $\zeta^\text{PAR}$ in Equation~\ref{ch3:equ:performance-metrics-par} tends towards one.
+At this point, one might assume a perfectly flat demand profile.
+However, if the total charging power of all EVs constructively superimposes at the same time, and if this additional power does not increase the daily demand peak, then $\zeta^\text{PAR}$ would still decrease despite the unwanted demand shape.
+Therefore, the change in power, i.e. the mean transient, is also taken into account in Equation~\ref{ch3:equ:performance-metrics-tra} with $\zeta^\text{TRA}$.
+This value is only lowered when the change in power between consecutive time-steps is reduced and thus the profile becomes smooth.
 
 When the scheduling algorithm was detailed in Section~\ref{ch3:subsec:scheduling-algorithm}, convergence for the synchronised case was guaranteed since the algorithm follows the D'Alembert Criterion.
-This criterion holds if, for every iteration of the algorithm, the ratio between the current and previous algorithm outputs is less than one, i.e. the value is decreasing.
-More specifically, this criterion is satisfied when
+This criterion holds if the ratio between the metrics for the current and previous algorithm outputs (i.e. from Algorithm~\ref{ch3:alg:valley-filling}) is less than one or; as long as these values are decreasing for every successive algorithm iteration.
+Formally, this criterion is satisfied when
 
 \input{_chapter3/equ/convergence-criterion}
 
-These two convergence criteria in Equation~\ref{ch3:equ:convergence-criterion-par} and Equation~\ref{ch3:equ:convergence-criterion-tra} are limited to values of $\zeta_\text{PAR}$ and $\zeta_\text{PAR}$ greater than zero.
-Whilst the ratio between maximum and mean can only reduce to a value of one, $\zeta_\text{PAR}$ satisfies this criterium.
-$\zeta_\text{PAR}$ on the other hand may reduce to a value of zero.
-To prevent this from happening, the number of EVs and their total demand are limited to a certain value that could not fully ``fill'' the network demand's valleys and lead to a perfectly flat demand profile.
+These two convergence criteria in Equation~\ref{ch3:equ:convergence-criterion-par} and Equation~\ref{ch3:equ:convergence-criterion-tra} are limited to values of $\zeta^\text{PAR}$ and $\zeta^\text{PAR}$ greater than zero.
+Whilst the ratio between maximum and mean can only reduce to a value of one, $\zeta^\text{PAR}$ satisfies this criterium.
+$\zeta^\text{PAR}$ on the other hand may reduce to a value of zero.
+To prevent this from happening, the number of EVs and their total demand are limited to a value that could not fully ``fill'' the network demand's valleys and lead to a perfectly flat demand profile.
 
-Although the D'Alembert Criterion can be used to check whether the smart-charging algorithm converges, it cannot produce the rate of convergence.
+Although the chosen D'Alembert Criterion can be used to check whether the smart-charging algorithm converges, it cannot produce the rate of convergence.
 Similar to Laplace, the rate of convergence is determined by an exponential decay function.
 Since the underlying mathematical function is unknown, an estimated exponential is used instead.
-The estimate is obtained by fitting an exponential function to the series of $\zeta_\text{PAR}$ and $\zeta_\text{PAR}$ values over all iterations, and by using the following definition of a simple exponential function:
+The estimate is obtained by fitting an exponential function to the series of $\zeta^\text{PAR}$ and $\zeta^\text{PAR}$ values over all iterations, and by using the following definition of a simple exponential function:
 
 \input{_chapter3/equ/exponential-function}
 
 In Equation~\ref{ch3:equ:performance-metrics-par}, $a$ is the zero-crossing point of this function and $b$ the rate of convergence.
 For the scope of this chapter, $n$ is limited to $n \geq 0$.
 The size of $b$ indicates how fast the values converged, which is why $b$ is used as a convergence indicator.
-Values for $a$ and $b$ are found by reducing the error between the exponential function and the series of $\zeta_\text{PAR}$ or $\zeta_\text{TRA}$ values, i.e.:
+Values for $a$ and $b$ are found by reducing the error between the exponential function and the series of $\zeta^\text{PAR}$ or $\zeta^\text{TRA}$ values, i.e.:
 
 \input{_chapter3/equ/find-exponential}
 
-Results are therefore split into three parts.
+It is however worth mentioning, that the condition is not satisfied when $\alpha = 1$ and $\beta = 1$.
+In this case, an algorithm behaviour is expected where each EV's demand is oscillating between a set of profile troughs.
+A similar behaviour has already been observed by Karfopoulos et al. in \cite{Karfopoulos2013}, which is why the main part of the results in this chapter study values where $\alpha$ and $\beta$ are not one at the same time.
+
+Results are split into three parts.
 In the first part, results are presented for the time-series evolution when using the algorithm in a synchronised MAS.
 Different $\alpha$ and $\beta$ values are used to explore and show the sensitivity of the algorithm.
-With this in mind the corresponding $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are presented to show their link to the underlying load profile's shape, and their convergence values, i.e. $b$ is also presented.
-Finally, a complete set of final $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values, as well as their convergence values, $b$, are plotted for the entire spectrum of $\alpha$ and $\beta$ pairs.
+With this in mind the corresponding $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ values are presented to show their link to the underlying load profile's shape, and their convergence values, i.e. $b$ is also presented.
+Finally, a complete set of final $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ values, as well as their convergence values, $b$, are plotted for the entire spectrum of $\alpha$ and $\beta$ pairs.
 This is to show the sensitivity of the algorithm for the complete range of $\alpha$ and $\beta$.
 The second step is then to introduce algorithm desynchronisation, but with regular loop delays, and repeat the complete analysis to compare it with the results in the first part.
 In the third and last part, the algorithm desynchronisation is changed so that the algorithm's loop delays are irregular.

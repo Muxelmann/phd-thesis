@@ -3,6 +3,7 @@
  \SetKwFunction{Update}{update}
  \SetKwFunction{Break}{break}
  \SetKwFunction{Sync}{synchronising}
+ \tcp{Input data, i.e. initial conditions}\label{cmt}
  \KwData{$\textbf{p}_{\text{base},n}$, $E_u$, $P_{\text{max},u}$, $P_{\text{min},u}$, $\Delta t$, $T_\text{sch}$}
  \KwResult{$\textbf{p}_{\text{EV},u,n}$}
  \For{$n\leftarrow 1$ \KwTo $N$}{
@@ -10,7 +11,7 @@
   $\textbf{p}_{\text{base},n} \leftarrow$ \Query{}\;
   \tcp{Forward and undo previous schedule}\label{cmt}
   \eIf{$n>1$}{
-    $\textbf{p}_{\text{EV},u,n} \leftarrow \textbf{p}_{\text{EV},u,n-1}\alpha$\;
+    $\textbf{p}_{\text{EV},u,n} \leftarrow \textbf{p}_{\text{EV},u,n-1}(1-\alpha)$\;
    }{
     $\textbf{p}_{\text{EV},u,n} \leftarrow [0, 0, \dots, 0]$\;
   }

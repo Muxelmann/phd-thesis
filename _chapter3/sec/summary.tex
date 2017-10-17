@@ -5,14 +5,14 @@ When designing a smart-charging algorithm to distribute the EV load over the ent
 In this chapter, Chapter~\ref{ch3}, such an algorithm was developed to assure that the coordinated charging of an EV fleet dos not add a new demand spike onto the base power profile.
 This algorithm was then deployed on a MAS and controlled using two parameters, i.e. $\alpha$ and $\beta$, that allowed each agent to, respectively, undo and reassign an amount of its charging profile.
 By repeating this behaviour of undoing and reassigning fractions of the charging profile, agents were able to respond to each other and avoid simultaneous charging.
-Two performance metrics, i.e. $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$, indicated, respectively, the spikiness and volatility of the final power profile.
-Reducing these metrics is therefore the key function of the smart-charging algorithm.
+Two performance metrics, i.e. $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$, indicated, respectively, the spikiness and volatility of the final power profile.
+Reducing these metrics is therefore the key function of the smart-charging algorithm, despite the algorithm not being metric dependent.
 
-However, the this smart-charging algorithm was designed with MAS synchronisation in mind, which means that all agents obtain a network update and update their charging profile at exactly the same time.
+Originally however, the presented smart-charging algorithm was designed for synchronised MAS execution, which means that all agents obtain a network update and update their charging profile at exactly the same time.
 By desynchronising the agent communication, the output's parameter dependence significantly changed when compared to the synchronised execution of the algorithm.
-In fact regular and irregular desynchronisation yielded much lower values for $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$, despite the changes in $\alpha$ and $\beta$.
-However, convergence towards the final values still remained similar to the synchronised algorithm execution.
-Therefore, the algorithm's valley-filling behaviour was still upheld, since it was designed to to so, yet the interplay between agents that implement this algorithm significantly changed the outcome of the aggregated result.
+In fact regular and irregular desynchronisation yielded much lower values for $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$, as seen in Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular} and Section~\ref{ch3:subsec:algorithm-performance-desynchronised-irregular}.
+Convergence towards the final values on the other hand, did remained similar to the synchronised algorithm execution despite the difference in MAS execution.
+Therefore, the algorithm's valley-filling behaviour was still upheld, yet the interplay between agents that implement this algorithm significantly changed the outcome of the aggregated result.
 This work thus completes \ref{objective-3} of this thesis, which was outlined in Section~\ref{ch-introduction:sec:problem-statement}, since it shows the capabilities of a smart-charging algorithm and highlights the importance of considering agent de/synchronisation when developing a multi-controller DSM network.
 Such findings are especially relevant due to the inherent difficulty and cost associated with the synchronisation of a distributed control system.
 More specifically, synchronisation becomes particularly difficult when the network size and number of controllers increases.
