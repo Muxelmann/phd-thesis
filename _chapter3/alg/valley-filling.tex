@@ -11,7 +11,7 @@
   $\textbf{p}_{\text{base},n} \leftarrow$ \Query{}\;
   \tcp{Forward and undo previous schedule}\label{cmt}
   \eIf{$n>1$}{
-    $\textbf{p}_{\text{EV},u,n} \leftarrow \textbf{p}_{\text{EV},u,n-1}\alpha$\;
+    $\textbf{p}_{\text{EV},u,n} \leftarrow \textbf{p}_{\text{EV},u,n-1}(1-\alpha)$\;
    }{
     $\textbf{p}_{\text{EV},u,n} \leftarrow [0, 0, \dots, 0]$\;
   }
