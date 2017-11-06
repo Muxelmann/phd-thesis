@@ -21,6 +21,7 @@ In this section however the battery model, which is used in this work, is explai
 Also the load data acquisition, forecasting and ESMU schedule generation are outlined, where scheduling is performed in accordance to the ESMU model's constraints.
 
 \subsection{ESMU model}
+\label{ch2:subsec:esmu-model}
 
 \nomenclature[J]{$C_{bat}$}{Battery capacity in kWh, where $C_{bat} \in \mathbb{Z}^{>0}$}
 \nomenclature[J]{$C_{f}$}{Charge factor or ``C-factor'' of the battery, where $C_{f} \in \mathbb{Z}^{>0}$}
@@ -110,7 +111,7 @@ This computation is done by minimising several cost-functions.
 In Chapter~\ref{ch1}, several cost functions have been defined.
 Here however, three shape dependent cost-functions are used that quantify the profile improvements that are yielded by $\textbf{p}_\text{sch}$.
 These costs entailed the Peak-to-Average Ratio (PAR), the difference between the resulting power profile's maximum and minimum (MMD) load, and the magnitude of all power transients (TRA) \cite{Mohsenian-Rad2010, Mostafa2016}.
-Although these costs have already been presented in Section~\ref{ch1:subsec:esmu-scheduling} of this thesis, they are reminded for the convenience.
+Although these costs have already been presented in Section~\ref{ch1:subsec:esmu-scheduling} of this thesis, they are reminded for convenience.
 Before however detailing each of these three cost functions, a notation simplifying power as, $\textbf{p}$, is introduced:
 
 \input{_chapter2/equ/notation-simplification}

@@ -98,34 +98,36 @@ This model's data is used to simulate additional demand in the power network, wh
 
 \subsection{Battery Modelling}
 
-In this chapter the same BESS model is used, that has already been introduced in Chapter~\ref{ch1} of this thesis (i.e. see Section~\ref{ch1:subsec:battery-model}).
-Nonetheless, in the following paragraphs, this model's details are reminded, since this battery model consists of a self-discharge loss, $\mu$, that is dependent on the current State Of Charge (SOC) and an energy conversion efficiency, $\eta$, to compute the amount of energy that is lost when charging or discharging this battery. 
+In this chapter a similar BESS model is used as the one that has already been introduced in Chapter~\ref{ch1} and in Chapter~\ref{ch2} of this thesis (i.e. see Section~\ref{ch1:subsec:battery-model} and Section~\ref{ch2:subsec:esmu-model}).
+The following paragraphs are however used as a reminder of this model for convenience.
+This battery model consists of a self-discharge loss, $\mu$ where $\mu \in (0, 1]$, that is dependent on the current State Of Charge (SOC) and an energy conversion efficiency, $\eta$ where $\eta \in (0, 1]$, to compute the amount of energy that is lost when charging or discharging this battery. 
 %This model has also been was used in \cite{Rowe2013, Rowe2014, Rowe2014a, Zangs2016},
 
 \nomenclature[L]{$p_\text{bat}(t)$}{Battery power at time $t$, where $p_\text{bat}(t) \in \mathbb{R}$}
-\nomenclature[L]{$\text{SOC}(t)$}{Battery state of charge at time $t$}
-\nomenclature[L]{$\Delta\text{SOC}(t)$}{Change in SOC during time period $\Delta t$}
-\nomenclature[L]{$\mu$}{Self-discharge loss factor}
-\nomenclature[L]{$\eta$}{Energy conversion efficiency}
-\nomenclature[L]{$\text{SOC}_\text{min}$}{Minimum rated SOC for limited battery operation}
-\nomenclature[L]{$\text{SOC}_\text{max}$}{Maximum rated SOC for limited battery operation}
-\nomenclature[L]{$C$}{Battery capacity}
-\nomenclature[L]{$P_\text{max}$}{Power rating of battery}
-\nomenclature[L]{$\Delta t$}{Sampling period}
+\nomenclature[L]{$\text{SOC}(t)$}{Battery state of charge at time $t$, where $\text{SOC}(t) \in [0, 1]$}
+\nomenclature[L]{$\Delta\text{SOC}(t)$}{Change in SOC during time period $\Delta t$, where $\Delta\text{SOC}(t) \in [-1, 1]$}
+\nomenclature[L]{$\mu$}{Self-discharge loss factor, where $\mu \in (0, 1]$}
+\nomenclature[L]{$\eta$}{Energy conversion efficiency, where $\eta \in (0, 1]$}
+\nomenclature[L]{$\hat{\eta}$}{Direction dependent energy conversion efficiency, where $\hat{\eta} \in (0, 1]$}
+\nomenclature[L]{$\text{SOC}_\text{min}$}{Minimum rated SOC for limited battery operation, where $\text{SOC}_\text{min} < \text{SOC}_\text{max}$ and $\text{SOC}_\text{min} \in [0, 1]$}
+\nomenclature[L]{$\text{SOC}_\text{max}$}{Maximum rated SOC for limited battery operation, where $\text{SOC}_\text{min} < \text{SOC}_\text{max}$ and $\text{SOC}_\text{max} \in [0, 1]$}
+\nomenclature[L]{$C$}{Battery capacity, where $C \in \mathbb{R}_{>0}$}
+\nomenclature[L]{$P_\text{max}$}{Power rating of battery, where $P_\text{max} \in \mathbb{R}_{>0}$}
+\nomenclature[L]{$\Delta t$}{Sampling period, where $\Delta t \in \mathbb{Z}_{>0}$}
 
-When an ideal battery charges or discharges, the change in SOC is related by the battery power, $p_\text{bat}(t)$.
-When sampling battery operation at a regular period, $\Delta t$, then the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
-The change in SOC for this ideal battery, $\Delta SOC$, is therefore defined as:
+When an ideal battery charges or discharges, the change in SOC is determined by the battery power, $p_\text{bat}(t)$.
+By sampling battery operation at a regular period, $\Delta t$, the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
+The change in SOC for this ideal battery is therefore defined as:
 
 \input{_chapter4/equ/change-soc}
 
-The self-discharge loss is included in this ideal battery model to represent the continual loss of energy in the battery typical of chemical energy storage.
-This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined to be proportional to the current SOC and is determined using the self-discharge loss factor, $\mu$:
+The self-discharge loss is determined by $\mu$ and is included in this ideal battery model to represent the continual loss of energy in the battery, which is typical for chemical energy storage.
+This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined as a proportion of the current SOC and is determined using the self-discharge loss factor, $\mu$, as follows:
 
 \input{_chapter4/equ/self-discharge-loss}
 
 Additionally, to represent the losses in the power electronics and energy conversion process, an energy conversion loss, $\Delta\text{SOC}_\text{conversion}(t)$, is defined.
-This loss is proportional to the rate at which the battery's SOC changes, by using the energy conversion efficiency, $\hat{\eta}$ as follows:
+This loss is proportional to the rate at which the battery's SOC changes, and since a difference is made between charging and discharging BESS, a ``direction dependent energy conversion efficiency'', $\hat{\eta}$, is used that is derived from $\eta$:
 
 \input{_chapter4/equ/conversion-loss}
 
