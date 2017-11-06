@@ -1,0 +1,9 @@
+\begin{equation}
+	\min_{\textbf{a}, \textbf{b}} \left(p(t) - \hat{p}(t)\right)^2
+\label{ch2:equ:least-squares-1}
+\end{equation}
+Or:
+\begin{equation}
+	\min_{\textbf{a}, \textbf{b}} \left(p(t) - p(t - \Delta t) + \sum_{i=2}^{N} a_i p(t-i\Delta t) + \sum_{i=2}^{N} b_i \hat{p}(t-(i-1)\Delta t)\right)^2
+\label{ch2:equ:least-squares-2}
+\end{equation}
