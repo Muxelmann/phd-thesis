@@ -39,6 +39,7 @@ The following equation captures this error term.
 
 Applying a standard, linearly weighted dynamic gain vector, $\boldsymbol{\alpha}$, to the SOC error, allows the calculation of a corrective ESMU power component dynamically.
 Here, $\boldsymbol{\alpha} = \{\alpha_P, \alpha_I, \alpha_D\}$, where being the P, I and D weights, respectively.
+How to determine the values of $\boldsymbol{\alpha}$ is explained later in this section.
 This corrective power is denoted as $p_1(t+\Delta t)$, and is defined as follows:
 
 \input{_chapter2/equ/corrective-component-soc}
@@ -61,7 +62,7 @@ This value is the PID$_2$'s input from the MPC and results in an ``estimated pow
 \input{_chapter2/equ/power-error-estimate}
 
 Similarly to PID$_1$, PID$_2$ produces a corrective ESMU power component, $p_2(t)$ that smoothens the resulting power profile.
-This corrective ESMU power is also computed using a standard linear weighted dynamic vector $\boldsymbol{\beta}$ (with $\boldsymbol{\beta} = \{\beta_P, \beta_P, \beta_P\}$, being the P, I and D weight, respectively):
+This corrective ESMU power is also computed using a standard linear weighted dynamic vector $\boldsymbol{\beta}$, with $\boldsymbol{\beta} = \{\beta_P, \beta_P, \beta_P\}$, being the P, I and D weight, respectively (similar to $\boldsymbol{\alpha}$ how to determine the values of $\boldsymbol{\beta}$ is explained later in this section):
 
 \input{_chapter2/equ/corrective-component-power}
 
@@ -71,18 +72,18 @@ Finally, the ``next ESMU power'' can be deduced by adding the two corrective ESM
 
 Both PID compensators do however depend on correctly chosen weights for $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$.
 Therefore they need to be tuned prior to executing the dynamic control.
-For this work a minimisation problem was formulated, based on a cost function, $\zeta^*(\alpha, \beta)$, to deduce the two weight vectors as follows:
+For this work a minimisation problem was formulated, based on a cost function, $\zeta^*(\boldsymbol{\alpha}, \boldsymbol{\beta})$, to deduce the two weight vectors as follows:
 
 \input{_chapter2/equ/cost-weights}
 
-Here, $\zeta^*(\alpha, \beta)$ is defined as:
+Here, $\zeta^*(\boldsymbol{\alpha}, \boldsymbol{\beta})$ is defined as:
 
 \input{_chapter2/equ/dynamic-cost}
 
-In Equation~\ref{ch2:equ:cost-weights} and Equation~\ref{ch2:equ:dynamic-cost}, $\zeta^*(\alpha, \beta)$ represents the sub-half-hourly peak load during a day, when ESMU schedules are adjusted with the corresponding $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
+In Equation~\ref{ch2:equ:cost-weights} and Equation~\ref{ch2:equ:dynamic-cost}, $\zeta^*(\boldsymbol{\alpha}, \boldsymbol{\beta})$ represents the sub-half-hourly peak load during a day, when ESMU schedules are adjusted with the corresponding $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
 Also, the same SOC tolerance that was used to generate the SOC schedule, i.e. $SOC_{tol}$, is included to prevent the solution from deviating off the prescheduled SOC profile.
 To generalise this solution for all load cases, a minimisation problem was formulated to solve multiple daily load profiles in order to find ideal $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
-This resulting set of $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights, therefore guaranteed a convergent and stable solutions.
+This resulting set of $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights, therefore guaranteed a convergent and stable solutions for the provided data.
 The details concerning these case studies themselves, are however outlined in Section~\ref{ch2:sec:case-studies}.
 
 \subsection{Model predictive control}
@@ -91,26 +92,29 @@ As explained in the literature review in Chapter~\ref{ch-literature}, Model Pred
 With this knowledge, MPC can be used to not only react to recent changes but also to counteract foreseen trends.
 Different approaches exist to obtain these foreseen trends and these approaches highly vary in accuracy, computational burden and robustness.
 Equally, the characteristics of underlying data which is used to train these models impacts their performances.
-For the presented work, an efficient and robust approach is required, since system deployment dictates these functional requirements.
-As a result, prediction accuracy is an optional requirement, which becomes important only when the predicting model can issue predictions in real-time and does (for the predicting horizon) remain stationary and bounded.
+For the presented work, an efficient and robust approach is required, since potential ESMU deployment with SSEN demands these functional requirements.
+Prediction accuracy on the other hand is an optional requirement which becomes important only when the predicting model can issue predictions in real-time and does (for the predicting horizon) remain stationary and bounded.
 
 The simplest form of producing a prediction, is to assume that the currently observed load will also apply in the future.
 This kind of prediction does however not take into account model dynamics.
 An AR model on the other hand, uses a series of past observations to predict the next.
 Yet the further into the future these predictions are made, the less accurate they become.
-Therefore, this work only attempts to issue a power prediction for the immediate future, i.e. next sample time at $t+\Delta t$.
-Furthermore, to reduce computational burden and guarantee real-time operation, the simplest dynamic model, i.e. an Auto-Regressive (AR) model is chosen instead of e.g. deep artificial neural networks.
-Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model, with a time-series of input powers, $p(t) \in \textbf{p}$, a time-series of predicted ``next powers'', $\hat{p}(t) \in \hat{\textbf{p}}$, and an internal delay function $t-\Delta t$.
+This accuracy loss is however circumvented since the hybrid system was designed to only apply corrections based on load predictions of the immediate future, i.e. next sample time at $t+\Delta t$. 
+This simplification also reduces computational burden and guarantees real-time operation, especially when choosing the simplest dynamic model, i.e. an Auto-Regressive (AR) model instead of e.g. deep artificial neural networks.
+Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model, with a time-series of input powers, $\textbf{p} = (p(t))$, a time-series of predicted ``next powers'', $\hat{\textbf{p}} = (\hat{p}(t))$, and an internal delay function $t-\Delta t$.
 
 \input{_chapter2/fig/mpc-arx}
 
-Figure~\ref{ch2:fig:mpc-arx} graphically captures the standard AR model's function tree, which is also represented mathematically in the following equation:
+Figure~\ref{ch2:fig:mpc-arx} graphically captures the standard AR model's function tree, which is equivalently represented mathematically in the following equation:
 
 \input{_chapter2/equ/mpc-arx}
 
-Values of the two weight vectors $\textbf{a}$ and $\textbf{b}$, where $\textbf{a} = (a_i)$ and $\textbf{b} = (b_i)$, are determined during runtime using the standard adaptive least squares algorithm.
-This algorithm dynamically adjusts $\textbf{a}$ and $\textbf{b}$ to minimise the prediction error at each time-step.
-Beside finding optimised values for $\textbf{a}$ and $\textbf{b}$, the model's number of regressors, $N$, is also predicted to impact the model's performance ($N$ is also referred to as the ``model length'').
+Values of the two weight vectors $\textbf{a}$ and $\textbf{b}$, where $\textbf{a} = (a_i)$ and $\textbf{b} = (b_i)$, are determined during runtime using the standard adaptive least squares algorithm, i.e.:
+
+\input{_chapter2/equ/least-squares}
+
+Therefore, the proposed algorithm adjusts $\textbf{a}$ and $\textbf{b}$ to minimise the prediction error at each time-step.
+Beside finding optimised values for $\textbf{a}$ and $\textbf{b}$, the model's number of regressors, $N$, is also expected to impact the model's performance ($N$ is also referred to as the ``model length'').
 The example in Figure~\ref{ch2:fig:mpc-arx} represents a symmetric model where $N=3$.
 This short length however is most likely insufficient in predicting $p(t+\Delta t)$, which is why several models of increasing lengths are assessed and compared.
 From this comparison, the impact of $N$ on the models' resulting values of $\hat{p}(t+\Delta t)$, and correspondingly on the performance of the dynamic controller can be discussed.

@@ -1,12 +1,11 @@
 \section{Case studies}
 \label{ch2:sec:case-studies}
 
-Two cases are defined that the performance of the proposed dynamic control is compared against: case \textbf{O} and case \textbf{B}.
-More specifically, case \textbf{O}, original case, is the scenario where no ESMU operation takes place.
-Traditional off-line ESMU operation that only uses predetermined half-hourly ESMU schedules is referred to as the benchmark case, or case \textbf{B}.
-All remaining cases, which are explained below, are capture different versions of the dynamic control.
-
-In addition to the two comparison cases, three more different case studies are defined: cases \textbf{I}, \textbf{II} and \textbf{III}.
+All cases that are used to demonstrate the operation of the proposed hybrid control use 27 days of uninterrupted historical demand data.
+In total, five cases are assessed.
+Two special cases, respectively case \textbf{O} and case \textbf{B}, assess the performance of the original case, i.e. where no ESMU operation takes place, against a baseline case, i.e.  where traditional off-line ESMU operation that only uses predetermined half-hourly ESMU schedules is referred to as the benchmark case.
+The remaining remaining cases, which are explained below, capture different implementations of the dynamic control.
+These three case studies are defined: cases \textbf{I}, \textbf{II} and \textbf{III}.
 This group of three case studies evaluates the impact of the proposed dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts.
 In each of the three cases, a different mechanisms is used to predict the power volatility.
 More specifically:
@@ -26,4 +25,4 @@ Rather than assessing the underlying load profile from a time-series perspective
 However, the number of days may make it difficult to spot trends and improvements in the data.
 Therefore, from the daily peak reduction results, a Probability Density Function (PDF) is derived, which is based on kernel density estimation.
 The PDF shows the stochastic improvement of each case in comparison to the original case, i.e. case \textbf{O}.
-Finally, to assess the AR model's impact on the peak reduction performance, the simulations are re-run using different AR model lengths are and the results are compared using the same PDF comparison method.
+Finally, to assess the AR model's impact on the peak reduction performance, the simulations are re-run using different AR model lengths ($N$) are and the results are compared using the same PDF comparison method.

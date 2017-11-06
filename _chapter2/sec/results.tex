@@ -1,8 +1,8 @@
 \section{Results and discussion}
 \label{ch2:sec:results}
 
-The proposed cases are used to control power flow of the ESMU using 24 days of uninterrupted sub-half-hourly load record.
-At first, the time-series improvements are presented, where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
+All proposed cases are used to control power flow of the ESMU using 27 days of uninterrupted sub-half-hourly load record.
+In this section, the time-series improvements are presented at first, where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
 Then, the daily peak reduction across the entire dataset is presented, following by a probability density plot to better compare these findings.
 In the end, the ARX model's impact on the peak reduction performance is assessed.
 
@@ -11,10 +11,12 @@ In the end, the ARX model's impact on the peak reduction performance is assessed
 \input{_chapter2/fig/day-peak}
 
 A single day was plotted in Figure~\ref{ch2:fig:day-peak}, which shows the time-series improvements, yielded by the ESMU operation.
-For visual clarity, Figure~\ref{ch2:subfig:day-peak-total} and \ref{ch2:subfig:day-peak-zoomed} show, respectively, the entire day and a zoomed in version of the ESMU impact.
+For visual clarity, Figure~\ref{ch2:subfig:day-peak-total} and \ref{ch2:subfig:day-peak-zoomed} show, respectively, the entire day and a zoomed in version that focuses on the period of interest where the ESMU impact is most apparent.
 It can be observed, that the unmodified demand profile, i.e. the original case (case \textbf{O}), and the case where scheduled half-hourly ESMU operation is applied, i.e. the  baseline case (\textbf{B}), result in noticeably higher load peaks than any of the three adjustment cases.
-More specifically, the original peak reduction (which is equal to the scheduled ESMU power) was 1.8kW (3.9\% reduction), whereas the average peak reduction when adjusting ESMU operation was 9.6kW (20.6\% reduction).
-Furthermore, figure~\ref{ch2:subfig:day-peak-total} highlights the volatility of the underlying data, which was not included in the half-hourly ESMU schedule.
+More specifically, the original peak reduction (which is equal to the scheduled ESMU power) was 1.8kW (3.9\% reduction).
+The average peak reduction when applying adjustments to the ESMU operation was 9.6kW (20.6\% reduction).
+Although it is too early to conclude on any overall performance improvements, this time-series modification does show the physical impact of the ESMU schedule adjustments on the network's load profile.
+Furthermore, figure~\ref{ch2:subfig:day-peak-total} highlights the volatility of the underlying data, which would be neglected for half-hourly ESMU schedules.
 
 Interestingly, both the standard AR and the exogenous AR estimation models, that were used in case \textbf{II}, performed very similar and show little to no significant difference in peak reduction performance.
 Equally noteworthy is the fact, that the simplest prediction methods of them all, i.e. the method of ``assuming a power repetition occurs'', like in case \textbf{I}, yields good results, too.
@@ -32,13 +34,15 @@ Hence, the next section compares the daily peak load reduction from the applicat
 \input{_chapter2/fig/daily-peaks}
 
 In Figure~\ref{ch2:fig:daily-peaks}, every day's power peak was extracted, similar to the procedure used for Figure~\ref{ch2:fig:day-peak}.
-Here, however, both the actual power peaks as well as the relative power improvements, i.e. in comparison to the original power peak, were plotted.
-This was done in Figure~\ref{ch2:subfig:daily-peaks} and Figure~\ref{ch2:subfig:daily-peaks-percentage}, respectively.
+Here, the actual power peak values were plotted in Figure~\ref{ch2:subfig:daily-peaks}, and the relative power improvements, i.e. ratio to the original power peak, were plotted in Figure~\ref{ch2:subfig:daily-peaks-percentage}.
 From both plots, it can be seen that controlling ESMU using the proposed dynamic control lowers peak load, especially when the underlying ESMU schedule originally worsened and increased peak load.
-Such behaviour can be observed for e.g. days six, where the half-hourly ESMU schedule worsened the actual load peak, yet ESMU schedule adjustment mechanisms compensated for this error.
-Nonetheless, having a larger set of peak reduction results to compare the dynamic control's performance against the baseline cases, sensitivity to the underlying power prediction approaches become apparent, too.
-For example, case \textbf{I}, using the simplest prediction mechanism, underperformed on day 23 and worsened the peak power.
-In order to get a better idea of the general peak reduction performance when applying case \textbf{I}, \textbf{II} or \textbf{III}, the Probability Density Function was estimated and plotted in the following section.
+Such behaviour can be observed for e.g. days 6 and 25, where the half-hourly ESMU schedule increased the actual load peak by 4.4kW.
+The ESMU schedule adjustment mechanisms however compensated for this error, but not enough to reduce peak power below the original value.
+Day 26 on the other hand experienced a similar increase of the peak power for the baseline case (i.e. case \textbf{B}) by 2.1kW, but the power adjustment mechanism corrected this forecast error and reduced the final peak power below the original value.
+
+Nonetheless, sensitivity to the underlying power prediction approaches becomes apparent when having this larger set of peak reduction results to compare the dynamic control's performance against its baseline cases.
+For example, case \textbf{I}, using the simplest prediction mechanism, underperformed on day 23 and increased the day's peak power.
+In order to obtain an even better picture of the general peak reduction performance when applying case \textbf{I}, \textbf{II} or \textbf{III}, the Probability Density Function was estimated and plotted in the following section.
 
 \subsection{Probability of peak reduction}
 \label{ch2:subsec:probability-of-peak-reduction}
@@ -82,7 +86,7 @@ Therefore, one may assume that the length of the chosen models does not signific
 This assumption is supported by the boxplots in Figure~\ref{ch2:fig:boxplot-multi-length}, where the peak power distributions are visualised for all different model lengths and the six different case studies.
 It can be seen, that the different AR/ARX model lengths, \textbf{II}, outperforms both the original and baseline cases, \textbf{O} and \textbf{B}, respectively.
 Also, a certain variation in peak reduction performance can be observed, but no apparent trend.
-Therefore, the assumption that the model length impacts the performance of the dynamic control is true, but the assumption that a longer model yields better results is not.
+Therefore, the assumption that the model length impacts the performance of the dynamic control is true but, for the used data, the assumption that a longer model generally yields better results is not.
 %The reason behind this fact is either based on the limitations of the dynamic control or on the AR/ARX models.
 %However, assessing the complete catalogue of MPC lies beyond the scope of this thesis.
 
