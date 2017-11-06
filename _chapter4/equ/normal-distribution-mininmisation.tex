@@ -1,0 +1,11 @@
+\begin{equation}
+\begin{split}
+	\min_{\mu, \sigma, \beta}& \int_{0}^{24}\left(\hat{n}_m(t) + \hat{n}_l(t) + \hat{n}_e(t) - n_s(t)\right)^2 dt\\
+	\text{s.t.}&
+	\begin{cases}
+		0 = \int_{0}^{24}\hat{n}_m(t) + \hat{n}_l(t) - \hat{n}_e(t) dt \\
+		1 = \int_{0}^{24}\hat{n}_m(t) dt = \int_{0}^{24}\hat{n}_l(t) dt = \int_{0}^{24}\hat{n}_e(t) dt
+	\end{cases}
+\end{split}
+\label{ch6:equ:normal-distribution-minimisation}
+\end{equation}
