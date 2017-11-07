@@ -1,40 +1,40 @@
 \begin{algorithm}
-\KwData{$p(t)$, $\text{SOC}(t)$, $v(t)$, $V_\text{thr}$, $V_\text{max}$, $V_\text{min}$, $\text{SOC}_\text{max}$, $\text{SOC}_\text{min}$, $\alpha$, $\beta$}
+\KwData{$p_\text{bat}(t)$, $\text{SOC}(t)$, $v_\text{bat}(t)$, $V_\text{thr}$, $V_\text{max}$, $V_\text{min}$, $\text{SOC}_\text{max}$, $\text{SOC}_\text{min}$, $\alpha$, $\beta$}
 \KwResult{$p(t + \Delta t)$}
 \For{$t\leftarrow 1$ \KwTo $T$}{
 	 \tcp{Define the rate for the recent voltage reading}\label{cmt}
-	 $r(t) = \left(v(t) - V_\text{thr}\right)$\;
-	 \eIf{$v(t) \geq V_\text{thr}$}{
+	 $r(t) = \left(v_\text{bat}(t) - V_\text{thr}\right)$\;
+	 \eIf{$v_\text{bat}(t) \geq V_\text{thr}$}{
 	 	\tcp{If voltage levels are above a threshold and...}\label{cmt}
 	 	\eIf{$\text{SOC}(t) \leq \text{SOC}_\text{max}$}{
 	 		\tcp{...SOC is not at max.: increase charging power}\label{cmt}
-	 		$p(t + \Delta t) = p(t) + \alpha P_\text{max}r(t)$
+	 		$p(t + \Delta t) = p_\text{bat}(t) + \alpha P_\text{max}r(t)$
 	 	}{
 	 		\tcp{...SOC is at max.: shut off}\label{cmt}
 	 		$p(t + \Delta t) = 0$\;
 	 	}
 	 	\tcp{If the battery has been discharging...}\label{cmt}
-	 	\If{$p(t) <0$}{
+	 	\If{$p_\text{bat}(t) <0$}{
 		 	\tcp{...reduce discharging power by $\beta$}\label{cmt}
-		 	$p(t + \Delta t) = \beta p(t)$\;
+		 	$p(t + \Delta t) = \beta p_\text{bat}(t)$\;
 	 	}
 	 }{
 	 	\tcp{If voltage levels are below a threshold and...}\label{cmt}
 	 	\eIf{$\text{SOC}(t) \geq \text{SOC}_\text{min}$}{
 	 		\tcp{...SOC is not at min.: increase discharging power}\label{cmt}
-	 		$p(t + \Delta t) = p(t) - \alpha P_\text{max}r(t)$
+	 		$p(t + \Delta t) = p_\text{bat}(t) - \alpha P_\text{max}r(t)$
 	 	}{
 	 		\tcp{...SOC is at min.: shut off}\label{cmt}
 	 		$p(t + \Delta t) = 0$\;
 	 	}
 	 	\tcp{If the battery has been charging...}\label{cmt}
-	 	\If{$p(t) >0$}{
+	 	\If{$p_\text{bat}(t) >0$}{
 		 	\tcp{...reduce charging power by $\beta$}\label{cmt}
-		 	$p(t + \Delta t) = \beta p(t)$\;
+		 	$p(t + \Delta t) = \beta p_\text{bat}(t)$\;
 	 	}
 	 }
 	 \tcp{Restrict power to BESS limits}\label{cmt}
-	 $p(t + \Delta t) = \textbf{signum}(p(t)) \textbf{min}(|p(t)|, P_\text{max})$\;
+	 $p_\text{bat}(t + \Delta t) = \textbf{signum}(p_\text{bat}(t)) \textbf{min}(|p_\text{bat}(t)|, P_\text{max})$\;
 }
 \caption{Compute battery power}
 \label{ch4:alg:aimd}

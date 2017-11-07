@@ -15,8 +15,8 @@ For this work, several underlying assumption were made to obtain the models:
 The uptake of EVs is assumed to increase and, hence, to have a significant impact on the normal operation of the low voltage distribution network.
 This assumption is based on a well-established prediction that the majority of EV charging will take place at home \cite{Munkhammar2015a}.
 \item
-The transition from internal combustion engine-powered vehicles to EVs is assumed to not impact the users' driving behaviour.
-Similar to \cite{Dallinger2012}, this assumption allows the utilisation of recent vehicle mobility data \cite{MiD2008} to generate leaving, driving and arriving probabilities, from which the EV charging demand can be determined.
+The transition from internal combustion engine-powered vehicles to EVs is assumed to not impact the users' driving behaviour, apart from the introduction of home-charging.
+Similar to \cite{Dallinger2012}, this assumption allows the utilisation of recent vehicle mobility data \cite{MiD2008} to generate leaving, driving and arriving probabilities, from which the EV charging demand can be determined and the resulting energy demand can be determined.
 \item
 The transition to low carbon technologies will increase the variability of electricity demand, and therefore, grid-supporting devices, such as BESS, are anticipated to play a more important role \cite{FES2015}.
 Hence, alongside a high uptake of EVs, an increased adoption of distributed BESS devices is assumed.
@@ -36,18 +36,25 @@ It is assumed that the load profiles provided by the IEEE Power and Energy Socie
 \nomenclature[L]{$\hat{n}_x(t)$}{Predicted EV demand data, where $n_{r}(t) \in \mathbb{R}$}
 
 From publicly-available car mobility data in \cite{Dallinger2012, MiD2008} an empirical model was developed to capture the underlying driving behaviour.
-This data contained two parts, the probability of starting a trip, $n_{s}(t)$, and the probability of a trip being of a certain distance, $n_{d}(t)$.
-Both probabilities are at a 15-min period, and $n_{s}(t)$ is approximated by three continuous normal distribution functions, where each is defined as:
+This data contained three parts: the probability of starting a trip, $n_{s}(t)$, the probability of a weekday trip being of a certain distance, $w_{wd}(t)$, and the probability of a weekend trip being of a certain distance, $w_{we}(t)$.
+Both probabilities are at a 15-min period.
+The probability of starting a trip, $n_{s}(t)$, is approximated by three continuous normal distribution functions since it is assumed that driver behaviour is distributed normally around key times.
+Each distribution is based on the subsequent equation:
 
 \input{_chapter4/equ/normal-distribution}
 
-From this definition, $\hat{n}_{m}(t)$ represents the probability distribution  of a vehicle leaving in the morning, $\hat{n}_{l}(t)$ represents the probability distribution of it leaving during lunch time, and $\hat{n}_{e}(t)$ represents the probability of it leaving during the evening.
-To approximate the original probability of starting a trip, the difference between these three functions' aggregate and $n_s(t)$ needed to be minimised.
-This minimisation is achieved by a Generalised Reduced Gradient (GRG) algorithm, which fits the three functions to the original data.
-In order to represent a symmetric commuting behaviour, i.e. vehicles departing in the morning return during the evening, an equality amongst the three probabilities was defined as follows:
+From Equation \ref{ch4:equ:normal-distribution}, a probability distribution is denoted $\hat{n}_{m}(t)$ represent the probability of a vehicle leaving in the morning, $\hat{n}_{l}(t)$ represents the probability of it leaving during lunch time, and $\hat{n}_{e}(t)$ represents the probability of it leaving during the evening.
+It is assumed that vehicles perform a round trip from their home to a certain location and back.
+In order to represent this symmetric commuting behaviour, i.e. vehicles departing in the morning return during the evening, an equality amongst the three probabilities was defined as follows:
 
 \input{_chapter4/equ/normal-distribution-balance}
 
+To approximate the original probability of starting a trip, the difference between these three probability functions' aggregate and the original distribution, $n_s(t)$, needed to be minimised.
+This minimisation problem is defined as follows:
+
+\input{_chapter4/equ/normal-distribution-mininmisation}
+
+This minimisation problem was solved using a Generalised Reduced Gradient (GRG) algorithm, and the obtained parameters fit the three functions to the original data.
 The resulting parameters from the GRG fitting of the three distribution functions are tabulated in Table~\ref{ch4:tab:starting-a-trip-probability}.
 Additionally, the resulting departure probabilities, as well as the original data, $n_s(t)$, are shown in Figure~\ref{ch4:fig:starting-a-trip-probability}.
 
@@ -55,13 +62,18 @@ Additionally, the resulting departure probabilities, as well as the original dat
 
 \input{_chapter4/fig/starting-a-trip-probability}
 
-The second statistical data, i.e. the data capturing the probability distribution of a trip being of a certain distance, $w_x(t)$, was also extracted from the dataset and approximated.
+The second statistical data, i.e. the data capturing the probability distribution of a trip being of a certain distance, was also extracted from the dataset and approximated.
 This was done for both the weekdays $w_{wd}(d)$ and weekends $w_{we}(d)$.
-The Weibull function was chosen to be fitted against the extracted probability distributions and is defined as:
+The Weibull function was chosen to fit these probability distributions to the original data since it best suited the underlying data distribution, and it is defined as follows:
 
 \input{_chapter4/equ/weibull-distribution}
 
-Performing the curve fitting using the GRG optimisation algorithm, a weekday trip distance distribution, $\hat{w}_{wd}(d)$, and a weekend trip distribution, $\hat{w}_{we}(d)$, could be estimated.
+Similar to the approximation of the probability of starting a trip, a minimisation problem was designed to fit the two probability distributions to their original data.
+
+\input{_chapter4/equ/trip-distance-minimisation}
+
+This problem was also solved using the same GRG algorithm.
+As a result, the weekday trip distance distribution, $\hat{w}_{wd}(d)$, and the weekend trip distribution, $\hat{w}_{we}(d)$, could are estimated.
 The computed function parameters for these two estimated distribution functions are tabulated in Table~\ref{ch4:tab:trip-distance-probailility}.
 Their resulting probability distributions are plotted for comparison against the real data, $w_{wd}(d)$ and $w_{we}(d)$, in Figure~\ref{ch4:fig:trip-distance-probability}.
 
@@ -74,44 +86,48 @@ Using the predicted driving distance and average driving speed with the driving 
 Starting to charge from this arrival time until the energy demand has been met allows the generation of an estimated charging profile of a single EV.
 To do this, a maximum charging power of the U.K.'s average household circuit rating (i.e., 7.4 kW) and an immediate disconnection of the EV upon charge completion were assumed \cite{EVHomeCharging}.
 
+\input{_chapter4/fig/aggregated-ev-power}
+
 Generating several of those charging profiles and aggregating them produces an estimated charging demand for an entire fleet of EVs.
 To provide an example, charge demand profiles for 50 EVs were generated, aggregated and plotted in Figure~\ref{ch4:fig:aggregated-ev-power}.
 This plot shows the expected magnitude and variability in energy demand that is required to charge several EVs at consumers' homes based on the vehicles' daily usage.
 
-This model's EV charging behaviour has been implemented to reflect EV demand if applied today without widespread smart charging infrastructure. It does therefore reflect the worst case scenario. Future smart-charging schemes would mitigate the currently present collective EV charging spike, yet the implementation and validation of available smart-charging schemes lies beyond the scope of this paper. This model's data were used to feed additional demand into the power network models, which are outlined in the next section.
-
-\input{_chapter4/fig/aggregated-ev-power}
+This model's EV charging behaviour has been implemented to reflect EV demand if applied today without widespread smart charging infrastructure.
+It does therefore reflect the worst assumable charging scenario.
+This model's data is used to simulate additional demand in the power network, which are detailed in the next section.
 
 \subsection{Battery Modelling}
 
-In this chapter the same BESS model is used, that has already been introduced in Chapter~\ref{ch1} of this thesis (i.e. see Section~\ref{ch1:subsec:battery-model}).
-Nonetheless, in the following paragraphs, this model's details are reminded, since this battery model consists of a self-discharge loss, $\mu$, that is dependent on the current State Of Charge (SOC) and an energy conversion efficiency, $\eta$, to compute the amount of energy that is lost when charging or discharging this battery. 
+In this chapter a similar BESS model is used as the one that has already been introduced in Chapter~\ref{ch1} and in Chapter~\ref{ch2} of this thesis (i.e. see Section~\ref{ch1:subsec:battery-model} and Section~\ref{ch2:subsec:esmu-model}).
+The following paragraphs are however used as a reminder of this model for convenience.
+This battery model consists of a self-discharge loss, $\mu$ where $\mu \in (0, 1]$, that is dependent on the current State Of Charge (SOC) and an energy conversion efficiency, $\eta$ where $\eta \in (0, 1]$, to compute the amount of energy that is lost when charging or discharging this battery. 
 %This model has also been was used in \cite{Rowe2013, Rowe2014, Rowe2014a, Zangs2016},
 
 \nomenclature[L]{$p_\text{bat}(t)$}{Battery power at time $t$, where $p_\text{bat}(t) \in \mathbb{R}$}
-\nomenclature[L]{$\text{SOC}(t)$}{Battery state of charge at time $t$}
-\nomenclature[L]{$\Delta\text{SOC}(t)$}{Change in SOC during time period $\Delta t$}
-\nomenclature[L]{$\mu$}{Self-discharge loss factor}
-\nomenclature[L]{$\eta$}{Energy conversion efficiency}
-\nomenclature[L]{$\text{SOC}_\text{min}$}{Minimum rated SOC for limited battery operation}
-\nomenclature[L]{$\text{SOC}_\text{max}$}{Maximum rated SOC for limited battery operation}
-\nomenclature[L]{$C$}{Battery capacity}
-\nomenclature[L]{$P_\text{max}$}{Power rating of battery}
-\nomenclature[L]{$\Delta t$}{Sampling period}
+\nomenclature[L]{$\text{SOC}(t)$}{Battery state of charge at time $t$, where $\text{SOC}(t) \in [0, 1]$}
+\nomenclature[L]{$\Delta\text{SOC}(t)$}{Change in SOC during time period $\Delta t$, where $\Delta\text{SOC}(t) \in [-1, 1]$}
+\nomenclature[L]{$\mu$}{Self-discharge loss factor, where $\mu \in (0, 1]$}
+\nomenclature[L]{$\eta$}{Energy conversion efficiency, where $\eta \in (0, 1]$}
+\nomenclature[L]{$\hat{\eta}$}{Direction dependent energy conversion efficiency, where $\hat{\eta} \in (0, 1]$}
+\nomenclature[L]{$\text{SOC}_\text{min}$}{Minimum rated SOC for limited battery operation, where $\text{SOC}_\text{min} < \text{SOC}_\text{max}$ and $\text{SOC}_\text{min} \in [0, 1]$}
+\nomenclature[L]{$\text{SOC}_\text{max}$}{Maximum rated SOC for limited battery operation, where $\text{SOC}_\text{min} < \text{SOC}_\text{max}$ and $\text{SOC}_\text{max} \in [0, 1]$}
+\nomenclature[L]{$C$}{Battery capacity, where $C \in \mathbb{R}_{>0}$}
+\nomenclature[L]{$P_\text{max}$}{Power rating of battery, where $P_\text{max} \in \mathbb{R}_{>0}$}
+\nomenclature[L]{$\Delta t$}{Sampling period, where $\Delta t \in \mathbb{Z}_{>0}$}
 
-When an ideal battery charges or discharges, the change in SOC is related by the battery power, $p_\text{bat}(t)$.
-When sampling battery operation at a regular period, $\Delta t$, then the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
-The change in SOC for this ideal battery, $\Delta SOC$, is therefore defined as:
+When an ideal battery charges or discharges, the change in SOC is determined by the battery power, $p_\text{bat}(t)$.
+By sampling battery operation at a regular period, $\Delta t$, the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
+The change in SOC for this ideal battery is therefore defined as:
 
 \input{_chapter4/equ/change-soc}
 
-The self-discharge loss is included in this ideal battery model to represent the continual loss of energy in the battery typical of chemical energy storage.
-This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined to be proportional to the current SOC and is determined using the self-discharge loss factor, $\mu$:
+The self-discharge loss is determined by $\mu$ and is included in this ideal battery model to represent the continual loss of energy in the battery, which is typical for chemical energy storage.
+This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined as a proportion of the current SOC and is determined using the self-discharge loss factor, $\mu$, as follows:
 
 \input{_chapter4/equ/self-discharge-loss}
 
 Additionally, to represent the losses in the power electronics and energy conversion process, an energy conversion loss, $\Delta\text{SOC}_\text{conversion}(t)$, is defined.
-This loss is proportional to the rate at which the battery's SOC changes, by using the energy conversion efficiency, $\hat{\eta}$ as follows:
+This loss is proportional to the rate at which the battery's SOC changes, and since a difference is made between charging and discharging BESS, a ``direction dependent energy conversion efficiency'', $\hat{\eta}$, is used that is derived from $\eta$:
 
 \input{_chapter4/equ/conversion-loss}
 

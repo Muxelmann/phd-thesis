@@ -16,14 +16,16 @@ Each load's bus voltage was recorded, from which a sample voltage profile, Figur
 
 \input{_chapter4/fig/voltage-probabilities}
 
-In this histogram, the voltage probability distributions for all four cases were normalised and plotted against each other.
-Here, the previously seen drop in voltages by introducing EVs is recorded as a shift in the voltage distribution.
-This voltage drop is mitigated by the introduction of the storage solutions, since the probability distribution is shifted towards higher voltage bands.
-For the IEEE EU LV Test feeder, the AIMD+-controlled batteries outperform the AIMD devices as the resulting $\zeta_\textbf{C}^{*}$ is greater than $\zeta_\textbf{D}^{*}$.
+In this histogram, the voltage PD for all four cases were normalised and plotted against each other.
+Here, the previously seen drop in voltages by introducing EVs is recorded as a shift in the voltage distribution towards the left.
+The widened left hand tail of \ref{ch4:case-b} can be clearly observed in Figure~\ref{ch4:fig:voltage-probabilities}.
+This voltage drop is then mitigated by the introduction of the storage solutions, since the voltage PD is shifted towards higher voltage bands, i.e. towards the right.
+Since the difference between the BESS controlled by AIMD and AIMD+ is difficult to see, a comparison of their underlying performance metrics is necessary.
+In Figure~\ref{ch4:fig:voltage-probabilities}, for the IEEE EU LV Test feeder, the AIMD+-controlled batteries outperform the AIMD devices since the resulting $\zeta_\textbf{C}^{*}$ is greater than $\zeta_\textbf{D}^{*}$.
 
 \input{_chapter4/fig/voltage-aimd}
 
-To gain a full understanding of the performance of the AIMD and AIMD+ algorithms, a full sweep of EV and BESS uptake combinations was simulated on all available power distribution networks.
+However, to gain a full understanding of the performance of the AIMD and AIMD+ algorithms, a full sweep of EV and BESS uptake combinations was simulated on all available power distribution networks.
 The resulting parameters were averaged and plotted in Figure~\ref{ch4:fig:voltage-aimd}.
 
 These figures show that the AIMD+ control algorithm reduces voltage deviation more effectively as the uptake in storage and EVs increases.
@@ -42,72 +44,86 @@ Nonetheless, it should be noted that the AIMD+ algorithm had reduced the frequen
 
 \input{_chapter4/fig/utilisation-probability}
 
-Similar to the voltage improvement analysis, a frequency distribution of the line utilisation was generated.
-Figure~\ref{ch4:fig:utilisation-probability} shows a probability distribution of the per unit (1 p.u. represents a 100\% line usage, i.e., a line current of the same value as the line's nominal current rating) current in all lines, for each of the four scenarios.
-The corresponding $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$ values for the AIMD and AIMD+ storage deployment have also been included in the figure's caption.
-In this figure, the observed high probability of line over-utilisation confirms that the used test network is of insufficient capacity to cater for the chosen EV uptake.
+Similar to the voltage PD analysis, a PD of the line utilisation was generated and plotted in Figure~\ref{ch4:fig:utilisation-probability}.
+This figure shows a normalised PD plot of the per unit current in all lines, for each of the four scenarios (here, 1 p.u. represents a 100\% line usage, i.e., a line current of the same value as the line's nominal current rating).
+Whilst the case without any charging EVs, i.e. \ref{ch4:case-a}, shows no overloading, \ref{ch4:case-b} has significantly widened the probability spectrum.
+AIMD and AIMD+ controlled BESS can mitigate the effect of this EV introduction, and the difference in performance becomes more apparent than it did for the voltage PD analysis.
+In Figure~\ref{ch4:fig:utilisation-probability} the PDs for \ref{ch4:case-c} and \ref{ch4:case-d} intersect at 1 p.u. load, yet for the AIMD+ scenario, overloads are less likely than for the AIMD controlled scenario.
+However, in this figure it can also be observed that the used test network is of insufficient capacity to cater for the chosen EV uptake, since the probability of line over-utilisation is still above zero.
 
-Here, the AIMD+ controlled storage devices yielded a noticeable reduction in line overloads. This improvement is apparent through the compressed width of the probability distribution and the negative $\zeta_\textbf{D}^{**}$ value. In contrast, the AIMD controlled storage devices do not fully utilise the line capacity as effectively, which leads to a positive value of $\zeta_\textbf{C}^{**}$. To evaluate the line utilisation improvement across all simulations, the full range of EV and storage uptake was evaluated. The resulting plots are shown in Figure~\ref{ch4:fig:utilisation-aimd}.
+Nonetheless, the AIMD+ controlled storage devices yielded a noticeable reduction in line overloads, despite being a voltage driven control method.
+This improvement is apparent through the compressed width of the probability distribution and the negative $\zeta_\textbf{D}^{**}$ value.
+In contrast, the AIMD controlled storage devices do not fully utilise the line capacity as effectively, which leads to a positive value of $\zeta_\textbf{C}^{**}$.
+To evaluate the line utilisation improvement across all simulations, the full range of EV and storage uptake was evaluated. The resulting plots are shown in Figure~\ref{ch4:fig:utilisation-aimd}.
 
 \input{_chapter4/fig/utilisation-aimd}
 
 In these figures, it can be seen how the performance metrics change as EV uptake and storage uptake increase.
-For the AIMD-controlled BESS, the resulting $\zeta_\textbf{C}^{**}$ values are distributed around zero, whereas the AIMD+ algorithm achieved mostly negative values of $\zeta_\textbf{D}^{**}$.
-These negative values confirm the better usage of available line capacity. This becomes particularly noticeable for scenarios where very low EV uptake is combined with larger BESS uptake.
+For the AIMD-controlled BESS, the resulting $\zeta_\textbf{C}^{**}$ values are distributed around zero, whereas the AIMD+ algorithm achieved negative values of $\zeta_\textbf{D}^{**}$ for nearly 90\% of the performed simulations.
+These negative values confirm the better usage of available line capacity. This becomes particularly apparent for scenarios where very low EV uptake is combined with larger BESS uptake.
 Here, AIMD-controlled storage devices commence their initial charge simultaneously.
 As they are located closer to the substation, they do not measure a sufficient bus voltage offset to regulate down their charging power.
 This behaviour causes a number of line overloads at the very beginning of the simulated days.
 The AIMD+ algorithm on the other hand, with its adjusted thresholds, is more responsive to non-optimal network operation and, therefore, increases the charging rate gradually.
+
+\input{_chapter4/fig/utilisation-aimd-compare}
 
 This gradual adjustment is based on the fact that the bus voltages in the AIMD+ algorithm are closer to their nominal voltages (i.e., bus voltages found by simulating the feeder with its equally-distributed nominal load) than they are in the conventional AIMD case.
 A greater voltage disparity, which is the case in AIMD, causes a prolonged additive adjustment to the battery's power.
 This prolonged adjustment is particularly apparent for batteries situated at the bottom of the feeder, as their voltage measurements deviate the furthest from the substation voltage level.
 AIMD+ on the other hand prevents this behaviour by setting the voltage threshold based on the network's nominal voltage drop, which is dependent on the distance between the BESS and its feeding substation.
 As a result, the set-point voltage thresholds at the bottom of the feeder are lower than those closer to the substation.
-Hence, the additive power adjustment is equalised along the entire feeder.
+Hence, the additive power adjustment becomes equal for all BESS along the feeder.
 Therefore, by applying these individualised control thresholds, the sensitivity of the algorithm is corrected, whilst successfully mitigating the severity of line overloads.
-
-\input{_chapter4/fig/utilisation-aimd-compare}
 
 Averaging the $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$ values over all EV uptakes gives a clearer indication of performance, as this is now the only variable in the performance analysis.
 The result is plotted in Figure~\ref{ch4:fig:utilisation-aimd-compare}.
 Here, the hypothesis that AIMD-controlled energy storage devices do not improve line utilisation is confirmed.
-In contrast, the AIMD+-controlled devices succeed at effectively reducing line overloads. This is also demonstrated by the values of $\zeta_\textbf{C}^{**}$, which remain positive yet close to zero, whereas $\zeta_\textbf{D}^{**}$ decreases with increasing uptake of battery storage devices.
+In contrast, the AIMD+-controlled devices succeed at effectively reducing line overloads.
+This is also demonstrated by the values of $\zeta_\textbf{C}^{**}$, which remain positive yet close to zero, whereas $\zeta_\textbf{D}^{**}$ decreases with increasing uptake of battery storage devices, as shown in Figure~\ref{ch4:fig:utilisation-aimd-compare}.
 
 Whilst the deployment of energy storage has often been seen as a possible solution to defer network reinforcements, the presented results show that this is not always the case.
-In fact, the importance of choosing an appropriate control algorithm outweighs the availability of the energy storage itself.
-This becomes particularly apparent when energy storage devices need to recharge their injected energy for times of peak demand.
-For the AIMD case, this recharging was not controlled sufficiently, which led to higher line currents.
+In fact, due to technical limitations, choosing an appropriate control algorithm enables the BESS to perform optimally.
+This becomes particularly apparent when, e.g. energy storage devices need to recharge their injected energy for times of peak demand.
+For the AIMD case, this recharging was not controlled in accordance to the underlying network properties, which led to higher line currents.
 The proposed AIMD+ algorithm was not as susceptible to this kind of behaviour, as it has been designed to take battery location into account.
 This immunity and well-controlled power flow caused little to no additional strain on the network's equipment, allowing the deployed storage devices to also provide voltage support.
 
 \subsection{Battery Utilisation Analysis}
 
+In this part of the analysis, the batteries' equality of use was evaluated by comparing the battery cycling for each AIMD implementation.
+As already mentioned, a single battery cycle is defined as a full discharge and recharge.
+In Figure~\ref{ch4:fig:storage-aimd}, the battery power profiles are plotted along the horizontal axis and they are order by increasing distance to the substation:
+
 \input{_chapter4/fig/storage-aimd}
 
-In this part of the analysis, the batteries' fairness of usage was evaluated. The battery power profiles were recorded; excerpts are plotted in Figure~\ref{ch4:fig:storage-aimd} and are arranged by distance from the substation.
-In this figure, it can be seen that only half of the deployed storage devices were active in \ref{ch4:case-c} (AIMD control), whereas all devices are utilised in \ref{ch4:case-d} (AIMD+ control).
-From the recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation, giving an average daily cycling value.
-This value is plotted for each load in Figure~\ref{ch4:subfig:storage-aimd-cycling-compare}. The corresponding statistical analysis is presented in Figure~\ref{ch4:subfig:storage-aimd-cycling-stats}.
+Figure~\ref{ch4:fig:storage-aimd} shows that only half of the deployed storage devices were active in \ref{ch4:case-c} (AIMD control), whereas all devices are utilised in \ref{ch4:case-d} (AIMD+ control).
+From the recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation to give an average daily cycling value.
+This value is plotted for each load in Figure~\ref{ch4:subfig:storage-aimd-cycling-compare} - the corresponding statistical analysis is included in Figure~\ref{ch4:subfig:storage-aimd-cycling-stats}:
 
 \input{_chapter4/fig/storage-aimd-cycling}
 
-These two plots show the under-usage of AIMD controlled batteries, as well as the variance in battery usage under AIMD and AIMD+ control.
-In fact, under AIMD control, 20 out of 55 batteries experienced a cycling of less than 10\% per day, whereas the remaining devices were utilised fully.
-This discrepancy causes the $\zeta_\textbf{C}^{***}$ value to be noticeably larger than $\zeta_\textbf{D}^{***}$.
-A more detailed comparison is given when plotting the Peak-to-Average Ratios (PAR) of the batteries' daily cycling over the full range of EV and storage uptake scenarios; these plots are shown in Figure~\ref{ch4:fig:storage-aimd-par}.
-Section~\ref{ch4:subsec:performance-metric-definition} gave the detail on all performance metrics, including $\zeta^{***}$, i.e. PAR, which is defined in Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}.
+These two plots in Figure~\ref{ch4:fig:storage-aimd-cycling} show the under-use of AIMD controlled batteries, as well as the variance in battery usage under AIMD control (\ref{ch4:case-c}) and AIMD+ control (\ref{ch4:case-d}).
+In fact, when using the AIMD control, 20 out of 55 batteries experienced a battery cycling of less than 10\% per day, whereas the remaining devices were utilised fully.
+This discrepancy causes the cycling performance metric of \ref{ch4:case-c} (i.e. $\zeta_\textbf{C}^{***}$) to be higher than the performance metric of \ref{ch4:case-d} (i.e $\zeta_\textbf{D}^{***}$).
+Such a difference supports the assumption that AIMD+ yields a more equal battery cycling than traditional AIMD.
+For a more detailed comparison however, the PARs of the batteries' daily cycling over the full range of EV and storage uptake scenarios are plotted in Figure~\ref{ch4:fig:storage-aimd-par} (Section~\ref{ch4:subsec:performance-metric-definition} gave details on all performance metrics, including $\zeta^{***}$, i.e. PAR, which is defined in Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}):
 
 \input{_chapter4/fig/storage-aimd-par}
 
-The figure shows that for any EV uptake scenario, AIMD-controlled energy storage units were cycled less equally than the AIMD+ controlled devices.
-Results also show that with a low EV uptake, both the AIMD and AIMD+ algorithm performed worse; yet improved as EV uptake increased.
-Averaging the PARs for all batteries' SOC profiles over all EV uptake percentages yields a clear performance difference between AIMD and AIMD+.
-These resulting PARs, i.e., the $\zeta_\textbf{C}^{***}$ and $\zeta_\textbf{D}^{***}$ values for their corresponding storage uptake percentages, are presented in Figure~\ref{ch4:fig:storage-aimd-compare-par}.
+In Figure~\ref{ch4:fig:storage-aimd-par}, it can be seen that for any EV uptake scenario, AIMD-controlled energy storage units were cycled less equally than the AIMD+ controlled devices.
+The results also show that with an increasing storage uptake, BESS were cycled less equally for both control methods.
+However, AIMD+ (i.e. \ref{ch4:case-d}) always outperformed the traditional AIMD algorithm (i.e. \ref{ch4:case-c}).
+When averaging the values for $\zeta^{***}$ of all batteries' SOC profiles and over all EV uptake percentages, then a clear performance difference between AIMD and AIMD+ can be observed.
+These resulting averaged PARs are plotted in the subsequent figure, Figure~\ref{ch4:fig:storage-aimd-compare-par}.
 
 \input{_chapter4/fig/storage-aimd-compare-par}
 
-Although the AIMD controlled batteries were, on average, cycled less than the batteries controlled by the proposed AIMD+ algorithm, looking at the average produces a distorted understanding of the performance.
-In fact, as more than half of the assigned AIMD BESS devices never partook in the network control, a lower average cycling was expected to begin with.
-The variation in cycling across all batteries, or the cycling PAR, reveals the difference between usage and effective usage.
-A lower ratio indicates a better usage of the deployed batteries.
+Although the AIMD controlled batteries were, on average, cycled less than the batteries controlled by the proposed AIMD+ algorithm, inspecting the average by itself produces a distorted understanding of the algorithm's performance.
+After all, since more than half of the assigned AIMD BESS devices never partook in the network control, a lower average cycling would be expected to begin with.
+The difference in cycling across all batteries, or the cycling PAR, reveals the difference between usage equality as well as effective usage.
+And since a lower PAR indicates a more equal usage of the deployed batteries, AIMD+ clearly outperforms AIMD when subjected to the provided data.
+
+
+
+
