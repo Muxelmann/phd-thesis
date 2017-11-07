@@ -19,9 +19,9 @@ leftmargin=*,
 label=\textbf{Case \Alph*}
 ]
 \item \label{ch4:case-a}
-A baseline scenario, where only household demand is used.
+A normal scenario, where only household demand is used.
 \item \label{ch4:case-b}
-A worst case scenario, in which EV uptake is 100\% and no BESS is used.
+A baseline or worst case scenario, in which EV uptake is 100\% and no BESS is used.
 \item \label{ch4:case-c}
 An AIMD scenario, in which EV uptake is 100\% and each household has a battery energy storage device.
 Here, each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
@@ -36,41 +36,40 @@ In addition to the four defined scenarios, a full set of simulations was perform
 \subsection{Performance Metric Definition}
 \label{ch4:subsec:performance-metric-definition}
 
-In order to compare the network's performance during execution of the predefined cases, three performance metrics, $\zeta^{*}$, $\zeta^{**}$ and $\zeta^{***}$, are defined.
+In order to compare the network's performance during execution of the predefined cases, three performance metrics, i.e. $\zeta^{*}$, $\zeta^{**}$ and $\zeta^{***}$, are defined.
 These metrics capture, respectively, the improvements in voltage violation mitigation, line overload reduction and the equality of battery usage.
+They are derived from the Probability Distribution (PD) of the underlying measurements and thus allow an comparison of the four scenarios.
+In the following sections, all metrics' subscripts are used to indicate which scenario they represent, e.g. $\zeta_\textbf{C}^{**}$ represents \ref{ch4:case-c} and $\zeta_\textbf{D}^{*}$ represents \ref{ch4:case-d}.
 For reproducibility, all excerpts to showcase the performance metrics were generated from simulations based on the IEEE EU LV Test feeder.
 
 \subsubsection{Parameter for Voltage Improvement}
 
-The first metric is used to assess the improvement of \ref{ch4:case-c} in comparison to \ref{ch4:case-b}, using $\zeta^{*}_\textbf{C}$, and the improvement of \ref{ch4:case-d} in comparison to \ref{ch4:case-b}, using $\zeta^{*}_\textbf{D}$.
-This comparison is done by calculating the magnitude of the voltage level improvement between the two cases' voltage frequency distributions.
-More specifically, the difference between these two probability distributions is found and a weighted sum is computed.
-The underlying weighting is defined by a weighting function, $\delta^{*}(v)$, to emphasise those voltage level improvements that deviate further from the nominal substation voltage $V_\text{ss}$.
-If the resulting weighted sum is negative, then the obtained voltage frequency distribution is improved in comparison to the associated worst case scenario.
-In contrast, a positive number would indicate a worse outcome.
-The performance metric $\zeta^{*}_\textbf{C}$ and $\zeta^{*}_\textbf{D}$ are defined as follows.
+Metric $\zeta^{*}$ is designed to assess the changes in voltage PD.
+For instance, a narrow voltage PD around the nominal voltage (i.e. $V_\text{ss}$) would indicate a stable voltage at all nodes of the network.
+A wider or even shifted PD would however indicate that the voltage deviation has increased, and that voltage levels are not stable at all nodes.
+In order to compare the AIMD and AIMD+ cases (i.e. respectively \ref{ch4:case-c} and \ref{ch4:case-d}), the two voltage PD dependent performance metrics are defined:
 
 \nomenclature[L]{$\zeta_\textbf{X}^{*}$}{Metric quantifying improvements in voltage levels for a case named \textbf{X}, where $\zeta_\textbf{X}^{*} \in \mathbb{R}$}
 \nomenclature[L]{$\delta^{*}(v)$}{Scaling function for a voltage $v$, which is used in the metric to quantify improvements in voltage levels for a case named \textbf{X}, where $\delta^{*}(v) \in \mathbb{R}$}
 
 \input{_chapter4/equ/voltage-metric}
 
-In Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d}, $V_\text{min}$ is the lowest recorded voltage, and $V_\text{max}$ is the highest recorded voltage.
-$P_\textbf{B}(v)$ is the voltage probability distribution of the worst case scenario (\ref{ch4:case-b}), $P_\textbf{C}(v)$ is the voltage probability distributions of \ref{ch4:case-c} (the case with EV and AIMD storage uptake), and $P_\textbf{D}(v)$ is the voltage probability distribution of \ref{ch4:case-d} (the case with EV and AIMD+ storage uptake).
-The factor, $\delta^{*}(v)$, scales down the summation in Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d} for voltages within the nominal operating band, where no voltage violations occur.
-Regions outside the nominal operation band, i.e. where violations do occur, are scaled up to increase their weighting in the summation.
-This scaling was produced using a linear function, with its minimum at $V_\text{ss}$, that is defined as:
-
 \input{_chapter4/equ/metric-voltage-scaling}
 
-$V_\text{low}$ and $V_\text{high}$ are defined as the lower and upper limits of the nominal operation voltage band, respectively.
-In general, the proposed voltage comparison parameters, $\zeta^*_\textbf{C}$ and $\zeta^*_\textbf{D}$, show an improvement in voltage distribution when they are negative, whereas a positive value implies a voltage distribution with more voltage violations.
+Together with their scaling function, $\delta^{*}$, in Equation~\ref{ch4:equ:metric-voltage-scaling}, Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d} define the performance metrics $\zeta_\textbf{C}^{*}$ and $\zeta_\textbf{D}^{*}$, respectively.
+In these equations, $P_\textbf{B}(v)$ represents the probability distribution of all voltages for \ref{ch4:case-b} (the baseline case).
+The two metric specific PDs, i.e. $P_\textbf{C}(v)$ and $P_\textbf{D}(v)$, represent the voltage PDs for \ref{ch4:case-c} and \ref{ch4:case-d}.
+By computing the weighted difference, a reduction in probabilistic voltage deviation is found.
+The weighting is necessary to emphasise changes in PD that make voltages tend towards the nominal substation voltage, $V_\text{ss}$.
+$V_\text{high}$ and $V_\text{low}$ are also used in Equation~\ref{ch4:equ:metric-voltage-scaling} to normalise the deviation at the upper and lower voltage bounds (these constants are also used in the AIMD+ algorithm in Section~\ref{ch4:sec:storage-control}).
+With $\delta^{*}(v)$, regions outside the nominal operating band are thus weighted higher than those within and surrounding the nominal voltage level.
+In summary, the proposed voltage comparison parameters, $\zeta^*_\textbf{C}$ and $\zeta^*_\textbf{D}$, show an improvement in voltage PD when they are negative, whereas a positive value implies a voltage PD with higher deviation from the nominal level, $V_\text{ss}$.
 
 \subsubsection{Parameter for Line Overload Reduction}
 
-Similar to measuring the voltage level improvements, all line utilisation probability distributions are also compared with each other.
-This follows a similar approach as in Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d}, but the line utilisation probability distribution uses a different scaling factor.
-The resulting two performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$, for comparing, respectively, \ref{ch4:case-c} and   \ref{ch4:case-d} to \ref{ch4:case-b}, as well as the corresponding scaling function $\delta^{**}(c)$, are defined as follows:
+Similar to measuring the voltage level improvements, all line utilisation PDs are also compared with the base case, \ref{ch4:case-b}.
+This follows a similar approach as in Equations~\ref{ch4:equ:voltage-metric-c} to \ref{ch4:equ:metric-voltage-scaling}, but the line utilisation PD uses a different scaling factor.
+The two line utilisation performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$, for assessing, respectively, \ref{ch4:case-c} and   \ref{ch4:case-d} are defines as follows:
 
 \nomenclature[L]{$\zeta_\textbf{X}^{**}$}{Metric quantifying improvements in line utilisation for a case named \textbf{X}, where $\zeta_\textbf{X}^{**} \in \mathbb{R}$}
 \nomenclature[L]{$\delta^{**}(c)$}{Scaling function for a current $c$, which is used in the metric to quantify improvements in line utilisation for a case named \textbf{X}, where $\delta^{**}(c) \in \mathbb{R}$}
@@ -79,13 +78,15 @@ The resulting two performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textb
 
 \input{_chapter4/equ/metric-utilisation-scaling}
 
-In Equation~\ref{ch4:equ:utilisation-metric-c} and Equation~\ref{ch4:equ:utilisation-metric-d}, $C_\text{max}$ is the highest line utilisation.
-$P_\textbf{B}(c)$, $P_\textbf{C}(c)$ and $P_\textbf{D}(c)$ present the line utilisation probability distributions for \ref{ch4:case-b}, \ref{ch4:case-c} and \ref{ch4:case-d}, respectively.
-Unlike the previous scaling function in Equation~\ref{ch4:equ:metric-voltage-scaling}, Equation~\ref{ch4:equ:metric-utilisation-scaling} scales quadratically since the relationship between line current and resistive losses is also quadratic.
+Here, $P_\textbf{B}(c)$ represents the baseline PD (i.e. \ref{ch4:case-b}), $P_\textbf{C}(c)$ represents the line utilisation PD for the AIMD scenario (i.e. \ref{ch4:case-c}), and $P_\textbf{D}(c)$ represents the line utilisation PD for the AIMD+ scenario (i.e. \ref{ch4:case-d}).
+Line utilisation is computed as the ratio between the simulated current in each line and the nominal rating of this line.
+A value of one would therefore indicate a fully loaded line.
+To scale the comparison with the baseline case correctly, a corresponding scaling function $\delta^{**}(c)$ in Equation~\ref{ch4:equ:metric-utilisation-scaling}, is defined.
+This function is a quadratic function since the relationship between line current and resistive losses is also quadratic.
+A minimum load, $C_\text{min}$, is however used to neglect those probabilities where lines are only lightly loaded.
 The resulting scaling effect thus amplifies the impact of line current reduction beyond the line's nominal rating and reduces the weight on those improvements within the line's thermal constraints.
-To neglect any probability changes at low currents, a capacity scale modifier, $C_\text{min}$, defines from where the scaling should start.
 For the work presented in this chapter, the value for this modifier is set to $0.5$ since only line utilisation improvements above $0.5$ p.u. are considered noteworthy.
-To summarise, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation, i.e. worse results.
+In summary, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation, i.e. worse results.
 
 \subsubsection{Parameter for the Improvement of Battery Cycling}
 
