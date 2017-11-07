@@ -49,8 +49,12 @@ For instance, a narrow voltage PD around the nominal voltage (i.e. $V_\text{ss}$
 A wider or even shifted PD would however indicate that the voltage deviation has increased, and that voltage levels are not stable at all nodes.
 In order to compare the AIMD and AIMD+ cases (i.e. respectively \ref{ch4:case-c} and \ref{ch4:case-d}), the two voltage PD dependent performance metrics are defined:
 
-\nomenclature[L]{$\zeta_\textbf{X}^{*}$}{Metric quantifying improvements in voltage levels for a case named \textbf{X}, where $\zeta_\textbf{X}^{*} \in \mathbb{R}$}
+\nomenclature[L]{$\zeta_\textbf{C}^{*}$}{Metric quantifying improvements in voltage levels for a \ref{ch4:case-c} (i.e. AIMD), where $\zeta_\textbf{C}^{*} \in \mathbb{R}$}
+\nomenclature[L]{$\zeta_\textbf{D}^{*}$}{Metric quantifying improvements in voltage levels for a \ref{ch4:case-d} (i.e. AIMD+), where $\zeta_\textbf{D}^{*} \in \mathbb{R}$}
 \nomenclature[L]{$\delta^{*}(v)$}{Scaling function for a voltage $v$, which is used in the metric to quantify improvements in voltage levels for a case named \textbf{X}, where $\delta^{*}(v) \in \mathbb{R}$}
+\nomenclature[L]{$P_\textbf{B}(v)$}{Probability distribution of voltage levels for case \ref{ch4:case-b} (i.e. baseline case), where $P_\textbf{B}(v) \in \mathbb{R}$}
+\nomenclature[L]{$P_\textbf{C}(v)$}{Probability distribution of voltage levels for case \ref{ch4:case-c} (i.e. AIMD), where $P_\textbf{C}(v) \in \mathbb{R}$}
+\nomenclature[L]{$P_\textbf{D}(v)$}{Probability distribution of voltage levels for case \ref{ch4:case-d} (i.e. AIMD+), where $P_\textbf{D}(v) \in \mathbb{R}$}
 
 \input{_chapter4/equ/voltage-metric}
 
@@ -71,8 +75,13 @@ Similar to measuring the voltage level improvements, all line utilisation PDs ar
 This follows a similar approach as in Equations~\ref{ch4:equ:voltage-metric-c} to \ref{ch4:equ:metric-voltage-scaling}, but the line utilisation PD uses a different scaling factor.
 The two line utilisation performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$, for assessing, respectively, \ref{ch4:case-c} and   \ref{ch4:case-d} are defines as follows:
 
-\nomenclature[L]{$\zeta_\textbf{X}^{**}$}{Metric quantifying improvements in line utilisation for a case named \textbf{X}, where $\zeta_\textbf{X}^{**} \in \mathbb{R}$}
+\nomenclature[L]{$\zeta_\textbf{C}^{**}$}{Metric quantifying improvements in line utilisation for \ref{ch4:case-c}, where $\zeta_\textbf{D}^{**} \in \mathbb{R}$}
+\nomenclature[L]{$\zeta_\textbf{D}^{**}$}{Metric quantifying improvements in line utilisation for \ref{ch4:case-d}, where $\zeta_\textbf{D}^{**} \in \mathbb{R}$}
 \nomenclature[L]{$\delta^{**}(c)$}{Scaling function for a current $c$, which is used in the metric to quantify improvements in line utilisation for a case named \textbf{X}, where $\delta^{**}(c) \in \mathbb{R}$}
+\nomenclature[L]{$C_\text{min}$}{Minimum necessary line loading to take the changes into account, where $C_\text{min} \in [0, 1)$}
+\nomenclature[L]{$P_\textbf{B}(c)$}{Probability distribution of line utilisation for \ref{ch4:case-b} (i.e. baseline case), where $P_\textbf{B}(c) \in \mathbb{R}_{\geq0}$}
+\nomenclature[L]{$P_\textbf{C}(c)$}{Probability distribution of line utilisation for \ref{ch4:case-c} (i.e. AIMD), where $P_\textbf{C}(c) \in \mathbb{R}_{\geq0}$}
+\nomenclature[L]{$P_\textbf{D}(c)$}{Probability distribution of line utilisation for \ref{ch4:case-d} (i.e. AIMD+), where $P_\textbf{D}(c) \in \mathbb{R}_{\geq0}$}
 
 \input{_chapter4/equ/utilisation-metric}
 
@@ -90,19 +99,22 @@ In summary, a reduction in line overloads would give a negative $\zeta^{**}_\tex
 
 \subsubsection{Parameter for the Improvement of Battery Cycling}
 
-The final metrics, $\zeta^{***}_\textbf{C}$ and $\zeta^{***}_\textbf{D}$, give an indication of the inequality of battery cycling for different cases.
-Here, one battery cycle is defined as a full discharge and charge of the battery at its maximum operating power.
-The metrics do this by computing the the ratio between the peak and mean battery cycling.
-In previous chapters, this so called Peak-to-Average Ratio (PAR) has been used to assess smoothness of load profiles (see Section~\ref{ch1:subsec:esmu-scheduling}, Section~\ref{ch2:subsec:load-data-and-esmu-scheduling} and Section~\ref{ch3:subsec:cases-and-metrics}) but in this chapter, Chapter~\ref{ch4}, it is used to quantify the inequality of battery cycling.
-The PAR is defined for \ref{ch4:case-c}, $\zeta_\textbf{C}^{***}$, and for \ref{ch4:case-d}, $\zeta_\textbf{D}^{***}$, as follows:
+The final metric, $\zeta^{***}$, gives an indication of the inequality of battery cycling.
+Here, one battery cycle is defined as a full discharge and charge of the BESS at its maximum operating power.
+Since BESS at the bottom of the feeder are more likely to partake in voltage correcting functions than a BESS located closer to the substation, higher degradation can be expected.
+To assess the difference in cycling between different BESSs, the ratio between the peak and mean battery cycling is used.
+Previous chapters used this so called Peak-to-Average Ratio (PAR) to assess smoothness of load profiles (see Section~\ref{ch1:subsec:esmu-scheduling}, Section~\ref{ch2:subsec:load-data-and-esmu-scheduling} and Section~\ref{ch3:subsec:cases-and-metrics}).
+In this chapter however, PAR is used to quantify the maximum deviation in battery cycling from the mean battery cycling.
+The metrics to determine the PAR for \ref{ch4:case-c} and \ref{ch4:case-d} are defined as follows:
 
 \nomenclature[L]{$U$}{Number of BESS units in the network}
 \nomenclature[L]{$\zeta_\textbf{X}^{***}$}{Equality metric of using distributed BESS for a case named \textbf{X}}
 
 \input{_chapter4/equ/par-metric}
 
-In Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}, $U$ represents the number of batteries, $c_\textbf{C}^u$ is the total cycling of each BESS units, $u$, during \ref{ch4:case-c}, and $c_\textbf{D}^u$ is the total cycling of each BESS units, $u$, during \ref{ch4:case-d}.
-Here, $\textbf{c}_\textbf{C}$ and $\textbf{c}_\textbf{D}$ are a vectors of size $\mathbb{R}_{\geq 0}^{U}$, that contain all battery cycling values for \ref{ch4:case-c} and \ref{ch4:case-d}, respectively.
+In Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}, $c^u$ is the total cycling of a BESS unit, $u$, out of a total number of units $U$.
+For simplicity, a BESS cycling vector, $\textbf{c}$, is used to combine the cycling of all devices, where $\textbf{c} = (c^u)$.
+To differentiate between \ref{ch4:case-c} and \ref{ch4:case-d}, $\textbf{c}_\textbf{C}$ (where $\textbf{c}_\textbf{C} = c^u_\textbf{C}$) and $c_\textbf{D}^u$ (where $\textbf{c}_\textbf{D} = c^u_\textbf{D}$) are used to indicate the total cycling of each BESS unit for the AIMD and AIM+ case, respectively.
 In the event of a perfectly equal cycling of all batteries, $\zeta^{***}_\textbf{C}$ and $\zeta^{***}_\textbf{D}$ will have a value of one.
 Yet, as batteries are more likely to operate differently, these values are expected to be greater than one.
 Therefore, values closer to one imply a more equal and therefore fairer utilisation of the deployed batteries, whilst values deviating further from one imply the opposite.

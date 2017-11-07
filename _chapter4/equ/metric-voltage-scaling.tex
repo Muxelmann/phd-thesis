@@ -1,8 +1,11 @@
 \begin{equation}
-	\delta^{*}(v) := 
+\begin{split}
+	&\delta^{*}(v) := 
 	\begin{cases} 
 		\frac{V_\text{ss} - v}{V_\text{ss} - V_\text{low}} & \text{if } v \leq V_\text{ss} \\
 		\frac{v - V_\text{ss}}{V_\text{high} - V_\text{ss}} & \text{otherwise}
-	\end{cases}
-	\label{ch4:equ:metric-voltage-scaling}
+	\end{cases}\\
+	&\text{where } V_\text{low} < V_\text{ss} < V_\text{high}
+\end{split}
+\label{ch4:equ:metric-voltage-scaling}
 \end{equation}
