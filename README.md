@@ -18,6 +18,7 @@ The next step, before submission, is to proofread the current copy and then send
 
 1. [x] Abstract
 - [x] Declaration
+- [x] Dedication
 - [x] Acknowledgements
 - [x] Table of Contents
 - [x] Table of Figures
