@@ -7,17 +7,17 @@ The presented work is part of the \textit{New Thames Valley Vision} (NTVV) resea
 From the findings of this research project, the diagram in Figure~\ref{ch2:fig:system-diagram} was generated, showing two well established ESMU control approaches and the proposed dynamic control approach.
 This figure includes all constituent systems that were used during the ESMU street-level deployment.
 The two traditional systems are off-line and on-line ESMU control, which are shown in Figure~\ref{ch2:subfig:traditional-forecast-based-system} and \ref{ch2:subfig:traditional-on-line-system}, respectively.
-Alongside these two control approaches is the proposed dynamic control system, as shown in Figure~\ref{ch2:subfig:proposed-dynamic-control-system}.
+Alongside these two control approaches is the proposed dynamic control system that is shown in Figure~\ref{ch2:subfig:proposed-dynamic-control-system}.
 This control approach entails the benefits from both the traditional half-hourly forecast driven and the sub-half-hourly ESMU control system, and can therefore be seen as the hybrid of the two traditional systems.
 Unlike previous work, this hybrid system does not rely on Set-Point Control (SPC) which is adjusted by a MPC to compensate for trends in the load profile.
 Instead, it operates by executing a predetermined half-hourly ESMU schedule which is adjusted at sub-half-hourly intervals.
 Therefore the necessity of relying on a stable SPC is removed and replaced by a robust schedule execution.
-Flexibility is however provided by allowing the aforementioned adjustments.
+Nonetheless, flexibility is provided by allowing the aforementioned schedule adjustments.
 The preceding work by Rowe et al. in \cite{Rowe2014} inspired this hybrid system and used a similar approach, emphasising these benefits of using a hybrid system.
-Unlike the work by Rowe et al. in \cite{Rowe2014} however, the proposed hybrid system operates at a higher temporal resolution, it uses a light weight deterministic adjustment method (i.e. using MPC), and it does not rely on a long forecasting horizon since it recomputes the power adjustments for every single time-step.
+Unlike the work by Rowe et al. in \cite{Rowe2014} however, the proposed hybrid system operates at a higher temporal resolution (it uses a light weight deterministic adjustment method in the form of MPC), and it does not rely on a long forecasting horizon since it recomputes the power adjustments for every single time-step.
 As already mentioned, those adjustments are based on MPC-guided instructions, and details about this dynamic control are outlined in Section~\ref{ch2:sec:control-of-esmu}.
 
-In this section however the battery model, which is used in this work, is explained first.
+In this section however the battery model, which is used in this work, is reminded first.
 Also the load data acquisition, forecasting and ESMU schedule generation are outlined, where scheduling is performed in accordance to the ESMU model's constraints.
 
 \subsection{ESMU model}
@@ -41,40 +41,11 @@ The ESMU model is based on the physical system that was deployed by SSEN during 
 Since this model is the same model as the one used in the preceding chapter, which has been explained in detail in Section~\ref{ch1:subsec:battery-model}, only the model's final equation (as well as all used parameters) are detailed, hence foregoing the re-deriving of the same battery storage model.
 This ESMU model equation is as follows:
 
-%Therefore, the model is designed to accurately capture the physical limitations of the device, which includes a limited capacity of the battery pack, $C_{bat}$, and a corresponding charge and discharge factor (i.e. the ``C-factor''), $C_{f}$, to also limit the maximum charge and discharge rate\footnote{Nominal charge and discharge powers are calculated from the ``C-factor'' and the capacity of the battery. For example, a 12.5kWh battery with a C-factor of 1.6(h$^{-1}$) would have a maximum dis/charge rate of 20kW ($=12.5 \cdot 1.6$).}.
-%Furthermore, the power electronics unit that regulates the three-phase power flow into and out of the ESMU is limited by its power ratings, $P_{bat}$, which must not be exceeded.
-%Corresponding conversion losses within the power electronics unit lead to a limited ESMU round-trip efficiency, $\eta$, where $\eta \in (0, 1]$.
-%Self-discharge losses inside the battery pack are also included as the ratio $\mu$, where $\mu \in (0, 1]$.
-%This ratio expresses how much energy is lost over time, due to the battery's imperfect means of storing energy.
-%
-%The dynamics of ESMU are modelled over discrete time, $t$ where $t \in \mathbb{Z}_{\geq0}$, by simulating the transition from one State of Charge (SOC) to the next.
-%A finite sampling period between each simulation's time-step is defined and notated as $\Delta t$, and this sample period represents the highest temporal resolution used in the context of this work, i.e. sub-half-hourly resolution.
-%Change in State of Charge, i.e. $\delta SOC(t)$, can then be defined as the difference between the current State of Charge, $SOC(t)$, and the subsequent State of Charge, $SOC(t+\Delta t)$.
-%When combining this definition with the self-discharge loss, the following SOC equation can be formulated:
-%
-%\input{_chapter2/equ/soc-equation}
-%
-%Hence, $\delta SOC(t)$ is the result of charging or discharging the battery by consuming or releasing energy.
-%The amount of energy that flows into or out of the ESMU is equal to the active power, $p(t)$, that is applied over the sampling period $\Delta t$.
-%Yet $\delta SOC(t)$ is not equal to this consumed energy, due to the imperfect round-trip efficiency.
-%In order to act like a load in the LV network, positive power is associated to charging and negative power is associated to discharging the ESMU.
-%Therefore, the sign of the ESMU power indicates the direction of the flowing energy, and based upon this direction of energy flow, the true amount of stored charge can be calculated by using the aforementioned round-trip efficiency, $\mu$.
-%In order to correctly inject or absorb power into or from the network, ESMU power is given and battery power, $p_{bat}(t)$, is derived and defined as follows:
-%
-%\input{_chapter2/equ/battery-power}
-%
-%As power electronics approach ideal performance, $\mu$ tends towards one, however a value of $0.95$ is chosen for the model to coincide with the technical specifications of the deployed ESMU units.
-%Knowing both the power at street- and at the battery-level, the amount of energy injected into the battery during $\Delta t$ can be determined:
-%
-%\input{_chapter2/equ/soc-equation-from-battery-power}
-%
-%Combining Equation~\ref{ch2:equ:soc-equation}, \ref{ch2:equ:battery-power} and \ref{ch2:equ:soc-equation-from-battery-power} and solving for $SOC(t+\Delta t)$, yields the following battery model equation:
-
 \input{_chapter2/equ/battery-model-equation}
 
-Here, the next State of Charge, $SOC(t+\Delta t)$, is computed from the current State of Charge, $SOC(t)$, and the battery power, $p(t)$.
-This is done by calculating the change in SOC as the currently added energy $\Delta t p(t)$, divided by the battery capacity $C_\text{bat}$.
-Dynamics of the model also take into account the energy conversion efficiency, $\eta$, and the self-discharge factor, $\mu$.
+Here, the next State of Charge, $SOC(t+\Delta t)$, is computed from the current State of Charge, $SOC(t)$, and the current battery power, $p(t)$.
+This is done by calculating the current change in SOC as the added energy $\Delta t p(t)$, divided by the total battery capacity $C_\text{bat}$.
+Dynamic properties of the model also take into account the energy conversion efficiency, $\eta$, and the self-discharge factor, $\mu$.
 
 For the purpose of the simulation, it is assumed that the battery is initially charged up to 50\%.
 Hence, the initial conditions of this model are defined as $SOC(0) = 0.5$, which makes the model valid for a time span of $t \geq 0$, where $t \in \mathbb{Z}_{\geq0}$.
@@ -84,7 +55,7 @@ Hence, the initial conditions of this model are defined as $SOC(0) = 0.5$, which
 
 \nomenclature[J]{$k(t)$}{Sampling time conversion function, linking sub-half hourly samples $t$ at sampling period $\Delta r$ to half-hourly period $30 \Delta t$}
 
-Having established the ESMU model, the procedure to generate a corresponding schedule is explained in this section.
+Having established the ESMU model, the procedure to generate a corresponding schedule is explained in this subsection.
 This procedure follows the same practice as outlined in the previous chapter, in Section~\ref{ch1:subsec:esmu-scheduling}, where an ESMU schedule is generated at half-hourly temporal resolution.
 Therefore, the same synchronisation function, $k(t)$, is used that links the native sampling period of $\Delta t$, to the schedule's half-hourly period.
 Since the sub-half-hourly operation was at a minutely period, and the generated schedule is at half-hourly period, this fixed conversion function is defined as:
@@ -111,8 +82,8 @@ This computation is done by minimising several cost-functions.
 In Chapter~\ref{ch1}, several cost functions have been defined.
 Here however, three shape dependent cost-functions are used that quantify the profile improvements that are yielded by $\textbf{p}_\text{sch}$.
 These costs entailed the Peak-to-Average Ratio (PAR), the difference between the resulting power profile's maximum and minimum (MMD) load, and the magnitude of all power transients (TRA) \cite{Mohsenian-Rad2010, Mostafa2016}.
-Although these costs have already been presented in Section~\ref{ch1:subsec:esmu-scheduling} of this thesis, they are reminded for convenience.
-Before however detailing each of these three cost functions, a notation simplifying power as, $\textbf{p}$, is introduced:
+Although these costs and their benefits have already been presented in Section~\ref{ch1:subsec:esmu-scheduling} of this thesis, they are reminded for convenience.
+Before however detailing each of these three cost functions, a notation that simplifies power as, $\textbf{p}$, is introduced:
 
 \input{_chapter2/equ/notation-simplification}
 

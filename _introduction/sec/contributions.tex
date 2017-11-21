@@ -1,14 +1,15 @@
 \section{Contributions to knowledge}
 \label{ch-introduction:sec:contributions}
 
-The literature that is reviewed in Chapter~\ref{ch-literature} introduces the key contributions surrounding the control of energy storage in power distribution networks, and therefore supports the thesis problem statement in Section~\ref{ch-introduction:sec:problem-statement}.
+The literature that is reviewed in Chapter~\ref{ch-literature} introduces the key contributions surrounding the control of energy storage in power distribution networks, and therefore supports the thesis problem statement that was presented in Section~\ref{ch-introduction:sec:problem-statement}.
 This review concludes by identifying gaps in literature which are used as starting points to formulate the research objectives and resulting research contributions.
-These contributions are summarised as follows:
+Those contributions can be summarised as follows:
 
 \begin{itemize}
 	\item
-	An iterative closed-loop power adjustment method is presented, which controls a DNO owned storage devices in such a way that its three-phase power flow improves LV network operation.
-	This contribution is the result of \ref{objective-1} and is achieved by using the device's flexibility in assigning active power to the three phases, and by using the remaining capacity of power electronics to inject or absorb reactive power, whilst obeying to an underlying half-hourly BESS schedule.
+	An iterative closed-loop power adjustment method is presented that controls a DNO owned storage devices in such a way that its three-phase power flow improves LV network operation.
+	This contribution is the result of \ref{objective-1} and is achieved by using the device's flexibility in assigning active power to the three phases, and by using the remaining capacity of power electronics to inject or absorb reactive power.
+	Meanwhile the BESS is obeying its underlying half-hourly schedule.
 	\item
 	A dynamic control method to merge off-line BESS scheduled control with an on-line power prediction mechanism (i.e. Model Predictive Control) is developed to minimises both the imminent sub-half-hourly load peaks as well as the day-ahead half-hourly load peaks.
 	This contribution is the result of \ref{objective-2} and is achieved by merging schedules that are based on real load forecasts with an autoregressive model that is fed by real load data.
@@ -17,5 +18,5 @@ These contributions are summarised as follows:
 	This contribution is the result of \ref{objective-3} and is achieved by implementing a ``Multi-Agent System'' (discussed in the literature review in Section~\ref{ch-literature:subsec:centralised-and-distributed-control}) on a compute cluster to compare algorithm performance for both synchronised and desynchronised message exchange.
 	\item
 	A communication-less distributed control method is developed that improves the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm to achieve cooperative behaviour of multiple BESSs in order to mitigate the impact of co-located ``dumb-charging'' EVs.
-	This contribution is the result of \ref{objective-4} and is achieved by individually assigning control parameters to all BESS whilst using local voltage measurements to infer the current network status.
+	This contribution is the result of \ref{objective-4} and is achieved by individually assigning control parameters to all BESS to infer the current network status whilst only using local voltage measurements.
 \end{itemize}
