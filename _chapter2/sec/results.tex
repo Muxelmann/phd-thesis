@@ -20,8 +20,9 @@ Furthermore, figure~\ref{ch2:subfig:day-peak-total} highlights the volatility of
 
 Interestingly, both the standard AR and the exogenous AR estimation models, that were used in case \textbf{II}, performed very similar and show little to no significant difference in peak reduction performance.
 Equally noteworthy is the fact, that the simplest prediction methods of them all, i.e. the method of ``assuming a power repetition occurs'', like in case \textbf{I}, yields good results, too.
+Case \textbf{III} on the other hand underperforms slightly, yet the reason for this becomes more apparent when assessing the probability distribution of the results.
 The amount by which the three cases were able to reduce the daily peak load is also highlighted with the corresponding horizontal dashed lines and dots located at the point of peak load.
-These initial findings show that every single version of dynamic control reduces peak load further, when compared to the baseline case \textbf{O}.
+These initial findings show that every single version of dynamic control reduces peak load when compared to the baseline case \textbf{B}.
 This finding is as tabulated in Table~\ref{ch2:tab:ts-table}, and suggest that the prediction mechanism by itself did play a small role in compensating for demand volatility.
 
 \input{_chapter2/tab/ts-table}
@@ -61,11 +62,13 @@ When adjusting the schedule based with the use of the proposed dynamic control, 
 Figure~\ref{ch2:fig:peak-diff-pdf} takes this analysis even further, where only the difference in peak load to the original case, case \textbf{O}, was plotted.
 Now, ESMU impact can easily be seen, since a high probability of positive peak load reduction indicates a beneficial impact of the ESMU operation, whereas a negative peak load reduction (i.e. increased peak load) indicates a worsening performance.
 As expected, case \textbf{O} has a slight positive impact on the system, whilst a cumulative probability of more than 25\% (i.e. area under curve of case \textbf{O} to the left of 0kW) suggests that the peak might be worsened one in four times.
-Using dynamic control with its simplest prediction method however, i.e. case \textbf{I}, lowered this probability to only 11.8\%, with the AR model in case \textbf{II} performing best at only 8\%.
+Using dynamic control with its simplest prediction method however, i.e. case \textbf{I}, lowered this probability to only 11.8\%, with the perfect foresight model in case \textbf{III} performing best at only 7.4\% (case \textbf{II} achieved 8.0\%).
 
 Beside the reduced probability of missing or worsening peak load, the probability of having a larger positive impact is also increased when using the dynamic control.
 Whilst the probability of reducing load peaks by 1.7kW or more was at 50\% for case \textbf{B}, case \textbf{I} increased this probability to 77.7\%, case \textbf{II} to 84.5 5\% (AR) / 83.1\% (ARX), and case \textbf{III} to 79.8\%.
-When comparing the three dynamic control cases with each other, Figure~\ref{ch2:fig:peak-diff-pdf} indicates that case \textbf{II} using an AR model for MPC performed best at reducing peak loads.
+However, the probability curves narrowed as certainty of the prediction increases.
+This narrowing means that the control's performance gain is more reliable, and case \textbf{III} (being based on perfect foresight) outperformed all other estimation mechanisms.
+Nonetheless, when comparing the three dynamic control cases with each other as done in Figure~\ref{ch2:fig:peak-diff-pdf}, then it can be seen that case \textbf{II} using an AR model for MPC performed best at reducing peak loads for the used dataset.
 
 \subsection{Impact of varying the model's length}
 

@@ -95,11 +95,16 @@ Equally, the characteristics of underlying data which is used to train these mod
 For the presented work, an efficient and robust approach is required, since potential ESMU deployment with SSEN demands these functional requirements.
 Prediction accuracy on the other hand is an optional requirement which becomes important only when the predicting model can issue predictions in real-time and does (for the predicting horizon) remain stationary and bounded.
 
-The simplest form of producing a prediction, is to assume that the currently observed load will also apply in the future.
-This kind of prediction does however not take into account model dynamics.
-An AR model on the other hand, uses a series of past observations to predict the next.
-Yet the further into the future these predictions are made, the less accurate they become.
-This accuracy loss is however circumvented since the hybrid system was designed to only apply corrections based on load predictions of the immediate future, i.e. next sample time at $t+\Delta t$. 
+The simplest form of producing a prediction, is to assume that the currently observed trending load will also occur in the future.
+This kind of prediction does however not take into account demand dynamics.
+%Instead, it uses the mean power which is explained as follows:
+%
+%\input{_chapter2/equ/simple-prediction}
+%
+%Here, the estimated next power, $\hat{p}(t+\Delta t)$, is derived as the average past powers, $p(t)$, over an averaging horizon, $N$.
+An AR model on the other hand uses a series of past observations and their individual contribution to predict the next power.
+But the further into the future these predictions are made the less accurate they become.
+This accuracy loss is however circumvented since the hybrid system was designed to only apply corrections based on load predictions of the immediate future, i.e. next sample time at $t+\Delta t$ (not $t+2\Delta t$ or similar).
 This simplification also reduces computational burden and guarantees real-time operation, especially when choosing the simplest dynamic model, i.e. an Auto-Regressive (AR) model instead of e.g. deep artificial neural networks.
 Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model, with a time-series of input powers, $\textbf{p} = (p(t))$, a time-series of predicted ``next powers'', $\hat{\textbf{p}} = (\hat{p}(t))$, and an internal delay function $t-\Delta t$.
 
