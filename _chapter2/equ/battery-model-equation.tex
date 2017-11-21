@@ -1,8 +1,8 @@
 \begin{equation}
 	SOC(t+\Delta t) =
 	\begin{cases}
-		\eta \left(SOC(t) + \frac{\mu \Delta t p(t)}{C_{bat}(3.6\times10^6)}\right) &\text{if } p(t) \geq 0\\
-		\eta \left(SOC(t) + \frac{\Delta t p(t)}{\mu C_{bat}(3.6\times10^6)}\right) &\text{otherwise}
+		\mu \left(SOC(t) + \frac{\eta \Delta t p(t)}{C_{bat}(3.6\times10^6)}\right) &\text{if } p(t) \geq 0\\
+		\mu \left(SOC(t) + \frac{\Delta t p(t)}{\eta C_{bat}(3.6\times10^6)}\right) &\text{otherwise}
 	\end{cases}
 	\label{ch2:equ:battery-model-equation}
 \end{equation}

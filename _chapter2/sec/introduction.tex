@@ -15,15 +15,15 @@ However, this network improvement is limited by the constraint of having to obey
 In the subsequent chapter, Chapter~\ref{ch2}, research \ref{objective-2} is addressed (it is outlined in Section~\ref{ch-introduction:sec:problem-statement}) by removing these limiting constraint and proposing a corresponding sub-half-hourly ESMU schedule adjustment method.
 This method unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
 Unlike previous work in the field, the proposed approach reverses the traditional control paradigm to compensate for schedule inaccuracies.
-To reiterate, these traditional approaches implemented on-line control mechanisms, e.g. Set-Point Control (SPC), in combination with prediction models in order to adjust and prepare ESMU for future load trends.
-In this chapter however, instead of supporting on-line control with real-time load predictions, forecast driven schedules are adjusted using on-line measurements.
+Put differently: traditional approaches implemented on-line control mechanisms like Set-Point Control (SPC) in combination with prediction models in order to adjust and prepare ESMU for future load trends.
+In this chapter however, forecast driven schedules are adjusted using on-line measurements instead of supporting on-line control with real-time load predictions.
 This is achieved by first scheduling ESMU operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter~\ref{ch1}, and then modifying this schedule using MPC.
 In this case, MPC is comprised of of a lightweight AR model to assure real-time deployability.
-These two control signals are unified using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness, regardless of the forecast's erroneousness.
-All ESMU schedules are generated under the constraints of a realistic ESMU model, and all demand measurements and corresponding forecasts used in this work are based on real data, provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
-Results are generated from this realistic (i.e. provided) network load with corresponding load forecasts, and cases are compared against the original and a baseline load case (i.e. traditional off-line control).
-It is shown that, even under these imperfect forecast conditions, the proposed schedule adjustment method can successfully reduce sub-half-hourly peaks.
-In fact, whilst the probability distribution of the baseline case sat around an average of 1.78kW peak reduction, the proposed method increased the reduction to 5.24kW.
+These two control signals are unified using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness regardless of the forecast's erroneousness.
+All ESMU schedules are generated under the constraints of a realistic ESMU model, and all demand measurements and corresponding forecasts that are used in this work are based on real data that is provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
+Results are generated from this realistic (i.e. provided) network load with their corresponding load forecasts, and cases are compared against the original and a baseline load case (i.e. traditional off-line control).
+It is shown that the proposed schedule adjustment method can successfully reduce sub-half-hourly peaks, even under these imperfect forecast conditions.
+In fact, whilst the probability distribution of the baseline case sat around an average of 1.78kW peak reduction, the proposed method could increase the reduction to 5.24kW.
 Since this proposed control method is the natural extension of our previous work in \cite{Zangs2016}, it is hereon referred to as ``dynamic control''.
 
 The chapter is organised as follows:
