@@ -2,7 +2,7 @@
 \label{ch-literature:sec:control-of-energy-storage}
 
 Installing BESS at a strategic location in the LV network brings several advantages to DNOs' control over the network's performance.
-Regulating voltages to stay within statutory operating bands \cite{Yang2014}, improving power quality by optimising its power factor \cite{Chua2012b}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015}, or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
+Regulating voltages to stay within statutory operating bands \cite{Yang2014}, improving power quality by optimising its power factor \cite{Chua2012b}, shaving peak load to relieve stress from the installed network assets \cite{Bennett2015} or reducing phase unbalance to increase network efficiency \cite{Wang2015b} are only a few examples of recent research in this field.
 Whilst the questions regarding locating and scaling of BESS have mostly been addressed, BESS control still remains an open question and can be split into two complementing yet unmarried approaches:
 
 \begin{enumerate}
@@ -16,62 +16,63 @@ Therefore, Section~\ref{ch-literature:subsec:off-line-and-on-line-control} addre
 
 The current form of the NTVV project focuses on controlling a single BESS in the LV distribution network.
 However, the uptake of household connected BESS will increase the number of distributed systems, which need to be managed cooperatively.
-Therefore, Section~\ref{ch-literature:subsec:centralised-and-distributed-control} reviews and discusses different control approaches for distributed BESS, since the control of multiple single-phase storage units in a three-phase network is inherently more challenging that controlling a single three-phase device.
+Therefore, Section~\ref{ch-literature:subsec:centralised-and-distributed-control} reviews and discusses different control approaches for distributed BESS since the control of multiple single-phase storage units in a three-phase network is inherently more challenging that controlling one three-phase device.
 
 \subsection{Off-line and on-line control}
 \label{ch-literature:subsec:off-line-and-on-line-control}
 
-Off-line control uses historic data to predict future load patterns, which are used to schedule BESS operation accordingly.
-Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules, had relatively high forecast errors due to the inherent difficulty of predicting future loads.
+Off-line control uses historic data to predict future load patterns which are used to schedule BESS operation accordingly.
+Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules had relatively high forecast errors due to the inherent difficulty of predicting future loads.
 These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
 This is why recent research begun including uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
 Other work frequently re-evaluates BESS schedules to control and adjust its schedules after completing individual decision epochs \cite{Wang2014a}.
 Nonetheless, load forecasting remain a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
-This fact was emphasised by Rowe et al. in \cite{Rowe2014a}, and they developed a filtering mechanism for scheduling algorithms to reduce peak load in LV networks in spite the presence of forecast errors.
-They also highlight the fact that most day-ahead load forecast only predict at a temporal resolution down to half-hourly periods.
-The reason behind this choice was pointed out by Haben et al. in \cite{Poghosyan2014, Haben2014}, as they argue that forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution.
+This fact was emphasised by Rowe et al. in \cite{Rowe2014a}, and they developed a filtering mechanism for scheduling algorithms to reduce peak load in LV networks due to the presence of forecast errors.
+They also highlight the fact that most day-ahead load forecast only predict at a temporal resolution down to half-hourly periods which makes estimating errors at higher temporal resolution less dominant.
+The reason behind choosing this half-hourly forecasting period was pointed out by Haben et al. in \cite{Poghosyan2014, Haben2014}, as they argue that forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution.
 Therefore, half-hourly forecasts have become the standard for generating any resource commitment and resource operation schedules.
 However, sub-half-hourly load volatility imposes the biggest stress on the network and it is this volatility that cannot be addressed when relying on half-hourly forecast alone.
-Therefore, on-line control has been considered as an alternative to off-line control.
+In conclusion, on-line control has been considered as an alternative to off-line control.
 
-One flavour of on-line control is the Set-Point Control (SPC), which is a robust technique that can immediately respond to network changes.
-SPC achieves this behaviour by measuring some properties of the power system, e.g. voltage level or frequency, and comparing those values to an internal target value, i.e. the set-point.
+One flavour of on-line control is the Set-Point Control (SPC) which is a robust technique that can immediately respond to network changes.
+SPC achieves this behaviour by measuring some properties of the power system (e.g. voltage level or frequency) and comparing those values to an internal target value, i.e. the set-point.
 Droop control, as mentioned in Section~\ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
-A single set-point is however not suitable for a network that changes dynamically, which is why droop control was extended by Tayab et al. in \cite{Tayab2017} to become adaptive.
+A single set-point is however not suitable for a network that changes dynamically which is why droop control was extended to become adaptive as done by Tayab et al. in \cite{Tayab2017}.
 Their research shows how conventional droop control runs the risk of allowing system frequency to drop to 48.4Hz (from a nominal 50Hz), whereas adaptive droop was capable of frequency restoration with little to no observable frequency variation.
-However, their system only injected reactive power into the system, yet BESS in LV distribution networks needs to provide active power from its limited energy resource.
-Conventional droop control does therefore run the risk of reaching energy shortage or surplus if the set-points and system dynamics are chosen badly.
-Modifications like hysteresis control and ramp-rate control were proposed to make yield an adaptive SPC \cite{Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
-Hysteresis control prevents the device from oscillating between different power states, even when small changes in the network are detected and would otherwise trigger the SPC.
+However, their solution only injected reactive power into the system, yet BESS in LV distribution networks needs to provide active power from its limited energy resource.
+Conventional droop control does therefore run the risk of reaching energy shortage or surplus if the set-points and system dynamics are chosen too low or high.
+Modifications like hysteresis control and ramp-rate control were proposed to yield an adaptive SPC \cite{Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
+Hysteresis control prevents the device from oscillating between different power states even when small changes in the network are detected and would otherwise trigger an SPC change.
 When implementing a dead-band around the controller's set-point as well as utilising a ramp-rate control, as done by Such et al. in \cite{Such2012}, BESS can correct its internal energy state and therefore prevent hitting its operational limits.
 Furthermore, Such et al. showed how reverse power flow can be completely omitted through the use of on-line BESS control.
-However, this kind of on-line control is less effective when addressing daily demand peaks, since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
+However, this kind of on-line control is less effective when addressing daily demand peaks since pure SPC can only react to present network demand and does not respond to general trends or upcoming load events.
 
 In order to address these shortcomings SPC has been extended by using short-term load predictions through the implementation of Model Predictive Control (MPC) \cite{Gybel2012, Hatziargyriou2015}.
 Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fuzzy logic models \cite{Sannomiya2001, Chen2013a}, genetic algorithms \cite{Xia2015a, Liu2015} or Artificial Neural Networks (ANN) \cite{Kalogirou2014, Quan2014, Lee2014, Pezeshki2014, Vaz2016, Reihani2016, Xiao2017}.
-Advancements in computational power allowed ANN to gain traction, and as shown in the study by Quan et al. in \cite{Quan2014}, ANN is becoming a promising method to generate load forecasts.
-In fact, in their study, Quan et al. proved how ANN can outperform AR and fuzzy logic models, given that the ANN was optimally trained.
-Also, the increasing complexity of MPC yields a better prediction performance.
+Advancements in computational power allowed ANN to gain traction, and as shown in the study by Quan et al. in \cite{Quan2014} ANN is becoming a promising method to generate load forecasts.
+In fact, in their study, Quan et al. proved how ANN can outperform AR and fuzzy logic models given that the ANN was optimally trained.
+Therefore, MPC can yield a acceptable prediction performance for linear systems when its complexity is sufficiently increased.
 For instance, Reihani et al. in \cite{Reihani2016} use the most recent 20 minutes of load information with a complex-valued ANN to predict the next 20 minutes of minutely load variations.
 Since their raw forecasts were more erratic than the actual load profile, a Kalman filter was implemented to smoothen the MPC's output, yet this step introduced significant discrepancies between the actual and the forecasted load.
-Therefore, they increased MPC complexity even further by taking into account parallel time-series, i.e. they considered the same 20 minutes from previous days in the prediction mechanism.
-This addition produced significantly better results and they shaved daily peaks by around 300kW.
-Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes implementation of such systems not yet feasible.
+Therefore they increased MPC complexity even further by taking into account parallel time-series, i.e. they considered the same 20 minutes from previous days in the prediction mechanism.
+This addition produced significantly better results and they shaved daily peaks by around 300kW in the medium-voltage network.
+Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes deployment of such systems costly or difficult.
 
-Therefore, finding a way of combining both off-line control, i.e. scheduled BESS operation which is executed at half-hourly resolution, with on-line control, i.e. a mechanism that is responsive to power system changes, allows the application of real-time corrections to the BESS schedule.
+Therefore, finding a way of combining both off-line control (i.e. scheduled BESS operation which is executed at half-hourly resolution) with on-line control (i.e. a mechanism that is responsive to power system changes) allows application of real-time corrections to the BESS schedule.
 Since this is still an open and ongoing research problem that has not yet been solved, \ref{objective-1} and \ref{objective-2}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aim to develop and present a control mechanism that utilises the benefits from scheduled and real-time control.
-The objectives' corresponding chapters are, respectively, Chapter~\ref{ch1} and Chapter~\ref{ch2}, and address this research problem in two stages.
-At first the problem is addressed developing a framework to apply scheduled BESS operation to a three-phase network in a sub-half-hourly manner but without modifying its underlying half-hourly schedule.
-Secondly, this hard constraint is removed by developing and implementing a dynamic controller that allows an operational tolerance around the pre-computed BESS schedule in order to guide BESS operation without violating its energy storage limits, whilst maximising its flexibility to respond to sudden system changes.
+The objectives' corresponding chapters are, respectively, Chapter~\ref{ch1} and Chapter~\ref{ch2}, and they address this research problem in two stages.
+At first the problem is addressed by developing a framework to apply scheduled BESS operation to a three-phase network in a sub-half-hourly manner but without modifying its underlying half-hourly schedule.
+Secondly, this hard constraint is removed by developing and implementing a dynamic controller that allows an operational tolerance around the pre-computed BESS schedule in order to guide BESS operation without violating its energy storage limits whilst maximising its flexibility to respond to sudden system changes.
 This a control system does however rely on a communications infrastructure in order to be implemented and deployed in reality.
-These infrastructures and their underlying control either follow a centralised or distributed control paradigm, both entailing their specific costs and benefits which are addressed in the subsequent section, Section~\ref{ch-literature:subsec:centralised-and-distributed-control}.
+These infrastructures and their underlying control either follow a centralised or distributed networking paradigm.
+Both paradigms entail their specific costs and benefits which are addressed in the subsequent section, Section~\ref{ch-literature:subsec:centralised-and-distributed-control}.
 
 \subsection{Centralised and distributed control}
 \label{ch-literature:subsec:centralised-and-distributed-control}
 
-It is important to understand the topology of an on-line control system, since most of them have to gather power system information from multiple locations in order to make intelligent control decisions.
+It is important to understand the topology of an on-line control system since most of them have to gather power system information from multiple locations in order to make intelligent control decisions.
 This is particularly true if the control system consists of multiple entities that are distributed across the power network.
-The monitoring and control of such a distributed system, and hence of any power network, includes four systems that are inherently linked \cite{Mansouri-Samani1993}:
+The monitoring and control of such a distributed system (and hence of any power network) includes four systems that are inherently linked \cite{Mansouri-Samani1993}:
 
 \begin{enumerate}
 	\item The \textit{managed system} itself, i.e. power network, that needs to be controlled;
@@ -84,34 +85,35 @@ The monitoring and control of such a distributed system, and hence of any power 
 \nomenclature[G]{SCADA}{Supervisory Control And Data Acquisition}
 
 In traditional power system control, systems 1 and 2 are grouped into the distributed measuring system and systems 3 and 4 are grouped into a centralised controller \cite{Nelson1985}.
-Therefore, a bidirectional flow of information had to exist in order to control and assure operation of the underlying physical network.
+Therefore a bidirectional flow of information must exist in order to control and assure operation of the underlying physical network.
 Supervisory Control And Data Acquisition (SCADA) is the typical control architecture that enables the implementation of this bidirectional information flow.
-Tokyo is a showcase of implementing such a centralised control system.
-In 1990, \textit{Tokyo Electric Power Co.} (TEPCO) and \textit{Toshiba} presented their latest installation of a centrally managed power distribution network that could deliver 43GW of power to the entire city of Tokyo.
+Tokyo is a showcase of successfully implementing such a centralised control system on a very large scale.
+In 1990, \textit{Tokyo Electric Power Co.} (TEPCO) and \textit{Toshiba} presented their latest installation of a centrally managed power distribution network that could deliver 43GW of power to the entire city of Tokyo \cite{Matsuzawa1990}.
 All control instructions were generated from TEPCO's central dispatching centre, which took into account measurements from a network of 819 nodes and 938 branches.
 Since Tokyo has grown significantly over the past decades, computational burden to relay data and act upon the information has increased, too.
 The UK power network is also a centrally managed system that has seen an increase in complexity, yet ``\textit{the network is 99.9999\% reliable - a statistic we're proud of}``\cite{NationalGrid2017}.
 
-
 \nomenclature[G]{FIPA}{Foundation for Intelligent Physical Agents}
 \nomenclature[G]{ICT}{Information and Communication Technology}
 
-But with the deployment of smart meters, network enabled appliances and controllable LCTs that can be part of the a so called ``Internet of Things'' (IoT), system complexity is expected to increase beyond the capabilities of a single central management centre, which is why research began focusing on distributed control mechanisms \cite{Vovos2007, Guerrero2008, Bidram2014, Toledo2013, Marra2013, Gill2014, Dolan2012, Atia2016, Bidram2012, Wang2016}.
+But with the deployment of smart meters, network enabled appliances and controllable LCTs that can be part of the so called ``Internet of Things'' (IoT) system complexity is expected to increase beyond the capabilities of a single central management centre.
+This reason is why research began focusing on distributed control mechanisms \cite{Vovos2007, Guerrero2008, Bidram2014, Toledo2013, Marra2013, Gill2014, Dolan2012, Atia2016, Bidram2012, Wang2016}.
 For example, Vovos et al. in \cite{Vovos2007} compared centralised and distributed systems for voltage control and showed how they can yield a 86\% gain (using centralised control) and 72\% gain (using distributed control) in connectible capacity.
 Adding distributed BESS into the energy mix, Toledo et al. in \cite{Toledo2013} evaluated its impact on the IEEE-14 bus network when subjected to PV energy injection.
-Their developed voltage index shows how voltages can deviate from nominal levels, since this index was 0.074\%, 2.823\%, and 3.471\% for a release of the system capacity of 500kW, 1000kW, and 1500kW, respectively.
-In their work, a higher index represents a larger voltage deviation in comparison to a predefined base case without PV or BESS.
+Their developed voltage index showed how voltages can deviate from nominal levels.
+In their results this index was 0.074\%, 2.823\%, and 3.471\% for a release of system capacity of 500kW, 1000kW, and 1500kW, respectively.
+In their work a higher index represents a larger voltage deviation in comparison to a predefined base case without PV or BESS.
 To counteract this voltage rise, research like that by Marra et al. in \cite{Marra2013} used coordinated EV charging to maximise self-consumption and thus alleviate grid power injection by PV.
-Focusing on the LV network's voltage issues, Marra et al. showed how high voltage incidents are completely avoided by charging strategic times throughout the day, and at relatively low charging powers of 3.5kW.
+Focusing on the LV network's voltage issues, Marra et al. showed how high voltage incidents are completely avoided by charging at strategic times throughout the day, and at relatively low charging powers of 3.5kW.
 In fact, the majority of existing literature that uses BESS in distribution networks focuses on voltage security \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}, power flow management \cite{Guerrero2008, Wang2016} and management of flexible loads \cite{Gill2014, Dolan2012}.
 For instance, the approach used by Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads, and Marra et al. in \cite{Marra2013} go even further and use information sharing between PV and BESS in order to limit voltage deviation.
 Both research teams were able to stabilise the network, and Marras et al. even increased the voltage margin by an additional 6.1V.
 The reasons why the usage of distributed and hierarchical control systems have become this attractive include lighter computational load for all control systems through abstraction at higher control levels and improved system stability, security and redundancy \cite{Guerrero2013, Guerrero2013a}.
 
-Approaches and topologies to manage the flow of information within these control systems are classified by Bidram et al. in \cite{Bidram2014}, where they separate the real network, i.e. the \textit{physical layer}, from Information and Communication Technology (ITC), i.e. the \textit{cyber communication layer}.
+Approaches and topologies to manage the flow of information within these control systems are classified by Bidram et al. in \cite{Bidram2014} where they separate the real network (i.e. the \textit{physical layer}) from Information and Communication Technology (ITC) (i.e. the \textit{cyber communication layer}).
 This separation allowed them to represent any distributed power system as a system of multiple cooperating entities, i.e. intelligent agents that form a so called Multi-Agent System (MAS).
 The technology of MAS comes from computer science and is well established in theory and practice of intelligent agents \cite{Russell2009}.
-As stated by Wooldridge et al. in \cite{Wooldridge1995}, intelligent agents are flexible and autonomous entities that are defined by three fundamental properties:
+As stated by Wooldridge et al. in \cite{Wooldridge1995} intelligent agents are flexible and autonomous entities that are defined by three fundamental properties:
 
 \begin{enumerate}
 	\item \textit{Reactivity}, which allows an agent to respond to changes in its observed environment,
@@ -119,38 +121,40 @@ As stated by Wooldridge et al. in \cite{Wooldridge1995}, intelligent agents are 
 	\item \textit{Social-ability}, which enables the agent to coordinate its action with other agents.
 \end{enumerate}
 
-Computer scientists would describe an agents as a component that gathers and collaboratively reacts to information about its environment, but distributed control systems in power distribution networks share the same characteristics.
-For this very reason has MAS seen increasing attention in the power and energy engineering discipline.
+Computer scientists would describe an agent as a component that gathers and collaboratively reacts to information about its environment.
+But distributed control systems in power distribution networks share the same characteristics.
+For this very reason MAS has seen increasing attention in the power and energy engineering disciplines.
 Some MAS applications are focusing on integration of DERs \cite{Al-Hinai2004, Dimeas2005, Dou2017, Vasirani2013, Gomez-Sanz2014}, matching of demand and supply \cite{Kok2005}, restoring the power distribution network \cite{Li2012}, reconfiguring the network to reduce unbalance \cite{Ding2016}, integration of EVs \cite{Lopez2011, Karfopoulos2013, Ramachandran2013, GrauUnda2014} and providing voltage support \cite{Baran2007}.
 For example, Dou et al. in \cite{Dou2017} proposed a MAS that coordinates DERs in as a so called Virtual Power Source (VPS).
 This VPS is an aggregate of all distributed entities and responds to voltage events throughout the LV distribution systems.
-In the case where generation increase would raises voltage levels beyond their statutory limits, their VPS control could maximise power sharing and thus limit voltage overshoot to stay within voltage tolerance.
+In the case where generation increase would raise voltage levels beyond their statutory limits their VPS control could maximise power sharing and thus limit voltage overshoot to stay within voltage tolerance.
 This VPS is typically referred to as a Virtual Power Plant (VPP), which has also been implemented as a MAS by Vasirani et al. in \cite{Vasirani2013}.
-In their work, Vasirani et al. propose a distributed control strategy that utilises EVs as an energy storage medium to maximise profits from operating distributed renewable energy sources.
-Their findings suggest that when providing 12kWh of the EV's energy storage capacity for renewable integration, an annual EV profit of more than \texteuro250 (at 40\% depth of discharge) can be achieved.
+In their work Vasirani et al. propose a distributed control strategy that utilises EVs as an energy storage medium to maximise profits from operating distributed renewable energy sources.
+Their findings suggest that when providing 12kWh of the EV's energy storage capacity for renewable integration an annual EV profit of more than \texteuro250 (at 40\% depth of discharge) can be achieved.
 However, research involving MAS or any distributed control for that matter does require strong and standardised communication mechanisms.
 
-A standard for MAS was established by the Foundation for Intelligent Physical Agents (FIPA), since the underlying versatility of different MAS would make integration very challenging.
-This fact has also explored by Catterson et al. in \cite{Catterson2005}, where they merged the Condition Monitoring Multi-agent System (COMMAS) \cite{McArthur2004a} with the Protection Engineering Diagnostic Agents (PEDA) \cite{Hossack2003a}.
+A standard for MAS was established by the Foundation for Intelligent Physical Agents (FIPA) since the underlying versatility of different MAS would otherwise make integration very challenging.
+This challenge was also raised by Catterson et al. in \cite{Catterson2005}, where they tried to merge the Condition Monitoring Multi-agent System (COMMAS) \cite{McArthur2004a} with the Protection Engineering Diagnostic Agents (PEDA) system \cite{Hossack2003a}.
 They showed the inherent difficulty of combining different ontologies despite the similar underlying goals.
-Also, as the number of independent elements becomes ubiquitous, requirements for a strong telecommunications infrastructure become equally important \cite{Hatziargyriou2015}.
-So far, synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks may not automatically be synchronised \cite{He2017}.
+Also, as the number of independent elements becomes ubiquitous requirements for a strong telecommunications infrastructure become equally important \cite{Hatziargyriou2015}.
+So far synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks may not automatically be synchronised \cite{He2017}.
 The impact of desynchronised information exchange on the performance of a MAS driven energy scheduling algorithm still remains an open research question.
-Therefore, assessing the impact of introducing such a desynchronisation has become part of the research that is presented in this thesis, and \ref{objective-3}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aims to answer this research question.
-Regardless of the synchronised or desynchronised nature of the distributed control, they both do however require some kind of communications infrastructure, which may not always be present.
+Therefore, assessing the impact of introducing such a desynchronisation has become part of the research that is presented in this thesis, and \ref{objective-3} as outlined in Section~\ref{ch-introduction:sec:problem-statement} aims to answer this research question.
+Regardless of the synchronised or desynchronised nature of the distributed control, they both do however require some kind of communications infrastructure which may not always be present.
 Therefore, the next section, Section~\ref{ch-literature:subsec:communication-less-control}, introduces control mechanisms where communication between devices is no longer a strong requirement.
 
 \subsection{Communication-less control}
 \label{ch-literature:subsec:communication-less-control}
 
-Lastly, developing control methods for distributed system that do not rely on a communications infrastructure is also an important research topic, since this infrastructure may not always be available, despite being a common assumption \cite{Hatziargyriou2015}.
+Lastly, developing control methods for distributed system that do not rely on a communications infrastructure is also an important research topic since this infrastructure may not always be available; despite this being a common assumption \cite{Hatziargyriou2015}.
 So called communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
-The current procedure of charging EVs is a perfect example of such a system, since their charging commences immediately after they have been plugged into the grid.
-At the current rate of EV uptake, which is anticipated to increase with improved driving range, reduced cost of purchase and greater emphasis on leading an environmentally-friendly lifestyle \cite{Shah2015}, so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
+The current procedure of charging EVs is a perfect example of such a system since their charging commences immediately after they have been plugged into the grid.
+At the current rate of EV uptake so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
+This issue is amplified since the EV uptake is anticipated to increase as driving range increases, cost of purchase reduces and the emphasis on leading an environmentally-friendly lifestyle is favoured more \cite{Shah2015}.
 ICT reliant distributed control methods aim to circumvent these issues by using Demand Side Management (DSM) strategies.
 In \cite{Mohsenian-Rad2010} for example, Mohsenian-Rad et al. based developed a DSM mechanism that was based on game theory where multiple users engaged in the energy market to minimise the Peak-to-Average Ratio (PAR) of the resulting demand profile.
-Their results show that both minimising financial cost or the PAR of the resulting demand profile resulted in a 21.86\% reduction in PAR, when compared to a scenario without scheduling the energy consumer.
-But minimising PAR resulted in only a 7.31\% reduction in energy cost, whilst minimising cost directly lead to a 19.64\% reduction, despite the identically improvements in demand profile.
+Their results show that both minimising financial cost or the PAR of the resulting demand profile resulted in a 21.9\% reduction in PAR when compared to a scenario without scheduling the energy consumer.
+But minimising PAR resulted in only a 7.31\% reduction in energy cost, whilst minimising cost directly lead to a 19.6\% reduction, despite the similar improvements in demand profile.
 However, this approach highly relies on ICT, as do similar DSM approaches that use e.g. time-of-use tariffs \cite{Deilami2011, Surles2012} or other pricing signals \cite{Masoum2015}.
 None of them can be implemented without ICT and instead an indirect method must be sought.
 
@@ -159,15 +163,15 @@ None of them can be implemented without ICT and instead an indirect method must 
 
 A communication-less form of controlling Distributed Energy Resources (DERs) is the already mentioned Set-Point Control (SPC) \cite{Leadbetter2012}.
 Using traditional SPC on multiple identically-configured DERs can provide an optimal operation conditions, if each DER's control parameters (e.g., bus voltage) were shared \cite{Thieblemont2017a}.
-But in a communication-less environment this requirement cannot be satisfied, which is why DER control algorithms have to be improved to prevent, for example, devices located furthest from the substation from being used more frequently than others.
+But in a communication-less environment this requirement cannot be satisfied which is why DER control algorithms have to be improved to prevent e.g. devices located furthest from the substation from being used more frequently than others.
 The algorithm that is to be extended to control several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
 Unlike traditional SPC or hysteresis control like in \cite{Jiang2007}, where a fuel-cell's bus voltage was used as input to a ramp control for active power sharing, AIMD (like MAS) has its roots in computer science.
-Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
-The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks, where the limited resource is the availability of power throughput capacity of the substation's transformer.
-One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
-Later, their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work relied on an ICT infrastructure, too.
-Therefore, the question whether a truly communication-less dynamic control method can be developed, mitigating voltage deviation and capacity limitations, is still remaining research problem.
-More specifically, this control method should not only avoid to impose any ICT requirements, but it should also aim to equalise the utilisation of all controlled devices, which is not guaranteed by the traditional AIMD algorithm.
-\ref{objective-4}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to not skew the algorithm's control decisions.
-Previous research is therefore extended, since previous work has only utilised common SPC thresholds for controlling each of the DERs or relied on some form of communications infrastructure.
-In strong contrast to the previous work where substation monitoring was used, the proposed AIMD+ algorithm does not require this information or any communication infrastructure for that matter.
+Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989} to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
+The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks where the limited resource is the availability of power throughput capacity of the substation's transformer.
+One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communications infrastructure to broadcast a so called ``capacity event'' \cite{Studli2014, Studli2014a}.
+Later their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work still relied on a functioning and robust ICT infrastructure.
+Therefore, the question whether a truly communication-less dynamic control method can be developed (i.e. mitigating voltage deviation and capacity limitations) is still a remaining research problem.
+More specifically, this control method should not only avoid to impose any ICT requirements, but it should also aim to equalise the utilisation of all controlled devices which is not guaranteed by the traditional AIMD algorithm.
+\ref{objective-4}, as outlined in Section~\ref{ch-introduction:sec:problem-statement} aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to correctly skew the algorithm's control decisions for individual control entities.
+Previous research is therefore extended since previous work has only utilised common SPC thresholds for controlling each of the DERs or previous work relied still on some form of communications infrastructure.
+In strong contrast to the former objectives of this thesis where substation monitoring was used, the proposed AIMD+ algorithm does not require this information or any communication infrastructure for that matter.
