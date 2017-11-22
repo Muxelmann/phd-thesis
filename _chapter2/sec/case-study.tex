@@ -2,27 +2,27 @@
 \label{ch2:sec:case-studies}
 
 All cases that are used to demonstrate the operation of the proposed hybrid control use 27 days of uninterrupted historical demand data.
-In total, five cases are assessed.
+In total five cases are assessed.
 Two special cases, respectively case \textbf{O} and case \textbf{B}, assess the performance of the original case, i.e. where no ESMU operation takes place, against a baseline case, i.e.  where traditional off-line ESMU operation that only uses predetermined half-hourly ESMU schedules is referred to as the benchmark case.
-The remaining remaining cases, which are explained below, capture different implementations of the dynamic control.
-These three case studies are defined: cases \textbf{I}, \textbf{II} and \textbf{III}.
+The remaining cases which are explained below, capture different implementations of the dynamic control.
+These three case studies are defined as: cases \textbf{I}, \textbf{II} and \textbf{III}.
 This group of three case studies evaluates the impact of the proposed dynamic control when subjected to realistic (i.e. imperfect) half-hourly load forecasts.
-In each of the three cases, a different mechanisms is used to predict the power volatility.
+In each of the three cases a different mechanism is used to predict the power volatility.
 More specifically:
 \begin{itemize}
 	\item case \textbf{I} represents an ideal scenario where perfect foresight is assumed and the exact next load can be estimated,
-	\item case \textbf{II} uses the aforementioned MPC, and performance of different AR model lengths is compared, and
-	\item case \textbf{III} is the third and final case and implements the simplest prediction mechanism, i.e. it is assumed that the current power measurements repeats.
+	\item case \textbf{II} uses the aforementioned MPC and performance of different AR model lengths is compared, and
+	\item case \textbf{III} is the third and final case and implements the simplest prediction mechanism (i.e. it is assumed that the current power measurements repeats).
 \end{itemize}
 For clarity, all three cases, numbered \textbf{I} to \textbf{III}, are summarised and tabulated in Table~\ref{ch2:tab:cases}.
 
 \input{_chapter2/tab/cases}
 
-Results from all ESMU cases (\textbf{B}, \textbf{I}, \textbf{II} and \textbf{III}) are first compared against the original, i.e. uncompensated, network load case (\textbf{O}).
-Here, by using a sample day, the assessment of load profile improvements are made clear.
-Once it is clear how the day's peak is reduced by the algorithm, the daily peak reduction capability from all cases' results are compared.
+Results from all ESMU cases (\textbf{B}, \textbf{I}, \textbf{II} and \textbf{III}) are first compared against the original (i.e. uncompensated) network load case \textbf{O}.
+In this first set of results the assessment of load profile improvements are made clear by using only one sample day.
+Once it is clear how the day's peak is reduced by the algorithm the daily peak reduction capability from all cases' results are compared across the entire set of days.
 Rather than assessing the underlying load profile from a time-series perspective, focus is only put on any additional reductions of peak load.
 However, the number of days may make it difficult to spot trends and improvements in the data.
-Therefore, from the daily peak reduction results, a Probability Density Function (PDF) is derived, which is based on kernel density estimation.
-The PDF shows the stochastic improvement of each case in comparison to the original case, i.e. case \textbf{O}.
+Therefore a Probability Density Function (PDF), based on kernel density estimation, is derived from the daily peak reduction results.
+The PDF shows the stochastic improvement of each case in comparison to the original case \textbf{O}.
 Finally, to assess the AR model's impact on the peak reduction performance, the simulations are re-run using different AR model lengths ($N$) are and the results are compared using the same PDF comparison method.
