@@ -8,30 +8,29 @@
 
 In the preceding chapter, Chapter~\ref{ch1}, an Energy Storage Management Unit (ESMU) is used to improve network operation.
 This improvement is achieved by optimally adjusting the device's scheduled three-phase powers.
-Any improvement is indicated by a cost reduction, where the underlying cost functions are tied to changes in key network parameters.
-The extend to which ESMU is able to improve network operation is then shown by focusing on the minimisation of different cost functions and repetitively optimising and simulating the distribution network.
-However, this network improvement is limited by the constraint of having to obey the underlying half-hourly ESMU schedule, despite applying adjustments at a sub-half-hourly level.
+Any improvement is indicated by a cost reduction where the underlying cost functions are tied to changes in key network parameters.
+The extend to which ESMU is able to improve network operation was then shown by focusing on the minimisation of different cost functions and repetitively optimising and simulating the distribution network.
+However, this network improvement was limited by the constraint of having to obey the underlying half-hourly ESMU schedule despite applying adjustments at a sub-half-hourly level.
 
 In the subsequent chapter, Chapter~\ref{ch2}, research \ref{objective-2} is addressed (it is outlined in Section~\ref{ch-introduction:sec:problem-statement}) by removing these limiting constraint and proposing a corresponding sub-half-hourly ESMU schedule adjustment method.
 This method unifies the benefits from sub-half-hourly demand measurements and half-hourly demand forecasts.
 Unlike previous work in the field, the proposed approach reverses the traditional control paradigm to compensate for schedule inaccuracies.
 Put differently: traditional approaches implemented on-line control mechanisms like Set-Point Control (SPC) in combination with prediction models in order to adjust and prepare ESMU for future load trends.
 In this chapter however, forecast driven schedules are adjusted using on-line measurements instead of supporting on-line control with real-time load predictions.
-This is achieved by first scheduling ESMU operation at half-hourly resolution, i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter~\ref{ch1}, and then modifying this schedule using MPC.
-In this case, MPC is comprised of of a lightweight AR model to assure real-time deployability.
+This is achieved by first scheduling ESMU operation at half-hourly resolution (i.e. by following a ``peak-shaving'' and ``valley-filling'' behaviour which has been explained in Chapter~\ref{ch1}) and then modifying this schedule using MPC.
+In this case, MPC is comprised of a lightweight AR model to assure real-time deployability.
 These two control signals are unified using two Proportional Integral Derivative (PID) compensators that are tuned to assure system robustness regardless of the forecast's erroneousness.
 All ESMU schedules are generated under the constraints of a realistic ESMU model, and all demand measurements and corresponding forecasts that are used in this work are based on real data that is provided by the project partner and DNO: \textit{Scottish and Southern Energy Networks} (SSEN).
-Results are generated from this realistic (i.e. provided) network load with their corresponding load forecasts, and cases are compared against the original and a baseline load case (i.e. traditional off-line control).
-It is shown that the proposed schedule adjustment method can successfully reduce sub-half-hourly peaks, even under these imperfect forecast conditions.
+Results are generated from this realistic (i.e. provided) network load with their corresponding load forecasts and cases are compared against the original and a baseline load case (i.e. traditional off-line control).
+It is shown that the proposed schedule adjustment method can successfully reduce sub-half-hourly peaks even under these imperfect forecast conditions.
 In fact, whilst the probability distribution of the baseline case sat around an average of 1.78kW peak reduction, the proposed method could increase the reduction to 5.24kW.
-Since this proposed control method is the natural extension of our previous work in \cite{Zangs2016}, it is hereon referred to as ``dynamic control''.
+Since this proposed control method is the natural extension of our previous work in \cite{Zangs2016}, hereon it is also referred to as ``dynamic control''.
 
 The chapter is organised as follows:
-In Section~\ref{ch2:sec:system-explanation}, all constituent system components including ESMU model, forecast acquisition and ESMU schedule generation are explained.
-%Cost functions to generate optimised half-hourly ESMU schedules are formulated, containing well established parameters like the Peak-to-Average Ratio (PAR) or ``Min-Max'' difference, which have been widely used in DER scheduling and operation \cite{Liu2014, Deng2015, Bayram2015, Zangs2016a}.
+In Section~\ref{ch2:sec:system-explanation} all constituent system components including ESMU model, forecast acquisition and ESMU schedule generation are explained.
 Section~\ref{ch2:sec:control-of-esmu} presents the dynamic control, including the dual PID setup and MPC.
 Section~\ref{ch2:sec:case-studies} outlines the different case studies that were used to compare the performance of the dynamic control.
-In Section~\ref{ch2:sec:results}, all results from these case studies are presented and discussed.
+In Section~\ref{ch2:sec:results} all results from these case studies are presented and discussed.
 Finally, conclusion and the future work are described in Section~\ref{ch2:sec:summary}.
 
 
