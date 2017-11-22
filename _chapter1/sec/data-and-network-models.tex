@@ -2,8 +2,8 @@
 \label{ch1:sec:data-and-network-models}
 
 In this section the used power data is presented first.
-Then the network model, from which all aforementioned key network parameters are extracted, and the battery model are explained.
-In the end, the scheduling procedure is detailed.
+Then the network model from which all aforementioned key network parameters are extracted and the battery model are explained.
+In the end the ESMU scheduling procedure is detailed.
 
 \subsection{Load profiles}
 \label{ch1:subsec:load-profiles}
@@ -12,15 +12,15 @@ In the end, the scheduling procedure is detailed.
 \nomenclature[I]{$s_{\text{load},i}(t)$}{Apparent load power for load $i$ at time $t$, where $\textbf{s}_\text{load}(t) = (s_{\text{load},i}(t))$ and $s_{\text{load},i}(t) \in \mathbb{C}$}
 \nomenclature[I]{$\textbf{s}_\text{load}(t)$}{Apparent load power vector of all loads at time $t$, where $\textbf{s}_\text{load}(t) \in \mathbb{C}^{I}$}
 
-Alongside the LV Test Case model, the IEEE published 100 minutely demand profiles; each profile lasting 24h.
-Therefore, by assigning one load profile to each customer, a series of 1440 snapshot simulations could be run in OpenDSS in order to simulate the variation and volatility in demand over the entire day.
+Alongside the LV Test Case model the IEEE published 100 minutely demand profiles; each profile lasting 24h.
+Therefore by assigning one load profile to each customer a series of 1440 snapshot simulations could be run in OpenDSS in order to simulate the variation and volatility in demand over the entire day.
 A standardised power factor of 0.95 was used for all loads to calculate their reactive component.
 The apparent network power, $s_\text{net}(t)$, is therefore defined for each time-step, $t$, as the aggregate of all load apparent powers, $\textbf{s}_\text{load}(t)$:
 
 \input{_chapter1/equ/sub-half-hourly-network-load}
 
-However, this demand profile does not take into account the distribution losses, since they are only known after performing the power flow simulations.
-Nonetheless, it functions as a simple time-series to schedule ESMU operation, which is detailed in Section~\ref{ch1:subsec:esmu-scheduling}.
+However, this demand profile does not take into account the distribution losses since they are only known after performing the power flow simulations.
+Nonetheless, it functions as a simple time-series to schedule ESMU operation which is detailed in Section~\ref{ch1:subsec:esmu-scheduling}.
 
 \subsection{Network model}
 \label{ch1:subsec:standardised-network-model}
@@ -29,12 +29,12 @@ The IEEE Power and Energy Society (IEEE-PES) provides several multi-node test ca
 These test cases used to be limited to distribution networks in the United States.
 In 2015 however, they published a standardised model of a LV distribution network for the UK power network.
 This model is called the ``European Low Voltage Test Feeder'' \cite{DistributionTestFeeders2017}.
-Within the context of this work, this feeder is referred to as the ``LV Test Case'' and a network plot of this feeder has been included for reference.
+Within the context of the work in this thesis, this feeder is referred to as the ``LV Test Case'' and a network plot of this feeder has been included for reference.
 
 \input{_chapter1/fig/network-plot-LVTestCase}
 
-A substation (triangle in north west) provides power to the feeder, and the power magnitude is visualised by the thickness of the feeder's lines.
-In total, there are 55 single-phase households connected to the substation, which represents a medium-sized, unbalanced UK feeder.
+A substation (triangle in north west) provides power to the feeder and the power magnitude is visualised by the thickness of the feeder's lines.
+In total there are 55 single-phase households connected to the substation which represents a medium-sized and unbalanced UK feeder.
 
 \subsection{Battery model}
 \label{ch1:subsec:battery-model}
@@ -43,10 +43,10 @@ In total, there are 55 single-phase households connected to the substation, whic
 
 The ESMU systems that were deployed throughout the NTVV project consisted of two parts: the Power Management Unit (PMU) and the Energy Storage Unit (ESU).
 The PMU controls three-phase powers and links the ESU to the grid.
-Each PMU's single-phase power rating, $S_\text{rating}$, is 12kVA and can also perform filtering functions beside battery charging and discharging, e.g. compensating for harmonic distortion, reactive power and phase unbalance.
-The ESU is a modular container of 12.5kWh of Li-Ion energy storage that can be aggregated to increase the total energy storage capacity.
+Each PMU's single-phase power rating, $S_\text{rating}$, is 12kVA and can also perform filtering functions beside battery charging and discharging (e.g. to compensate for harmonic distortion, reactive power and phase unbalance).
+The ESU is a modular container of 12.5kWh of Li-Ion energy storage that can be concatenated to increase the total energy storage capacity.
 All battery monitoring, conditioning and regulation is performed within the ESU and hence lies outside the scope of this work.
-However, control instructions that are sent to the ESMU system should not request the device to operate outside its own specifications, i.e. avoid under- or over-charge.
+However, control instructions that are sent to the ESMU system should not request the device to operate outside its own specifications (i.e. avoid under- or over-charge).
 
 \nomenclature[I]{$C_\text{bat}$}{Battery capacity, where $C_\text{bat} \in \mathbb{R}_{>0}$}
 \nomenclature[I]{$E_\text{bat}(t)$}{Energy stored in battery at time $t$, where $E_\text{bat}(t) \in \mathbb{R}_{>0}$}
@@ -55,20 +55,20 @@ However, control instructions that are sent to the ESMU system should not reques
 \nomenclature[I]{$s_{\text{ESMU},\phi}(t)$}{Single-phase apparent ESMU power for phase $\phi$ at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $s_{\text{ESMU},\phi}(t) \in \mathbb{C}$}
 \nomenclature[I]{$\textbf{s}_\text{ESMU}(t)$}{Three-phase apparent ESMU power at time $t$, where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$ and $\textbf{s}_\text{ESMU}(t) \in \mathbb{C}^{\Phi}$}
 
-In order to simulate this ESMU system and its energy storing behaviour, in this section, Section~\ref{ch1:subsec:battery-model}, an energy model is developed from the given device specifications.
+In order to simulate this constrained ESMU system and its energy storing behaviour, in this section, Section~\ref{ch1:subsec:battery-model}, an energy model is developed from the given device specifications.
 This model includes an charge-discharge efficiency, $\eta$, and standby losses, $\mu$.
-$\eta$ is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\%, i.e. $\eta = 0.98$.
-$\mu$ on the other hand is linked to the nominal power drawn by the battery's control system as well as the battery's self-discharge rate.
+$\eta$ is related to the efficiency of the PMU's power converters, which are quoted to have a round trip efficiency of 98\% (i.e. $\eta = 0.98$) yet the whole range is $\eta \in [0, 1]$.
+$\mu$ on the other hand (where $\mu \in [0, 1]$) is linked to the nominal power drawn by the battery's control system as well as the battery's self-discharge rate.
 With the charge-discharge efficiency, $\eta$, the battery charge-discharge power, $p_\text{bat}(t)$, can be calculated for any given ESMU power, $\textbf{s}_\text{ESMU}(t)$ (where $\textbf{s}_\text{ESMU}(t) = (s_{\text{ESMU},\phi}(t))$).
 
 \input{_chapter1/equ/battery-power-definition}
 
 \nomenclature[I]{$C_f$}{Charge factor or ``C-factor'' of the battery, where $C_f \in \mathbb{R}_{>0}$}
 
-Although the ESMU's PSU rating, $S_\text{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$), the charging power is internally limited, by a charging factor, $C_f$.
+Although the ESMU's PSU rating, $S_\text{rating}$, may allow for a maximum power consumption of 36kVA (i.e. $=3\times12\text{kVA}$) the charging power is internally limited by a charging factor, $C_f$.
 This factor is the ratio between the battery's maximum discharge power and its total capacity (i.e. $\max_t (p_\text{bat}(t)) \leq C_f \cdot C_\text{bat}$).
-In accordance to the ESMU's specification, $C_f$ was fixed as 1.6.
-With those restrictions in mind, a charge-discharge power can be applied to charge or discharge the battery.
+In accordance to the ESMU's specification, $C_f$ was set to 1.6.
+With those restrictions in mind a charge-discharge power can be applied to charge or discharge the battery.
 Assuming that this power remains constant during a predefined sample period, $\Delta t$, then the change in stored energy can be defined as follows.
 
 \input{_chapter1/equ/change-in-energy}
@@ -82,13 +82,13 @@ Taking into account the standby losses, $\mu$, the next energy level $E_\text{ba
 
 \input{_chapter1/equ/next-energy}
 
-In an ideal case, $\mu = 1$, where no energy would be lost in the storage system.
-However, to model energy storage dynamics, it became common practice to assess the energy storage's charge level as the State of Charge (SOC) instead of using the actual charge stored.
+In an ideal case where $\mu = 1$ no energy would be lost in the storage system.
+However, to model energy storage dynamics it became common practice to assess the energy storage's charge level as the State of Charge (SOC) instead of using the actually stored energy level.
 This SOC is defined as the actual energy stored in the ESU, $E_\text{bat}(t)$, divided by the total capacity of the system, $C_\text{bat}$. i.e.:
 
 \input{_chapter1/equ/state-of-charge-definition}
 
-Similar to the energy dynamics, the SOC dynamics can therefore be defined as:
+Similar to the energy dynamics the SOC dynamics can therefore be defined as:
 
 \input{_chapter1/equ/next-state-of-charge}
 
@@ -97,19 +97,20 @@ When summarising $\hat{s}_\text{ESMU}(t) = \text{Re}\left\{\sum_{\phi=1}^{\Phi}s
 \input{_chapter1/equ/next-state-of-charge-2}
 
 A flowchart to visually represent the developed battery model, is included in Figure~\ref{ch1:fig:next-soc-flowchart}.
-In this figure, all green and blue fields indicate, respectively, model inputs and results.
-The white states represent operations applied onto those inputs and results and in the end yield the output, i.e. the yellow field.
+In this figure all green and blue fields indicate, respectively, model inputs and results.
+The white states represent operations that are applied to those inputs and results.
+The flowchart's output is marked as the yellow field.
 
 \input{_chapter1/fig/next-soc-flowchart}
 
 \subsection{ESMU scheduling}
 \label{ch1:subsec:esmu-scheduling}
 
-Computing the ESMU's daily schedule at the dataset's temporal resolution, i.e. sub-half-hourly, is ineffective and slow.
-Doing so is ineffective, because demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible, and the large number of search parameters makes finding a solutions very computationally demanding.
-Therefore, forecasting and scheduling is generally performed at half-hourly temporal resolution.
-To obtain such a half-hourly profile, the sub-half-hourly profile had to be down-sampled and synchronised.
-This is done with the synchronisation function $k(t)$, which links the original sub-half-hourly demand to a half-hourly time-series and is defined as follows:
+Computing the ESMU's daily schedule at the dataset's temporal resolution (i.e. sub-half-hourly) is ineffective and slow because demand variability due to behavioural unpredictability makes forecasting at high temporal resolution unfeasible.
+In addition the large number of search parameters makes finding a solutions very computationally demanding.
+Therefore forecasting and scheduling is generally performed at half-hourly temporal resolution.
+To obtain such a half-hourly profile the sub-half-hourly profile had to be down-sampled and synchronised.
+This is done with the synchronisation function $k(t)$ which links the original sub-half-hourly demand to a half-hourly time-series and is defined as follows:
 
 \input{_chapter1/equ/synchronisation-function}
 
@@ -119,23 +120,23 @@ This is done with the synchronisation function $k(t)$, which links the original 
 \nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$ and $s^*_\text{net}(t) \in \mathbb{C}$}
 \nomenclature[I]{$\textbf{s}^*_\text{net}$}{Half-hourly network load, where $\textbf{s}^*_\text{net} \in \mathbb{C}^{\frac{T_\text{sch}}{K}}$}
 
-Here, $\Delta t$ is the sub-half-hourly sampling period of the simulation, and $K$ is the duration of the half-hourly time-slot, i.e. number of sub-half-hourly periods within the half-hourly slot.
+Here, $\Delta t$ is the sub-half-hourly sampling period of the simulation and $K$ is the duration of the half-hourly time-slot, i.e. number of sub-half-hourly periods within the half-hourly slot.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $a := \frac{K}{T_\text{sch}} \text{ where } a \in \mathbb{Z}_{>0}$.
-Otherwise, the sub-half-hourly profile cannot be divided into a set of equal length time-slots, where each time-slot is of length $K\Delta t$.
-Therefore, the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$), is defined as follows:
+Otherwise the sub-half-hourly profile cannot be divided into a set of equal length time-slots where each time-slot is of length $K\Delta t$.
+Therefore the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$) is defined as follows:
 
 \input{_chapter1/equ/down-sampling-to-half-hourly}
 
-Now, over the period from $\alpha(t)$ to $\beta(t)$, are power values are equal.
+Now, over the period from $\alpha(t)$ to $\beta(t)$, power values are equal.
 To illustrate the difference between the original sub-half-hourly network load and the resulting half-hourly demand, both profiles are plotted in Figure~\ref{ch1:fig:sub-half-horuly-demand-comparison}.
-In this figure, it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
+In this figure it can be observed how the high variability and volatility in power is removed in the half-hourly profile.
 When generating ESMU schedules these variations are neglected and thus the unwanted peak power demands cannot be sufficiently compensated.
 
 \input{_chapter1/fig/sub-half-horuly-demand-comparison}
 
 The main goals when scheduling battery operation are to achieve ``valley-filling'' and ``peak-shaving'' behaviour.
 As shown in the literature review in Chapter~\ref{ch-literature}, the Peak-to-Average Ratio (PAR), the min-max-difference (MMD) and the power transients (TRA) are good indicators of such a behaviour.
-Therefore, three half-hourly costs regarding are used as, $\zeta_\text{PAR}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, $\zeta_\text{MMD}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, and $\zeta_\text{TRA}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$ are defined as follows:
+Therefore three half-hourly costs regarding are used as, $\zeta_\text{PAR}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, $\zeta_\text{MMD}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$, and $\zeta_\text{TRA}(\textbf{s}^*_\text{ESMU} + \textbf{s}^*_\text{net})$ are defined as follows:
 
 \input{_chapter1/equ/peak-to-average-definition}
 
@@ -148,9 +149,9 @@ Therefore, three half-hourly costs regarding are used as, $\zeta_\text{PAR}(\tex
 \nomenclature[I]{$\zeta_\text{TRA}(\textbf{s})$}{Cost of the underlying power profile $\textbf{s}$, based on the power transients (TRA), where $\zeta_\text{MMD}(\textbf{s}) \in \mathbb{R}_{\geq0}$}
 
 The half-hourly cost in Equation~\ref{ch1:equ:peak-to-average-definition} computes the ratio between the maximum network power and the mean network power.
-To normalise this value with a minimum value of zero, one is subtracted.
-Equation~\ref{ch1:equ:min-max-difference-definition} returns the difference between the largest and smallest network power, and Equation~\ref{ch1:equ:power-transients-definition} computes the change in network power over time.
-All three costs functions assess the sum of the half-hourly ESMU schedule, $\textbf{s}^*_\text{ESMU}$, and the half-hourly network load profile, $\textbf{s}^*_\text{net}$, and when they reach a value of zero, then a perfectly flat, i.e. valley-filled and peak-shaved profile is obtained.
+One is subtracted from the original PAR function to normalise this value with a minimum value of zero.
+Equation~\ref{ch1:equ:min-max-difference-definition} returns the difference between the largest and smallest network power and Equation~\ref{ch1:equ:power-transients-definition} computes the change in network power over time.
+All three costs functions assess the sum of the half-hourly ESMU schedule, $\textbf{s}^*_\text{ESMU}$, and the half-hourly network load profile, $\textbf{s}^*_\text{net}$, and when they reach a value of zero then a perfectly flat profile (i.e. valley-filled and peak-shaved) is obtained.
 Combined with all underlying model constraints, the following minimisation problem is defined to aim and obtain such a flat power profile:
 
 \input{_chapter1/equ/scheduling-cost}
@@ -158,14 +159,14 @@ Combined with all underlying model constraints, the following minimisation probl
 To solve this minimisation problem, a Sequential Quadratic Programming (SQP) approach was chosen.
 The resulting half-hourly ESMU power, $\textbf{s}^*_\text{ESMU}$, could then be extrapolated using the same synchronisation function, $k(t)$, to yield a sub-half-hourly ESMU schedule.
 
-For the work presented in this chapter, the supplied half-hourly network load (or forecast) was obtained from sub-half-hourly data.
-Treating it as a forecast with perfect foresight does not skew the already imperfect schedule performance, which is obtained when applying the resulting half-hourly schedule to sub-half-hourly load.
-Figure~\ref{ch1:fig:improved-network-power} shows a sample day, where the impact of this half-hourly ESMU schedule becomes apparent.
+For the work presented in this chapter the supplied half-hourly network load (or forecast) was obtained from sub-half-hourly data.
+Treating it as a forecast with perfect foresight does not skew the already imperfect schedule performance which is obtained when applying the resulting half-hourly schedule to sub-half-hourly load.
+Figure~\ref{ch1:fig:improved-network-power} shows a sample day where the impact of this half-hourly ESMU schedule becomes apparent.
 
 \input{_chapter1/fig/improved-network-power}
 
-This figure shows the positive impact on the half-hourly profile (i.e. in Figure~\ref{ch1:subfig:improved-half-hourly-network-power}), which is particularly dominant during the evening peak load.
-However, the impact on the actual sub-half-hourly demand (i.e. in Figure~\ref{ch1:subfig:improved-sub-half-hourly-network-power}) has a much larger demand spike during the morning hours, which is not that strongly addressed.
+This figure shows the positive impact on the half-hourly profile (i.e. in Figure~\ref{ch1:subfig:improved-half-hourly-network-power}) which is particularly dominant during the evening peak load.
+However, the impact on the actual sub-half-hourly demand (i.e. in Figure~\ref{ch1:subfig:improved-sub-half-hourly-network-power}) has a much larger demand spike during the morning hours which is not that strongly addressed.
 When compared, the ideal peak power shaving dropped from 9.46kW to only 6.36kW.
 Nonetheless, the overall improvement yielded by the ESMU schedule can still be noticed. 
 The method of how to adjust the ESMU's phase powers to mitigate the impact of such volatile load spikes is addressed in the following section.
