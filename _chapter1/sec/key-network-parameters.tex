@@ -3,27 +3,27 @@
 
 Two distinct approaches have emerged to quantitatively improve the performance of a system: either ``cost'' is reduced or ``utility'' is maximised.
 Both approaches rely on a mathematical explanation of underlying features that relate to performance of the system.
-The choice for this piece of work was to associate a cost to each key network parameter, for the reason that cost functions can be minimised towards a finite value, i.e. zero.
-Utility maximisation on the other hand is a theoretically unbound problem that can only reach a maximum, if its maximum can be estimated in advance.
-In other words, solutions to a cost function where the resulting cost is zero, are by definition part of the set of optimal solutions.
-Determining the set of optimal solutions for the maximisation of a utility function is however more difficult.
+The choice for the work in this thesis was to associate a cost to each key network parameter for the reason that cost functions can be minimised towards a finite value i.e. zero.
+Utility maximisation on the other hand is a theoretically unbound problem that can only reach a maximum if its maximum can be estimated in advance.
+In other words, solutions to a cost function where the resulting cost is zero are by definition part of the set of optimal solutions.
+Determining the set of optimal solutions for the maximisation of a utility function is more difficult however.
 
 \nomenclature[I]{$t$}{Time-steps of the simulation, where $t \in \{1,\Delta t, 2\Delta t,\dots,T\}$}
 \nomenclature[I]{$\Delta t$}{Sample time, where $\Delta t \in \mathbb{Z}_{\geq0}$}
 \nomenclature[I]{$T$}{Length of simulation, where $T \in \mathbb{Z}_{\geq0}$}
 
-With this in mind, the key network parameters are defined and their corresponding cost functions are introduced.
-In this chapter, Chapter~\ref{ch1}, of work, power flow simulations are run at discrete times, $t$, which are separated by a sampling period $\Delta t$. 
+With this in mind the key network parameters are defined and their corresponding cost functions are introduced.
+In this chapter, Chapter~\ref{ch1}, power flow simulations are run at discrete times, $t$, which are separated by a sampling period $\Delta t$. 
 The model used for these simulations is the IEEE LV Test Case, i.e. a network consisting of 906 three phase buses which resulting in a total of 2718 observable nodes.
-For each node, complex currents and voltages can be obtained, making the number of parameters to chose from nearly inexhaustible.
-In reality however, a power distribution network can only be observed at a limited number of measuring points.
-For the NTVV project, these points were at the substation and the ESMU's Point of Common Coupling (PCC).
-Therefore, all derived network parameters that could be obtained in reality are seen as ``realistic parameters'', despite the fact that all key network parameters are extracted from power flow simulations.
-The remaining key network parameters, i.e. those that could not easily be obtained in reality, are therefore referred to as ``theoretical parameters''\footnote{In literature, parameters are usually referred to as being ``observable'' or ``unobservable''. From a technical perspective however all simulated parameters are observable. Therefore a parallel to real life observability and unobservability is drawn with the keywords ``realistic'' and ``theoretical'', respectively.}.
+For each node complex currents and voltages can be obtained making the number of parameters to chose from nearly inexhaustible.
+In reality however a power distribution network can only be observed at a limited number of measuring points.
+For the NTVV project these points were at the substation and the ESMU's Point of Common Coupling (PCC).
+Therefore all derived network parameters that could be obtained in reality are seen as ``realistic parameters'' despite the fact that all key network parameters are extracted from power flow simulations.
+The remaining key network parameters (i.e. those that could not easily be obtained in reality) are therefore referred to as ``theoretical parameters''\footnote{In literature parameters are usually referred to as being ``observable'' or ``unobservable''. From a technical perspective however all simulated parameters are observable. Therefore a parallel to real life observability and unobservability is drawn with the keywords ``realistic'' and ``theoretical'', respectively.}.
 
 Due to the high number of these theoretical parameters, only a subset of them is used.
 The choice of parameters is based on their importance, role and impact on the actual network operation.
-A list of all key network parameters is presented below, and in this list all theoretical key network parameters are marked with a dagger ($\dagger$).
+A list of all key network parameters is presented below and in this list all theoretical key network parameters are marked with a dagger ($\dagger$).
 
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding, i.e. $\textbf{v}_{ss}(t)$
@@ -36,7 +36,7 @@ A list of all key network parameters is presented below, and in this list all th
 \end{itemize}
 
 
-The following three subsections cover all key network parameters, by detailing the cost functions relating to: voltages, powers and currents.
+The following three subsections cover all key network parameters by detailing the cost functions relating to voltages, powers and currents within the simulated LV network.
 
 \subsection{Voltage related cost functions}
 \label{ch1:subsec:voltages-related-cost-functions}

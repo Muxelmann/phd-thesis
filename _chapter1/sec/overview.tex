@@ -5,13 +5,13 @@ Due to the trends in energy demand, future network load is expected to increase 
 As a result, DNOs have two choices to address the issues that are expected to result from increased network stress.
 They can either invest in network reinforcement or install network support equipment.
 For several reasons, e.g. decommissioning cost, installation cost, service disruption, etc., which have been outlined in Chapter~\ref{ch-introduction}, the installation of network support equipment was favoured.
-As also mentioned in Chapter~\ref{ch-introduction}, \textit{SSEN} deployed and trialled an Energy Storage Management Unit (ESMU) in some of their Low-Voltage (LV) power distribution networks.
-Within the scope of their trials, ESMU had to be controlled to benefit the network, without exceeding or violating any operational constraints.
-In order to achieve this kind of operation, ESMU operation had to be scheduled.
-During this kind of operation, the system either consumes or injects power, according to a predetermined plan that changes at regular intervals.
-For historic reasons and system compliance, this interval was chosen to be of 30 minutes, i.e. at half-hourly period.
+As also mentioned in Chapter~\ref{ch-introduction} \textit{SSEN} deployed and trialled an Energy Storage Management Unit (ESMU) in some of their Low-Voltage (LV) power distribution networks.
+Within the scope of their trials ESMU had to be controlled to benefit the network without exceeding or violating any operational constraints.
+In order to achieve this kind of operation ESMU operation had to be scheduled.
+During this kind of operation the system either consumes or injects power according to a predetermined plan that changes at regular intervals.
+For historic reasons and system compliance this interval was chosen to be of 30 minutes (i.e. at half-hourly period).
 
-Since the ESMU schedule was generated based upon a demand forecast, any resulting impact on the LV network operation is therefore based upon two factors:
+Since the ESMU schedule was generated based upon a demand forecast any resulting impact on the LV network operation is therefore based upon two factors:
 
 \begin{enumerate}
 	\item quality of the underlying forecast that is used to generate ESMU schedules, and
@@ -22,17 +22,17 @@ Since the ESMU schedule was generated based upon a demand forecast, any resultin
 \nomenclature[G]{UoR}{University of Reading}
 
 The previous research that was conducted by the Energy Research Laboratory (ERL) at the University of Reading (UoR) focused on improving half-hourly network operation to e.g. reduce peak load \cite{Rowe2014a, Yunusov2011}.
-However, in that research, sub-half-hourly demand variability has not been taken into account.
-Therefore, previously used performance parameters, and the corresponding measure of success, did not effectively quantify the ESMU's capability at mitigating negative impacts from this sub-half-hourly demand.
+However, in that research sub-half-hourly demand variability has not been taken into account.
+Therefore previously used performance parameters and the corresponding measure of success did not effectively quantify the ESMU's capability at mitigating negative impacts from this sub-half-hourly demand.
 
-Therefore, this chapter addresses \ref{objective-1} of this thesis (which is outlined in Section~\ref{ch-introduction:sec:problem-statement}), and a closed-loop optimisation method is proposed that adjusts the ESMU's phase powers at a sub-half-hourly resolution in order to improve network operation, whilst maintaining the charging and discharging profile during the corresponding half-hourly period.
+In conclusion, this chapter addresses \ref{objective-1} of this thesis (which is outlined in Section~\ref{ch-introduction:sec:problem-statement}) and a closed-loop optimisation method is proposed that adjusts the ESMU's phase powers at a sub-half-hourly resolution in order to improve network operation whilst maintaining the charging and discharging profile during the corresponding half-hourly period.
 Unlike previous work in the field, this approach makes the ESMU follow its  predetermined ESMU schedule, as well as allowing it to respond to high-resolution variations in three-phase network load.
 
 In order to investigate how network operation may be improved, a collection of commonly used parameters are evaluated in a set of corresponding cost functions.
-Initially, these cost functions are minimised on an individual basis to inspect their separate impact on network performance.
-Then, all cost functions are combined as a weighted sum to form a global cost function, which is used in the final analysis.
-For each optimisation approach, power flow simulations are run on a standardised UK power distribution feeder model in the simulation environment OpenDSS.
-This chapter therefore addresses the research question, whether sub-half-hourly adjustments to scheduled ESMU operation can significantly improve measured key network parameters.
+Initially these cost functions are minimised on an individual basis to inspect their separate impact on network performance.
+Then all cost functions are combined as a weighted sum to form a global cost function which is used in the final analysis.
+For each optimisation approach power flow simulations are run on a standardised UK power distribution feeder model in the simulation environment OpenDSS.
+This chapter therefore addresses the research question whether sub-half-hourly adjustments to scheduled ESMU operation can significantly improve measured key network parameters.
 
 The obtainment of key network parameters and their corresponding measure of improvement is explained next, in Section~\ref{ch1:sec:key-network-parameters}.
 All acquired data and the power network models used for this piece of work are shown in Section~\ref{ch1:sec:data-and-network-models}.
