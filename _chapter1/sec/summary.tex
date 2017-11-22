@@ -1,24 +1,26 @@
 \section{Summary}
 \label{ch1:sec:summary}
 
-In this chapter, a method to adjust three-phase ESMU powers on a sub-half-hourly basis to support network operation, whilst following a pre-determined half-hourly schedule, is proposed and tested.
+In this chapter, a method to adjust three-phase ESMU powers on a sub-half-hourly basis to support network operation whilst following a pre-determined half-hourly schedule is proposed and tested.
 The ESMU schedule is tailored to result in a ``peak-shaving'' and ``valley-filling'' behaviour and uses a realistic ESMU model to meet any operational constraints.
-A set of key network parameters to indicate the performance of the network, were used in a corresponding set of cost functions.
+A set of key network parameters to indicate the performance of the network were used in a corresponding set of cost functions.
 By adjusting the ESMU's active and reactive powers, each cost could be minimised and therefore network operation is improved.
 
-Results indicate that when explicitly focusing on the improvement of certain key network parameters, then the derived cost reduces for every single case.
-The scale by which the cost was reduced, and network performance was improved, became apparent for the time-series assessments in Section~\ref{ch1:subsec:time-series-analysis}.
+Results indicate that when explicitly focusing on the improvement of certain key network parameters then the derived cost reduces for every single case.
+The scale by which the cost was reduced and network performance was improved became apparent for the time-series assessments in Section~\ref{ch1:subsec:time-series-analysis}.
 During periods of low demand and low ESMU powers, reactive power injection provided the largest benefits (i.e. before 7am).
-Active power that is dictated by the underlying ESMU schedule, did however provide peak reduction and thermal constraint functions for the remaining time of the day.
+Active power that is dictated by the underlying ESMU schedule did however provide peak reduction and thermal constraint functions for the remaining time of the day.
 Nonetheless, any cost minimisation always had an effect on different costs (e.g. loss minimisation positively impacted nearly all other costs).
 
-Using cumulative cross-cost differences in Section~\ref{ch1:subsec:difference-analysis}, it is shown that a net cost reduction is achieved simply by implementing the proposed ESMU power adjustment method top of the normal execution of a half-hourly schedule.
-Although the impact with which different costs reduced is not as large as the impact on the cost that is currently focused on, all costs did experience some kind of cross-cost impact.
+Using cumulative cross-cost differences in Section~\ref{ch1:subsec:difference-analysis} it is shown that a net cost reduction is achieved simply by implementing the proposed ESMU power adjustment method on top of the normal execution of a half-hourly schedule.
+Although the amount by which different costs reduce is not as large as the amount for the cost that is currently focused on, all costs did experience some kind of cross-cost impact.
 Since the units of this assessment were cost specific, a true assessment of the correlation between costs cannot be performed.
 
-Therefore, Section~\ref{ch1:subsec:probability-density-analysis} focused on the statistical sensitivity of the cost reduction.
-Using the two-paired $t$-test, the aforementioned fact that costs do indeed impact each other is supported too.
-Hence there is strong evidence that those power adjustments do have a positive impact on the distribution network's operation, and the first objective of this thesis, which is outlined in Section~\ref{ch-introduction:sec:problem-statement}, has been met.
+Therefore, Section~\ref{ch1:subsec:probability-density-analysis} focused on the statistical sensitivity of the cost reduction to attempt such an assessment.
+Using the two-paired $t$-test the aforementioned fact that costs do indeed impact each other is supported, too.
+Hence there is strong evidence that those power adjustments do have a positive impact on the distribution network's operation.
+The strength of this impact can be used when trying to impact theoretical key network parameters in reality, i.e. when only realistic key network parameters can be observed.
+From these lessons learnt one can conclude that the first objective of this thesis which is outlined in Section~\ref{ch-introduction:sec:problem-statement} has been met.
 
 The main limitation of the proposed method is however the battery's half-hourly schedule.
 It dictates the active power that has to be injected into or absorbed from the distribution network.
