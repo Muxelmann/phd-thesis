@@ -15,31 +15,34 @@ Here, the first algorithm iteration is shown in Figure~\ref{ch3:subfig:time-seri
 The second iteration however reduces these spikes by the factor $\alpha$ (i.e $0.2$) and redistributes the undone charging powers over the new power profile.
 Figure~\ref{ch3:subfig:time-series-2} shows this reduction and reallocation.
 Figure~\ref{ch3:subfig:time-series-3} is the third iteration that reduces and redistributes the peaks even further.
-In the end, i.e. when $n=N$, the resulting power profile becomes as flat as possible, which is shown in Figure~\ref{ch3:subfig:time-series-last}.
-Throughout these iterations, it can be observed how the peak load in the total power, i.e. $\textbf{p}_n$, reduces and it can be observed how the changes in charging power, i.e. $\textbf{p}_{n+1}-\textbf{p}_n$, reduce in variance, which indicates that the algorithm works for the chosen parameters of $\alpha$ and $\beta$.
-However, different parameters of $\alpha$ and $\beta$ do impact the performance of this synchronised algorithm execution, as shown in Figure~\ref{ch3:fig:oscillation}.
+In the end (i.e. when $n=100$) the resulting power profile becomes as flat as possible which is shown in Figure~\ref{ch3:subfig:time-series-last}.
+Throughout these iterations, it can be observed how the peak load in the total power (i.e. $\textbf{p}_n$) reduces and it can be observed how the changes in charging power (i.e. $\textbf{p}_{n+1}-\textbf{p}_n$) reduce in variance, which indicates that the algorithm works for the chosen parameters of $\alpha$ and $\beta$.
+However, different parameters of $\alpha$ and $\beta$ do impact the performance of this synchronised algorithm execution as shown in Figure~\ref{ch3:fig:oscillation}.
 
 \input{_chapter3/fig/oscillation/oscillation}
 
 \input{_chapter3/tab/pair-comparison}
 
-Whereas the $\alpha$ and $\beta$ parameters use to produce the results in Figure~\ref{ch3:fig:time-series} reduced the power spike, those parameters in \ref{ch3:fig:oscillation} did not, where $\alpha = \beta = 1.0$.
+Whereas the $\alpha$ and $\beta$ parameters use to produce the results in Figure~\ref{ch3:fig:time-series} reduced the power spike, those parameters in \ref{ch3:fig:oscillation} where $\alpha = \beta = 1.0$ did not.
 In fact, an oscillating behaviour can be observed since the initially applied power profile is completely undone and completely reassigned onto a different demand trough.
 Since this produces similar peaks, the same procedure repeats and reassigns the complete power profile back to the original demand troughs.
-In the end, these charging spikes could never be fully mitigated and the algorithm did not smoothen the total demand.
-The resulting charging spike of more than 200kW could therefore cause significant issues if e.g. the underlying physical network was not been scaled appropriately.
+In the end, these charging spikes can never be fully mitigated and the algorithm did not smoothen the total demand.
+The resulting charging spike of more than 200kW could therefore cause significant issues if e.g. the underlying physical network has not been scaled appropriately.
 This longevity of issue becomes more evident when comparing the $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ values for both parameter pairs.
 The evolution of $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$, as tabulated in Table~\ref{ch3:tab:pair-comparison}, shows this difference in performance and convergence of the algorithm when subjected to different values of $\alpha$ and $\beta$.
-Therefore, multiple parameter pairs across the entire range of $\alpha$ and $\beta$ are studied to determine how the algorithm performs for each given pair.
-The results for the synchronised algorithm performance are plotted in Figure~\ref{ch3:fig:all-sync}.
+Those figures indicate that a well chosen pair of $\alpha$ and $\beta$ results in a convergence value (i.e. $b$) that is greater than zero.
+No convergence occurred however for those values of $\alpha$ and $\beta$ that resulted in the oscillating behaviour (i.e. convergence rate $b$ is zero).
+
+Next, the entire range of $\alpha$ and $\beta$ needed to be studied since different parameter pairs are likely to result in different convergence rates (and therefore different algorithm performance).
+These results (i.e. for the synchronised algorithm performance) are plotted in Figure~\ref{ch3:fig:all-sync}.
 
 \input{_chapter3/fig/all-sync/all-sync}
 
 Figure~\ref{ch3:subfig:all-sync-par} and Figure~\ref{ch3:subfig:all-sync-tra} show how the final values for both $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ were lowest when either $\alpha$ or $\beta$ was chosen closer to zero.
 This result coincides with the finding that hard reduction and reallocation lead to an oscillating behaviour of the algorithm.
-Similarly, the convergence of those two performance metrics, as shown in Figure~\ref{ch3:subfig:all-sync-par-conv} and Figure~\ref{ch3:subfig:all-sync-tra-conv}, was best when $\alpha$ approached one and $\beta$ approached zero.
-This behaviour is by design, since a larger value of $\alpha$ increases the rate at which the currently applied peak is reduced, whilst a smaller value of $\beta$ limits the amount that can be reallocated for each time slot.
-Such clear behavioural differences for different pairs of $\alpha$ and $\beta$ indicate an optimal operation region of the algorithm within the north-east quadrant of the plot.
+Similarly, the convergence of those two performance metrics, as shown in Figure~\ref{ch3:subfig:all-sync-par-conv} and Figure~\ref{ch3:subfig:all-sync-tra-conv}, was highest when $\alpha$ approached one and $\beta$ approached zero.
+This behaviour is by design since a larger value of $\alpha$ increases the rate at which the currently applied peak is reduced whilst a smaller value of $\beta$ limits the amount that can be reallocated for each time slot.
+Such clear behavioural differences for different pairs of $\alpha$ and $\beta$ indicate an optimal operation region of the algorithm within the north-eastern quadrant of the plot.
 Whether the algorithm still performs in this way when introducing desynchronisation is answered in the subsequent section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular}.
 
 
@@ -49,10 +52,10 @@ Whether the algorithm still performs in this way when introducing desynchronisat
 \input{_chapter3/fig/time-series-desync/time-series-desync}
 
 Looking at the evolution of the time-series when desynchronising the algorithm's execution shows significant differences already.
-Figure~\ref{ch3:fig:time-series-desync} shows this evolution for the same parameters as those chosen for Figure~\ref{ch3:fig:time-series}.
-The difference is however, that the assignment of charging powers lead to a significantly lower demand spike at the very beginning of executing the algorithm.
+Figure~\ref{ch3:fig:time-series-desync} shows thie evolution for the same parameters as those chosen for Figure~\ref{ch3:fig:time-series}.
+The difference is however that the assignment of charging powers lead to a significantly lower demand spike at the very beginning of executing the algorithm.
 Subsequent iterations then reduce this spike much broader than it has been the case when executing the algorithm in a synchronised manner.
-Therefore, more demand troughs are filled and a smoother profile is obtained much quicker, when compared to the synchronised case.
+Therefore, more demand troughs are filled and a smoother profile is obtained much quicker when compared to the synchronised case.
 
 \input{_chapter3/fig/all-async-regular/all-async-regular}
 
@@ -60,8 +63,9 @@ This behaviour becomes particularly apparent when looking at the full range of $
 Figure~\ref{ch3:fig:all-async-regular} shows the same full range analysis as the figure in the previous section did, i.e. Figure~\ref{ch3:fig:all-sync}.
 When comparing them at the same scale, $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ values (plotted in Figure~\ref{ch3:subfig:all-async-regular-par} and Figure~\ref{ch3:subfig:all-async-regular-tra}, respectively) have significantly lowered in magnitude.
 This indicates a much better performance of the algorithm across the entire range of $\alpha$ and $\beta$ parameters.
-Convergence rates (plotted in Figure~\ref{ch3:subfig:all-async-regular-par-conv} and Figure~\ref{ch3:subfig:all-async-regular-tra-conv}, respectively were however not impacted to the same extend.
+Convergence rates (i.e. plotted in Figure~\ref{ch3:subfig:all-async-regular-par-conv} and Figure~\ref{ch3:subfig:all-async-regular-tra-conv}) were however not impacted to the same extend.
 This indicates that the underlying execution of the algorithm still performs as intended, but the interplay between the agents that implement this algorithm changes the outcome of the aggregated result.
+
 The next step is to assess whether desynchronising the algorithm's execution by randomising the loop delays yields any further changes in algorithm performance and behaviour.
 Results from that step are presented in the following section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-irregular}.
 
@@ -71,15 +75,12 @@ Results from that step are presented in the following section, Section~\ref{ch3:
 \input{_chapter3/fig/time-series-desync-irregular/time-series-desync-irregular}
 
 As shown in Figure~\ref{ch3:fig:time-series-desync-irregular}, the difference between regular and irregular loop delays when executing the smart-charging algorithm is barely noticeable.
-The interlaced querying still causes each agent to react to a slightly different network demand profile, which results in a varied power profile allocation.
-A functioning peak reduction behaviour is therefore a positive sign, since this irregular algorithm desynchronisation, as introduced in Section~\ref{ch3:subsec:desynchronisation}, represents the worst algorithm deployment scenario.
-Performance and convergence do however need to be inspected for the complete range of $\alpha$ and $\beta$ values.
+The interlaced querying still causes each agent to react to a slightly different network demand profile which results in a varied power profile allocation.
+A functioning peak reduction behaviour is therefore a positive sign since this irregular algorithm desynchronisation (as introduced in Section~\ref{ch3:subsec:desynchronisation}) represents the worst algorithm deployment scenario.
+Performance and convergence do however need to be inspected for the complete range of $\alpha$ and $\beta$ values so that the results can be compared to the previous findings.
 
 \input{_chapter3/fig/all-async-irregular/all-async-irregular}
 
-Figure~\ref{ch3:fig:all-async-irregular} shows the results for this range of $\alpha$ and $\beta$ valued, when executing the algorithm on a desynchronised MAS with irregular loop delays.
-The values for $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ are still significantly lower than they were for the synchronised case, and do not differ much from the regular desynchronisation case.
-The same is true when comparing convergence, which indicates that the algorithm's underlying execution still performs as intended.
-
-
-
+Figure~\ref{ch3:fig:all-async-irregular} shows the results for this range of $\alpha$ and $\beta$ values when executing the algorithm on a desynchronised MAS with irregular loop delays.
+The values for $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ are still significantly lower than they were for the synchronised case, but they do not differ much from the regular desynchronisation case.
+The same is true when comparing convergence which indicates that the algorithm's underlying execution still performs as intended.
