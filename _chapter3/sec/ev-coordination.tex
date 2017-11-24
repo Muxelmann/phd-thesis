@@ -1,10 +1,10 @@
 \section{Coordination of EV charging}
 \label{ch3:sec:ev-coordination}
 
-In this section, an algorithm for EV charging is presented, which is implemented in both a synchronised and desynchronised case.
+In this section an algorithm for EV charging is presented which is implemented in both a synchronised and desynchronised case.
 The Irish load dataset \cite{IrishData2002} is used in combination with EV energy demand to test the proposed smart-charging algorithm.
-Performance of the algorithm at preventing new power spikes from occurring is then assessed with the use of standard performance metrics.
-Finally, to study the convergence of the algorithm, a convergence criteria as well as rate of convergence are presented, too.
+Performance of the algorithm at preventing new power spikes from occurring is then assessed with the use of standard performance metrics that have already been used throughout this thesis (i.e. the PAR and TRA metric).
+Finally, to study the convergence of the algorithm a convergence criteria as well as rate of convergence are presented, too.
 
 \subsection{EV Demand}
 
@@ -19,59 +19,62 @@ Finally, to study the convergence of the algorithm, a convergence criteria as we
 \nomenclature[K]{$P^\text{min}_{u}$}{Minimum EV charging power }
 \nomenclature[K]{$P^\text{min}_{u}$}{Maximum EV charging power }
 
-In order to simulate the fleet of $U$ charging EVs, where $U \in \mathbb{Z}^{>0}$, each EV, $u$ where $u \in \{1, \dots, U\}$, is modelled as a load that needs to consume a certain amount of energy, $E_u$, over the course of a scheduling horizon, $T^\text{sch}$ where $T^\text{sch} \in \mathbb{Z}^{>0}$.
-Unlike typical load profiles (e.g. household load profiles), EVs are modelled to not have a predetermined load profile, but are flexible in order to schedule their own demand, $p^\text{EV}_{u,n}(t)$, at any moment time $t$, where $\textbf{p}^\text{EV}_{u,n} = (p^\text{EV}_{u,n}(t))$ and $t \in \mathbb{Z}^{\geq0}$.
+In order to simulate the fleet of charging EVs, $U$ where $U \in \mathbb{Z}^{>0}$, each EV, $u$ where $u \in \{1, \dots, U\}$, is modelled as a load that needs to consume a certain amount of energy, $E_u$ where $E_u \in \mathbb{R}^{\geq0}$, over the course of a scheduling horizon, $T^\text{sch}$ where $T^\text{sch} \in \mathbb{Z}^{>0}$.
+Unlike typical load profiles (e.g. household load profiles) EVs are modelled to not have a predetermined load profile.
+Instead they are flexible so they schedule their own demand, $p^\text{EV}_{u,n}(t)$ where $\textbf{p}^\text{EV}_{u,n} = (p^\text{EV}_{u,n}(t))$, at any moment time, $t$ where $t \in \mathbb{Z}^{\geq0}$.
 In other words, EVs can autonomously assign their own charging plan over the predetermined number of future time-slots, $T^\text{sch}$.
-Due to limitations in on-board power electronics, each EV's maximum charge rate, $P^\text{max}_{u}$, is restricted and may not be exceeded.
-Equally, in order to meet the EV's charging demand over the scheduling horizon, $T^\text{sch}$, a soft minimum charging power, $P^\text{min}_{u}$ is also introduced:
+Due to limitations in on-board power electronics each EV's maximum charge rate, $P^\text{max}_{u}$ where $P^\text{max}_{u} \in \mathbb{R}^{>0}$, is restricted and may not be exceeded.
+In order to meet the EV's charging demand over the scheduling horizon, $T^\text{sch}$, a soft minimum charging power, $P^\text{min}_{u}$ where $P^\text{min}_{u} \in \mathbb{R}^{>0}$, is also introduced:
 
 \input{_chapter3/equ/power-charge-minimum}
 
-Although the upper limit represents a technical restrictions, this lower limit is a necessity to assure the demanded energy is charged over the entire charging period, and this limit is used to initiate the scheduling procedure itself.
+Although the upper limit represents the technical restriction of the on board charging equipment, this lower limit is a necessity to assure the demanded energy is charged over the entire charging period and thus this limit is also used to initiate the scheduling procedure itself.
 This charging procedure is explained in Section~\ref{ch3:subsec:scheduling-algorithm}.
-Using MAS, EVs utilise their agent systems to purchase energy quantities for each time-slot, $t$, and also sell or ``undo'' some of the already acquired energy quantities if it helps lowering a potential load spike.
+EVs utilise their agent system to purchase energy quantities for each time-slot, $t$, and also sell or ``undo'' some of the already acquired energy quantities if it contributes towards the lowering of a potential load spike.
 
 \subsection{Base Load}
 
 \nomenclature[K]{$\Delta t$}{Sample period for EV scheduling, where $\Delta t \in \mathbb{R}^{>0}$}
 
-To represent real power consumption in simulations, historic customer load profiles were used in this work \cite{IrishData2002}.
-This dataset consisted of 7392 demand readings for 543 loads, which were sampled at half-hourly period, i.e. $\Delta t = 0.5$ hours.
-A single scheduling horizon was defined as one day, therefore $T^\text{sch}=48$ samples.
+Historic customer load profiles were used in this work to represent real power consumption in simulations \cite{IrishData2002}.
+For every of the containing 543 loads, this dataset consisted of 7392 demand readings which were sampled at half-hourly period (i.e. $\Delta t = 0.5$ hours).
+A single scheduling horizon was defined as one day (i.e. $T^\text{sch}=48$ samples).
 
-In this context, each household dispatches its agents once to acquire the household's half-hourly energy demand for the entire day; making the assumption that some demand foresight is available.
-After having acquired or reserved the daily demand by issued an energy request, the entire network demand is known to the energy supplier and can be relayed to all EV agents when they query for it.
+In this MAS related context, each household dispatches its agents once to acquire the household's half-hourly energy demand for the entire day; thus making the assumption that some demand foresight is available.
+After each household has acquired or reserved its daily demand by issuing an energy request, the entire network demand is known to the energy supplier and can be relayed to all EV agents when they query for the overall demand profile.
 This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
-More specifically, all EV's agents communicate with the suppler's agent to optimally embed their charging profiles, $p^\text{EV}_{u,n}(t)$, within this aggregated base load.
+More specifically, all EV's agents communicate with the supplier's agent to optimally embed their charging profiles (i.e. $p^\text{EV}_{u,n}(t)$) within this aggregated base load.
 
 \subsection{Scheduling Algorithm}
 \label{ch3:subsec:scheduling-algorithm}
 
-For the EV charging coordination strategy, an algorithm was designed that generates charging profiles for each EV so that the network power is optimised.
-Here, an optimal network power, $p^\text{net}(t)$ implies that when adding all aggregated charging profiles to the network's base demand, $p^\text{base}(t)$, no additional power spikes occur in the resulting power profile, i.e. $p^\text{net}(t) = p^\text{base}(t) + \sum_{u=1}^U p_{EV,u,N}(t)$.
-The charging profiles are generated by repetitively querying energy supplies for the network's base load, adjusting individual EV charging profiles, and resubmitting the adjusted charging profile.
-As already stated, the common assumption when designing such a scheduling algorithm is that all scheduling entities are synchronised, i.e. wait for each other, before querying for the network's base load.
-For visualisation, the message exchange between two loads and a supplier including a synchronisation time is shown in Figure~\ref{ch3:fig:agent-synchronisation}.
+For the EV charging coordination strategy, an algorithm was designed that generates charging profiles for each EV so that the network power, $p^\text{net}(t)$ where $p^\text{net}(t) \in \mathbb{R}$, is optimised.
+Here an optimal network power implies that when adding all aggregated charging profiles to the network's base demand, $p^\text{base}(t)$  where $p^\text{base}(t) \in \mathbb{R}^{>0}$, no additional power spikes occur in the resulting power profile (i.e. $p^\text{net}(t) = p^\text{base}(t) + \sum_{u=1}^U p^\text{EV}_{u,n}(t)$ where $p^\text{EV}_{u,n}(t)$ is the EV charging power).
+The charging profiles are generated by repetitively querying energy supplies for the network's base load, adjusting individual EV charging profiles and resubmitting the adjusted charging profile.
+As already stated, the common assumption when designing such a scheduling algorithm is that all scheduling entities are synchronised (i.e. they wait for each other) before querying for the network's base load.
+For visualisation the message exchange between two loads and a supplier is shown in Figure~\ref{ch3:fig:agent-synchronisation}.
+This visualisation also includes the agent synchronisation event.
 
 \input{_chapter3/fig/agent-synchronisation}
 
-In this figure, the horizontal arrows indicate messages being sent from loads (i.e. EV agents) to a supplier and vertical lines indicate processing or idle time.
-Shown within Figure~\ref{ch3:fig:agent-synchronisation} is a single scheduling iteration, which can be broken into the sub-processes of: querying, scheduling, updating and synchronising.
-From top to bottom, the sequential execution of these sub-processes is as follows:
-
+In Figure~\ref{ch3:fig:agent-synchronisation} the horizontal arrows indicate messages being sent from loads (i.e. EV agents) to a supplier and vertical lines indicate processing or idle time.
+Here a single scheduling iteration is shown, which can be broken into the sub-processes of: querying, scheduling, updating and synchronising.
+From top to bottom, the sequential execution of these sub-processes is as follows
 First, both load$_1$ and load$_2$ query the supplier for the currently known network load (i.e. query($l_1$) and query($l_2$)).
-This network load is used to schedule their power profiles to ``fill valleys'', i.e. only charge EVs during periods of low demand.
-Upon receipt of a reply from the energy supplier (i.e. reply($l_1$) and reply($l_2$)), both loads immediately start scheduling their profiles.
-In the example above, load$_1$ found a solution before load$_2$ and can therefore inform the supplier about its intended load profile sooner, by sending an update (i.e. update$(l_1)$) to the supplier.
-Subsequently querying the supplier for an updated network load would be premature, since the other load (i.e. load$_2$) has not yet generated and updated its load profile.
-Therefore, a synchronisation mechanism had to be used, forcing load$_1$ to wait until all loads have sent updates to the supplier.
-Here, load$_1$ waits until load$_2$ has sent an update and the corresponding profile was acknowledged by the supplier (i.e. ack$(l_2)$).
+This network load is used to schedule their power profiles to ``fill valleys'' (i.e. only charge EVs during periods of low demand).
+Upon receipt of a reply from the energy supplier (i.e. reply($l_1$) and reply($l_2$)) both loads immediately start scheduling their profiles.
+In the example above load$_1$ found a solution before load$_2$ and can therefore inform the supplier about its intended load profile sooner.
+It does so by sending an update (i.e. update$(l_1)$) to the supplier.
+Subsequently querying the supplier for an updated network load would be premature since the other load (i.e. load$_2$) has not yet generated and updated its load profile.
+Therefore a synchronisation mechanism had to be used which forces load$_1$ to wait until all loads have sent updates to the supplier.
+In this example load$_1$ waits until load$_2$ has sent an update and the corresponding profile was acknowledged by the supplier (i.e. ack$(l_2)$).
 Only after this had happened, a synchronisation event would be triggered (i.e. \textit{SYNC} event).
-After this synchronisation event, the next algorithm iteration is initiated and the procedure repeats.
-Since all subsequent iterations are similar to the one shown in Figure~\ref{ch3:fig:agent-synchronisation}, only the two querying messages of the  second iteration are shown.
+After this synchronisation event the next algorithm iteration is initiated and the procedure repeats.
+Since all subsequent iterations are similar to the one shown in Figure~\ref{ch3:fig:agent-synchronisation} only the two querying messages of the second iteration are shown.
 
-Although timing and message exchange has been defined, the mechanism to allocate and reallocate charging powers in order to achieve a valley filling behaviour has not yet been defined.
-This behaviour is shown in Figure~\ref{ch3:fig:valley-filling-procedure}, where several iterations numbered $n$ are shown, and for each subsequent iteration, some amount of prescheduled power is reallocated to different time-slots.
+Although timing and message exchange has been outlined, the mechanism to allocate and reallocate charging powers in order to achieve the aforementioned valley filling behaviour has not yet been defined.
+This behaviour is shown in Figure~\ref{ch3:fig:valley-filling-procedure} where several iterations numbered $n$ (where $n \in [1, \dots, N]$ where $N \in \mathbb{Z}^{>0}$) are shown and for each subsequent iteration some amount of prescheduled power is reallocated to different time-slots.
+It is this reallocation to different time-slots that reduces and eventually completely mitigates EV charging spikes.
 
 \input{_chapter3/fig/valley-filling-procedure}
 
@@ -80,52 +83,54 @@ This behaviour is shown in Figure~\ref{ch3:fig:valley-filling-procedure}, where 
 \nomenclature[K]{$\hat{p}^\text{base}_{n}(t)$}{Temporary demand at time $t$, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}^\text{base}_{n}(t) \in \mathbb{Z}^{\geq0}$}
 \nomenclature[K]{$\hat{\textbf{p}}_{\text{base},n}$}{Temporary demand vector, i.e. the aggregate of all EV charge vector and the base load vector, where $\hat{p}^\text{base}_{n}(t) \in \hat{\textbf{p}}_{\text{base},n}$}
 
-For every iteration, $n$ where $n \in \mathbb{Z}^{>0}$, in Figure~\ref{ch3:fig:valley-filling-procedure}, charging profiles are added onto a base network load, $\textbf{p}^\text{base}_{n}$, where $p^\text{base}_{n}(t) \in \textbf{p}^\text{base}_{n}$.
-This base load is shown as the bold black line and does not change throughout EV scheduling.
-For any iteration, the charging profile during iteration number $n$, for EV $u$, is defined as $\textbf{p}_n$, where $\textbf{p}_n = (p_{u,n}(t))$.
-During the first iteration however, i.e. Figure~\ref{ch3:subfig:valley-filling-1} where $n=1$, this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met, i.e. at time-slot $t$ where $t = \text{argmin}(\textbf{p}^\text{base})$.
-Since all EVs schedule their profiles based upon the same knowledge of $\textbf{p}^\text{base}_{n}$, the aggregated charging power is likely to generate a new spike.
-This spike is seen on an updated or temporary demand profile, $\hat{\textbf{p}}^\text{base}_{n}$, where $\hat{\textbf{p}}^\text{base}_{n} = (\hat{p}^\text{base}_{n}(t))$, is defined as:
+For every iteration, $n$, in Figure~\ref{ch3:fig:valley-filling-procedure}, charging profiles are added onto a base network load, $\textbf{p}^\text{base}_{n}$, where $\textbf{p}^\text{base}_{n} = (p^\text{base}_{n}(t))$.
+This base load is shown as the bold black line and does not change throughout the EV scheduling procedure.
+For every iteration numbered $n$, the charging profile of EV number $u$ is defined as $p^\text{EV}_{u,n}$, where $\textbf{p}^\text{EV}_n = (p^\text{EV}_{u,n}(t))$ (i.e. $\textbf{p}^\text{EV}_n$ consists of all EV charging profiles at iteration $n$).
+During the first iteration however (e.g. Figure~\ref{ch3:subfig:valley-filling-1} where $n=1$) this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met (i.e. consecutive time-slots $t$ are chosen where $t = \text{argmin}(\textbf{p}^\text{base})$).
+Resulting is an aggregated charging power that is likely to contain at least one new charging spike since all EVs scheduled their profiles based upon the same knowledge of $\textbf{p}^\text{base}_{n}$.
+This spike is seen on an updated (i.e. temporary) demand profile, $\hat{\textbf{p}}^\text{base}_{n}$, where $\hat{\textbf{p}}^\text{base}_{n} = (\hat{p}^\text{base}_{n}(t))$, is defined as:
 
 \input{_chapter3/equ/updated-demand-profile}
 
 \nomenclature[K]{$\hat{p}^\text{EV}_{u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}^\text{EV}_{u, n}(t) \in \textbf{Z}^{\geq0}$}
 \nomenclature[K]{$\hat{\textbf{p}}^\text{EV}_{u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}^\text{EV}_{u, n}(t) \in \hat{\textbf{p}}^\text{EV}_{u, n}$}
 
-For the next iteration $n+1$, i.e. Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$, a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
-Subsequently, the spike in the resulting $\hat{\textbf{p}}^\text{base}_{n}$ is reduced, yet the energy that has been undone needs to be reallocated.
+For the next iteration $n+1$ (e.g. Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$) a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
+Subsequently, the spike in the resulting $\hat{\textbf{p}}^\text{base}_{n}$ is reduced, yet the energy that has been undone needs to be reallocated to meet the EVs' demands.
 The amount by which $\textbf{p}^\text{EV}_{n-1}$ is reduced is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
-A new reduced or temporary charging vector $\hat{p}^\text{EV}_{u, n}(t)$ is therefore defined as:
+A new reduced (i.e. temporary) charging vector $\hat{p}^\text{EV}_{u, n}(t)$ is therefore defined as:
 
 \input{_chapter3/equ/temporary-charging-power}
 
-Using this temporary charging power, the regained or temporary energy demand, $\hat{E}_{u,n}$, that needs to be reallocated, can also be defined by including the sampling period $\Delta t$:
+Using this temporary charging power the temporary energy demand, $\hat{E}_{u,n}$, that needs to be reallocated can also be defined by including the sampling period $\Delta t$:
 
 \input{_chapter3/equ/temporary-charging-demand}
 
-To include the first iteration of the algorithm, Equation~\ref{ch3:equ:temporary-charging-demand} needs to be expanded to redefine $\hat{E}_{u,n}$ for all possible algorithm iterations $n$:
+To include the first iteration of the algorithm, Equation~\ref{ch3:equ:temporary-charging-demand} needs to be expanded to redefine $\hat{E}_{u,n}$ for all successive algorithm iterations $n$:
 
 \input{_chapter3/equ/temporary-charging-demand-expanded}
 
-Following the similar procedure as for the first iteration, $\hat{E}_{u,n}$ is then allocated to different time-slots where the rule of performing the power allocation $p^\text{EV}_{u,n}(t)$ based on $p^\text{EV}_{u,n-1}(t)$, is defined as follows.
+Following the similar procedure as for the first iteration, $\hat{E}_{u,n}$ is then allocated to different time-slots where the rule of performing the power allocation (i.e. allocating $p^\text{EV}_{u,n}(t)$ based on $p^\text{EV}_{u,n-1}(t)$) is defined as follows:
 
 \input{_chapter3/equ/valley-filling-equation.tex}
 
 \nomenclature[K]{$\beta$}{Allocation parameter to assign a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\beta \in (0, 1]$}
 
-Here, $\beta$ is the maximum ``allocation'' parameter, where $\beta \in (0, 1]$, and this parameter limits the power that may be allocated to any successive time-slot, $t$.
-To not exceed the EV's maximum charging power, any value in the charging vector, $\textbf{p}^\text{EV}_{u,n}$, is capped to $P^\text{max}_{u}$.
-If $\beta$ is chosen as one, then the undone energy is allocated as quickly as possible.
-For smaller values of $\beta$ on the other hand, the undone charge is reallocated in smaller portions.
-Since EV scheduling takes place over a finite scheduling horizon, $T^\text{sch}$, a constraint was added in Equation~\ref{ch3:equ:valley-filling-equation}.
-This was done to assure that the temporary energy demand equates after some charging power was assigned to every time-slot of $\textbf{p}^\text{EV}_{u,n}$.
+Here $\beta$ is the maximum ``allocation'' parameter, where $\beta \in (0, 1]$, and this parameter limits the power that may be allocated to any successive time-slot (i.e. $t-\Delta t$).
+To not exceed the EV's maximum charging power any value in the charging vector, $\textbf{p}^\text{EV}_{u,n}$, is capped to $P^\text{max}_{u}$.
+If $\beta$ is chosen as one then the undone energy is allocated as quickly as possible, but this can lead to new power spikes and this slow the converging behaviour.
+For smaller values of $\beta$ on the other hand, the undone charge is reallocated in smaller portions and the old power spike is distributed gradually.
+If this value is too small however then the total EV demand, $E_u$, cannot be allocated across the entire scheduling horizon, $T^\text{sch}$.
+The constraint in Equation~\ref{ch3:equ:valley-filling-equation} thus guarantees that EV demand is allocated over this finite scheduling horizon.
+By doing so, the temporary energy demand equates to the original energy demand after the new charging powers are assigned to their corresponding time-slot (i.e. after $\textbf{p}^\text{EV}_{u,n}$ is updated).
 
-In any following algorithm iteration, i.e. $n>2$ as shown in Figure~\ref{ch3:subfig:valley-filling-3}, each EV's charging profile is adjusted and spread further over the base load, $\textbf{p}^\text{base}$.
-In the end, i.e. when $n=N$, the ideal EV charging profiles add to the base load in such a way, that the resulting network load has an optimally filled valley.
-This valley filling behaviour is achieved with the ``undoing'' and ``allocation'' of EV charging power from one algorithm iteration to the next.
-Regardless of the final network load's shape, the algorithm terminates when the final iteration is reached, i.e. $n=N$.
-Rate of convergence of the algorithm differs based upon the choice of $\alpha$ and $\beta$ values.
-However, convergence is in fact guaranteed when selecting values of $\alpha < 1$ and $\beta < 1$, since, in those cases, the algorithm satisfies the D'Alembert Criterion; the criterion requires a continuous but not necessarily regular reduction in output.
+In any following algorithm iteration (i.e. $n>2$ as shown in Figure~\ref{ch3:subfig:valley-filling-3}) each EV's charging profile is adjusted and spread further over the base load, $\textbf{p}^\text{base}$.
+In the end (i.e. when $n=N$) the ideal EV charging profiles add to the base load in such a way that the resulting network load has an optimally filled valley.
+This valley filling behaviour was thus achieved by the ``undoing'' and ``allocation'' of EV charging power from one algorithm iteration to the next.
+For the purpose of this simulation, the algorithm terminates when the final iteration is reached (i.e. $n=N$) regardless of the final network load's shape.
+Here the rate of convergence of the algorithm differs based upon the choice of $\alpha$ and $\beta$ values.
+This rate can be estimated and compared for each choice of $\alpha$ and $\beta$ since the simulations terminate after the same number of iterations.
+However, convergence is in fact guaranteed when selecting values of $\alpha < 1$ and $\beta < 1$ since, in those cases, the algorithm satisfies the D'Alembert Criterion; the criterion requires a continuous but not necessarily regular reduction in successive outputs.
 
 To summarise this section, the complete EV scheduling algorithm was developed by: 
 \begin{enumerate*}
@@ -133,7 +138,7 @@ To summarise this section, the complete EV scheduling algorithm was developed by
 	\item formulating the initial and successive ``undoing'' of charging power, as shown in Equation~\ref{ch3:equ:temporary-charging-power}; and
 	\item defining the iterative update and ``allocation'' of the temporary energy demand, as defined in Equation~\ref{ch3:equ:temporary-charging-demand-expanded}.
 \end{enumerate*}
-For clarity, the this smart charging algorithm's pseudocode, performing the complete valley filling procedure, has been included in Algorithm \ref{ch3:alg:valley-filling}.
+For clarity, this smart charging algorithm's pseudocode that performs the complete valley filling procedure has been included below; in Algorithm \ref{ch3:alg:valley-filling}.
 
 \input{_chapter3/alg/valley-filling}
 
