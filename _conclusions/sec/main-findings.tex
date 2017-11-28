@@ -5,50 +5,52 @@ This thesis' problem statement, which has been presented in Chapter~\ref{ch-intr
 
 \begin{itemize}
 	\item
-	The aim of this thesis is to investigate how BESS in the LV network should be controlled in order to achieve best possible network support, including the reduction of peak load, voltage deviations and phase balance.
+	The aim of this thesis is to investigate how BESS in the LV network should be controlled in order to achieve best possible network support, including the reduction of peak load, voltage deviations and phase unbalance.
 	\item 
 	To assess the impact of BESS on the LV network's topology, simulations are being run to compare on-line and off-line control performance.
 	\item
 	Given that BESS can operate flexibly but have a limited energy resource and often have a predetermined half-hourly schedule, the research studies whether sub-half-hourly corrections can improve the performance of LV networks by incorporating load forecasts.
+	\item
+	Additionally the aim is extended to assess the effects of, and to develop algorithms for desynchronised and communication less BESS control.
+	This is done since distributed BESS (that is usually controlled using ICT) is expected to proliferate within the LV networks.
 \end{itemize}
 
 The reviewed literature in Chapter~\ref{ch-literature} as well as the findings from Chapter~\ref{ch1} emphasise the need for improved methods of control for energy storage in the LV network.
-In Chapter~\ref{ch1}, a set of key network parameters were introduced to highlight the breadth of possible network improvement functions.
+In Chapter~\ref{ch1} a set of key network parameters were introduced to highlight the breadth of possible network improvement functions.
 Using the LV connected BESS, its impact on each of these key network parameters was assessed by optimising each parameter through its corresponding cost function.
 The same BESS would traditionally have been operated with a half-hourly schedule that dictates the device's active powers.
-Using this operation as a benchmark, sub-half-hourly phasor adjustments were proposed to tune the BESS operation to achieve optimal impact for any given key network parameter, yet without violating the higher resolution power constraints.
-As shown in several resulting time-series plots in Section~\ref{ch1:sec:results-and-discussion}, and as summarised in Table~\ref{ch1:tab:cost-table}, optimising BESS operation for certain key network parameters has two resulting impacts.
-Firstly, the targeted key network parameter and the associated network operation are improved, and secondly, other key network parameters are also impacted.
-The second impact however need not be a positive impact since, e.g. reducing voltage deviation can lead to a significantly worse power factor due to the injection of reactive power.
+Using this operation as a benchmark, sub-half-hourly phasor adjustments were proposed to tune the BESS operation to achieve optimal impact for any given key network parameter - yet without violating the higher resolution power constraints.
+As shown in several resulting time-series plots in Section~\ref{ch1:sec:results-and-discussion} that were summarised in Table~\ref{ch1:tab:cost-table} optimising BESS operation for certain key network parameters has two resulting impacts.
+Firstly, the targeted key network parameter and the associated network operation are improved and secondly, other key network parameters are also impacted.
+The second impact however need not be a positive impact since e.g. reducing voltage deviation can lead to a significantly worse power factor due to the injection of reactive power.
 Nonetheless, showing that sub-half-hourly phasor adjustments can result in improved network operation formed the basis for the subsequent chapter, Chapter~\ref{ch2}, where the half-hourly active power constraint is  eliminated.
 
 Chapter~\ref{ch2} presented a novel approach in combining both on-line and off-line energy storage control to dynamically reduce both daily and minutely load peaks.
-This load reduction was achieved without reaching a surplus of shortage of stored energy since a half-hourly BESS schedule (similar to Chapter~\ref{ch1}) was used, too.
-Unlike the preceding chapter however, the BESS control in Chapter~\ref{ch2} had operational flexibility within a certain tolerance band around the predetermined schedule.
+This load reduction was achieved without reaching a surplus of shortage of stored energy since a half-hourly BESS schedule (similar to Chapter~\ref{ch1}) was followed.
+Unlike the preceding chapter however, the BESS control in Chapter~\ref{ch2} had operational flexibility within a certain tolerance band around the predetermined half-hourly schedule.
 Combined with a MPC to estimate the sub-half-hourly power volatility, results were achieved that noticeably reduced peak loads in comparison to the traditional forecast driven control.
-In fact, as shown in Figure~\ref{ch2:fig:peak-diff-pdf}, the mean peak load reduction increased from 1.7kW to around 5kW for different types of MPC.
+In fact, as shown in Figure~\ref{ch2:fig:peak-diff-pdf} the mean peak load reduction increased from 1.7kW to around 5kW for different types of MPC.
 These findings from Chapter~\ref{ch1} and Chapter~\ref{ch2} thus form the contribution to knowledge i.e. \ref{objective-1} and \ref{objective-2}, respectively.
 
 However, the findings in Chapter~\ref{ch1} and Chapter~\ref{ch2} assumed the inter-device communication to e.g. allow network information to be used in the derivation of BESS control instructions.
-Chapter~\ref{ch3} therefore develops a new smart-charging algorithm and uses a novel MAS implementation that operates in an intentionally desynchronised manner, in order to assess the algorithm performance if the previously assumed communications become less reliable.
-Since uncoordinated EV charging is expected to put the most significant stress on the LV network, any algorithm failure, i.e. to coordinate this charging, would become noticeable.
-And indeed, the findings indicate that the algorithm's converging behaviour is less sensitive to its control parameters in a desynchronised environment, when compared to the traditional synchronised execution.
-However, when comparing the overall performance at avoiding charing peaks between the synchronised case (i.e. Figure~\ref{ch3:fig:all-sync}) and the fully desynchronised peak case (i.e. Figure~\ref{ch3:fig:all-async-irregular}), this parameter sensitivity is no longer observed.
+Chapter~\ref{ch3} therefore develops a new smart-charging algorithm and uses a novel MAS implementation that operates in an intentionally desynchronised manner.
+This desynchronisation was to assess the algorithm performance when e.g. the previously assumed communications become less reliable.
+Since uncoordinated EV charging is expected to put the most significant stress on the LV network, any algorithm failure (i.e. failure to coordinate this charging) would become noticeable.
+And indeed, the findings indicate that the algorithm's converging behaviour is less sensitive to its control parameters in a desynchronised environment, when compared to the traditional synchronised algorithm execution.
+However, when comparing the overall performance at avoiding charging peaks between the synchronised case (i.e. Figure~\ref{ch3:fig:all-sync}) with the fully desynchronised case (i.e. Figure~\ref{ch3:fig:all-async-irregular}) then this parameter sensitivity is no longer observed.
 Chapter~\ref{ch3} therefore achieved \ref{objective-3} by developing and assessing the smart-charging algorithm in regards to communication desynchronisation.
 
-From the lessons learnt in Chapter~\ref{ch3}, and to circumvent the need to communications altogether, Chapter~\ref{ch4} proposes a communication-less control method for distributed BESS to reduce peak load, voltage deviation and unequal asset utilisation.
+From the lessons learnt in Chapter~\ref{ch3} and to circumvent the need to communications altogether, Chapter~\ref{ch4} proposes a communication-less control method for distributed BESS to reduce peak load, voltage deviation and unequal asset utilisation.
 This communication-less control is achieved by using individualised control parameters in an improved AIMD algorithm.
-Co-locating dynamic loads, i.e. uncoordinated EVs, to maximise the stress on the LV network that the BESS control algorithm had to mitigate.
+Dynamic loads (i.e. uncoordinated EVs) are co-located to BESS in order to maximise the stress on the LV network that the developed control algorithm has to mitigate.
 The results show that for different EV uptake levels, BESS could always yield improvements for both AIMD and the proposed AIMD+ control methods.
-However, as seen in Figure~\ref{ch4:fig:storage-aimd}, only the latter method did compensate uniformly across the LV network, since it took into account the network specific voltage characteristics.
-Therefore, the finding form the contribution to knowledge stated in Section~\ref{ch-introduction:sec:problem-statement} \ref{objective-4}.
+However, as seen in Figure~\ref{ch4:fig:storage-aimd}, only the latter method did compensate uniformly across the LV network since it took into account the network specific voltage characteristics.
+Therefore, these findings form the contribution to knowledge stated in Section~\ref{ch-introduction:sec:problem-statement} \ref{objective-4}.
 
 The research over these four chapters has shown that energy storage algorithm can be improved by merging on-line and off-line control at high and low temporal resolution.
-Additionally, the research has shown that desynchronised control instructions can yield significantly different operation of otherwise synchronised control algorithms, yet this issue can be avoided by mitigating the need for ICT.
-In each chapter the thesis comprehensively tested the presented control algorithms on real demand data, which allowed it to encapsulate varying demand behaviour and characteristics at both high and low temporal resolutions.
+Additionally, the research has shown that desynchronised control instructions can yield significantly different operation of otherwise synchronised control algorithms - yet this issue can be avoided by mitigating the need for ICT.
+In each chapter this thesis comprehensively tested the presented control algorithms on real demand data, which allowed it to encapsulate varying demand behaviour and characteristics at both high and low temporal resolutions.
 The overarching finding from Chapter~\ref{ch1} to Chapter~\ref{ch4} is, that there is not currently a single control algorithm that will consistently outperform all proposed covered aspects of the research.
 However, the results show that focused control can be tuned to achieve a significantly higher impact on a narrow set of key parameters, which is why the chapters that implement such methods do also present the means of implementing their control and thus achieve the subsequent improvements.
 One can thus conclude that the research that has been presented in this thesis is therefore beneficial to both industry and the academic research community.
-All objectives that were set out in the problem statement have been met and the aforementioned key contributions have been made.
-
-
+All objectives that were set out in the problem statement of this thesis have been met by making the aforementioned key contributions.
