@@ -1,31 +1,32 @@
 \section{System Modelling}
 \label{ch4:sec:system-modelling}
 
-In this section, Section \ref{ch4:sec:system-modelling}, the underlying assumptions to validate the research are presented.
-Then, the EV charging model and a BESS model are explained.
+In this section, Section \ref{ch4:sec:system-modelling} the underlying assumptions to validate the research are presented.
+Then the EV charging model and a BESS model are explained.
 In the end of this section, the network models that are used to simulate the power distribution networks are presented.
 
 \subsection{Assumptions}
 \label{ch4:subsec:assumptions}
 
-For this work, several underlying assumption were made to obtain the models:
+Several underlying assumption were made to obtain the models that are used throughout this work :
 
 \begin{enumerate}
 \item
 The uptake of EVs is assumed to increase and, hence, to have a significant impact on the normal operation of the low voltage distribution network.
 This assumption is based on a well-established prediction that the majority of EV charging will take place at home \cite{Munkhammar2015a}.
 \item
-The transition from internal combustion engine-powered vehicles to EVs is assumed to not impact the users' driving behaviour, apart from the introduction of home-charging.
-Similar to \cite{Dallinger2012}, this assumption allows the utilisation of recent vehicle mobility data \cite{MiD2008} to generate leaving, driving and arriving probabilities, from which the EV charging demand can be determined and the resulting energy demand can be determined.
+The transition from internal combustion engine-powered vehicles to EVs is assumed to not impact the users' driving behaviour - apart from the introduction of home-charging.
+Similar to \cite{Dallinger2012} this assumption allows the utilisation of recent vehicle mobility data \cite{MiD2008} to generate leaving, driving and arriving probabilities, from which the EV charging demand can be determined and the resulting energy demand can be calculated.
 \item
-The transition to low carbon technologies will increase the variability of electricity demand, and therefore, grid-supporting devices, such as BESS, are anticipated to play a more important role \cite{FES2015}.
-Hence, alongside a high uptake of EVs, an increased adoption of distributed BESS devices is assumed.
+The transition to low carbon technologies will increase the variability of electricity demand and therefore, grid-supporting devices such as BESS are anticipated to play a more important role \cite{FES2015}.
+Hence, alongside a high uptake of EVs an increased adoption of distributed BESS devices is assumed.
 \item
-It is assumed that BESS solutions, or more specifically battery energy storage solutions, start the simulations at 50\% SOC and are not 100\% efficient at storing and releasing electrical energy, as in \cite{Rowe2014a}.
-Additionally, its utilisation will degrade the energy storage capability and performance over time, as shown in \cite{Laresgoiti2015}.
+A realistic behaviour of BESS is also assumed since they are not 100\% efficient at storing and releasing electrical energy as in \cite{Rowe2014a}.
+Furthermore the assumption is made that BESS start the simulations at 50\% State of Charge (SOC).
+Additionally, it is assumed that BESS utilisation will degrade its energy storage capability and power performance over time as shown in \cite{Laresgoiti2015}.
 Therefore, the requirements for equal and fair storage usage is of high importance.
 \item
-It is assumed that the load profiles provided by the IEEE Power and Energy Society (PES) are sufficient as base load profiles for all simulations.
+It is assumed that the load profiles provided by the IEEE Power and Energy Society (PES) are sufficient as base load profiles for all simulations and capture enough realistic demand variability to generate results from which conclusions (regarding the algorithm performance) can be drawn.
 \end{enumerate}
 
 \subsection{EV charging behaviour}
@@ -35,36 +36,36 @@ It is assumed that the load profiles provided by the IEEE Power and Energy Socie
 \nomenclature[L]{$w_{x}(t)$}{Trip distance probability for weekends ($w_{we}(t)$) and week-days ($w_{wd}(d)$), where $w_{x}(t) \in [0, 1]$}
 \nomenclature[L]{$\hat{n}_x(t)$}{Predicted EV demand data, where $n_{r}(t) \in \mathbb{R}$}
 
-From publicly-available car mobility data in \cite{Dallinger2012, MiD2008} an empirical model was developed to capture the underlying driving behaviour.
-This data contained three parts: the probability of starting a trip, $n_{s}(t)$, the probability of a weekday trip being of a certain distance, $w_{wd}(t)$, and the probability of a weekend trip being of a certain distance, $w_{we}(t)$.
-Both probabilities are at a 15-min period.
-The probability of starting a trip, $n_{s}(t)$, is approximated by three continuous normal distribution functions since it is assumed that driver behaviour is distributed normally around key times.
-Each distribution is based on the subsequent equation:
+An empirical EV model was developed to capture the underlying driving behaviour that was captured in the publicly-available car mobility dataset named \textit{Mobilit\"{a}t in Deutschland} that was published by the German Department of Transport \cite{MiD2008} and validated by Dallinger et al. in \cite{Dallinger2012}.
+This dataset contained three parts: the probability of starting a trip, $n_{s}(t)$, the probability of a weekday trip being of a certain distance, $w_{wd}(t)$, and the probability of a weekend trip being of a certain distance, $w_{we}(t)$.
+Both probabilities are at a 15 minutely period.
+The probability of starting a trip (i.e. $n_{s}(t)$) is approximated by three continuous normal distribution functions since it is assumed that driver behaviour is distributed normally around three key times throughout the day.
+Each distribution is based on the subsequent equation of a normal distribution:
 
 \input{_chapter4/equ/normal-distribution}
 
-From Equation \ref{ch4:equ:normal-distribution}, a probability distribution is denoted $\hat{n}_{m}(t)$ represent the probability of a vehicle leaving in the morning, $\hat{n}_{l}(t)$ represents the probability of it leaving during lunch time, and $\hat{n}_{e}(t)$ represents the probability of it leaving during the evening.
-It is assumed that vehicles perform a round trip from their home to a certain location and back.
-In order to represent this symmetric commuting behaviour, i.e. vehicles departing in the morning return during the evening, an equality amongst the three probabilities was defined as follows:
+From Equation \ref{ch4:equ:normal-distribution} a probability distribution is denoted $\hat{n}_{m}(t)$ to represent the probability of a vehicle leaving in the morning.
+$\hat{n}_{l}(t)$ represents the probability of it leaving during lunch time and $\hat{n}_{e}(t)$ represents the probability of an EV leaving during the evening.
+If it is assumed that vehicles perform a round trip from their home to a certain location and back, then a symmetric commuting behaviour (i.e. vehicles departing in the morning return during the evening) and an equality amongst the three probabilities (i.e. a constraint) can be defined as follows:
 
 \input{_chapter4/equ/normal-distribution-balance}
 
-To approximate the original probability of starting a trip, the difference between these three probability functions' aggregate and the original distribution, $n_s(t)$, needed to be minimised.
-This minimisation problem is defined as follows:
+To approximate the original probability of starting a trip, the difference between these three probability functions' aggregate and the original distribution (i.e. $n_s(t)$) had to be minimised.
+Therefore, this minimisation problem is defined as follows:
 
 \input{_chapter4/equ/normal-distribution-mininmisation}
 
-This minimisation problem was solved using a Generalised Reduced Gradient (GRG) algorithm, and the obtained parameters fit the three functions to the original data.
+This minimisation problem was solved using a Generalised Reduced Gradient (GRG) algorithm so that the obtained parameters make the three functions fit best to the original dataset.
 The resulting parameters from the GRG fitting of the three distribution functions are tabulated in Table~\ref{ch4:tab:starting-a-trip-probability}.
-Additionally, the resulting departure probabilities, as well as the original data, $n_s(t)$, are shown in Figure~\ref{ch4:fig:starting-a-trip-probability}.
+Additionally, the resulting departure probabilities as well as the original data (i.e. $n_s(t)$) are shown in Figure~\ref{ch4:fig:starting-a-trip-probability} for visualisation.
 
 \input{_chapter4/tab/starting-a-trip-probability}
 
 \input{_chapter4/fig/starting-a-trip-probability}
 
-The second statistical data, i.e. the data capturing the probability distribution of a trip being of a certain distance, was also extracted from the dataset and approximated.
-This was done for both the weekdays $w_{wd}(d)$ and weekends $w_{we}(d)$.
-The Weibull function was chosen to fit these probability distributions to the original data since it best suited the underlying data distribution, and it is defined as follows:
+The second statistical data (i.e. the data capturing the probability distribution of a trip being of a certain distance) was also extracted from the dataset and approximated using probability distributions.
+This approximation was performed for both the weekdays (i.e. $w_{wd}(d)$) and weekends (i.e. $w_{we}(d)$) data.
+The Weibull function was chosen to fit these probability distributions to the original data since it best suited the underlying data distribution - it is defined as follows:
 
 \input{_chapter4/equ/weibull-distribution}
 
@@ -73,18 +74,18 @@ Similar to the approximation of the probability of starting a trip, a minimisati
 \input{_chapter4/equ/trip-distance-minimisation}
 
 This problem was also solved using the same GRG algorithm.
-As a result, the weekday trip distance distribution, $\hat{w}_{wd}(d)$, and the weekend trip distribution, $\hat{w}_{we}(d)$, could are estimated.
+As a result, the weekday trip distance distribution, $\hat{w}_{wd}(d)$, and the weekend trip distribution, $\hat{w}_{we}(d)$, could be estimated.
 The computed function parameters for these two estimated distribution functions are tabulated in Table~\ref{ch4:tab:trip-distance-probailility}.
-Their resulting probability distributions are plotted for comparison against the real data, $w_{wd}(d)$ and $w_{we}(d)$, in Figure~\ref{ch4:fig:trip-distance-probability}.
+Furthermore, their resulting probability distributions are plotted in comparison to the real data (i.e. $w_{wd}(d)$ and $w_{we}(d)$) in Figure~\ref{ch4:fig:trip-distance-probability}.
 
 \input{_chapter4/tab/trip-distance-probailility}
 
 \input{_chapter4/fig/trip-distance-probability}
  
-In addition to these probabilities, an average driving speed of 56 kmh (35 mph) and an average driving energy efficiency of 0.1305 kWh/kmh (0.21 kWh/mph) are taken from \cite{UKGovernmentDigitalService2013}.
+In addition to these probabilities an average driving speed of 56 kmh (35 mph) and an average driving energy efficiency of 0.1305 kWh/kmh (0.21 kWh/mph) are derived from the \textit{UK Government Digital Service} dataset \cite{UKGovernmentDigitalService2013}.
 Using the predicted driving distance and average driving speed with the driving energy efficiency, it is possible to estimate an EV's energy demand upon arrival.
-Starting to charge from this arrival time until the energy demand has been met allows the generation of an estimated charging profile of a single EV.
-To do this, a maximum charging power of the U.K.'s average household circuit rating (i.e., 7.4 kW) and an immediate disconnection of the EV upon charge completion were assumed \cite{EVHomeCharging}.
+A single EV charging profile is then estimated by starting to charge from the EV's predicted arrival time until the energy demand has been met.
+To do so a maximum charging power of the UK's average household circuit rating (i.e. 7.4kW) and an immediate disconnection of the EV upon charge completion were assumed to comply with the guidance of the UK's \textit{Electric Vehicle Home Charging Scheme} \cite{EVHomeCharging}.
 
 \input{_chapter4/fig/aggregated-ev-power}
 
@@ -94,14 +95,13 @@ This plot shows the expected magnitude and variability in energy demand that is 
 
 This model's EV charging behaviour has been implemented to reflect EV demand if applied today without widespread smart charging infrastructure.
 It does therefore reflect the worst assumable charging scenario.
-This model's data is used to simulate additional demand in the power network, which are detailed in the next section.
+This model's data is used to simulate additional demand in the power network which is supported by batteries whose model is detailed in the next section.
 
 \subsection{Battery Modelling}
 
 In this chapter a similar BESS model is used as the one that has already been introduced in Chapter~\ref{ch1} and in Chapter~\ref{ch2} of this thesis (i.e. see Section~\ref{ch1:subsec:battery-model} and Section~\ref{ch2:subsec:esmu-model}).
 The following paragraphs are however used as a reminder of this model for convenience.
-This battery model consists of a self-discharge loss, $\mu$ where $\mu \in (0, 1]$, that is dependent on the current State Of Charge (SOC) and an energy conversion efficiency, $\eta$ where $\eta \in (0, 1]$, to compute the amount of energy that is lost when charging or discharging this battery. 
-%This model has also been was used in \cite{Rowe2013, Rowe2014, Rowe2014a, Zangs2016},
+In summary, the battery model consists of a self-discharge loss (i.e. $\mu$ where $\mu \in (0, 1]$) that is dependent on the current State Of Charge (SOC) and the model contains an energy conversion efficiency (i.e. $\eta$ where $\eta \in (0, 1]$) to compute the amount of energy that is lost when charging or discharging this battery.
 
 \nomenclature[L]{$p_\text{bat}(t)$}{Battery power at time $t$, where $p_\text{bat}(t) \in \mathbb{R}$}
 \nomenclature[L]{$\text{SOC}(t)$}{Battery state of charge at time $t$, where $\text{SOC}(t) \in [0, 1]$}
@@ -115,33 +115,34 @@ This battery model consists of a self-discharge loss, $\mu$ where $\mu \in (0, 1
 \nomenclature[L]{$P_\text{max}$}{Power rating of battery, where $P_\text{max} \in \mathbb{R}_{>0}$}
 \nomenclature[L]{$\Delta t$}{Sampling period, where $\Delta t \in \mathbb{Z}_{>0}$}
 
-When an ideal battery charges or discharges, the change in SOC is determined by the battery power, $p_\text{bat}(t)$.
-By sampling battery operation at a regular period, $\Delta t$, the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
-The change in SOC for this ideal battery is therefore defined as:
+In an ideal battery the change in SOC is determined by the battery power $p_\text{bat}(t)$.
+By sampling battery operation at a regular period (i.e. $\Delta t$) the energy transferred into the battery can be described as $p_\text{bat}(t)\Delta t$.
+The change in SOC for this ideal battery that is of capacity $C$ is therefore defined as:
 
 \input{_chapter4/equ/change-soc}
 
-The self-discharge loss is determined by $\mu$ and is included in this ideal battery model to represent the continual loss of energy in the battery, which is typical for chemical energy storage.
-This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined as a proportion of the current SOC and is determined using the self-discharge loss factor, $\mu$, as follows:
+Next, the self-discharge loss is determined by $\mu$ and is included in this ideal battery model to represent the continual loss of energy in the battery - which is typical for chemical energy storage.
+This loss, $\Delta\text{SOC}_\text{self-discharge}$, is defined as a proportion of the most recent SOC and is determined using the self-discharge loss factor (i.e. $\mu$) as follows:
 
 \input{_chapter4/equ/self-discharge-loss}
 
-Additionally, to represent the losses in the power electronics and energy conversion process, an energy conversion loss, $\Delta\text{SOC}_\text{conversion}(t)$, is defined.
-This loss is proportional to the rate at which the battery's SOC changes, and since a difference is made between charging and discharging BESS, a ``direction dependent energy conversion efficiency'', $\hat{\eta}$, is used that is derived from $\eta$:
+Additionally, to represent the losses in the power electronics and energy conversion process, an energy conversion loss (i.e. $\Delta\text{SOC}_\text{conversion}(t)$) is defined next.
+This loss is proportional to the rate at which the battery's SOC changes.
+Since a difference is made between charging and discharging BESS, a ``direction dependent energy conversion efficiency'' (i.e. $\hat{\eta}$) is derived from $\eta$ and used as follows:
 
 \input{_chapter4/equ/conversion-loss}
 
-Here, the conversion losses in the power electronics are reflected as an asymmetric efficiency, which depends on the direction of the flow of energy.
+Here, the conversion losses in the power electronics are reflected as an asymmetric efficiency that depends on the direction of the flow of energy.
 This is done by charging the battery at a lower power when consuming energy and discharging it more quickly when releasing energy.
-Mathematically, this can be represented as:
+Mathematically, this is represented as:
 
 \input{_chapter4/equ/energy-conversion-adjustment}
 
-When substituting the self-discharge loss from Equation~\ref{ch4:equ:self-discharge-loss}, $\Delta\text{SOC}_\text{self-discharge}$, and conversion losses from Equation~\ref{ch4:equ:conversion-loss}, $\Delta\text{SOC}_\text{conversion}$, into the SOC evolution equation, the full battery model, i.e. the transition from $\text{SOC}(t)$ to $\text{SOC}(t+\Delta t)$, can be summarised as follows:
+When substituting the self-discharge loss from Equation~\ref{ch4:equ:self-discharge-loss} (i.e. $\Delta\text{SOC}_\text{self-discharge}$) and conversion losses from Equation~\ref{ch4:equ:conversion-loss} (i.e. $\Delta\text{SOC}_\text{conversion}$) into the SOC evolution equation, then the full battery model (i.e. the transition from $\text{SOC}(t)$ to $\text{SOC}(t+\Delta t)$) can be derived as follows:
 
 \input{_chapter4/equ/soc-transition}
 
-In addition, both the SOC and the battery power, $p_\text{bat}(t)$, are constrained due to the device's maximum and minimum energy storage capabilities, respectively $\text{SOC}_\text{max}$ and $\text{SOC}_\text{min}$, and maximum charge and discharge rate, $P_\text{max}$.
+In addition, both the SOC and the battery power (i.e. $p_\text{bat}(t)$) are constrained due to the device's maximum and minimum energy storage capabilities (i.e. respectively $\text{SOC}_\text{max}$ and $\text{SOC}_\text{min}$ and maximum charge and discharge rate $P_\text{max}$).
 These limitations are captured in Equations~\ref{ch4:equ:soc-range} and Equation~\ref{ch4:equ:charge-discharge-range}, respectively.
 
 \input{_chapter4/equ/soc-range}
@@ -151,25 +152,23 @@ These limitations are captured in Equations~\ref{ch4:equ:soc-range} and Equation
 \subsection{Network Models}
 \label{ch4:subsec:network-models}
 
-Similar to Chapter~\ref{ch1} of this thesis, the Open Distribution System Simulator (OpenDSS), developed by the Electronic Power Research Institute (EPRI), was used in order to simulate the LV energy distribution networks.
-It requires element-based network models, including line, load and transformer information, and generates realistic power flow results.
+Similar to Chapter~\ref{ch1} of this thesis, the Open Distribution System Simulator (OpenDSS) that is developed by the Electronic Power Research Institute (EPRI) was used in order to simulate the LV energy distribution networks.
+It requires element-based network models including line, load and transformer information to generate realistic power flow results.
 
 \input{_chapter4/fig/network}
 
-Simulations were conducted using the IEEE's European Low Voltage Test Feeder \cite{EULVFeeder2015} and six detailed U.K. feeder models, that are based on real power distribution networks and provided by Scottish and Southern Electricity Networks (SSEN).
-The SSEN circuit models were provided as Common Information Models (CIM) during the collaboration on the New Thames Valley Vision Project Project (NTVV) \cite{NTVV2016}.
-An example of the IEEE EU LV Test feeder and a UK feeder provided by SSE-PDEN are shown in Figure~\ref{ch4:subfig:network-ssen} and Figure~\ref{ch4:subfig:network-ssen}, respectively.
-A summary of these model's parameters is given in the Table~\ref{ch4:tab:model-parameters}.
+Initial simulations were conducted using the IEEE's European Low Voltage Test Feeder \cite{EULVFeeder2015} and later six detailed UK feeder models were added that are based on real power distribution networks.
+These models were provided by the project partner Scottish and Southern Electricity Networks (SSEN).
+The SSEN circuit models were provided as Common Information Models (CIM) during the collaboration on the New Thames Valley Vision (NTVV) project \cite{NTVV2016}.
+An example of the IEEE EU LV Test feeder and a UK feeder provided by SSEN are shown in Figure~\ref{ch4:subfig:network-ssen} and Figure~\ref{ch4:subfig:network-ssen}, respectively.
+A summary of all model's parameters is given in the Table~\ref{ch4:tab:model-parameters}.
 
 \input{_chapter4/tab/model-parameters}
 
-
-Throughout the remainder of this chapter, all excerpt and time series results were extracted from experiments with the IEEE EU LV Test feeder (i.e., Network No. 1).
+Throughout the remainder of this chapter, all excerpt and time series results were extracted from experiments with the IEEE EU LV Test feeder (i.e. Network No. 1).
 Any further results are then based on an aggregation of all networks to include their network diversity in the analysis.
 
-The same model-derived EV data and IEEE EU LV Test feeder consumer demand profiles were used for all simulations.
+The same model-derived EV data and the IEEE provided consumer demand profiles were used in all power flow simulations.
 The resulting demand profiles therefore represent the total daily electricity demand of households with connected EVs.
-These profiles were sampled at $\Delta t = 1\text{ min}$.
-The OpenDSS simulation environment was controlled using MATLAB, achieved through OpenDSS's Common Object Model (COM) interface and accessible using Microsoft's ActiveX server bridge.
-
-
+These profiles were sampled at $\Delta t = 1\text{ minute}$.
+The OpenDSS simulation environment was controlled using MATLAB that communicated with OpenDSS through its Common Object Model (COM) interface which is accessible using Microsoft's ActiveX server bridge.

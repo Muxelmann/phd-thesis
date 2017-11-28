@@ -3,27 +3,22 @@
 
 The main body of existing literature on communication-less control has already been covered in Section \ref{ch-literature:subsec:communication-less-control}.
 Within this literature the main usage of BESS in LV distribution networks is to assure voltage security and was addressed in \cite{Sugihara2013, Toledo2013, Marra2013, Mokhtari2013, Atia2016}.
-%An approach used by, e.g., Mokhtari et al. in \cite{Mokhtari2013} relies on bus voltage and network load measurements to prevent system overloads.
-%Yet, these kinds of storage control systems do require communication infrastructures to relay the network information and control instructions.
-%This requirement has also been addressed in the comprehensive review on storage allocation and application methods by .
-However, as also identified by Hatziargyriou et al. in \cite{Hatziargyriou2015}, the underlying requirement for a communication infrastructure to relay network information and control instructions still remains.
-Therefore, in the presented chapter, a control algorithm is proposed that removes the need for any such BESS communication, by only using local voltage measurements and individually tuned control to infer the network operation.
-In order to to prevent conflicting device behaviour, the underlying coordination mechanism is of particular importance.
-The AIMD algorithm is perfectly suited for such coordinated control, although it originated from a different research area.
-In this section, Section \ref{ch4:sec:related-work}, the origin and current usage of AIMD are explained to emphasise the algorithm's suitability and room for improvements.
+However, as also identified by Hatziargyriou et al. in \cite{Hatziargyriou2015}, the underlying but strong requirement for a communication infrastructure to relay network information and control instructions still remains.
+Therefore this chapter presents a control algorithm that removes the need for any such BESS communication.
+It does so by implementing local voltage measurements with individually tuned control parameters which are used to infer the network operation from a local standpoint.
+The underlying coordination mechanism of each control entity is of particular importance so that conflicting device behaviour is prevented.
+An AIMD algorithm is perfectly suited for such coordinated control despite originating from a different research area.
+In this section, Section \ref{ch4:sec:related-work} the origin and current usage of AIMD are explained to emphasise the algorithm's suitability and room for improvements.
 
-Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989}, to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
-Later, AIMD-type algorithms have also been applied to power sharing scenarios in LV distribution networks, where the limited resource is the availability of power from the substation's transformer.
-For EV charging, ine such an algorithm was initially proposed by St{\"{u}}dli et al. in \cite{Studli2012}, yet this algorithm still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
-Later, their work was extended to include vehicle-to-grid applications with reactive power support \cite {Studli2015}, yet the ICT requirements were still not addressed.
-The battery control algorithm proposed in this chapter builds upon the algorithm used by Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile derived from network models.
-Similar to the work by Xia et al. \cite{Xia2014}, who utilised local voltage measurements to adjust the charging rate, the work presented in this chapter only uses voltage measurements at the batteries' connection sites in order to to control the batteries' operations.
+Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989} (i.e. to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}).
+Later, AIMD-type algorithms have also been applied to power sharing scenarios in LV distribution networks where the limited resource is the availability of power from the substation's transformer.
+For EV charging, one such algorithm was initially proposed by St{\"{u}}dli et al. in \cite{Studli2012} yet this algorithm still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
+Later, their work was extended to include vehicle-to-grid applications with reactive power support \cite {Studli2015}, but the ICT requirements were still not reduced.
+The battery control algorithm that is proposed in this chapter thus builds upon the algorithm used by St{\"{u}}dli et al. and Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile that is derived from network model simulations.
+Similar to the work by Xia et al. \cite{Xia2014} who utilised local voltage measurements to adjust the charging rate, the work presented in this chapter only uses voltage measurements at the batteries' connection sites in order to control the batteries' operations.
+However, the fact that the charging of EVs is based upon a traditional (i.e. ``dumb'') charging approach and that co-located BESS is used to mitigate this charging impact differentiates the proposed algorithm from the work by Xia et al.
 
-By developing the bi-directional and individually tuned BESS AIMD control algorithm, previous research is extended since it has only utilised common set-point thresholds for controlling each of the DERs.
-The approach proposed in this chapter ensures that unavoidable voltage drops along the feeder do not skew the global control decisions, and that voltage oscillations caused by demand variation are taken into control considerations.
-In contrast to previous work, where substation monitoring was used to inform control units of the transformer's present operational capacity, the proposed algorithm does not require this information and does not require such any extensive ICT infrastructure.
-
-
-
-
-
+In summary, previous research is extended by developing the bi-directional and individually tuned BESS AIMD control algorithm since it has only utilised common set-point thresholds for controlling each of the Distributed Energy Resources (DERs).
+The approach proposed in this chapter ensures that unavoidable voltage drops along the feeder do not skew the global control decisions.
+Nonetheless, despite the robustness to voltage drop, voltage oscillations that are caused by demand variation are still taken into control considerations.
+Therefore, in strong contrast to previous work where substation monitoring was used to inform control units of the transformer's present operational capacity, the proposed algorithm does not require this information and does not require such any extensive ICT infrastructure.

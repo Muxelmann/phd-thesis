@@ -1,15 +1,16 @@
 \section{Summary}
 \label{ch4:sec:summary}
 
-In this chapter, Chapter~\ref{ch4}, an algorithm is proposed for distributed battery energy storage, in order to mitigate the negative impact of highly variable and uncontrolled loads; such as the charging of EVs.
-Unlike previous algorithms the improved algorithm, i.e. AIMD+, only uses local bus voltage measurements to issue control instructions.
-It implements a reference voltage profile which is derived from power flow analysis of the distribution network for its set-point control.
-Taking the distance to the feeding substation into account allows optimising the algorithm's parameters for each BESS.
-Simulations were performed on the IEEE EU LV Test feeder and a set of real UK LV network models.
-Comparisons were made of the standard AIMD algorithm with a fixed voltage threshold against the proposed AIMD+ algorithm.
+In this chapter, Chapter~\ref{ch4} an algorithm is proposed for distributed battery energy storage in order to mitigate the negative impact of highly variable and uncontrolled loads - such as the charging of EVs.
+Unlike previous algorithms, the improved algorithm (i.e. AIMD+) only uses local bus voltage measurements to issue control instructions.
+It implements a reference voltage profile which is derived from power flow analysis of the distribution network for its individualised set-point control.
+Taking the distance to the feeding substation into account allows an optimisation of the algorithm's parameters for each BESS.
+Simulations were performed on the IEEE EU LV Test feeder and a set of real UK LV network models that were provided by SSEN.
+Comparisons were made of the standard AIMD algorithm with a fixed voltage threshold against the proposed AIMD+ algorithm with its individualised control.
 A set of European demand profiles and a realistic EV travel model were used to feed load data into the simulations.
-For all conducted simulations, the performance of the distributed BESS was improved by using the proposed AIMD+ algorithm instead of traditional AIMD control.
-The improved algorithm resulted in a reduction of voltage variation and an increased utilisation of available line capacity, which also reduced the frequency of line overloads.
-Additionally, the same algorithm equalised the cycling and utilisation of battery energy storage, making better use of the deployed battery assets.
+For all conducted simulations, network performance was improved by using the AIMD and AIMD+ algorithm in the distributed BESS.
+However, AIMD+ frequently outperformed the traditional AIMD control.
+More specifically, although the improved algorithm only resulted in a comparable reduction of voltage variation, it did outperform AIMD when decreasing line utilisation, thus reducing the frequency of line overloads.
+Additionally, the same algorithm equalised the cycling and utilisation of battery energy storage to make better use of the deployed battery assets.
 Despite being data driven, all findings indicate a similar improvement in performance when extending the traditional AIMD based control to AIMD+.
-As a result, \ref{objective-4} (outlined in Section~\ref{ch-introduction:sec:problem-statement} of this thesis) has been met since all the aforementioned benefits were achieved without the use of any ICT infrastructure whilst satisfying all assumptions that were outlined in Section~\ref{ch4:subsec:assumptions}.
+As a result, \ref{objective-4} (which was outlined in Section~\ref{ch-introduction:sec:problem-statement} of this thesis) has been met since all the aforementioned benefits were achieved without the use of any ICT infrastructure whilst satisfying all assumptions that were outlined in Section~\ref{ch4:subsec:assumptions}.

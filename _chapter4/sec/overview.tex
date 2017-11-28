@@ -1,18 +1,19 @@
 \section{Overview}
 \label{ch4:sec:overview}
 
-In the past three chapters of this thesis, on-line control methods have been developed to optimally control power injection into the LV network, and to shave or prevent load peaks.
-Chapter~\ref{ch1} and Chapter~\ref{ch2} showed how such an on-line control can be tuned to maximise BESS impact on a three-phase LV network, and how it can also minimise both daily (i.e. half-hourly) and intermittent (i.e. sub-half-hourly) demand peaks.
-In Chapter~\ref{ch3}, a smart-charging algorithm was developed to mitigate charging peaks from an EV fleet.
-By analysing the communications requirements of the algorithm, it was executed in different MAS environments, where its distributed control was run in both a synchronised and desynchronise system.
-It was found that control methods that rely on such information exchange also rely on a stable ICT infrastructure, otherwise the global performance significantly deviates from the algorithm's expected smart-charging behaviour.
-To continue contributing towards the aim of this thesis, in this chapter, Chapter~\ref{ch4}, the impact of charging an EV fleet is mitigated in a different, communication-less approach.
-More specifically, this chapter addresses \ref{objective-4} of this thesis (which is outlined in Section~\ref{ch-introduction:sec:problem-statement}), and proposes an individually tuned control algorithm for multiple household connected BESSs in order to mitigate the impact from charging EVs.
-As already discussed in the literature review, in Chapter~\ref{ch-literature}, although the adoption of EVs is often seen as the potential solution to decarbonise future transport networks, conventional charging, i.e. ``dumb-charging'', is expected to dominate the domestic charging demand \cite{Shah2015}.
-This kind of charging behaviour is expected to put the most significant burden on the power distribution network, and this burden is aimed to be mitigated by the distributed BESS control that is proposed in this chapter, Chapter~\ref{ch4}.
-More specifically, the proposed algorithm uses an individualised Set-Point Control (SPC) to regulate bi-directional battery power flow and, for stability, is built upon the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm \cite{Chiu1989}.
-As a result, the developed battery control method reduces voltage deviation, it reduces over-currents and it reduces the otherwise uneven usage of deployed batties.
-Reducing this uneven battery usage leads to a more homogeneous operation of all of the distributed BESSs and e.g. prevents unequal degradation rates and potentially unfair device utilisation.
+In the past three chapters of this thesis on-line control methods have been developed to optimally control power injection into the LV network and to shave or prevent load peaks.
+Chapter~\ref{ch1} and Chapter~\ref{ch2} showed how such an on-line control can be tuned to maximise BESS impact on a three-phase LV network and how it can also minimise both daily (i.e. half-hourly) and intermittent (i.e. sub-half-hourly) demand peaks.
+Then, in Chapter~\ref{ch3} a smart-charging algorithm was developed to mitigate charging peaks from an EV fleet.
+This algorithm's communications requirements were analysed by executing it in different MAS environments where its distributed control was run in both a synchronised and desynchronise system.
+It was found that control methods that rely on such information exchange also rely on a stable ICT infrastructure since the impact of control parameters on the algorithm's global performance significantly deviated from the expected smart-charging behaviour.
+To continue contributing towards the aim of this thesis, in this chapter, Chapter~\ref{ch4} the impact of charging an EV fleet is mitigated in a different communication-less approach.
+More specifically, this chapter addresses \ref{objective-4} of this thesis (which is outlined in Section~\ref{ch-introduction:sec:problem-statement}) and proposes an individually tuned control algorithm for multiple household connected BESSs in order to mitigate the impact from charging EVs.
+As already discussed in the literature review in Chapter~\ref{ch-literature}, although the adoption of EVs is often seen as the potential solution to decarbonise future transport networks, conventional charging (i.e. ``dumb-charging'') is expected to dominate the domestic charging demand \cite{Shah2015}.
+In the near future such a charging behaviour is expected to put the most significant burden on the power distribution network.
+This burden is aimed to be mitigated by the extended control of distributed BESS that is proposed in Chapter~\ref{ch4}.
+More specifically, the proposed algorithm uses an individualised Set-Point Control (SPC) to regulate bi-directional battery power flow and is built upon the traditional Additive-Increase Multiplicative-Decrease (AIMD) algorithm for stability \cite{Chiu1989}.
+Results show how the developed battery control method reduces voltage deviation, how it reduces over-currents and how it reduces the otherwise uneven usage of deployed batteries without relying on any ICT.
+Equalising this uneven battery usage leads to a more homogeneous operation of all of the distributed BESSs and e.g. prevents unequal degradation rates and potentially unfair device utilisation.
 
 The remainder of Chapter~\ref{ch4} is organised as follows:
 Section~\ref{ch4:sec:related-work} gives some background to related work on AIMD algorithms on which this research is based.
