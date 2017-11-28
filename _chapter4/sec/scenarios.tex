@@ -8,7 +8,8 @@ These metrics quantify the improvements caused by the different algorithms in co
 \subsection{Test Cases and Scenarios}
 \label{ch4:subsec:test-cases-and-scenarios}
 
-In all simulations, the EVs plug-in on arrival and charge at their nominal charging rate until fully charged. The BESS devices were chosen to have a capacity of 7 kWh with a maximum power rating of 2 kW (battery specifications are based on the Tesla Powerwall \cite{Powerwall2015}).
+In all simulations, the EVs plug-in on arrival and charge at their nominal charging rate until fully charged.
+The BESS devices were chosen to have a capacity of 7kWh with a maximum power rating of 2kW (i.e. battery specifications are based on the Tesla Powerwall \cite{Powerwall2015}).
 Four excerpt cases were defined with different levels of EV and storage uptakes.
 The detail of these cases are as follows:
 
@@ -23,30 +24,32 @@ A normal scenario, where only household demand is used.
 \item \label{ch4:case-b}
 A baseline or worst case scenario, in which EV uptake is 100\% and no BESS is used.
 \item \label{ch4:case-c}
-An AIMD scenario, in which EV uptake is 100\% and each household has a battery energy storage device.
-Here, each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
+An AIMD scenario in which EV uptake is 100\% and each household has a battery energy storage device.
+Here each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
 \item \label{ch4:case-d}
-An AIMD+ scenario, in which EV uptake is 100\%, and each household has a battery energy storage device.
-Here, each battery was controlled using the AIMD+ algorithm using the optimised reference voltage profile.
+An AIMD+ scenario in which EV uptake is 100\% and each household has a battery energy storage device.
+Here each battery was controlled using the AIMD+ algorithm using the optimised reference voltage profile.
 \end{enumerate}
 
-A storage uptake of 100\% was adopted to represent the worst case scenario.
-In addition to the four defined scenarios, a full set of simulations was performed with EV and storage uptake combinations of 0\% to 100\% in steps of 10\%.
+An EV uptake of 100\% was adopted to represent the worst case scenario.
+In addition to the four defined scenarios, a full set of simulations was performed with EV and storage uptake varying between 0\% to 100\% in steps of 10\%.
 
 \subsection{Performance Metric Definition}
 \label{ch4:subsec:performance-metric-definition}
 
-In order to compare the network's performance during execution of the predefined cases, three performance metrics, i.e. $\zeta^{*}$, $\zeta^{**}$ and $\zeta^{***}$, are defined.
+In order to compare the network's performance during execution of the predefined cases, three performance metrics (i.e. $\zeta^{*}$, $\zeta^{**}$ and $\zeta^{***}$) are defined.
 These metrics capture, respectively, the improvements in voltage violation mitigation, line overload reduction and the equality of battery usage.
 They are derived from the Probability Distribution (PD) of the underlying measurements and thus allow an comparison of the four scenarios.
-In the following sections, all metrics' subscripts are used to indicate which scenario they represent, e.g. $\zeta_\textbf{C}^{**}$ represents \ref{ch4:case-c} and $\zeta_\textbf{D}^{*}$ represents \ref{ch4:case-d}.
+Each PD is generated using the standard kernel density estimation.
+In the following sections, all subscripts of the metrics notate which scenario they represent (e.g. $\zeta_\textbf{C}^{**}$ represents results from \ref{ch4:case-c} and $\zeta_\textbf{D}^{*}$ represents results from \ref{ch4:case-d}).
 For reproducibility, all excerpts to showcase the performance metrics were generated from simulations based on the IEEE EU LV Test feeder.
+Only the full set of simulations is based on the combination of all network models.
 
 \subsubsection{Parameter for Voltage Improvement}
 
 Metric $\zeta^{*}$ is designed to assess the changes in voltage PD.
 For instance, a narrow voltage PD around the nominal voltage (i.e. $V_\text{ss}$) would indicate a stable voltage at all nodes of the network.
-A wider or even shifted PD would however indicate that the voltage deviation has increased, and that voltage levels are not stable at all nodes.
+A wider or even shifted PD would however indicate that the voltage deviation has increased and that voltage levels are not stable at all nodes.
 In order to compare the AIMD and AIMD+ cases (i.e. respectively \ref{ch4:case-c} and \ref{ch4:case-d}), the two voltage PD dependent performance metrics are defined:
 
 \nomenclature[L]{$\zeta_\textbf{C}^{*}$}{Metric quantifying improvements in voltage levels for a \ref{ch4:case-c} (i.e. AIMD), where $\zeta_\textbf{C}^{*} \in \mathbb{R}$}
@@ -60,20 +63,20 @@ In order to compare the AIMD and AIMD+ cases (i.e. respectively \ref{ch4:case-c}
 
 \input{_chapter4/equ/metric-voltage-scaling}
 
-Together with their scaling function, $\delta^{*}$, in Equation~\ref{ch4:equ:metric-voltage-scaling}, Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d} define the performance metrics $\zeta_\textbf{C}^{*}$ and $\zeta_\textbf{D}^{*}$, respectively.
-In these equations, $P_\textbf{B}(v)$ represents the probability distribution of all voltages for \ref{ch4:case-b} (the baseline case).
-The two metric specific PDs, i.e. $P_\textbf{C}(v)$ and $P_\textbf{D}(v)$, represent the voltage PDs for \ref{ch4:case-c} and \ref{ch4:case-d}.
+Together with their scaling function (i.e. $\delta^{*}$ in Equation~\ref{ch4:equ:metric-voltage-scaling}) Equation~\ref{ch4:equ:voltage-metric-c} and Equation~\ref{ch4:equ:voltage-metric-d} define the performance metrics $\zeta_\textbf{C}^{*}$ and $\zeta_\textbf{D}^{*}$, respectively.
+In these equations $P_\textbf{B}(v)$ represents the probability distribution of all voltages for \ref{ch4:case-b} (i.e. the baseline case).
+The two metric specific PDs (i.e. $P_\textbf{C}(v)$ and $P_\textbf{D}(v)$) represent the voltage PDs (i.e. for \ref{ch4:case-c} and \ref{ch4:case-d}, respectively).
 By computing the weighted difference, a reduction in probabilistic voltage deviation is found.
-The weighting is necessary to emphasise changes in PD that make voltages tend towards the nominal substation voltage, $V_\text{ss}$.
+The weighting is necessary to emphasise those changes in PD that do not lie close to the nominal substation voltage (i.e. $V_\text{ss}$).
 $V_\text{high}$ and $V_\text{low}$ are also used in Equation~\ref{ch4:equ:metric-voltage-scaling} to normalise the deviation at the upper and lower voltage bounds (these constants are also used in the AIMD+ algorithm in Section~\ref{ch4:sec:storage-control}).
 With $\delta^{*}(v)$, regions outside the nominal operating band are thus weighted higher than those within and surrounding the nominal voltage level.
-In summary, the proposed voltage comparison parameters, $\zeta^*_\textbf{C}$ and $\zeta^*_\textbf{D}$, show an improvement in voltage PD when they are negative, whereas a positive value implies a voltage PD with higher deviation from the nominal level, $V_\text{ss}$.
+In summary, the proposed voltage comparison parameters $\zeta^*_\textbf{C}$ and $\zeta^*_\textbf{D}$ show an improvement in voltage PD when they are negative, whereas a positive value implies a voltage PD with higher deviation from the nominal level of $V_\text{ss}$.
 
 \subsubsection{Parameter for Line Overload Reduction}
 
-Similar to measuring the voltage level improvements, all line utilisation PDs are also compared with the base case, \ref{ch4:case-b}.
+Similar to measuring the voltage level improvements, all line utilisation PDs are also compared with the base case (i.e. \ref{ch4:case-b}).
 This follows a similar approach as in Equations~\ref{ch4:equ:voltage-metric-c} to \ref{ch4:equ:metric-voltage-scaling}, but the line utilisation PD uses a different scaling factor.
-The two line utilisation performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$, for assessing, respectively, \ref{ch4:case-c} and   \ref{ch4:case-d} are defines as follows:
+The two line utilisation performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta_\textbf{D}^{**}$, for assessing, respectively, \ref{ch4:case-c} and   \ref{ch4:case-d} are defined as follows:
 
 \nomenclature[L]{$\zeta_\textbf{C}^{**}$}{Metric quantifying improvements in line utilisation for \ref{ch4:case-c}, where $\zeta_\textbf{D}^{**} \in \mathbb{R}$}
 \nomenclature[L]{$\zeta_\textbf{D}^{**}$}{Metric quantifying improvements in line utilisation for \ref{ch4:case-d}, where $\zeta_\textbf{D}^{**} \in \mathbb{R}$}
@@ -87,24 +90,24 @@ The two line utilisation performance metrics, $\zeta_\textbf{C}^{**}$ and $\zeta
 
 \input{_chapter4/equ/metric-utilisation-scaling}
 
-Here, $P_\textbf{B}(c)$ represents the baseline PD (i.e. \ref{ch4:case-b}), $P_\textbf{C}(c)$ represents the line utilisation PD for the AIMD scenario (i.e. \ref{ch4:case-c}), and $P_\textbf{D}(c)$ represents the line utilisation PD for the AIMD+ scenario (i.e. \ref{ch4:case-d}).
-Line utilisation is computed as the ratio between the simulated current in each line and the nominal rating of this line.
+Here, $P_\textbf{B}(c)$ represents the baseline PD (i.e. \ref{ch4:case-b}), $P_\textbf{C}(c)$ represents the line utilisation PD for the AIMD scenario (i.e. \ref{ch4:case-c}) and $P_\textbf{D}(c)$ represents the line utilisation PD for the AIMD+ scenario (i.e. \ref{ch4:case-d}).
+Line utilisation is computed as the ratio between the simulated current in each line and the nominal line rating.
 A value of one would therefore indicate a fully loaded line.
-To scale the comparison with the baseline case correctly, a corresponding scaling function $\delta^{**}(c)$ in Equation~\ref{ch4:equ:metric-utilisation-scaling}, is defined.
+To scale the comparison with the baseline case correctly, a corresponding scaling function $\delta^{**}(c)$ is defined in Equation~\ref{ch4:equ:metric-utilisation-scaling}.
 This function is a quadratic function since the relationship between line current and resistive losses is also quadratic.
-A minimum load, $C_\text{min}$, is however used to neglect those probabilities where lines are only lightly loaded.
+A minimum line current (i.e. $C_\text{min}$) is however used to neglect those probabilities where lines are only lightly loaded.
 The resulting scaling effect thus amplifies the impact of line current reduction beyond the line's nominal rating and reduces the weight on those improvements within the line's thermal constraints.
-For the work presented in this chapter, the value for this modifier is set to $0.5$ since only line utilisation improvements above $0.5$ p.u. are considered noteworthy.
-In summary, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation, i.e. worse results.
+For the work presented in this chapter, the value for this modifier is set to $0.5$ since only line utilisation improvements above $0.5$ per unit are considered noteworthy.
+In summary, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation or worse network operation.
 
 \subsubsection{Parameter for the Improvement of Battery Cycling}
 
 The final metric, $\zeta^{***}$, gives an indication of the inequality of battery cycling.
 Here, one battery cycle is defined as a full discharge and charge of the BESS at its maximum operating power.
-Since BESS at the bottom of the feeder are more likely to partake in voltage correcting functions than a BESS located closer to the substation, higher degradation can be expected.
+Since BESS at the bottom of the feeder are more likely to partake in voltage correcting functions than a BESS located closer to the substation, higher degradation would be expected.
 To assess the difference in cycling between different BESSs, the ratio between the peak and mean battery cycling is used.
 Previous chapters used this so called Peak-to-Average Ratio (PAR) to assess smoothness of load profiles (see Section~\ref{ch1:subsec:esmu-scheduling}, Section~\ref{ch2:subsec:load-data-and-esmu-scheduling} and Section~\ref{ch3:subsec:cases-and-metrics} of this thesis).
-In this chapter however, PAR is used to quantify the maximum deviation in battery cycling from the mean battery cycling.
+In this chapter however, PAR is used to quantify the maximum deviation in battery usage from the mean battery cycling.
 The metrics to determine the PAR for \ref{ch4:case-c} and \ref{ch4:case-d} are defined as follows:
 
 \nomenclature[L]{$U$}{Number of BESS units in the network}
@@ -113,11 +116,9 @@ The metrics to determine the PAR for \ref{ch4:case-c} and \ref{ch4:case-d} are d
 
 \input{_chapter4/equ/par-metric}
 
-In Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d}, $c^u$ is the total cycling of a BESS unit, $u$, out of a total number of units $U$.
-For simplicity, a BESS cycling vector, $\textbf{c}$, is used to combine the cycling of all devices, where $\textbf{c} = (c^u)$.
-To differentiate between \ref{ch4:case-c} and \ref{ch4:case-d}, $\textbf{c}_\textbf{C}$ (where $\textbf{c}_\textbf{C} = (c^u_\textbf{C})$) and $c_\textbf{D}^u$ (where $\textbf{c}_\textbf{D} = (c^u_\textbf{D})$) are used to indicate the total cycling of each BESS unit for the AIMD and AIM+ case, respectively.
+In Equation~\ref{ch4:equ:par-metric-c} and Equation~\ref{ch4:equ:par-metric-d} $c^u$ is the total cycling of a BESS unit (i.e. unit $u$) out of a total number of units $U$.
+For simplicity, a BESS cycling vector (i.e. $\textbf{c}$ where $\textbf{c} = (c^u)$) is used to combine the cycling of all devices.
+To differentiate between \ref{ch4:case-c} and \ref{ch4:case-d}, $\textbf{c}_\textbf{C}$ (where $\textbf{c}_\textbf{C} = (c^u_\textbf{C})$) and $\textbf{c}_\textbf{D}$ (where $\textbf{c}_\textbf{D} = (c^u_\textbf{D})$) are respectively used to indicate the total cycling of each BESS unit for the AIMD and AIM+ case.
 In the event of a perfectly equal cycling of all batteries, $\zeta^{***}_\textbf{C}$ and $\zeta^{***}_\textbf{D}$ will have a value of one.
-Yet, as batteries are more likely to operate differently, these values are expected to be greater than one.
-Therefore, values closer to one imply a more equal and therefore fairer utilisation of the deployed batteries, whilst values deviating further from one imply the opposite.
-
-
+But these values are expected to be greater than one since batteries are more likely to operate differently.
+Therefore, values closer to one imply a more equal and therefore fairer utilisation of the deployed batteries whilst values deviating further from one imply the opposite.
