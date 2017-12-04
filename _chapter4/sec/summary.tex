@@ -10,7 +10,9 @@ Comparisons were made of the standard AIMD algorithm with a fixed voltage thresh
 A set of European demand profiles and a realistic EV travel model were used to feed load data into the simulations.
 For all conducted simulations, network performance was improved by using the AIMD and AIMD+ algorithm in the distributed BESS.
 However, AIMD+ frequently outperformed the traditional AIMD control.
-More specifically, although the improved algorithm only resulted in a comparable reduction of voltage variation, it did outperform AIMD when decreasing line utilisation, thus reducing the frequency of line overloads.
-Additionally, the same algorithm equalised the cycling and utilisation of battery energy storage to make better use of the deployed battery assets.
+Although the improved algorithm only resulted in a comparable reduction of voltage variation (e.g. voltage deviation was reduced by an average of 4\% when using AIMD and an average of 5\% when using AIMD+ in a scenario of 50\% BESS uptake), it did outperform AIMD when decreasing line utilisation, thus reducing the frequency of line overloads.
+But the AIMD+ algorithm made better use of the deployed battery assets since it always reduced the corresponding metric (i.e. $\zeta^{**}_\textbf{D}$) by an additional 7.1\% in comparison to the AIMD algorithm's results (i.e. for $\zeta^{**}_\textbf{C}$).
+Additionally, the same AIMD+ algorithm equalised the cycling and utilisation of battery energy storage to since the BESS located at the top of the feeder were also included into the distributed BESS operation.
+Quantitatively, this was shown by a reduction in the PAR of battery cycling, where the AIMD+ algorithm outperformed the AIMD algorithm by an average of 1.3 for all storage uptake scenarios (i.e. when comparing $\zeta^{***}_\textbf{D}$ with $\zeta^{***}_\textbf{C}$).
 Despite being data driven, all findings indicate a similar improvement in performance when extending the traditional AIMD based control to AIMD+.
 As a result, \ref{objective-4} (which was outlined in Section~\ref{ch-introduction:sec:problem-statement} of this thesis) has been met since all the aforementioned benefits were achieved without the use of any ICT infrastructure whilst satisfying all assumptions that were outlined in Section~\ref{ch4:subsec:assumptions}.
