@@ -34,13 +34,13 @@ These findings from Chapter~\ref{ch1} and Chapter~\ref{ch2} thus form the contri
 
 However, the findings in Chapter~\ref{ch1} and Chapter~\ref{ch2} assumed the inter-device communication to e.g. allow network information to be used in the derivation of BESS control instructions.
 Chapter~\ref{ch3} therefore develops a new smart-charging algorithm and uses a novel MAS implementation that operates in an intentionally desynchronised manner.
-This desynchronisation was to assess the algorithm performance when e.g. the previously assumed communications become less reliable.
+This desynchronisation was to assess the algorithm performance when e.g. the previously assumed communication infrastructure become less reliable.
 Since uncoordinated EV charging is expected to put the most significant stress on the LV network, any algorithm failure (i.e. failure to coordinate this charging) would become noticeable.
 And indeed, the findings indicate that the algorithm's converging behaviour is less sensitive to its control parameters in a desynchronised environment, when compared to the traditional synchronised algorithm execution.
 However, when comparing the overall performance at avoiding charging peaks between the synchronised case (i.e. Figure~\ref{ch3:fig:all-sync}) with the fully desynchronised case (i.e. Figure~\ref{ch3:fig:all-async-irregular}) then this parameter sensitivity is no longer observed.
 Chapter~\ref{ch3} therefore achieved \ref{objective-3} by developing and assessing the smart-charging algorithm in regards to communication desynchronisation.
 
-From the lessons learnt in Chapter~\ref{ch3} and to circumvent the need to communications altogether, Chapter~\ref{ch4} proposes a communication-less control method for distributed BESS to reduce peak load, voltage deviation and unequal asset utilisation.
+From the lessons learnt in Chapter~\ref{ch3} and to circumvent the need for a communication infrastructure altogether, Chapter~\ref{ch4} proposes a communication-less control method for distributed BESS to reduce peak load, voltage deviation and unequal asset utilisation.
 This communication-less control is achieved by using individualised control parameters in an improved AIMD algorithm.
 Dynamic loads (i.e. uncoordinated EVs) are co-located to BESS in order to maximise the stress on the LV network that the developed control algorithm has to mitigate.
 The results show that for different EV uptake levels, BESS could always yield improvements for both AIMD and the proposed AIMD+ control methods.

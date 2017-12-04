@@ -10,9 +10,9 @@ The underlying coordination mechanism of each control entity is of particular im
 An AIMD algorithm is perfectly suited for such coordinated control despite originating from a different research area.
 In this section, Section \ref{ch4:sec:related-work} the origin and current usage of AIMD are explained to emphasise the algorithm's suitability and room for improvements.
 
-Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989} (i.e. to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}).
+Originally, AIMD algorithms were applied to congestion management in telecommunication networks using the TCP protocol \cite{Chiu1989} (i.e. to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}).
 Later, AIMD-type algorithms have also been applied to power sharing scenarios in LV distribution networks where the limited resource is the availability of power from the substation's transformer.
-For EV charging, one such algorithm was initially proposed by St{\"{u}}dli et al. in \cite{Studli2012} yet this algorithm still required a one-way communications infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
+For EV charging, one such algorithm was initially proposed by St{\"{u}}dli et al. in \cite{Studli2012} yet this algorithm still required a one-way communication infrastructure to broadcast a ``capacity event'' \cite{Studli2014, Studli2014a}.
 Later, their work was extended to include vehicle-to-grid applications with reactive power support \cite {Studli2015}, but the ICT requirements were still not reduced.
 The battery control algorithm that is proposed in this chapter thus builds upon the algorithm used by St{\"{u}}dli et al. and Mareels et al. \cite{Mareels2014}, where EV charging was organised by including bidirectional power flow and the use of a reference voltage profile that is derived from network model simulations.
 Similar to the work by Xia et al. \cite{Xia2014} who utilised local voltage measurements to adjust the charging rate, the work presented in this chapter only uses voltage measurements at the batteries' connection sites in order to control the batteries' operations.

@@ -14,7 +14,7 @@ In previous work however, physical agents directly controlled the virtual entiti
 Therefore, the physical agent is never notified of any intermediate charging profile and only receives the final schedule (i.e. scheduling is delegated to a broker).
 Scheduling and inter-agent communication is achieved by so called ``broker'' agents that follow the Brokering Interaction Protocol (BIP) to serve the final charging profile when it is requested.
 It is those broker agents that communicate and negotiate with each other by following the Contact-Net Protocol (CNP).
-All these FIPA protocols are based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunications infrastructure since it standardises the communication ontology and schemas.
+All these FIPA protocols are based on the FIPA Agent Communication Language (ACL) that is required to communicate over a shared telecommunication infrastructure since it standardises the communication ontology and schemas.
 Following this standard also opens the possibility of including different agent packages into the scheduling mechanism, but this lies outside the scope of this thesis.
 Explanations of all protocols that were used in this implementation of FIPA agents also lie outside the scope of this thesis, but for completeness they are included in Appendix~\ref{appx-b:multi-agent-systems}.
 In this work, each broker is linked to a single EV and negotiates its charging profile over the aforementioned scheduling horizon (i.e. $T_\text{sch}$).

@@ -63,7 +63,7 @@ Since this is still an open and ongoing research problem that has not yet been s
 The objectives' corresponding chapters are, respectively, Chapter~\ref{ch1} and Chapter~\ref{ch2}, and they address this research problem in two stages.
 At first the problem is addressed by developing a framework to apply scheduled BESS operation to a three-phase network in a sub-half-hourly manner but without modifying its underlying half-hourly schedule.
 Secondly, this hard constraint is removed by developing and implementing a dynamic controller that allows an operational tolerance around the pre-computed BESS schedule in order to guide BESS operation without violating its energy storage limits whilst maximising its flexibility to respond to sudden system changes.
-This a control system does however rely on a communications infrastructure in order to be implemented and deployed in reality.
+This a control system does however rely on a communication infrastructure in order to be implemented and deployed in reality.
 These infrastructures and their underlying control either follow a centralised or distributed networking paradigm.
 Both paradigms entail their specific costs and benefits which are addressed in the subsequent section, Section~\ref{ch-literature:subsec:centralised-and-distributed-control}.
 
@@ -136,17 +136,17 @@ However, research involving MAS or any distributed control for that matter does 
 A standard for MAS was established by the Foundation for Intelligent Physical Agents (FIPA) since the underlying versatility of different MAS would otherwise make integration very challenging.
 This challenge was also raised by Catterson et al. in \cite{Catterson2005}, where they tried to merge the Condition Monitoring Multi-agent System (COMMAS) \cite{McArthur2004a} with the Protection Engineering Diagnostic Agents (PEDA) system \cite{Hossack2003a}.
 They showed the inherent difficulty of combining different ontologies despite the similar underlying goals.
-Also, as the number of independent elements becomes ubiquitous requirements for a strong telecommunications infrastructure become equally important \cite{Hatziargyriou2015}.
+Also, as the number of independent elements becomes ubiquitous requirements for a strong telecommunication infrastructure become equally important \cite{Hatziargyriou2015}.
 So far synchronisation amongst agents has been taken for granted, yet MAS on multilayer networks may not automatically be synchronised \cite{He2017}.
 The impact of desynchronised information exchange on the performance of a MAS driven energy scheduling algorithm still remains an open research question.
 Therefore, assessing the impact of introducing such a desynchronisation has become part of the research that is presented in this thesis, and \ref{objective-3} as outlined in Section~\ref{ch-introduction:sec:problem-statement} aims to answer this research question.
-Regardless of the synchronised or desynchronised nature of the distributed control, they both do however require some kind of communications infrastructure which may not always be present.
+Regardless of the synchronised or desynchronised nature of the distributed control, they both do however require some kind of communication infrastructure which may not always be present.
 Therefore, the next section, Section~\ref{ch-literature:subsec:communication-less-control}, introduces control mechanisms where communication between devices is no longer a strong requirement.
 
 \subsection{Communication-less control}
 \label{ch-literature:subsec:communication-less-control}
 
-Lastly, developing control methods for distributed system that do not rely on a communications infrastructure is also an important research topic since this infrastructure may not always be available; despite this being a common assumption \cite{Hatziargyriou2015}.
+Lastly, developing control methods for distributed system that do not rely on a communication infrastructure is also an important research topic since this infrastructure may not always be available; despite this being a common assumption \cite{Hatziargyriou2015}.
 So called communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
 The current procedure of charging EVs is a perfect example of such a system since their charging commences immediately after they have been plugged into the grid.
 At the current rate of EV uptake so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
@@ -166,12 +166,12 @@ Using traditional SPC on multiple identically-configured DERs can provide an opt
 But in a communication-less environment this requirement cannot be satisfied which is why DER control algorithms have to be improved to prevent e.g. devices located furthest from the substation from being used more frequently than others.
 The algorithm that is to be extended to control several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
 Unlike traditional SPC or hysteresis control like in \cite{Jiang2007}, where a fuel-cell's bus voltage was used as input to a ramp control for active power sharing, AIMD (like MAS) has its roots in computer science.
-Originally, AIMD algorithms were applied to congestion management in communications networks using the TCP protocol \cite{Chiu1989} to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
+Originally, AIMD algorithms were applied to congestion management in telecommunication networks using the TCP protocol \cite{Chiu1989} to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.
 The same AIMD-type algorithms have previously been applied to power sharing scenarios in low voltage distribution networks where the limited resource is the availability of power throughput capacity of the substation's transformer.
-One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communications infrastructure to broadcast a so called ``capacity event'' \cite{Studli2014, Studli2014a}.
+One of the first proposed implementations for DER management was by St{\"{u}}dli et al. \cite{Studli2012}, yet their system still required a one-way communication infrastructure to broadcast a so called ``capacity event'' \cite{Studli2014, Studli2014a}.
 Later their work was extended to include Vehicle to Grid (V2G) applications with reactive power support \cite {Studli2015}, but this work still relied on a functioning and robust ICT infrastructure.
 Therefore, the question whether a truly communication-less dynamic control method can be developed (i.e. mitigating voltage deviation and capacity limitations) is still a remaining research problem.
 More specifically, this control method should not only avoid to impose any ICT requirements, but it should also aim to equalise the utilisation of all controlled devices which is not guaranteed by the traditional AIMD algorithm.
 \ref{objective-4}, as outlined in Section~\ref{ch-introduction:sec:problem-statement} aims to solve this research problem by extending AIMD to AIMD+, where natural voltage drops are taken into account to correctly skew the algorithm's control decisions for individual control entities.
-Previous research is therefore extended since previous work has only utilised common SPC thresholds for controlling each of the DERs or previous work relied still on some form of communications infrastructure.
+Previous research is therefore extended since previous work has only utilised common SPC thresholds for controlling each of the DERs or previous work relied still on some form of communication infrastructure.
 In strong contrast to the former objectives of this thesis where substation monitoring was used, the proposed AIMD+ algorithm does not require this information or any communication infrastructure for that matter.
