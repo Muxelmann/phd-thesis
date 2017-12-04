@@ -31,11 +31,12 @@ Since most of these EVs are expected to charge at home and (at least initially) 
 \nomenclature[G]{ENW}{Electricity North West}
 
 Figure~\ref{ch-introduction:fig:electricity-peak-demand} supports this fear since uncontrolled proliferation of LCTs and EVs (as shown in the ``Consumer Power'' scenario) will add more than 20GW of power demand onto today's peak power levels.
-Such a rise in peak power would exceed today's supply capacities, especially since the new energy mix and decommissioning of fossil fuelled power plants have resulted in this year's winter capacity margin to only lie between 3.7GW and 4.9GW \cite{NationalGrid2017a}.
+Such a rise in peak power would exceed today's supply capacities, especially since the new energy mix and decommissioning of fossil fuelled power plants have resulted in this year's winter capacity margin to only lie between 3.7GW and 4.9GW \cite{NationalGrid2017a} (this equates to a 7.2\% margin whilst in e.g. 2010 this margin was at 15\% with 11.7GW \cite{NationalGrid2010}).
+
 Although FES 2017 expects the ``Two Degrees'' scenario to also show an increase in peak power, better coordination and control is expected to mitigate half of the 20GW peak increase.
-From this point of view, today's narrow capacity margins could already cater for nearly half of the increase in peak demand that is expected to occur over the next 33 years, i.e. until 2050.
+From this point of view, today's narrow capacity margins could already cater for nearly half of the increase in peak demand that is expected to occur over the next 33 years (i.e. until 2050).
 Whilst UK power transmission networks are being upgraded and will therefore be capable of handling this increased power demand, the increasing stress on the distribution network still remains.
-This is due to the fact that loads in the residential and commercial sectors are typically situated at the network edge, i.e. in the LV distribution network, and reinforcing these networks can result in costly service disruptions.
+This stress is due to the fact that loads in the residential and commercial sectors are typically situated at the network edge (i.e. in the LV distribution network) and reinforcing these networks can result in costly service disruptions.
 
 \subsection{Topology and challenges of the UK electricity network}
 \label{ch-introduction:subsec:topology-of-lv-network}
@@ -50,7 +51,7 @@ Such a high voltage requires a relatively small current to transmit the generate
 Regional supply points step-down this high voltage to 132kV\footnote{In some cases regional supply points provide 127kV instead of 132kV.} to deliver power to Distribution Network Operators (DNOs).
 From the primary level of the distribution network and onwards, this so called medium-voltage is stepped down to 33kV, then 11kV and finally 400V phase to phase (P2P), in order to cater for heavy industry, medium clients and household sized customers, respectively.
 In the UK, all households are connected to one of the three phases of the distribution network and therefore are supplied at a nominal voltage of 230V (phase to neutral - P2N).
-To achieve a balanced network, each customer's phase allocation is chosen at random.
+To achieve a balanced network, each customer's phase allocation is chosen at pseudo-random\footnote{Guidance for customer phase allocation is not explicitly specified in the network's design framework~\cite{UKPowerNetworks2014}. Therefore, choosing the ``top phase'' qualifies as pseudo-random phase allocation with statutory compliance~\cite{StatutoryInstruments2015}.}.
 
 \nomenclature[G]{DER}{Distributed Energy Resource}
 \nomenclature[G]{ADMD}{After Diversity Maximum Demand}
