@@ -26,9 +26,9 @@ Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic pr
 These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
 This is why recent research begun including uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
 Other work frequently re-evaluates BESS schedules to control and adjust its schedules after completing individual decision epochs \cite{Wang2014a}.
-Nonetheless, load forecasting remain a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
+Nonetheless, load forecasting remains a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
 This fact was emphasised by Rowe et al. in \cite{Rowe2014a}, and they developed a filtering mechanism for scheduling algorithms to reduce peak load in LV networks due to the presence of forecast errors.
-They also highlight the fact that most day-ahead load forecast only predict at a temporal resolution down to half-hourly periods which makes estimating errors at higher temporal resolution less dominant.
+They also highlight the fact that most day-ahead load forecasts only predict at a temporal resolution down to half-hourly periods which makes estimating errors at higher temporal resolution less dominant.
 The reason behind choosing this half-hourly forecasting period was pointed out by Haben et al. in \cite{Poghosyan2014, Haben2014}, as they argue that forecasts at half-hourly resolution yield the best compromise between high accuracy and high temporal resolution.
 Therefore, half-hourly forecasts have become the standard for generating any resource commitment and resource operation schedules.
 However, sub-half-hourly load volatility imposes the biggest stress on the network and it is this volatility that cannot be addressed when relying on half-hourly forecast alone.
@@ -52,11 +52,11 @@ Some MPC examples include Auto-Regressive (AR) models \cite{Li2009, Nie2011}, fu
 Advancements in computational power allowed ANN to gain traction, and as shown in the study by Quan et al. in \cite{Quan2014} ANN is becoming a promising method to generate load forecasts.
 In fact, in their study, Quan et al. proved how ANN can outperform AR and fuzzy logic models given that the ANN was optimally trained.
 Therefore, MPC can yield a acceptable prediction performance for linear systems when its complexity is sufficiently increased.
-For instance, Reihani et al. in \cite{Reihani2016} use the most recent 20 minutes of load information with a complex-valued ANN to predict the next 20 minutes of minutely load variations.
+For instance, Reihani et al. in \cite{Reihani2016} used the most recent 20 minutes of load information with a complex-valued ANN to predict the next 20 minutes of minutely load variations.
 Since their raw forecasts were more erratic than the actual load profile, a Kalman filter was implemented to smoothen the MPC's output, yet this step introduced significant discrepancies between the actual and the forecasted load.
 Therefore they increased MPC complexity even further by taking into account parallel time-series, i.e. they considered the same 20 minutes from previous days in the prediction mechanism.
 This addition produced significantly better results and they shaved daily peaks by around 300kW in the medium-voltage network.
-Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes deployment of such systems costly or difficult.
+Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes deployment of such systems costly and/or difficult.
 
 Therefore, finding a way of combining both off-line control (i.e. scheduled BESS operation which is executed at half-hourly resolution) with on-line control (i.e. a mechanism that is responsive to power system changes) allows application of real-time corrections to the BESS schedule.
 Since this is still an open and ongoing research problem that has not yet been solved, \ref{objective-1} and \ref{objective-2}, as outlined in Section~\ref{ch-introduction:sec:problem-statement}, aim to develop and present a control mechanism that utilises the benefits from scheduled and real-time control.
@@ -148,9 +148,9 @@ Therefore, the next section, Section~\ref{ch-literature:subsec:communication-les
 
 Lastly, developing control methods for distributed system that do not rely on a communication infrastructure is also an important research topic since this infrastructure may not always be available; despite this being a common assumption \cite{Hatziargyriou2015}.
 So called communication-less systems are typically collections of multiple ``dumb'' devices that follow their own control instructions without any external inputs.
-The current procedure of charging EVs is a perfect example of such a system since their charging commences immediately after they have been plugged into the grid.
+The current procedure of charging EVs is a perfect example of such a system since their charging typically commences immediately after they have been plugged into the grid.
 At the current rate of EV uptake so called ``dumb charging'' (or any ``dumb action'' for that matter) has high potential of causing significant network issues \cite{Hota2014, Liu2015a}; i.e. voltage deviations, equipment overloads, asset damage and system outages.
-This issue is amplified since the EV uptake is anticipated to increase as driving range increases, cost of purchase reduces and the emphasis on leading an environmentally-friendly lifestyle is favoured more \cite{Shah2015}.
+This issue is amplified since the EV uptake is anticipated to increase as driving range increases, cost of purchase decreases and the emphasis on leading an environmentally-friendly lifestyle is favoured more \cite{Shah2015}.
 ICT reliant distributed control methods aim to circumvent these issues by using Demand Side Management (DSM) strategies.
 In \cite{Mohsenian-Rad2010} for example, Mohsenian-Rad et al. based developed a DSM mechanism that was based on game theory where multiple users engaged in the energy market to minimise the Peak-to-Average Ratio (PAR) of the resulting demand profile.
 Their results show that both minimising financial cost or the PAR of the resulting demand profile resulted in a 21.9\% reduction in PAR when compared to a scenario without scheduling the energy consumer.
