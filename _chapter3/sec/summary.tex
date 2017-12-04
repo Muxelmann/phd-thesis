@@ -1,3 +1,5 @@
+\pagebreak
+
 \section{Summary}
 \label{ch3:sec:summary}
 
@@ -9,9 +11,15 @@ Two performance metrics (i.e. $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$) indicat
 Reducing these metrics is therefore the key function of the smart-charging algorithm, despite the fact that the algorithm is not metric dependent or metric driven.
 
 Originally, the presented smart-charging algorithm was designed for synchronised MAS execution which means that all agents obtain a network update to calculate their charging profile at exactly the same time.
-The dependence on the control parameters significantly changed when desynchronising the agent communication (i.e. compared to the synchronised execution of the algorithm).
+For properly chosen values of $\alpha$ and $\beta$, this resulted in an algorithm convergence in accordance to the D'Alembert Criterion which was explained in Section~\ref{ch3:subsec:cases-and-metrics}.
+Extreme control parameters (i.e. where $\alpha=1.0$ and $\beta=1.0$) resulted in an oscillating behaviour where an aggregated charging spike of more than 200kW would continue to persist.
+This persistence lead to the conclusions that the underlying scheduling algorithm is highly dependent on a correct choice of values for $\alpha$ and $\beta$.
+The dependence on these control parameters is however significantly reduced when desynchronising the agent communication (i.e. compared to the synchronised execution of the algorithm).
 In fact regular and irregular desynchronisation yielded much lower values for $\zeta^\text{PAR}$ and $\zeta^\text{TRA}$ as seen in Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular} and Section~\ref{ch3:subsec:algorithm-performance-desynchronised-irregular}.
-Convergence towards the final performance values on the other hand did remained similar to the synchronised algorithm execution despite the difference in MAS execution behaviour.
+For example, in the synchronised case $\zeta^\text{PAR}$ converged to a value below 5 after 100 algorithm if the control parameters where chosen for $\alpha < 0.2$ or $\beta < 0.1$.
+The desynchronised execution however showed that after 100 algorithm iterations $\zeta^\text{PAR}$ values always reach a value below 5.
+
+The rate of convergence towards these final performance values on the other hand did maintain a similar distribution to the synchronised algorithm execution despite the difference in MAS execution behaviour.
 Therefore, the algorithm's valley-filling behaviour was still upheld, yet the interplay between agents that implement this algorithm significantly changed the outcome of the aggregated result.
 This work thus completes \ref{objective-3} of this thesis (which was outlined in Section~\ref{ch-introduction:sec:problem-statement}) since it shows the capabilities of a smart-charging algorithm and highlights the importance of considering agent de/synchronisation when developing a multi-controller DSM network.
 Such findings are especially relevant due to the inherent difficulty and cost associated with the synchronisation of a distributed control system.
