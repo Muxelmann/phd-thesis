@@ -9,7 +9,7 @@ Particularly the decarbonisation of heat and transport sectors are two areas of 
 \nomenclature[G]{FES}{Future Energy Scenarios}
 
 As uptake of these LCTs continues and they start penetrating power distribution networks, stress on these networks will also continue to increase, resulting in operating issues that can eventually lead to additional service disruptions.
-Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, and instead clusters of early adopters are predicted to form, leading to certain LV networks exceeding their operational constraints even at a relatively low national rate of LCT adaption \cite{Poghosyan2014}.
+Furthermore, the uptake of LCTs is not expected to progress evenly throughout the entire power network, but instead clusters of early adopters are predicted to form, leading to certain LV networks exceeding their operational constraints even at a relatively low national rate of LCT adaption \cite{Poghosyan2014}.
 The scale of this energy transition becomes becomes particularly apparent when referring to the UK's 2017 Future Energy Scenarios (FES) that compare the predicted future load scenarios for the upcoming decades \cite{FES2017}.
 
 \input{_introduction/fig/electricity-demand-residential}
@@ -95,7 +95,7 @@ Therefore, alternatives to defer or avoid network reinforcements have been sough
 Most promising alternatives are to install flexible and controllable Distributed Energy Resources (DERs), or more specifically: Battery Energy Storage Solutions (BESS) \cite{Wade2010}.
 BESS has not only seen significant advancements in technology, but also received increasing attention in both academic studies and industry trials \cite{Palizban2016}.
 
-Installing BESS on a strategic location in the LV network brings several advantages to DNOs' control over their network performance.
+Installing BESS at a strategic location in the LV network brings several advantages to DNOs' control over their network performance.
 Roles for and advantages of energy storage technology are extensively reviewed in Section~\ref{ch-literature:sec:role-of-energy-storage-a-survey}.
 However, a few examples of potential benefits from BESS do include the regulation of voltages in order to to operate within statutory voltage bands \cite{Yang2014}, shaving peak loads to relieve stress from the installed network assets \cite{Bennett2015}, and reducing phase unbalance to increase network efficiency \cite{Wang2015b}.
 These three examples all implement a similar control paradigm where BESS is charged during periods of low demand and discharged at peak demand periods in order to achieve the best possible impact.
@@ -128,12 +128,12 @@ Limiting their charge rates based upon the current network demand as well as the
 A similar key term is the ``smart grid'' where DER communicate and cooperate in order to e.g. shed load using Demand Side Response (DSR) or maintain microgrid operation in fault situations \cite{Samadi2012, Liu2014, Liang2014}.
 However, the fundamental requirement for the successful realisation of any such smart control method is the reliable exchange of information amongst the participating entities that physically operate within the power network.
 
-Therefore smart control does not only require robust control mechanisms, but also a robust communications infrastructure.
+Therefore smart control does not only require robust control mechanisms, but also a robust communication infrastructure.
 In Section~\ref{ch-literature:subsec:centralised-and-distributed-control}, literature that reviews and compares centralised control methods with distributed control paradigms will show the implicit need to synchronise the coordination of multiple smart devices to achieve their promised benefits.
 It will be shown that all underlying control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume a robust communication infrastructure where communication is synchronised.
-For instance, this requirement is assumed whenever messages are received and executed immediately and without delay after they have been dispatched or whenever a single control instruction result in the synchronised reaction of all controlled entities.
-In reality however, the strength of the communication link may vary with e.g. weather or current network traffic, and fixed message delays and exact device synchronisation can no longer be guaranteed.
-Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communications infrastructure is of interest.
+For instance, this requirement is assumed whenever messages are received and executed immediately (i.e. without delay) after they have been dispatched or whenever a single control instruction result in the synchronised reaction of all controlled entities.
+In reality however, the strength of the communication link may vary with e.g. weather or current network traffic, so that fixed message delays and exact device synchronisation can no longer be guaranteed.
+Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communication infrastructure is of interest.
 As a result the research question can be risen whether communication desynchronisation can result in equal or better coordination performance; i.e. in reducing peak load.
 
 The alternative to relying on telecommunication in order to coordinate DERs is to remove the requirement for device communication altogether.
