@@ -2,7 +2,7 @@
 \label{ch-introduction:sec:problem-statement}
 
 The focus of the research presented in this thesis is put on aiding DNOs to manage and operate their power distribution networks by installing energy storage into their distribution networks in order to counteract the effects from electrification of heat and transport sectors as well as the decarbonisation of the grid itself.
-More specifically, BESS is the main focus since it is a rapidly improving technology that has the potential to defer or even mitigate costly network reinforcements.
+Therefore BESS control is the main focus of this work since BESS is a rapidly improving technology that has the potential to defer or even mitigate costly network reinforcements.
 Modern battery technology allows the storage of electrical energy in ever-decreasing form factors, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
 As shown in the literature review in Chapter~\ref{ch-literature}, methods to control BESS, e.g. in order to optimise power flow, have been and still are of great research interest.
 
@@ -21,9 +21,9 @@ style=multiline,
 leftmargin=*,
 label=\textbf{Objective~\arabic*}
 ]
-	\item \label{objective-1} Develop a control mechanism for a single BESS to further improve three-phase network operation without deviating from its predetermined BESS schedule.
-	\item \label{objective-2} Develop a control mechanism that dynamically adjusts BESS schedules to reducing load peaks by combining both off-line and on-line control.
-	\item \label{objective-3} Develop and compare operation of a charge scheduling algorithm for multiple entities in a synchronised and desynchronised communications environment.
-	\item \label{objective-4} Develop a control strategy for distributed BESSs by individually assigning control parameters to an extended charge-discharge-algorithm.
+	\item \label{objective-1} Develop a control mechanism for a single BESS to further improve three-phase network operation without deviating from its predetermined BESS schedule by adjusting BESS power phasors and reactive power injection.
+	\item \label{objective-2} Develop a control mechanism that dynamically adjusts half-hourly BESS schedules on a sub-half-hourly basis in order to reduce daily load peaks by combining control elements from both off-line and on-line control.
+	\item \label{objective-3} Develop and compare operation of a scheduling algorithm that manages the charging behaviour of multiple BESS by submitting it to performance analysis in a synchronised and desynchronised communications environment.
+	\item \label{objective-4} Develop a communication less control strategy for distributed BESS by extending the traditional and robust Additive Increase Multiplicative Decrease (AIMD) algorithm and individually assigning control parameters.
 \end{enumerate}
 
