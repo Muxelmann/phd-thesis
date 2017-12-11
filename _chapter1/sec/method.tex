@@ -5,13 +5,13 @@ Previously, in Section~\ref{ch1:sec:key-network-parameters}, the key network par
 A summary of all key network parameters that are used in this work is listed below, but the full notation is defined in the nomenclature of this thesis:
 
 \begin{itemize}
-	\item substation phase voltages, $\textbf{v}_{ss}(t) = (v_{\text{ss},\phi}(t))$,
-	\item ESMU phase voltages, $\textbf{v}_\text{ESMU}(t) = (v_{\text{ESMU},\phi}(t))$,
-	\item all load voltages, $\textbf{v}_\text{load}(t) = (v_{\text{load},i}(t))$,
-	\item substation apparent phase power, $\textbf{s}_{ss}(t) = (s_{\text{ss},\phi}(t))$,
-	\item substation phase currents, $\textbf{i}_{ss}(t) = (i_{\text{ss},\phi}(t))$,
-	\item all line currents, $\textbf{i}_\text{line}(t) = (i_{\text{line},l,\phi}(t))$, and
-	\item all network losses, $s_\text{losses}(t)$.
+	\item substation phase voltages, $\textbf{v}_{ss}(t) = (v_{\text{ss},\phi}(t))$ where $\textbf{v}_{ss}(t) \in \mathbb{R}^\Phi$,
+	\item ESMU phase voltages, $\textbf{v}_\text{ESMU}(t) = (v_{\text{ESMU},\phi}(t))$ where $\textbf{v}_\text{ESMU}(t) \in \mathbb{C}^\Phi$,
+	\item all load voltages, $\textbf{C}_\text{load}(t) = (v_{\text{load},i,\phi}(t))$ where $\textbf{V}_\text{load}(t) \in \mathbb{C}^{I\times\Phi}$,
+	\item substation apparent phase power, $\textbf{s}_{ss}(t) = (s_{\text{ss},\phi}(t))$ where $\textbf{s}_{ss}(t) \in \mathbb{C}^\Phi$,
+	\item substation phase currents, $\textbf{i}_{ss}(t) = (i_{\text{ss},\phi}(t))$ where $\textbf{i}_{ss}(t) \in \mathbb{R}^\Phi$,
+	\item all line currents, $\textbf{I}_\text{line}(t) = (i_{\text{line},l,\phi}(t))$ where $\textbf{I}_\text{line}(t) \in \mathbb{R}^{L\times\Phi}$, and
+	\item all network losses, $s_\text{losses}(t)$ where $s_\text{losses}(t) \in \mathbb{C}$.
 \end{itemize}
 
 In this section, the method of adjusting the predetermined ESMU schedule on a sub-half-hourly basis is presented.
