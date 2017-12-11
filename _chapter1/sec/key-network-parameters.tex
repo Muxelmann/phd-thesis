@@ -28,7 +28,7 @@ A list of all key network parameters is presented below and in this list all the
 \begin{itemize}
 	\item Voltages at substation transformer's secondary winding, i.e. $\textbf{v}_{ss}(t)$
 	\item Voltages at ESMU's PCC, i.e. $\textbf{v}_\text{ESMU}(t)$
-	\item Voltages at customer lateral$^{\dagger}$, i.e. $\textbf{v}_\text{load}(t)$
+	\item Voltages at customer lateral$^{\dagger}$, i.e. $\textbf{V}_\text{load}(t)$
 	\item Total power flow, i.e. $s_\text{net}(t)$
 	\item Substation line utilisation, i.e. $\textbf{i}_{ss}(t)$
 	\item Maximum line utilisation$^{\dagger}$, i.e. $\textbf{i}_\text{line}(t)$
@@ -113,8 +113,8 @@ Figure~\ref{ch1:fig:voltage-drop-for-loads-along-feeder} then shows all load bus
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
 
-\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $\textbf{v}_\text{load}(t) = (v_{\text{load},i,\phi}(t))$ and $v_{\text{load},i,\phi}(t) \in \mathbb{C}$}
-\nomenclature[I]{$\textbf{v}_\text{load}(t)$}{Multi-phase load voltage vector at time $t$, where $\textbf{v}_\text{load}(t) = (v_{\text{load},i,\phi}(t))$ and $\textbf{v}_\text{load}(t) \in \mathbb{C}^{I\times\Phi}$}
+\nomenclature[I]{$v_{\text{load},i,\phi}(t)$}{Phase voltage of load $i$ for phase $\phi$ at time $t$, where $\textbf{V}_\text{load}(t) = (v_{\text{load},i,\phi}(t))$ and $v_{\text{load},i,\phi}(t) \in \mathbb{C}$}
+\nomenclature[I]{$\textbf{V}_\text{load}(t)$}{Multi-phase load voltage vector at time $t$, where $\textbf{V}_\text{load}(t) = (v_{\text{load},i,\phi}(t))$ and $\textbf{V}_\text{load}(t) \in \mathbb{C}^{I\times\Phi}$}
 \nomenclature[I]{$\zeta_\text{load voltage}(\textbf{v}(t))$}{Voltage deviation cost for load voltage vector $\textbf{v}$ at time $t$ and $\zeta_\text{load voltage}(\textbf{v}(t)) \in \mathbb{R}_{\geq0}$}
 
 In this figure, two observations can be made.
@@ -130,7 +130,7 @@ More specifically, only the worst deviation cost is used.
 By reducing this number to the worst case any implemented solver thus focuses on the edges of the minimisation problem.
 This focus is of particular importance especially if the impact of the ESMU on some customer voltages is comparatively low.
 An aggregated voltage deviation cost would potentially obfuscate this impact and prevent the solver from effectively targeting the worst cases.
-Therefore, the customer (or load) voltage is defined as $\textbf{v}_\text{load}(t)$, where $\textbf{v}_{load}(t) = (v_{\text{load},i,\phi}(t))$, and used in the new cost function, $\zeta_\text{load voltage}(\textbf{v}_\text{load}(t))$, which is defined as:
+Therefore, the customer (or load) voltage is defined as $\textbf{V}_\text{load}(t)$, where $\textbf{v}_{load}(t) = (v_{\text{load},i,\phi}(t))$, and used in the new cost function, $\zeta_\text{load voltage}(\textbf{V}_\text{load}(t))$, which is defined as:
 
 \input{_chapter1/equ/load-voltage-deviation}
 
