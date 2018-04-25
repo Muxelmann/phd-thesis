@@ -10,30 +10,36 @@
 
 The thesis is **done**! Chapters 1 through 6 have been reviewed by my supervisors Ben and William. Although the conclusion has not yet been reviewed, I feel confident that it's ok.
 
-The next step, before submission, is to proofread the current copy and then send the final draft to Ben and William for one last check.
+The viva is over and I passed with **minor corrections**. Now These corrections need to be applied according to the documents in the [`README/post-viva`](https://github.com/Muxelmann/phd-thesis/tree/master/README/post-viva) directory. My plan is to finish all corrections by the 22nd of June 2018, to still graduate in July 2018.
 
-## Structure & Progress
+## Correction progress
+
+1. Received corrections - `24 April 2018`
+    - Identify scope of added discussions and corrections
+    - Prepare response to internal examiner with intended changes
+    - Assure scope will satisfy examiner **before** applying corrections
+
+## Thesis structure
 
 ### Main Chapters
 
-1. [x] Abstract
-- [x] Declaration
-- [x] Dedication
-- [x] Acknowledgements
-- [x] Table of Contents
-- [x] Table of Figures
-- [x] Abbreviations & Nomenclature
-- [x] `Ch 1` Introduction
-- [x] `Ch 2` Literature Review of Storage Control
-- [x] `Ch 3` Improving network performance by adjusting battery operation at sub-half-hourly resolution
-- [x] `Ch 4` Real-Time Adjustment of Battery Operation using MPC Guided Schedule Deviation
-- [x] `Ch 5` Effects of Control Instruction Desynchronisation in a Distributed MAS of Smart-Charging Batteries
-- [x] `Ch 6` Cooperative Operation of Distributed Batteries without Communications Infrastructure Needs
-- [x] `Ch 7` Conclusion
-- [x] Bibliography
+1. Abstract
+- Declaration
+- Acknowledgements
+- Table of Contents
+- Table of Figures
+- Abbreviations & Nomenclature
+- `Ch 1` Introduction
+- `Ch 2` Literature Review of Storage Control
+- `Ch 3` Improving network performance by adjusting battery operation at sub-half-hourly resolution
+- `Ch 4` Real-Time Adjustment of Battery Operation using MPC Guided Schedule Deviation
+- `Ch 5` Effects of Control Instruction Desynchronisation in a Distributed MAS of Smart-Charging Batteries
+- `Ch 6` Cooperative Operation of Distributed Batteries without Communications Infrastructure Needs
+- `Ch 7` Conclusion
+- Bibliography
 
 ### Appendices
 
-- [x] A1 : Additional results
-- [x] A2 : Multi-agent system information
-- [ ] A4 : OpenDSS interface (optional)
+- A1 : Additional results
+- A2 : Multi-agent system information
+- A3 : OpenDSS interface (optional - *not written*)
