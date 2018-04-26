@@ -78,9 +78,6 @@
 %  ypos=15
 %]{DRAFT}
 
-% Change this to "white" when done (or remove all \hl{ ... }, LOL!!!)
-\sethlcolor{green}
-
 \setlength\epigraphrule{0pt}
 \renewcommand{\epigraphflush}{center}
 \setlength{\epigraphwidth}{0.95\textwidth}
@@ -107,6 +104,12 @@
   \ifthenelse{\equal{#1}{L}}{\item[\textbf{Symbols used in Chapter 6}]}{%
   {}}}}}}}}
 % -----------------------------------------
+
+% Change this to the 2nd option (or remove all \hl{ ... }, LOL!!!)
+\newcommand{\hladd}[1]{\sethlcolor{green}\hl{#1}}
+\newcommand{\hlrem}[1]{\sethlcolor{red}\hl{#1}}
+%\newcommand{\hladd}[1]{\sethlcolor{white}\hl{#1}}
+%\newcommand{\hlrem}[1]{}
 
 % Generate the nomenclature (includes glossary)
 \makenomenclature
