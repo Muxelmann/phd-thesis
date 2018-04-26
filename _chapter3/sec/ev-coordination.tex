@@ -20,7 +20,7 @@ Finally, to study the convergence of the algorithm a convergence criteria as wel
 \nomenclature[K]{$P^\text{min}_{u}$}{Maximum EV charging power }
 
 In order to simulate the fleet of charging EVs, $U$ where $U \in \mathbb{Z}^{>0}$, each EV, $u$ where $u \in \{1, \dots, U\}$, is modelled as a load that needs to consume a certain amount of energy, $E_u$ where $E_u \in \mathbb{R}^{\geq0}$, over the course of a scheduling horizon, $T^\text{sch}$ where $T^\text{sch} \in \mathbb{Z}^{>0}$.
-Unlike typical load profiles (e.g. household load profiles) EVs are modelled to not have a predetermined load profile.
+Unlike typical load profiles (\hlrem{e.g.}\hladd{for example} household load profiles) EVs are modelled to not have a predetermined load profile.
 Instead they are flexible so they schedule their own demand, $p^\text{EV}_{u,n}(t)$ where $\textbf{p}^\text{EV}_{u,n} = (p^\text{EV}_{u,n}(t))$, at any moment time, $t$ where $t \in \mathbb{Z}^{\geq0}$.
 In other words, EVs can autonomously assign their own charging plan over the predetermined number of future time-slots, $T^\text{sch}$.
 Due to limitations in on-board power electronics each EV's maximum charge rate, $P^\text{max}_{u}$ where $P^\text{max}_{u} \in \mathbb{R}^{>0}$, is restricted and may not be exceeded.
@@ -86,7 +86,7 @@ It is this reallocation to different time-slots that reduces and eventually comp
 For every iteration, $n$, in Figure~\ref{ch3:fig:valley-filling-procedure}, charging profiles are added onto a base network load, $\textbf{p}^\text{base}_{n}$, where $\textbf{p}^\text{base}_{n} = (p^\text{base}_{n}(t))$.
 This base load is shown as the bold black line and does not change throughout the EV scheduling procedure.
 For every iteration numbered $n$, the charging profile of EV number $u$ is defined as $p^\text{EV}_{u,n}$, where $\textbf{p}^\text{EV}_n = (p^\text{EV}_{u,n}(t))$ (i.e. $\textbf{p}^\text{EV}_n$ consists of all EV charging profiles at iteration $n$).
-During the first iteration however (e.g. Figure~\ref{ch3:subfig:valley-filling-1} where $n=1$) this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met (i.e. consecutive time-slots $t$ are chosen where $t = \text{argmin}(\textbf{p}^\text{base})$).
+During the first iteration however (\hlrem{e.g.}\hladd{for example} Figure~\ref{ch3:subfig:valley-filling-1} where $n=1$) this charging profile is determined by assigning the maximum EV charging power to the time-slots of lowest load, until the total EV energy demand is met (i.e. consecutive time-slots $t$ are chosen where $t = \text{argmin}(\textbf{p}^\text{base})$).
 Resulting is an aggregated charging power that is likely to contain at least one new charging spike since all EVs scheduled their profiles based upon the same knowledge of $\textbf{p}^\text{base}_{n}$.
 This spike is seen on an updated (i.e. temporary) demand profile, $\hat{\textbf{p}}^\text{base}_{n}$, where $\hat{\textbf{p}}^\text{base}_{n} = (\hat{p}^\text{base}_{n}(t))$, is defined as:
 
@@ -95,7 +95,7 @@ This spike is seen on an updated (i.e. temporary) demand profile, $\hat{\textbf{
 \nomenclature[K]{$\hat{p}^\text{EV}_{u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}^\text{EV}_{u, n}(t) \in \textbf{Z}^{\geq0}$}
 \nomenclature[K]{$\hat{\textbf{p}}^\text{EV}_{u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}^\text{EV}_{u, n}(t) \in \hat{\textbf{p}}^\text{EV}_{u, n}$}
 
-For the next iteration $n+1$ (e.g. Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$) a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
+For the next iteration $n+1$ (\hlrem{e.g.}\hladd{for example} Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$) a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
 Subsequently, the spike in the resulting $\hat{\textbf{p}}^\text{base}_{n}$ is reduced, yet the energy that has been undone needs to be reallocated to meet the EVs' demands.
 The amount by which $\textbf{p}^\text{EV}_{n-1}$ is reduced is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
 A new reduced (i.e. temporary) charging vector $\hat{p}^\text{EV}_{u, n}(t)$ is therefore defined as:

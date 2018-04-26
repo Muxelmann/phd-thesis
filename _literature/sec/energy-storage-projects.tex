@@ -2,7 +2,7 @@
 \label{ch-literature:sec:energy-storage}
 
 The challenge for DNOs to manage their distribution networks is caused by the DER's and LCT's difficult predictability, their volatile nature, and the weakness of the network into which they are deployed.
-If left unmanaged, voltage fluctuations caused by e.g. PV systems \cite{Woyte2006, Bravo2015} or capacity shortages due to additional loads like EVs \cite{Mohd2008a, Koureoumpezis2010} will threaten the power system's stability.
+If left unmanaged, voltage fluctuations caused \hladd{for example} by \hlrem{e.g. }PV systems \cite{Woyte2006, Bravo2015} or capacity shortages due to additional loads like EVs \cite{Mohd2008a, Koureoumpezis2010} will threaten the power system's stability.
 Improved network management methods that are summarised under the term ``smart grid'' have thus become increasingly popular to counteract the negative impact from DERs and LCTs \cite{Panteli2015}.
 However, when deferring the reinforcement or retrofitting of network assets to construct such a smart grid, deployment of BESS can provide a significant contribution to the integration of DERs and LCTs.
 For instance, Grillo et al. in \cite{Grillo2012} showed how probabilistic price driven storage control successfully supports renewable integration.
@@ -40,7 +40,7 @@ Installing a BESS at a strategic location (i.e. closer to the regions where volt
 
 As stated by Wade et al. \cite{Wade2009}, allocation of the BESS's limited storage capacity so it can solve the voltage problem most effectively is still a sophisticated challenge.
 Nonetheless, by installing a 200kWh unit that is rated at 600kW in a project that was carried out with \textit{EDF Energy}, they showed the potential of BESS in a network to provide targeted voltage support \cite{Wade2010}.
-Their results for a 0.4MWh BESS achieved a reduced voltage variation by 2.4\% which resulted in a complete elimination of any ``out-of-limit'' voltage events, and a 70.96\% reduction of all network events (including e.g. power events) over the annual simulation period.
+Their results for a 0.4MWh BESS achieved a reduced voltage variation by 2.4\% which resulted in a complete elimination of any ``out-of-limit'' voltage events, and a 70.96\% reduction of all network events (including \hlrem{e.g. }power events) over the annual simulation period.
 A demonstration project in Germany that was titled ``More Microgrids'' used four 180kWh batteries and demonstrated how both voltage stability as well as grid independence could be improved \cite{Overbeeke2010}.
 In this ``More Microgrids'' project a collection of holiday homes were fitted with a distributed PV system that is capable of generating a peak power of 315kW, and BESS was used to maximise the utility from this generation.
 However, due to the relatively small size of the network, due to the different behavioural patterns of holiday home occupants, and due to the different means of connecting customers to the German three-phase network, voltage deviation and phase unbalance issues were not as big as a concern as they are for UK distribution feeders.
@@ -51,7 +51,7 @@ Results from these early field trials show how BESS store the excess renewable p
 But neither high nor low voltage events could be omitted once capacity limits were reached.
 An oversized BESS would be less likely to meet its operating limits, but the associated cost makes this oversizing unfeasible.
 Findings therefore indicate that not only the sizing, but also the BESS control method is of significant importance.
-Nonetheless, continuous voltage violations that require strong voltage support have not yet been encountered in any of these projects, and instead occasional violations accumulating to e.g. less than an average of 3.4 minutes per day are the norm \cite{Sugihara2013}.
+Nonetheless, continuous voltage violations that require strong voltage support have not yet been encountered in any of these projects, and instead occasional violations accumulating to \hlrem{e.g. }less than an average of \hladd{1.1 minutes (instead of 2.3 minutes) }per day are the norm \cite{Sugihara2013}.
 Also, the majority of recorded low-voltage events on the UK distribution networks (i.e. when voltage levels fall below 216.2V) are caused by anomalous network events or are due to failures of the measurement equipment \cite{UKPowerNetworks2014a}.
 Therefore the complementing task of choosing correct control methods to optimally manage the network's power flow is also important.
 
@@ -73,7 +73,7 @@ Droop control for the LV applications is therefore founded on the assumption tha
 Yet as already stated in Section~\ref{ch-introduction:subsec:topology-of-lv-network}, reversed power flow can raise voltage levels which makes such droop control methods less reliable and potentially unsuitable for LV network support.
 This problem was also encountered by Riffonneau et al. in \cite{Riffonneau2011}, where they control BESS to solve an optimal power flow problem for grid connected PV systems.
 Ultimately, they were able to achieve a 13\% reduction of electricity bills by implementing a rule-based dynamic programming optimiser, and they reduced peak power by successfully integrating PV.
-However, they do not consider reactive power within their power management method although it could free additional network resources and yield benefits to the distribution network, e.g. better voltage control and lower phase imbalance.
+However, they do not consider reactive power within their power management method although it could free additional network resources and yield benefits to the distribution network, \hlrem{e.g. }better voltage control and lower phase imbalance.
 The reason behind excluding it from their study was due to the potential conflicts that may arise with the proposed voltage control method which heavily relies on voltage measurements.
 Using BESS to reallocate PV generation for maximised self-consumption \cite{SaniHassan2017} or to achieve ``peak-shaving'' behaviour \cite{Bennett2015, DePaola2016} has seen continued interest in the field of BESS power flow management.
 

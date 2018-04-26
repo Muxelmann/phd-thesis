@@ -23,12 +23,12 @@ Using this operation as a benchmark, sub-half-hourly phasor adjustments were pro
 As shown in several resulting time-series plots in Section~\ref{ch1:sec:results-and-discussion} that were summarised in Table~\ref{ch1:tab:cost-table} optimising BESS operation for certain key network parameters has two resulting impacts:
 
 \begin{enumerate}
-	\item Minimisation of a cost function that is derived from a specific key network parameter results in BESS operation that improves the associated network operation (e.g. when minimising the cost that was linked to distribution losses, then a mean reduction in losses of 5.0kWh was achieved instead of a 1.2kWh reduction which would have been the result for traditional BESS scheduling).
-	\item Minimisation of a cost function that is derived from a specific key network parameter results in BESS operation that also impacts other indirectly associated network operation (e.g. when minimising the cost that was linked to BESS voltage deviation, then the worst voltage deviation, the worst line loadings and the network's neutral currents were also reduced, but voltage deviation, line loadings and power factor at substation level were worsened).
+	\item Minimisation of a cost function that is derived from a specific key network parameter results in BESS operation that improves the associated network operation (\hlrem{e.g.}\hladd{for example} when minimising the cost that was linked to distribution losses, then a mean reduction in losses of 5.0kWh was achieved instead of a 1.2kWh reduction which would have been the result for traditional BESS scheduling).
+	\item Minimisation of a cost function that is derived from a specific key network parameter results in BESS operation that also impacts other indirectly associated network operation (\hlrem{e.g.}\hladd{for example} when minimising the cost that was linked to BESS voltage deviation, then the worst voltage deviation, the worst line loadings and the network's neutral currents were also reduced, but voltage deviation, line loadings and power factor at substation level were worsened).
 \end{enumerate}
 
 In Chapter~\ref{ch1} it was shown that this second impact need not be positive.
-Instead, a statistically significant positive impact (i.e. where $p<0.05$) was proven for only certain pairs of network parameters (e.g. and as stated earlier, maximum bus voltage deviation, phase unbalance and neutral power when minimising voltage deviation at ESMU level).
+Instead, a statistically significant positive impact (i.e. where $p<0.05$) was proven for only certain pairs of network parameters (\hlrem{e.g.}\hladd{for example} and as stated earlier, maximum bus voltage deviation, phase unbalance and neutral power when minimising voltage deviation at ESMU level).
 Nonetheless, showing that sub-half-hourly phasor adjustments can result in improved network operation formed the basis for the subsequent chapter, Chapter~\ref{ch2}, where the half-hourly active power constraint is eliminated.
 
 Chapter~\ref{ch2} presented a novel approach in combining both on-line and off-line energy storage control to dynamically reduce both daily and minutely load peaks.
@@ -38,9 +38,9 @@ Combined with a MPC to estimate the sub-half-hourly power volatility, results we
 In fact, as shown in Figure~\ref{ch2:fig:peak-diff-pdf} the mean peak load reduction increased from 1.7kW to around 5kW for different types of MPC.
 These findings from Chapter~\ref{ch1} and Chapter~\ref{ch2} thus form the contribution to knowledge (i.e. \ref{objective-1} and \ref{objective-2}, respectively).
 
-However, the findings in Chapter~\ref{ch1} and Chapter~\ref{ch2} assumed the inter-device communication to e.g. allow network information to be used in the derivation of BESS control instructions.
+However, the findings in Chapter~\ref{ch1} and Chapter~\ref{ch2} assumed the inter-device communication to \hlrem{e.g.}\hladd{for instance} allow network information to be used in the derivation of BESS control instructions.
 Chapter~\ref{ch3} therefore develops a new smart-charging algorithm and uses a novel MAS implementation that operates in an intentionally desynchronised manner.
-This desynchronisation was to assess the algorithm performance when e.g. the previously assumed communication infrastructure become less reliable.
+This desynchronisation was to assess the algorithm performance when \hlrem{e.g.} the previously assumed communication infrastructure become less reliable.
 Since uncoordinated EV charging is expected to put the most significant stress on the LV network, any algorithm failure (i.e. failure to coordinate this charging) would become noticeable.
 And indeed, the results in Chapter~\ref{ch3} show that the algorithm's converging behaviour is less sensitive to its control parameters in a desynchronised environment, when compared to the traditional synchronised algorithm execution.
 For example, when choosing extrem control parameter values, then an oscillating behaviour was observed for the synchronised case which lead to the repetitive allocation of a persisting charging spike of around 200kW.
