@@ -107,7 +107,7 @@
 
 % Change this to the 2nd option (or remove all \hl{ ... }, LOL!!!)
 \newcommand{\hladd}[1]{\sethlcolor{green}\hl{#1}}
-\newcommand{\hlrem}[1]{\sethlcolor{red}\hl{#1}}
+\newcommand{\hlrem}[1]{\sethlcolor{red}\textcolor{white}{\hl{#1}}}
 %\newcommand{\hladd}[1]{\sethlcolor{white}\hl{#1}}
 %\newcommand{\hlrem}[1]{}
 
@@ -153,6 +153,8 @@ Low-Voltage Distribution Networks}
 \include{declaration}       % declaration of authenticity
 \include{dedication}        % include a dedication.tex file
 \include{acknowlegements}   % include an acknowledgements.tex file
+% TODO: Remove this line
+\sethlcolor{yellow}
 \addcontentsline{toc}{chapter}{Table of Contents}
 \tableofcontents            % generate and include a table of contents
 \addcontentsline{toc}{chapter}{Table of Figures}
