@@ -39,7 +39,8 @@ SPC achieves this behaviour by measuring some properties of the power system (\h
 Droop control, as mentioned in Section~\ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
 A single set-point is however not suitable for a network that changes dynamically which is why droop control was extended to become adaptive as done by Tayab et al. in \cite{Tayab2017}.
 Their research shows how conventional droop control runs the risk of allowing system frequency to drop to 48.4Hz (from a nominal 50Hz), whereas adaptive droop was capable of frequency restoration with little to no observable frequency variation.
-However, their solution only injected reactive power into the system, yet BESS in LV distribution networks needs to provide active power from its limited energy resource.
+However, their solution \hladd{relied on PV and gas turbines to provide active power injection and could} only injected reactive power into the system \hladd{when these are not available - a comparable scenario may occur when BESS completely discharges}\hlrem{, yet BESS in LV distribution networks needs to provide active power from its limited energy resource}.
+\hladd{Therefore, voltage compensation may still be realised, but frequency remains unchanged.}
 Conventional droop control does therefore run the risk of reaching energy shortage or surplus if the set-points and system dynamics are chosen too low or high.
 Modifications like hysteresis control and ramp-rate control were proposed to yield an adaptive SPC \cite{Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
 Hysteresis control prevents the device from oscillating between different power states even when small changes in the network are detected and would otherwise trigger an SPC change.
@@ -91,7 +92,7 @@ Tokyo is a showcase of successfully implementing such a centralised control syst
 In 1990, \textit{Tokyo Electric Power Co.} (TEPCO) and \textit{Toshiba} presented their latest installation of a centrally managed power distribution network that could deliver 43GW of power to the entire city of Tokyo \cite{Matsuzawa1990}.
 All control instructions were generated from TEPCO's central dispatching centre, which took into account measurements from a network of 819 nodes and 938 branches.
 Since Tokyo has grown significantly over the past decades, computational burden to relay data and act upon the information has increased, too.
-The UK power network is also a centrally managed system that has seen an increase in complexity, yet ``\textit{the network is 99.9999\% reliable - a statistic we're proud of}``\cite{NationalGrid2017}.
+The UK \hlrem{power network}\hladd{transmission system} is also a centrally managed system that has seen an increase in complexity, yet \hladd{in 2017} ``\textit{the network is 99.9999\% reliable - a statistic we're proud of}``\cite{NationalGrid2017}.
 
 \nomenclature[G]{FIPA}{Foundation for Intelligent Physical Agents}
 \nomenclature[G]{ICT}{Information and Communication Technology}
