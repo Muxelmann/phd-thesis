@@ -203,10 +203,11 @@ Equation \ref{ch1:equ:neutral-load}, superimposes the three-phase network powers
 In a perfectly balanced scenario the summation results in no neutral power (i.e. a value of zero), but for an unbalanced network the magnitude value will be greater than zero.
 Therefore this magnitude of the neutral's apparent power vector is computed which is then used as the resultant cost.
 
-In comparison to the losses of the entire electricity grid, losses in a LV distribution network are negligibly small.
-Nonetheless the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, nobody pays for undelivered energy).
+In comparison to the losses of the \hlrem{entire}\hladd{HV} electricity \hlrem{grid}\hladd{networks}, losses in a LV distribution network are \hlrem{negligibly}\hladd{quantitatively} small.
+\hladd{After all, a single LV feeder may distribute up to 500kW of power, whilst HV networks transmit more than 60GW.}
+Nonetheless the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, \hlrem{nobody pays}\hladd{energy suppliers cannot charge} for undelivered energy).
 For example, in the high load scenario that was simulated in in Section~\ref{ch1:subsec:voltages-related-cost-functions} distribution losses were calculated as 58kW.
-This equates to 12\% of the total network power, but losses would be noticeably lower during normal network operation, \hlrem{e.g. }a maximum around 5\%.
+This equates to 12\% of the total network power, but losses would be noticeably lower during normal network operation, \hlrem{e.g.}\hladd{for instance at} a maximum \hladd{of }\hlrem{around} 5\%.
 The rising proportion of losses as uniform network load is continuously increased is shown in Figure~\ref{ch1:fig:losses-against-network-demand}.
 
 \input{_chapter1/fig/losses-against-network-demand}
