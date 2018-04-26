@@ -61,8 +61,8 @@ The \textit{normal} simulation is the simplest of all ESMU interventions since t
 Comparing results from the \textit{base} and \textit{normal} simulations will show the direct impact of the traditional ESMU operation on network performance.
 The remaining nine datasets are results of the nine different cost driven simulations where the ESMU schedule is adjusted on a sub-half-hourly level for each simulation.
 This adjustment is designed to minimise one underlying cost-function, whilst conforming to the ESMU's overall half-hourly charging and discharging profile.
-In order to treat each cost-function separately $\boldsymbol{\alpha}$ is set to focus on each cost independently, e.g. by setting $\alpha_1 = 1 \text{ and } \alpha_2 = \alpha_3 = \dots = \alpha_9 = 0$.
-For simplicity the flowchart in Figure~\ref{ch1:fig:method-evaluation-flowchart} abbreviates the specific cost choice by only indicating which entry in the $\boldsymbol{\alpha}$ vector is set to $1$, e.g. $\zeta(\alpha_1=1)$.
+In order to treat each cost-function separately $\boldsymbol{\alpha}$ is set to focus on each cost independently, \hlrem{e.g.}\hladd{for example} by setting $\alpha_1 = 1 \text{ and } \alpha_2 = \alpha_3 = \dots = \alpha_9 = 0$.
+For simplicity the flowchart in Figure~\ref{ch1:fig:method-evaluation-flowchart} abbreviates the specific cost choice by only indicating which entry in the $\boldsymbol{\alpha}$ vector is set to $1$, \hlrem{e.g.}\hladd{for example} $\zeta(\alpha_1=1)$.
 
 Once all eleven simulations have completed their corresponding datasets are assessed in an identical manner so that their impact on network performance can be compared.
 This comparison is broken into three parts for all dataset:
@@ -82,6 +82,9 @@ This comparison is broken into three parts for all dataset:
 	An improvement is noted when the PDF is shifted towards the lower cost values, whereas a shift towards higher cost values worsened the network performance.
 \end{enumerate}
 
+\hladd{The above cost function is however limited to target each individual cost separately since $\boldsymbol{\alpha}$ is a binary choice vector.
+As discussed in the future work in Chapter~}\ref{ch-conclusions:sec:research-limits-and-future-work}\hladd{ a multi-objective problem may be considered as a next step where costs are weighted against each other.
+After all, the difference of importance of each cost that DNOs may care about could then be reflected accordingly.}
 
 
 

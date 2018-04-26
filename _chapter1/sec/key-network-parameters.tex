@@ -53,7 +53,7 @@ The following three subsections cover all key network parameters by detailing th
 In the UK, LV networks operate at a nominal voltage of 230V Phase-to-Neutral (P2N) or 400V Phase-to-Phase (P2P).
 Substations supply electricity to a three-phase cable (i.e. the feeder) and link to MV distribution networks which operate at 11kV P2P.
 In an ideal case the voltage measured at the substation transformer's secondary winding remains constant as load changes.
-But in reality internal losses (e.g. conductive losses and magnetic leakage) lead to a dropping voltage level when load increases.
+But in reality internal losses (\hlrem{e.g.}\hladd{for example} conductive losses and magnetic leakage) lead to a dropping voltage level when load increases.
 Therefore any deviation from the substation's nominal voltage can be seen as an indication of suboptimal network operation.
 
 The ``voltage deviation cost function'' $\zeta_\text{voltage}(\textbf{v}(t))$ captures and associates a cost to this suboptimal operation.
@@ -141,7 +141,7 @@ Here, $i$ represents the customer number out of a total customer count $I$, and 
 
 Beside meeting voltage constraints DNOs need to assure that their distribution networks operates both in an efficient and hence ideal manner.
 How ideal a three-phase network operates is indicated by its phase unbalance.
-This disturbance due to unbalanced phase load may not have an immediate impact, but negative long term effects (e.g. asymmetric load on transformers, rotating machines and increased neutral current) do weaken network assets and cannot be neglected.
+This disturbance due to unbalanced phase load may not have an immediate impact, but negative long term effects (\hlrem{e.g.}\hladd{for example} asymmetric load on transformers, rotating machines and increased neutral current) do weaken network assets and cannot be neglected.
 The approach by which UK customers are connected to the feeder increases the problem of phase unbalance even more because the single phase allocation is performed arbitrarily.
 Randomly assigning customers' phases was intended to distribute load evenly across all three phases which in theory should balance the three-phase network load.
 In reality however this is not the case.
@@ -158,7 +158,7 @@ The American National Standards Institute's (ANSI) definition of Unbalance Facto
 
 \input{_chapter1/equ/unbalance-equation}
 
-Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (e.g. $x_n$ may be voltage, current or power measurement per phase $n$).
+Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (\hlrem{e.g.}\hladd{for example} $x_n$ may be voltage, current or power measurement per phase $n$).
 In this context $x_n$ is chosen to be the power flow into one of the network's phases.
 For clarity the notation of $\overline{\textbf{x}}$ is used to define the mean of the given vector, i.e.:
 
@@ -203,10 +203,11 @@ Equation \ref{ch1:equ:neutral-load}, superimposes the three-phase network powers
 In a perfectly balanced scenario the summation results in no neutral power (i.e. a value of zero), but for an unbalanced network the magnitude value will be greater than zero.
 Therefore this magnitude of the neutral's apparent power vector is computed which is then used as the resultant cost.
 
-In comparison to the losses of the entire electricity grid, losses in a LV distribution network are negligibly small.
-Nonetheless the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, nobody pays for undelivered energy).
+In comparison to the losses of the \hlrem{entire}\hladd{HV} electricity \hlrem{grid}\hladd{networks}, losses in a LV distribution network are \hlrem{negligibly}\hladd{quantitatively} small.
+\hladd{After all, a single LV feeder may distribute up to 500kW of power, whilst HV networks transmit more than 60GW.}
+Nonetheless the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, \hlrem{nobody pays}\hladd{energy suppliers cannot charge} for undelivered energy).
 For example, in the high load scenario that was simulated in in Section~\ref{ch1:subsec:voltages-related-cost-functions} distribution losses were calculated as 58kW.
-This equates to 12\% of the total network power, but losses would be noticeably lower during normal network operation, e.g. a maximum around 5\%.
+This equates to 12\% of the total network power, but losses would be noticeably lower during normal network operation, \hlrem{e.g.}\hladd{for instance at} a maximum \hladd{of }\hlrem{around} 5\%.
 The rising proportion of losses as uniform network load is continuously increased is shown in Figure~\ref{ch1:fig:losses-against-network-demand}.
 
 \input{_chapter1/fig/losses-against-network-demand}
@@ -252,7 +253,7 @@ The red area indicates the region where current exceeds the fuse's nominal ratin
 
 In addition to the currents flowing through the substation's fuse, currents flowing through all lines in the network may also be considered.
 Just like voltage levels at each customer, line currents are also seen as theoretical key network parameters since they cannot easily be obtained.
-Generally as the distance to the substation increases fewer ``down stream'' customers are connected to a radially expanding feeder and therefore cables can be scaled down (e.g. to save cost).
+Generally as the distance to the substation increases fewer ``down stream'' customers are connected to a radially expanding feeder and therefore cables can be scaled down (\hlrem{e.g.}\hladd{for example} to save cost).
 However with the expected uptake of LCTs, feeders are expected to deliver increasingly larger currents throughout all lines.
 For smaller lines at the network edge these currents may increase to a magnitude larger than their nominal ratings.
 Therefore the fuse current cost is expanded to take into account all line currents, $i_{\text{line},l,\phi}(t)$, and their nominal ratings, $I_{\text{nom}, l}$.

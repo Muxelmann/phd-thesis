@@ -22,8 +22,8 @@ Therefore, Section~\ref{ch-literature:subsec:centralised-and-distributed-control
 \label{ch-literature:subsec:off-line-and-on-line-control}
 
 Off-line control uses historic data to predict future load patterns which are used to schedule BESS operation accordingly.
-Early approaches, e.g. by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules had relatively high forecast errors due to the inherent difficulty of predicting future loads.
-These errors ultimately limit the ability of any given BESS schedule to e.g. effectively reduce peaks.
+Early approaches\hlrem{, e.g.} by Oudalov et al. \cite{Oudalov2007}, who used dynamic programming to generate BESS schedules had relatively high forecast errors due to the inherent difficulty of predicting future loads.
+These errors ultimately limit the ability of any given BESS schedule to \hlrem{e.g. }effectively reduce peaks.
 This is why recent research begun including uncertainty, like the work done by Baker et al. \cite{Baker2017} where uncertainty of wind power was taken into account when scheduling and sizing BESS.
 Other work frequently re-evaluates BESS schedules to control and adjust its schedules after completing individual decision epochs \cite{Wang2014a}.
 Nonetheless, load forecasting remains a key component for BESS scheduling despite those load forecasts (and the resulting BESS schedules) being imperfect.
@@ -35,11 +35,12 @@ However, sub-half-hourly load volatility imposes the biggest stress on the netwo
 In conclusion, on-line control has been considered as an alternative to off-line control.
 
 One flavour of on-line control is the Set-Point Control (SPC) which is a robust technique that can immediately respond to network changes.
-SPC achieves this behaviour by measuring some properties of the power system (e.g. voltage level or frequency) and comparing those values to an internal target value, i.e. the set-point.
+SPC achieves this behaviour by measuring some properties of the power system (\hlrem{e.g.}\hladd{for example} voltage level or frequency) and comparing those values to an internal target value, i.e. the set-point.
 Droop control, as mentioned in Section~\ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
 A single set-point is however not suitable for a network that changes dynamically which is why droop control was extended to become adaptive as done by Tayab et al. in \cite{Tayab2017}.
 Their research shows how conventional droop control runs the risk of allowing system frequency to drop to 48.4Hz (from a nominal 50Hz), whereas adaptive droop was capable of frequency restoration with little to no observable frequency variation.
-However, their solution only injected reactive power into the system, yet BESS in LV distribution networks needs to provide active power from its limited energy resource.
+However, their solution \hladd{relied on PV and gas turbines to provide active power injection and could} only injected reactive power into the system \hladd{when these are not available - a comparable scenario may occur when BESS completely discharges}\hlrem{, yet BESS in LV distribution networks needs to provide active power from its limited energy resource}.
+\hladd{Therefore, voltage compensation may still be realised, but frequency remains unchanged.}
 Conventional droop control does therefore run the risk of reaching energy shortage or surplus if the set-points and system dynamics are chosen too low or high.
 Modifications like hysteresis control and ramp-rate control were proposed to yield an adaptive SPC \cite{Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
 Hysteresis control prevents the device from oscillating between different power states even when small changes in the network are detected and would otherwise trigger an SPC change.
@@ -55,7 +56,7 @@ Therefore, MPC can yield a acceptable prediction performance for linear systems 
 For instance, Reihani et al. in \cite{Reihani2016} used the most recent 20 minutes of load information with a complex-valued ANN to predict the next 20 minutes of minutely load variations.
 Since their raw forecasts were more erratic than the actual load profile, a Kalman filter was implemented to smoothen the MPC's output, yet this step introduced significant discrepancies between the actual and the forecasted load.
 Therefore they increased MPC complexity even further by taking into account parallel time-series, i.e. they considered the same 20 minutes from previous days in the prediction mechanism.
-This addition produced significantly better results and they shaved daily peaks by around 300kW in the medium-voltage network.
+This addition produced significantly better results and they shaved daily peaks by around 300kW\hladd{ (from 1.6MW)} in the medium-voltage network.
 Implementing such increasingly complex MPC to support on-line control is therefore a promising research trend, however the computational burden to deliver real-time solutions makes deployment of such systems costly and/or difficult.
 
 Therefore, finding a way of combining both off-line control (i.e. scheduled BESS operation which is executed at half-hourly resolution) with on-line control (i.e. a mechanism that is responsive to power system changes) allows application of real-time corrections to the BESS schedule.
@@ -75,9 +76,9 @@ This is particularly true if the control system consists of multiple entities th
 The monitoring and control of such a distributed system (and hence of any power network) includes four systems that are inherently linked \cite{Mansouri-Samani1993}:
 
 \begin{enumerate}
-	\item The \textit{managed system} itself, i.e. power network, that needs to be controlled;
+	\item The \textit{managed system} itself, \hlrem{i.e.}\hladd{like a} power network, that needs to be controlled;
 	\item a \textit{monitoring system} that generates data through sensors and measuring equipment that is installed in the \textit{managed system};
-	\item a \textit{decision making system} that uses the provided data to generate certain aims, e.g. to improve the system state; and
+	\item a \textit{decision making system} that uses the provided data to generate certain aims, \hlrem{e.g. }to improve the system state; and
 	\item a \textit{control system} to generate control actions for the \textit{managed system}.
 \end{enumerate}
 
@@ -91,7 +92,7 @@ Tokyo is a showcase of successfully implementing such a centralised control syst
 In 1990, \textit{Tokyo Electric Power Co.} (TEPCO) and \textit{Toshiba} presented their latest installation of a centrally managed power distribution network that could deliver 43GW of power to the entire city of Tokyo \cite{Matsuzawa1990}.
 All control instructions were generated from TEPCO's central dispatching centre, which took into account measurements from a network of 819 nodes and 938 branches.
 Since Tokyo has grown significantly over the past decades, computational burden to relay data and act upon the information has increased, too.
-The UK power network is also a centrally managed system that has seen an increase in complexity, yet ``\textit{the network is 99.9999\% reliable - a statistic we're proud of}``\cite{NationalGrid2017}.
+The UK \hlrem{power network}\hladd{transmission system} is also a centrally managed system that has seen an increase in complexity, yet \hladd{in 2017} ``\textit{the network is 99.9999\% reliable - a statistic we're proud of}``\cite{NationalGrid2017}.
 
 \nomenclature[G]{FIPA}{Foundation for Intelligent Physical Agents}
 \nomenclature[G]{ICT}{Information and Communication Technology}
@@ -155,15 +156,15 @@ ICT reliant distributed control methods aim to circumvent these issues by using 
 In \cite{Mohsenian-Rad2010} for example, Mohsenian-Rad et al. based developed a DSM mechanism that was based on game theory where multiple users engaged in the energy market to minimise the Peak-to-Average Ratio (PAR) of the resulting demand profile.
 Their results show that both minimising financial cost or the PAR of the resulting demand profile resulted in a 21.9\% reduction in PAR when compared to a scenario without scheduling the energy consumer.
 But minimising PAR resulted in only a 7.31\% reduction in energy cost, whilst minimising cost directly lead to a 19.6\% reduction, despite the similar improvements in demand profile.
-However, this approach highly relies on ICT, as do similar DSM approaches that use e.g. time-of-use tariffs \cite{Deilami2011, Surles2012} or other pricing signals \cite{Masoum2015}.
+However, this approach highly relies on ICT, as do similar DSM approaches that use \hlrem{e.g.}\hladd{for example} time-of-use tariffs \cite{Deilami2011, Surles2012} or other pricing signals \cite{Masoum2015}.
 None of them can be implemented without ICT and instead an indirect method must be sought.
 
 \nomenclature[G]{AIMD}{Additive Increase Multiplicative Decrease}
 \nomenclature[G]{V2G}{Vehicle to Grid}
 
 A communication-less form of controlling Distributed Energy Resources (DERs) is the already mentioned Set-Point Control (SPC) \cite{Leadbetter2012}.
-Using traditional SPC on multiple identically-configured DERs can provide an optimal operation conditions, if each DER's control parameters (e.g., bus voltage) were shared \cite{Thieblemont2017a}.
-But in a communication-less environment this requirement cannot be satisfied which is why DER control algorithms have to be improved to prevent e.g. devices located furthest from the substation from being used more frequently than others.
+Using traditional SPC on multiple identically-configured DERs can provide an optimal operation conditions, if each DER's control parameters (\hlrem{e.g., }bus voltage) were shared \cite{Thieblemont2017a}.
+But in a communication-less environment this requirement cannot be satisfied which is why DER control algorithms have to be improved to prevent \hlrem{e.g.}\hladd{for example} devices located furthest from the substation from being used more frequently than others.
 The algorithm that is to be extended to control several BESS in a LV network is the Additive Increase Multiplicative Decrease (AIMD) algorithm.
 Unlike traditional SPC or hysteresis control like in \cite{Jiang2007}, where a fuel-cell's bus voltage was used as input to a ramp control for active power sharing, AIMD (like MAS) has its roots in computer science.
 Originally, AIMD algorithms were applied to congestion management in telecommunication networks using the TCP protocol \cite{Chiu1989} to maximise utilisation while ensuring a fair allocation of data throughput amongst a number of competing users \cite{Wirth2014}.

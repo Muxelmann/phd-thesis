@@ -15,7 +15,7 @@ The first reference signal is the SOC profile derived from the ESMU scheduled, $
 These two inputs are fed into compensator PID$_1$ and compensator PID$_2$, respectively.
 The output of each compensator is a corrective battery power component that, when summed, yields the next ESMU power (i.e. $p_1(t+\Delta t)$ and $p_2(t+\Delta t)$) which is applied to the ESMU model.
 Each PID compensator also receives a feedback signal to compute the internal error states.
-More specifically, PID$_1$ receives the most recent SOC value that is obtained from the ESMU model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (e.g. through measurements by substation monitoring).
+More specifically, PID$_1$ receives the most recent SOC value that is obtained from the ESMU model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (\hlrem{e.g.}\hladd{for example} through measurements by substation monitoring).
 
 \nomenclature[J]{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $\textbf{p}_{net} = (p_\text{net}(t))$ and $p_\text{net}(t) \in \mathbb{R}$}
 \nomenclature[J]{$SOC^*(t)$}{Battery's state of charge at sample $t$, where $SOC^*(t) \in [0, 1]$}
@@ -106,7 +106,7 @@ This kind of prediction does however not take into account demand dynamics.
 An AR model on the other hand uses a series of past observations and their individual contribution to predict the next power.
 But the further into the future these predictions are made the less accurate they become.
 This accuracy loss is however circumvented since the hybrid system was designed to only apply corrections based on load predictions of the immediate future (i.e. next sample time at $t+\Delta t$ and not $t+2\Delta t$ or similar).
-This simplification also reduces computational burden and guarantees real-time operation especially when choosing the simplest dynamic model (i.e. an Auto-Regressive (AR) model instead of e.g. deep artificial neural networks).
+This simplification also reduces computational burden and guarantees real-time operation especially when choosing the simplest dynamic model (i.e. an Auto-Regressive (AR) model instead of \hlrem{e.g. }deep artificial neural networks).
 Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model with a time-series of input powers, $\textbf{p} = (p(t))$, a time-series of predicted ``next powers'', $\hat{\textbf{p}} = (\hat{p}(t))$, and an internal delay function $t-\Delta t$.
 
 \input{_chapter2/fig/mpc-arx}

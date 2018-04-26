@@ -31,7 +31,7 @@ Therefore, the following results assess both the highest and lowest voltage leve
 \input{_chapter1/fig/ts-all-voltages}
 
 In Figure~\ref{ch1:subfig:ts-all-voltages}, despite no voltage violations taking place due to the already boosted substation voltage, the ESMU's positive impact can be observed.
-Here the difference between highest and lowest voltage in the network is noticeably reduced at all times and their average voltage is brought closer to a nominal voltage level.
+Here the difference between highest and lowest \hladd{bus }voltage \hlrem{in}\hladd{of} the network\hladd{is indicated by two lines of the same color. It is this difference that} is noticeably reduced \hlrem{at all times }and their average voltage is brought closer to a nominal voltage level.
 The ESMU's function to support the network in providing more stable voltage levels at customer endpoints is therefore met.
 This fact is also supported by the associated cost plot in Figure~\ref{ch1:subfig:ts-all-voltages-cost} where a reduction in cost can be observed throughout the entire simulated day.
 
@@ -59,7 +59,7 @@ For the \textit{minimisation} case however, loading of the neutral conductor is 
 \input{_chapter1/fig/ts-power-factor}
 
 Unlike neutral phase unbalance and neutral loading, power factor on the other hand is impacted just by introducing the half-hourly ESMU schedule as shown in Figure~\ref{ch1:fig:ts-power-factor}.
-Whilst the choice of a static power factor for all loads in the \textit{normal} case resulted in a constant power throughout the day, half-hourly ESMU intervention in the \textit{base} case results in a noticeable power factor variation.
+Whilst the choice of a static power factor for all loads in the \hlrem{\textit{normal}}\hladd{\textit{base}} case resulted in a constant power throughout the day, half-hourly ESMU intervention in the \hlrem{\textit{base}}\hladd{\textit{normal}} case results in a noticeable power factor variation.
 This variation is however successfully reduced throughout the entire day for the \textit{minimisation} case in comparison to the \textit{normal} case.
 
 \input{_chapter1/fig/ts-losses}
@@ -76,7 +76,7 @@ This limitation can be seen in Figure~\ref{ch1:fig:ts-all-line-utilisation}.
 
 \input{_chapter1/fig/ts-all-line-utilisation}
 
-Whilst the \textit{normal} case noticeably lowered some of the daily demand, power spikes after e.g. 9pm were not addressed at all.
+Whilst the \textit{normal} case noticeably lowered some of the daily demand, power spikes after \hlrem{e.g.}\hladd{for example} 9pm were not addressed at all.
 Even the \textit{minimisation} case could barely reduce those spikes due to the constraining half-hourly schedule.
 Nonetheless, throughout the entire day ESMU was still able to reduce line utilisation at the substation level; despite those improvements being relatively small in comparison to the impact in the \textit{normal} case.
 
@@ -91,7 +91,7 @@ All cases are compared and plotted in Figure~\ref{ch1:fig:boxplot-overall-improv
 \input{_chapter1/fig/boxplot-overall-improvements}
 
 This figure shows the how the reduction in cost (defined in Equation~\ref{ch1:equ:weighted-sum-cost-function}) is distributed.
-In this case the cost reduction (i.e. $-\delta\zeta(\boldsymbol{\alpha})$) is the change in cost from the \textit{normal} ESMU operation case to \textit{minimisation} operation cases, e.g. for ``phase unbalance'' $\delta\zeta(\boldsymbol{\alpha}) = \zeta(\alpha_1 = 1) - \zeta(\alpha_6 = 1)$).
+In this case the cost reduction (i.e. $-\delta\zeta(\boldsymbol{\alpha})$) is the change in cost from the \textit{normal} ESMU operation case to \textit{minimisation} operation cases, \hlrem{e.g.}\hladd{like} for ``phase unbalance'' $\delta\zeta(\boldsymbol{\alpha}) = \zeta(\alpha_1 = 1) - \zeta(\alpha_6 = 1)$).
 Due to the different scales however, the improvements are difficult to observe.
 Therefore, this cost reduction has been normalised in regards to the \textit{normal} ESMU operation case and is replotted in Figure~\ref{ch1:fig:boxplot-relative-improvements}.
 
@@ -133,7 +133,7 @@ Doing so would focus the search for global minima for each iteration of the sequ
 
 The final part of analysing the results is to determine whether the cumulative cross-cost differences are statistically significant.
 To do so, the probability density functions (PDF) of the cross-cost differences is analysed using a null hypothesis test.
-The underlying data is conditioned in order to meet all prerequisites that are necessary to perform the null hypothesis test, e.g. the standard $t$-test.
+The underlying data is conditioned in order to meet all prerequisites that are necessary to perform the null hypothesis test, \hlrem{e.g.}\hladd{like} the standard $t$-test.
 These prerequisites include stationarity, low auto-correlation and high gaussianity of the underlying time-series.
 The procedure to meet these prerequisites is carried out without falsifying the data which means that all applied conditioning operations were restricted to time-series division and linear transformation.
 Details on the exact data conditioning steps are outside the scope of this chapter, but for completeness they are included in Appendix~\ref{appx-a:ch1:probability-density-analysis}.
@@ -143,4 +143,4 @@ Details on the exact data conditioning steps are outside the scope of this chapt
 Table~\ref{ch1:tab:t-test-table} presents the results from this analysis, where $p$-values have been tabulated and those cells with a value below $0.05$ have been highlighted.
 A similar pattern to that in the previous table can be seen (i.e. Table~\ref{ch1:tab:cost-table}).
 In this table however, instead of just comparing cross-cost reductions, statistical indications to support the significance of the findings is presented.
-In combination with the preceding table one can therefore determine that e.g. the impact of optimising operation based on maximum voltage deviation has little to no significant impact on improvements in power factor whilst adjusting ESMU powers to improve the network's power factor has the most significant statistical impact on the chosen key network parameters.
+In combination with the preceding table one can therefore determine that \hlrem{e.g. }the impact of optimising operation based on maximum voltage deviation has little to no significant impact on improvements in power factor whilst adjusting ESMU powers to improve the network's power factor has the most significant statistical impact on the chosen key network parameters.
