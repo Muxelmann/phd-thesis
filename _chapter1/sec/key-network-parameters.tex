@@ -182,7 +182,7 @@ A sample illustration that shows how this cost behaves as phase unbalance increa
 Here, it can be seen how $\zeta_\text{unbalance}(\textbf{s}(t))$ rises with an increasing separation of the three-phase power values.
 Additionally, to assess the effective utilisation of the power distribution network deviation from a unity Power Factor (PF) is also formulated as a cost.
 PF is the ratio between active (p) and apparent power (s), and gives an indication of how much ``good'' power is being consumed by the system\footnote{Reactive power is used to maintain magnetic fields in rotating machines, yet this can be supplied by local reactive power compensators and thus need not occupy otherwise free power transmission resources.}.
-Experts would agree that keeping PF of a system close to unity indicates that it only requires active power to operate which implies that it uses the lowest possible amount of power transmission resources.
+\hlrem{Experts would agree that k}\hladd{K}eeping PF of a system close to unity indicates that it only requires active power to operate which implies that it uses the lowest possible amount of power transmission resources.
 In order to indicate the proximity to unity PF a corresponding cost, $\zeta_\text{PF}(\textbf{s}_{ss}(t))$, is used and which is defined as:
 
 \input{_chapter1/equ/power-factor}
@@ -193,8 +193,10 @@ Any deviation from a unity PF per phase increases the associated cost whilst ach
 In perfectly balanced systems that operate at unity PF all three phases are $120^\circ$ out of phase, and the sum of their instantaneous powers should equate to zero.
 This zero-sum also indicates that no neutral current is flowing in the system.
 However, in an unbalanced system that operates at non-unity PF the power transmitted through the neutral conductor can significantly deviate from zero.
-The negative impact of transmitting power through the neutral conductor is further amplified since typical power distribution cables often use neutral conductors with significantly smaller cross-section areas than those used as line conductors.
-Results of any such additional power flow in the neutral conductor are further deviation of neutral voltages from ground, increased losses and quicker exhaustion of the neutral conductor's power carrying capability (making the system become more prone to failures).
+The negative impact of transmitting \hlrem{power}\hladd{current} through the neutral conductor is further amplified since typical power distribution cables often use neutral conductors with significantly smaller cross-section areas than those used as line conductors.
+Results of any such additional \hlrem{power flow}\hladd{current} in the neutral conductor are further deviation of neutral voltages from ground, increased losses and quicker exhaustion of the neutral conductor's power carrying capability (making the system become more prone to failures).
+\hladd{A somewhat unconventional approach is used here, since neutral power is estimated instead of neutral current.
+The mechanism to calculate this power flow in the neutral conductor is however identical to calculating neural current.}
 To address this last point a ``neutral load'' cost, $\zeta_\text{neutral load}(\textbf{s}_{ss}(t))$, is defined as follows:
 
 \input{_chapter1/equ/neutral-load}

@@ -19,6 +19,11 @@ The viva is over and I passed with **minor corrections**. Now These corrections 
     - Prepare response to internal examiner with intended changes
     - Assure scope will satisfy examiner **before** applying corrections
 
+2.	Finished contribution chapters - `30 April 2018`
+	- All corrections may be found on in Dropbox [here](https://www.dropbox.com/s/pu362ccrpp9ncmc/thesis%20post-viva%20-%20mzangs%20v1.pdf?dl=0) (_link will expire once thesis is submitted_)
+	- The proposed changes to the conclusion/discussion section will be drafted
+	- Proof of corrections is included in the [`README/post-viva`](https://github.com/Muxelmann/phd-thesis/tree/master/README/post-viva), too
+
 ## Thesis structure
 
 ### Main Chapters
