@@ -40,11 +40,12 @@ How the compute cluster was used to realise multiple agents is shown in Figure~\
 
 In this figure, Figure~\ref{ch3:fig:agent-implementation} a collection of MAS simulations is compiled in order to extensively cover the algorithm's operating spectrum.
 This compilation is done at the laboratory workstation.
-More specifically, 10000 repetitions of the scheduling algorithm are queued for a single base load, but with different $\alpha$ and $\beta$ parameters.
+More specifically, 10000 repetitions of the scheduling algorithm are queued for a single base\hladd{line} load, but with different $\alpha$ and $\beta$ parameters.
 Therefore, the algorithm's parameter sensitivity is probed at a resolution of 0.01 for both $\alpha$ and $\beta$ (i.e. $\alpha \in \{0.01, 0.02, \dots, 1.00\}$ and $\beta \in \{0.01, 0.02, \dots, 1.00\}$).
 This queue of 10000 simulations is then submitted to the \textit{HTCondor} master node which schedules the execution of each simulation to its pool of workers.
-Each worker internally simulates an instance of the MAS and stores its outputs to a fast networked storage which also serves as the worker's data source
-Given the 1540 load profiles from the Irish dataset and assuming a typical distribution network of 55 customers, a theoretical limit of $6.11\times10^{101}$ simulations would exist.
+Each worker internally simulates an instance of the MAS and stores its outputs to a fast networked storage which also serves as the worker's data source.
+\hladd{The Irish dataset }\cite{IrishData2002}\hladd{ comprising several weeks of uninterrupted power data is used since it also provides 1540 different half-hourly load profiles.}
+Given th\hlrem{e}\hladd{is large number of} \hlrem{1540 }load profiles\hladd{, provided } from the Irish dataset\hladd{,} and assuming a typical distribution network of 55 customers, a theoretical limit of $6.11\times10^{101}$ simulations would exist.
 Due to the limited time and size of the available worker pool (ca. 200 workers), a total number of $1.5\times10^{7}$ MAS simulations is chosen to yield a sufficiently accurate estimate of the algorithm's performance.
 For all submitted simulations a relatively high EV uptake of 20\% was chosen in order to maximise the effect of badly scheduled EV charging and in order to give the algorithm a larger energy volume when adjusting the EV charging schedules.
 Also, in the diagram in Figure~\ref{ch3:fig:agent-implementation}, all bold arrows indicate data transmissions that are faster than the lab PC connection (this connection is used to acquire and store the datasets that are used for each MAS simulation), solid arrow indicates the loading of simulation data and the dotted arrows indicate the software messages to submit and launch the MAS simulations.
