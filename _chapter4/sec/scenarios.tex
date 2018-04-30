@@ -28,7 +28,7 @@ An AIMD scenario in which EV uptake is 100\% and each household has a battery en
 Here each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
 \item \label{ch4:case-d}
 An AIMD+ scenario in which EV uptake is 100\% and each household has a battery energy storage device.
-Here each battery was controlled using the AIMD+ algorithm using the optimised reference voltage profile.
+Here each battery was controlled using the AIMD+ algorithm using the \hlrem{optimised }reference voltage profile.
 \end{enumerate}
 
 An EV uptake of 100\% was adopted to represent the worst case scenario.
@@ -99,6 +99,11 @@ A minimum line current (i.e. $C_\text{min}$) is however used to neglect those pr
 The resulting scaling effect thus amplifies the impact of line current reduction beyond the line's nominal rating and reduces the weight on those improvements within the line's thermal constraints.
 For the work presented in this chapter, the value for this modifier is set to $0.5$ since only line utilisation improvements above $0.5$ per unit are considered noteworthy.
 In summary, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation or worse network operation.
+
+\hladd{It should be noted, that maximised asset utilisation may be of benefit to the DNO since such a state would reflect a best return for the investment.
+Different ownership of the support asset would therefore reflect different incentives for using the asset.
+Therefore, in scenarios where a longevity of BESS whilst providing network support is of importance, the above metric is used.
+Nonetheless, different usage and ownership scenarios are discussed in Section}~\ref{ch-conclusions:sec:research-limits-and-future-work}\hladd{ of this thesis.}
 
 \subsubsection{Parameter for the Improvement of Battery Cycling}
 
