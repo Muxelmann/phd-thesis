@@ -91,7 +91,7 @@ This is also demonstrated since the values of $\zeta_\textbf{C}^{**}$ lie close 
 
 Whilst the deployment of energy storage has often been seen as a possible solution to defer network reinforcements, the presented results show that this is not always the case.
 In fact, due to technical limitations of the algorithm, choosing an appropriate control algorithm enables the BESS to perform optimally.
-This becomes particularly apparent when \hlrem{e.g.} energy storage devices need to recharge their injected energy for times of peak demand.
+This becomes particularly apparent when energy storage devices need to recharge their injected energy for times of peak demand.
 For the AIMD case, this recharging was not controlled in accordance to the underlying network properties which led to higher line currents.
 The proposed AIMD+ algorithm was not as susceptible to this kind of behaviour since it has been designed to take battery location into account.
 This immunity and well-controlled power flow caused little to no additional strain on the network's equipment, allowing the deployed storage devices to free some of the network resources.
@@ -104,12 +104,12 @@ In Figure~\ref{ch4:fig:storage-aimd} the battery power profiles are plotted alon
 
 \input{_chapter4/fig/storage-aimd}
 
-Figure~\ref{ch4:fig:storage-aimd} shows \hladd{a load profile plotted from the left to right for each load, where all loads are numbered in increasing order (top to bottom) as their distance to the substation increases.
+Figure~\ref{ch4:fig:storage-aimd} shows a load profile plotted from the left to right for each load, where all loads are numbered in increasing order (top to bottom) as their distance to the substation increases.
 The shade of the colour indicates the energy consumed or injected into the grid.
-From this figure, it can be seen }that only \hlrem{half}\hladd{about one third} of the deployed storage devices were active in \ref{ch4:case-c} (i.e. using AIMD control) whereas all devices are utilised in \ref{ch4:case-d} (i.e. using AIMD+ control).
-\hladd{Alongside the these power profiles, the SOC profiles were also recorded, and}
-\hlrem{F}\hladd{f}rom the\hladd{se} recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation to give an average daily cycling value.
-This \hladd{average battery cycling} value is plotted for each load in Figure~\ref{ch4:subfig:storage-aimd-cycling-compare} - the corresponding \hlrem{statistical analysis}\hladd{box-plot} is included in Figure~\ref{ch4:subfig:storage-aimd-cycling-stats}\hlrem{:}\hladd{, where the central red mark indicates the median, the bottom and top edges of the blue box indicate the 25$^\text{th}$ and 75$^\text{th}$ percentiles, respectively, and the whiskers extend to the most extreme data points not considered outliers.}
+From this figure, it can be seen that only about one third of the deployed storage devices were active in \ref{ch4:case-c} (i.e. using AIMD control) whereas all devices are utilised in \ref{ch4:case-d} (i.e. using AIMD+ control).
+Alongside the these power profiles, the SOC profiles were also recorded, and
+from these recorded battery SOC profiles, the net cycling of each battery was computed and divided by the duration of the simulation to give an average daily cycling value.
+This average battery cycling value is plotted for each load in Figure~\ref{ch4:subfig:storage-aimd-cycling-compare} - the corresponding box-plot is included in Figure~\ref{ch4:subfig:storage-aimd-cycling-stats}, where the central red mark indicates the median, the bottom and top edges of the blue box indicate the 25$^\text{th}$ and 75$^\text{th}$ percentiles, respectively, and the whiskers extend to the most extreme data points not considered outliers.
 
 \input{_chapter4/fig/storage-aimd-cycling}
 
@@ -130,6 +130,6 @@ These resulting averaged PARs are plotted in the subsequent figure, Figure~\ref{
 \input{_chapter4/fig/storage-aimd-compare-par}
 
 Although the AIMD controlled batteries were on average cycled less than the batteries controlled by the proposed AIMD+ algorithm, inspecting the average by itself produces a distorted understanding of the algorithm's performance.
-After all, since more than \hlrem{half}\hladd{a third} of the assigned AIMD BESS devices never partook in the network control, a lower average cycling would be expected to begin with.
+After all, since more than a third of the assigned AIMD BESS devices never partook in the network control, a lower average cycling would be expected to begin with.
 The difference in cycling across all batteries (or the cycling PAR) reveals the difference between usage equality as well as effective usage.
 And since a lower PAR indicates a more equal usage of the deployed batteries, AIMD+ clearly outperforms AIMD when subjected to the provided power data.
