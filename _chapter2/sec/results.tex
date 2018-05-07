@@ -3,7 +3,7 @@
 
 All proposed cases are used to control power flow of the ESMU using 27 days of uninterrupted sub-half-hourly load records.
 In this section the time-series improvements are presented at first where a day's peak reduction due to the sub-half-hourly schedule adjustment are highlighted.
-\hladd{After all, reducing peaks both frees additional resources for future load and reduces ohmic losses in the cables.}
+After all, reducing peaks both frees additional resources for future load and reduces ohmic losses in the cables.
 Then the daily peak reduction across the entire dataset is presented and followed by a probability density plot to better compare these findings.
 In the end the model's impact on the peak reduction performance is assessed.
 
@@ -38,11 +38,11 @@ Hence, the next section compares the daily peak load reduction from the applicat
 
 In Figure~\ref{ch2:fig:daily-peaks}, every day's power peak was extracted in a similar way to the procedure that was used for Figure~\ref{ch2:fig:day-peak}.
 Here the actual power peaks were plotted in Figure~\ref{ch2:subfig:daily-peaks}, and the relative power improvements (i.e. ratio to the baseline power peaks from case \textbf{B}) were plotted in Figure~\ref{ch2:subfig:daily-peaks-percentage}.
-From both plots it can be seen that controlling ESMU using the proposed dynamic control \hladd{(\textbf{I}, \textbf{II}, \textbf{III}) }lowers peak load.
-This is true even when the underlying ESMU schedule originally worsened and increased peak load\hladd{ (see \textbf{B} vs \textbf{O})}.
-Such a behaviour can be observed clearly during \hlrem{e.g.} days 6 and 25, where the half-hourly ESMU schedule\hladd{ based on \textbf{B}} increased the actual load peak\hladd{ from case \textbf{O}} by 2.8kW and 2.5kW, respectively.
-The ESMU schedule adjustment mechanisms \hladd{(\textbf{I}, \textbf{II}, \textbf{III}) }however compensated for this error, but in those two cases the compensation was not enough to reduce peak power below the original value.
-Day 26 on the other hand experienced a similar increase in peak power during the baseline case \hlrem{(i.e. case }\textbf{B}\hlrem{)} by 1.2kW, but the \hladd{proposed }power adjustment mechanism \hladd{according to \textbf{II}}corrected this forecast error and reduced the final peak power below the original value.
+From both plots it can be seen that controlling ESMU using the proposed dynamic control (\textbf{I}, \textbf{II}, \textbf{III}) lowers peak load.
+This is true even when the underlying ESMU schedule originally worsened and increased peak load (see \textbf{B} vs \textbf{O}).
+Such a behaviour can be observed clearly during days 6 and 25, where the half-hourly ESMU schedule based on \textbf{B} increased the actual load peak from case \textbf{O} by 2.8kW and 2.5kW, respectively.
+The ESMU schedule adjustment mechanisms (\textbf{I}, \textbf{II}, \textbf{III}) however compensated for this error, but in those two cases the compensation was not enough to reduce peak power below the original value.
+Day 26 on the other hand experienced a similar increase in peak power during the baseline case \textbf{B} by 1.2kW, but the proposed power adjustment mechanism according to \textbf{II}corrected this forecast error and reduced the final peak power below the original value.
 
 Nonetheless, the sensitivity to the underlying power prediction approaches becomes apparent when having this larger set of peak reduction results to compare the dynamic control's performance against its baseline cases.
 As seen in Figure~\ref{ch2:subfig:daily-peaks-percentage} the scenario with perfect foresight (i.e. case \textbf{I}) frequently outperformed all other cases since it appears to achieve largest peak power reduction from the baseline case.
@@ -75,16 +75,14 @@ Figure~\ref{ch2:fig:peak-diff-pdf} takes this analysis even further where only t
 Now the ESMU impact can easily be seen since a high probability of positive peak load reduction indicates a beneficial impact of the ESMU operation.
 A negative peak load reduction (i.e. increased peak load) would therefore indicate a worse performance.
 As expected, case \textbf{B} has a slight positive impact on the system whilst a cumulative probability of more than 25\% (i.e. area under curve of case \textbf{O}) to the left of 0kW suggests that the peak might be worsened one in four times.
-The dynamic control with its simplest prediction method however (i.e. case \textbf{III}) lowered this probability to already \hlrem{11.8\%}\hladd{7.4\%}.
-The perfect foresight model (i.e. case \textbf{I}) performed \hlrem{best at} only \hlrem{7.4\%}\hladd{at 11.8\%} and the MPC based cases (i.e. case \textbf{II}) achieved an average of 8.0\% probability of worsening the peak power.
-\hladd{The fact, that the perfect foresight model \textbf{III} could not reduce the probability of peaks as well as the simple model \textbf{I} is likely due to the used power profiles and forecast errors.
-However, the mean probabilities (that are discussed below) differ as expected.}
+The dynamic control with its simplest prediction method however (i.e. case \textbf{III}) lowered this probability to already 7.4\%.
+The perfect foresight model (i.e. case \textbf{I}) performed only at 11.8\% and the MPC based cases (i.e. case \textbf{II}) achieved an average of 8.0\% probability of worsening the peak power.
+The fact, that the perfect foresight model \textbf{III} could not reduce the probability of peaks as well as the simple model \textbf{I} is likely due to the used power profiles and forecast errors.
+However, the mean probabilities (that are discussed below) differ as expected.
 
-\hladd{In the following, the mean peak reduction of the base case \textbf{B} (i.e. where the cumulative probability reaches 50\%) is treated as the benchmark for peak reduction.
-This probability is reached at 1.7kW or in other words:}\hlrem{
-Beside the reduced probability of missing or worsening peak load, the probability of having a larger positive impact is also increased when using the dynamic control.
-Whilst} the probability of reducing load peaks by 1.7kW or more was at 50\% for case \textbf{B}\hladd{.
-The}\hlrem{,} \hladd{simplest }case \textbf{III} \hladd{however }increased this probability to 77.7\%, case \textbf{II} to 84.5 5\% (AR) / 83.1\% (ARX), and the \hladd{perfect foresight }case \textbf{I} to 79.8\%.
+In the following, the mean peak reduction of the base case \textbf{B} (i.e. where the cumulative probability reaches 50\%) is treated as the benchmark for peak reduction.
+This probability is reached at 1.7kW or in other words: the probability of reducing load peaks by 1.7kW or more was at 50\% for case \textbf{B}.
+The simplest case \textbf{III} however increased this probability to 77.7\%, case \textbf{II} to 84.5 5\% (AR) / 83.1\% (ARX), and the perfect foresight case \textbf{I} to 79.8\%.
 The reason why this simplest case achieved a slightly lower value than the AR/ARX cases was due to aforementioned discrepancy between actual and forecasted load profiles.
 Due to the discrepancy in erroneousness the chosen SOC tolerance was exhausted and lead to some worsening cases that negatively skewed results of the perfect foresight case (i.e. case \textbf{I}).
 Nonetheless, when comparing the three dynamic control cases with each other as done in Figure~\ref{ch2:fig:peak-diff-pdf}, then it can be seen that case \textbf{II} using an AR model for MPC performed best at reducing peak loads for the used dataset.
