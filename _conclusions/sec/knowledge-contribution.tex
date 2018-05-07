@@ -3,20 +3,20 @@
 
 In Chapter~\ref{ch-literature} the literature is reviewed that surrounds the present control methods for DNO owned storage devices in the LV network.
 Then, in Section~\ref{ch-introduction:sec:problem-statement}, gaps in this literature are identified and upon those the problem statement of this thesis is formed, i.e. how BESS control can aid DNOs at maintaining their network despite the ongoing transition towards a low-carbon economy.
-The main contribution that is presented in this thesis is thus the development of control methods for BESS in the LV network that improve network operation (\hlrem{e.g.}\hladd{for example} power flow, voltage deviation and phase unbalance) whilst later taking into account telecommunication limitations (\hlrem{e.g.}\hladd{for example} possible desynchronisation or total absence of a communication infrastructure).
+The main contribution that is presented in this thesis is thus the development of control methods for BESS in the LV network that improve network operation (for example power flow, voltage deviation and phase unbalance) whilst later taking into account telecommunication limitations (for example possible desynchronisation or total absence of a communication infrastructure).
 All chapters that are presented in this thesis make contributions within these identified gaps and in accordance to the outlined research objectives, these contributions are summarised as follows:
 
 \begin{itemize}
 	\item
 	In accordance with \ref{objective-1}, a closed-loop phasor adjustment method was presented to control DNO owned BESS to maximise its beneficial impact on key network parameters of the LV network.
-	Findings in Chapter~\ref{ch1} showed how network issues (\hlrem{e.g.}\hladd{for example} voltage deviation, neutral currents, phase unbalance and losses) could be reduced individually when adjusting BESS operation at a sub-half-hourly resolution, even though the BESS was constrained by an active power schedule at half-hourly time scale.
+	Findings in Chapter~\ref{ch1} showed how network issues (for example voltage deviation, neutral currents, phase unbalance and losses) could be reduced individually when adjusting BESS operation at a sub-half-hourly resolution, even though the BESS was constrained by an active power schedule at half-hourly time scale.
 	Knowing how improving one key network parameter impacts different network operation is of relevance to industry since their limited network observability constrain their assessment of any control actions.
 	Being able to infer and possibly predict the overall network impact from a limited set of measurements would allow DNOs to better control BESS and thus improve operation of their LV networks.
 	Nonetheless, this schedule based constraint of the proposed adjustment method still imposed limitations to the otherwise flexible BESS operation, but results still showed the benefits that could be achieved despite this constraint.
 	\item
 	Then a method to dynamically correct BESS schedules was developed in order to control DNO owned BESS and to maximise its capabilities at reducing both daily demand peaks (i.e. at half-hourly resolution) whilst also mitigating volatile load peaks (i.e. at sub-half-hourly resolution).
 	This method is thus in accordance with \ref{objective-2} and findings in the associated chapter (i.e. Chapter~\ref{ch2}) showed how the control method outperformed traditional BESS control and how the probability of reducing peak load could be noticeably increased.
-	Having developed such a method that functions despite the underlying erroneousness of load forecasts allows DNOs to limit peak power flows and thus prevent \hlrem{e.g. }possible tripping of protection equipment.
+	Having developed such a method that functions despite the underlying erroneousness of load forecasts allows DNOs to limit peak power flows and thus prevent possible tripping of protection equipment.
 	Therefore, DNOs will be able to leverage the proposed dynamic control method instead of relying on the accuracy of the underlying load forecast when aiming to ensure an undisrupted supply of electricity.
 	However, to achieve this improvement with the proposed control method, the implicit assumption of an ICT infrastructure could limit algorithm deployability when distributed across multiple devices (i.e. for distributed BESS).
 	\item
@@ -30,10 +30,10 @@ All chapters that are presented in this thesis make contributions within these i
 	Consequently and in accordance with \ref{objective-4}, a communication-less control method for distributed BESS was developed to assess its ability at reducing the negative impact from the charging of co-located EVs.
 	Findings in Chapter~\ref{ch4} showed that the developed AIMD+ algorithm did not only reduce peak loads or voltage deviation, but it also equalised the asset utilisation across the entire feeder.
 	The achievement of this improvement was due to the individual algorithm tuning which was based on the properties of the underlying power delivery network.
-	Whilst academic and industry based research projects typically use historic demand data to derive set-points for their control algorithms, system models allow better tuning when \hlrem{e.g. }the traditional demand assumptions no longer hold.
+	Whilst academic and industry based research projects typically use historic demand data to derive set-points for their control algorithms, system models allow better tuning when the traditional demand assumptions no longer hold.
 	This was the case for the assumptions in Chapter~\ref{ch4} which is why a stochastic EV model was developed to simulate future EV uptake scenarios.
 	Such an approach in combination with the proposed AIMD+ algorithm would therefore benefit the planning and performance assessment of future power distribution networks.
-	However, without any communication infrastructure the performance of the proposed algorithm may be unable to address overarching network issues that were already assessed in Chapter~\ref{ch1} (\hlrem{e.g.}\hladd{for example} phase unbalance).
+	However, without any communication infrastructure the performance of the proposed algorithm may be unable to address overarching network issues that were already assessed in Chapter~\ref{ch1} (for example phase unbalance).
 \end{itemize}
 
 

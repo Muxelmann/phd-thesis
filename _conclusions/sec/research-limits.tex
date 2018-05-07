@@ -38,10 +38,10 @@ However, constructing models and stating the corresponding assumptions that vali
 After all, the scope of this thesis was on the development of BESS control methods and not on development of load prediction mechanisms.
 
 Furthermore, the data that was used in simulations to trigger certain control instructions may not be measurable in reality.
-Substation monitoring and voltage measurements at the energy storage were a certain prerequisite for most of the presented research, but obtaining other network parameters in reality (\hlrem{e.g.}\hladd{for example} customer voltages) could only be done at significant financial cost or at unusably low resolution.
-Being able to include data acquisition mechanisms that are comparable to reality (\hlrem{e.g.}\hladd{for example} data acquisition through the deployment of smart-meters) would strengthen the validity of the resulting findings.
+Substation monitoring and voltage measurements at the energy storage were a certain prerequisite for most of the presented research, but obtaining other network parameters in reality (for example customer voltages) could only be done at significant financial cost or at unusably low resolution.
+Being able to include data acquisition mechanisms that are comparable to reality (for example data acquisition through the deployment of smart-meters) would strengthen the validity of the resulting findings.
 In cases where data acquisition is not possible either due to the lack of measuring equipment or the legal barriers that uphold customer privacy, endpoint data needs to be estimated instead.
-Developing a reliable method of estimating the endpoint data (\hlrem{e.g.}\hladd{for example} customer voltages) from a limited number of measuring points is still an open research challenge.
+Developing a reliable method of estimating the endpoint data (for example customer voltages) from a limited number of measuring points is still an open research challenge.
 Future work will therefore develop a method that uses BESS and substation data to maximise the certainty of endpoint data, which in turn can be used to improve future BESS control methods.
 
 \subsection{Network models and Power Flow Simulations}
@@ -50,14 +50,14 @@ The dominant network model that was used throughout the research was a European 
 This so called ``LV Test Case'' complemented some of the in-house network models that were provided by SSEN - particularly since reproducibility of the findings could be assured.
 Different LV networks do however have their own network characteristics and their models can only be included in the research if their results are averaged.
 Also, this averaging is only valid if the number of network models is of sufficient size.
-Beside this shortage of network models, their accuracy cannot be guaranteed since old assets' electrical characteristics might have changed (\hlrem{e.g.}\hladd{for example} due to degradation or misinformation).
+Beside this shortage of network models, their accuracy cannot be guaranteed since old assets' electrical characteristics might have changed (for example due to degradation or misinformation).
 A higher number of detailed and accurate network models would thus allow the proposed algorithms to be tested on a larger variety of networks, which would in turn improve certainty that the proposed algorithms will function correctly if deployed.
 
 Future work will incorporate the algorithms into a more accurate and standardised network model.
 Power flow simulations on OpenDSS, PowerSim, GridLab-D or similar tools are frequently used throughout literature to create accurate network assessments.
 Having learnt the standardised network model structure that is specified by the IEEE will allow any future work to utilise the updated collection of network models in an IEEE compliant manner.
 Such compliancy would not only allow a better comparative assessment of network power flow solutions, but also of network failures, harmonic studies and islanded operation - previously this would not have easily been possible.
-Furthermore, with improved and updated network information, simulation tools would also give more accurate results (\hlrem{e.g.}\hladd{for example} regarding the location and scaling of LV assets).
+Furthermore, with improved and updated network information, simulation tools would also give more accurate results (for example regarding the location and scaling of LV assets).
 Finally, by cooperating with research institutes (i.e. the Electric Power Research Institute (EPRI) and the National Energy Research Laboratory (NERL) in the United States) it has now become possible to accelerate the simulation of network models by parallelising the power flow simulations and porting the execution to different programming languages.
 Therefore extending the number of trials would also improve the finding's certainty and lead to further conclusive results.
 However, for the scope of the conducted research, the number and variety of network models was deemed sufficient since the industrial partner (i.e. SSEN) assured their accuracy and ability to qualify as ``typical UK distribution networks''.
@@ -65,7 +65,7 @@ However, for the scope of the conducted research, the number and variety of netw
 \subsection{Different Control Methods}
 
 So far, the selection of control methods was based on both literature recommendations and the scope of the presented research.
-But computer science driven areas of research (\hlrem{e.g.}\hladd{for example} artificial intelligence - AI) are becoming increasingly popular in the area of power delivery and have also begun penetrating the control of power network assets.
+But computer science driven areas of research (for example artificial intelligence - AI) are becoming increasingly popular in the area of power delivery and have also begun penetrating the control of power network assets.
 With the ever increasing abilities of computers, such complex control approaches are likely to outperform traditional deterministic and probabilistic methods.
 Future work is therefore likely to also include AI aspects to assess their performance and to also understand how AI can safely be implemented.
 Combining such AI driven control with the discovered issue of desynchronising message propagation would open a new inter-disciplinary research category that focuses on power delivery, control systems and telecommunication issues.
@@ -76,6 +76,6 @@ However, these areas lie outside the scope of the work that was presented in thi
 Although Chapter~\ref{ch3} addressed the common assumption that control instructions propagate in a synchronised manner, other communication issues beside message desynchronisation do still remain an open research challenge.
 For instance a sudden loss of communication may result in a cluster of control devices to operate in an islanded manner (i.e. from a ICT point of view).
 Being able to cope with not just desynchronised messages, but with a complete loss of messages (or falsification of messages) has not been included in the presented work although the correctness and continuous receipt of messages is a common assumption throughout the area of smart grid research.
-Furthermore, assessing the resilience of the underlying communication systems to cyber attacks (\hlrem{e.g.}\hladd{for example} denial of service or man in the middle attacks) will become of vital important as digitisation and connectivity between control assets becomes the norm.
+Furthermore, assessing the resilience of the underlying communication systems to cyber attacks (for example denial of service or man in the middle attacks) will become of vital important as digitisation and connectivity between control assets becomes the norm.
 After all, assuring that both the ICT and by extension the power systems are robust in withstanding such attacks is essential to prevent possible service disruptions.
 However, although these hot research topics are of high personal interest to the author of this thesis, they do lie outside the scope of the presented work.
