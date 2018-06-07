@@ -3,8 +3,8 @@
 
 \input{_chapter2/fig/system-controller}
 
-This section explains the dynamic control (i.e. the controller block as shown in Figure~\ref{ch2:subfig:proposed-dynamic-control-system}) \hladd{in the shape of an MPC, }\hlrem{which contains}\hladd{containing} the two PID compensators to adjust operation around the predetermined ESMU schedule.
-The first PID compensator is fed by the ESMU schedule and the other is fed by the \hlrem{MPC}\hladd{predictor} load estimations.
+This section explains the dynamic control (i.e. the controller block as shown in Figure~\ref{ch2:subfig:proposed-dynamic-control-system}) in the shape of an MPC, containing the two PID compensators to adjust operation around the predetermined ESMU schedule.
+The first PID compensator is fed by the ESMU schedule and the other is fed by the predictor load estimations.
 After the control system is detailed in this section the auto-regressive models which were used during the course of this research are also explained.
 
 \subsection{Dynamic control}
@@ -15,7 +15,7 @@ The first reference signal is the SOC profile derived from the ESMU scheduled, $
 These two inputs are fed into compensator PID$_1$ and compensator PID$_2$, respectively.
 The output of each compensator is a corrective battery power component that, when summed, yields the next ESMU power (i.e. $p_1(t+\Delta t)$ and $p_2(t+\Delta t)$) which is applied to the ESMU model.
 Each PID compensator also receives a feedback signal to compute the internal error states.
-More specifically, PID$_1$ receives the most recent SOC value that is obtained from the ESMU model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (\hlrem{e.g.}\hladd{for example} through measurements by substation monitoring).
+More specifically, PID$_1$ receives the most recent SOC value that is obtained from the ESMU model, $SOC^*(t)$, and PID$_2$ receives the network's most recent power demand, $p_\text{net}(t)$ (for example through measurements by substation monitoring).
 
 \nomenclature[J]{$p_\text{net}(t)$}{Most recent network demand at sample $t$, where $\textbf{p}_{net} = (p_\text{net}(t))$ and $p_\text{net}(t) \in \mathbb{R}$}
 \nomenclature[J]{$SOC^*(t)$}{Battery's state of charge at sample $t$, where $SOC^*(t) \in [0, 1]$}
@@ -23,7 +23,7 @@ More specifically, PID$_1$ receives the most recent SOC value that is obtained f
 \nomenclature[J]{$E_{p}(t)$}{Difference between current and predicting network power at sample $t$, where $E_{p}(t) \in \mathbb{R}$}
 \nomenclature[J]{$\hat{p}_\text{net}(t+\Delta t)$}{Predicted next network power at sample $t$}
 \nomenclature[J]{$\boldsymbol{\alpha}$}{PID weight vector for SOC compensator PID$_1$, where $\boldsymbol{\alpha} = \{\alpha_P, \alpha_I, \alpha_D\}$ and $\boldsymbol{\alpha} \in \mathbb{R}^3$}
-\nomenclature[J]{$\boldsymbol{\beta}$}{PID weight vector for \hlrem{MPC}\hladd{predictor} compensator PID$_2$, where $\boldsymbol{\beta} = \{\beta_P, \beta_I, \beta_D\}$ and $\boldsymbol{\beta} \in \mathbb{R}^3$}
+\nomenclature[J]{$\boldsymbol{\beta}$}{PID weight vector for predictor compensator PID$_2$, where $\boldsymbol{\beta} = \{\beta_P, \beta_I, \beta_D\}$ and $\boldsymbol{\beta} \in \mathbb{R}^3$}
 \nomenclature[J]{$\textbf{a}$}{Weight vector for compensator input regression of the AR model, where $\textbf{a} = \mathbb{R}^{N}$}
 \nomenclature[J]{$\textbf{b}$}{Weight vector for compensator output regression of the AR model, where $\textbf{b} = \mathbb{R}^{N}$}
 \nomenclature[J]{$N$}{Number of regressors of the AR model, where $N \in \mathbb{Z}_{>0}$}
@@ -57,7 +57,7 @@ This error signal is defined as:
 \input{_chapter2/equ/power-error-signal}
 
 However, since the future network power is unknown an ``estimated next power'', $\hat{p}_\text{net}(t+\Delta t)$, is used instead.
-This value is the PID$_2$'s input from the \hlrem{MPC}\hladd{predictor} and results in an ``estimated power error signal'':
+This value is the PID$_2$'s input from the predictor and results in an ``estimated power error signal'':
 
 \input{_chapter2/equ/power-error-estimate}
 
@@ -84,10 +84,9 @@ Here, $\zeta^*(\boldsymbol{\alpha}, \boldsymbol{\beta})$ is defined as:
 In Equation~\ref{ch2:equ:cost-weights} and Equation~\ref{ch2:equ:dynamic-cost}, $\zeta^*(\boldsymbol{\alpha}, \boldsymbol{\beta})$ represents the sub-half-hourly peak load during a day when ESMU schedules are adjusted with the corresponding $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights.
 Also, the same SOC tolerance that was used to generate the SOC schedule (i.e. $SOC_{tol}$) is included to prevent the solution from deviating off the prescheduled SOC profile.
 To generalise this solution for all load cases this minimisation problem was formulated to solve multiple daily load profiles in order to find ideal values for $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$.
-\hladd{The system of two PID compensators for discrete time is unconventional and it may be worth considering different types of control or compensator.
-However, with the above-explained approach and for the data used as part of this research, the computed}\hlrem{
-This resulting} set of $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights \hlrem{therefore guaranteed}\hladd{resulted} a convergent and stable solutions\hlrem{ for the provided data}.
-\hladd{In this context, convergent means that the $SOC^*(t)$ values tend towards the $SOC(t)$ values, and stable means that the $SOC^*(t)$ values never clipped at zero or one.}
+The system of two PID compensators for discrete time is unconventional and it may be worth considering different types of control or compensator.
+However, with the above-explained approach and for the data used as part of this research, the computed set of $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ weights resulted a convergent and stable solutions.
+In this context, convergent means that the $SOC^*(t)$ values tend towards the $SOC(t)$ values, and stable means that the $SOC^*(t)$ values never clipped at zero or one.
 The details concerning these case studies themselves are however outlined in Section~\ref{ch2:sec:case-studies}.
 
 \subsection{Model predictive control}
@@ -109,7 +108,7 @@ This kind of prediction does however not take into account demand dynamics.
 An AR model on the other hand uses a series of past observations and their individual contribution to predict the next power.
 But the further into the future these predictions are made the less accurate they become.
 This accuracy loss is however circumvented since the hybrid system was designed to only apply corrections based on load predictions of the immediate future (i.e. next sample time at $t+\Delta t$ and not $t+2\Delta t$ or similar).
-This simplification also reduces computational burden and guarantees real-time operation especially when choosing the simplest dynamic model (i.e. an Auto-Regressive (AR) model instead of \hlrem{e.g. }deep artificial neural networks).
+This simplification also reduces computational burden and guarantees real-time operation especially when choosing the simplest dynamic model (i.e. an Auto-Regressive (AR) model instead of deep artificial neural networks).
 Since external forces can and often do impact the behaviour of the model, the AR model is treated as an exogenous model with a time-series of input powers, $\textbf{p} = (p(t))$, a time-series of predicted ``next powers'', $\hat{\textbf{p}} = (\hat{p}(t))$, and an internal delay function $t-\Delta t$.
 
 \input{_chapter2/fig/mpc-arx}

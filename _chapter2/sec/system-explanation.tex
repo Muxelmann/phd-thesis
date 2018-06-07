@@ -57,13 +57,13 @@ Hence, the initial conditions of this model are defined as $SOC(0) = 0.5$, which
 
 Having established the ESMU model, the procedure to generate a corresponding schedule is explained in this subsection.
 This procedure follows the same practice as outlined in the previous chapter (i.e. in Section~\ref{ch1:subsec:esmu-scheduling}) where an ESMU schedule is generated at half-hourly temporal resolution.
-Therefore the same synchronisation function, $k(t)$,\hladd{ that was used in Section~}\ref{ch1:subsec:esmu-scheduling} can be used to link the native \hladd{minutely }sampling period of $\Delta t$ to the schedule's half-hourly \hlrem{period}\hladd{time slots}.
+Therefore the same synchronisation function, $k(t)$, that was used in Section~\ref{ch1:subsec:esmu-scheduling} can be used to link the native minutely sampling period of $\Delta t$ to the schedule's half-hourly time slots.
 Since the sub-half-hourly operation was at a minutely period and the generated schedule is at half-hourly period, this fixed conversion function is defined as:
 
 \input{_chapter2/equ/sample-conversion-function}
 
 Having established a means of synchronising the two sampling periods, the shape of the ESMU schedule that would ``smoothen'' the underlying power profile is defined next.
-For simplicity linear forwarding was chosen which means that the power assigned at \hlrem{e.g.}\hladd{for instance} $t=1$ remains constant over the scheduling period of $30\Delta t$ until $t=31$.
+For simplicity linear forwarding was chosen which means that the power assigned at for instance $t=1$ remains constant over the scheduling period of $30\Delta t$ until $t=31$.
 With this assumption the ESMU's SOC can be calculated for each $t$ despite the scheduled power profile only having been defined for every 30$^\text{th}$ $t$.
 Furthermore, with this second assumption not only every sub-half-hourly ESMU power can be derived from its half-hourly schedule, but it also enables the calculation of every SOC, i.e. $SOC(t)$ is well defined.
 
@@ -74,7 +74,7 @@ Furthermore, with this second assumption not only every sub-half-hourly ESMU pow
 
 For the generation of the ESMU schedule a load forecast, $\textbf{p}_\text{for}$, was required; here $\textbf{p}_\text{for} = (p_\text{for}(k(t)))$.
 Just like the ESMU forecast this forecast is also produced at half-hourly temporal resolution and it was provided by SSEN as part of the NTVV research project.
-The task at hand is to find a half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, where $\textbf{p}_\text{sch} = (p_\text{sch}(k(t)))$, that improves the shape of the underlying forecast, \hlrem{e.g.}\hladd{for example} by reducing load peaks.
+The task at hand is to find a half-hourly ESMU schedule, $\textbf{p}_\text{sch}$, where $\textbf{p}_\text{sch} = (p_\text{sch}(k(t)))$, that improves the shape of the underlying forecast, for example by reducing load peaks.
 In order to generate this optimised ESMU schedule a performance metric quantifying improvements had to be defined first.
 The remaining task is to now compute a half-hourly schedule, $\textbf{p}_\text{sch}$, that yields the best performance.
 This computation is done by minimising several cost-functions.

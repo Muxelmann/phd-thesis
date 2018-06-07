@@ -4,14 +4,14 @@
 The focus of the research presented in this thesis is put on aiding DNOs to manage and operate their power distribution networks by installing energy storage into their distribution networks in order to counteract the effects from electrification of heat and transport sectors as well as the decarbonisation of the grid itself.
 Therefore BESS control is the main focus of this work since BESS is a rapidly improving technology that has the potential to defer or even mitigate costly network reinforcements.
 Modern battery technology allows the storage of electrical energy in ever-decreasing form factors, whilst power electronics technology becomes more efficient at integrating batteries into power networks.
-As shown in the literature review in Chapter~\ref{ch-literature}, methods to control BESS, \hlrem{e.g.}\hladd{for instance,} in order to optimise power flow, have been and still are of great research interest.
+As shown in the literature review in Chapter~\ref{ch-literature}, methods to control BESS, for instance, in order to optimise power flow, have been and still are of great research interest.
 
 Therefore, the aim of this thesis is to present a contribution in BESS control to improve grid operation and reliance, when deploying it in the UK LV distribution network.
 Given the already established control approaches of ``off-line'' and ``on-line'' control, merging the two in order to take advantage of BESS schedules and real-time information is still an open research challenge.
 Subsequently, applying real-time corrections to BESS schedules in order to decrease peak demand whilst obeying to technical and operational constraints is also an identified research challenge.
-Since the expected uptake of distributed LCTs and DERs through proliferation of household-connected storage solutions (\hlrem{e.g.}\hladd{for example} to support PV integration or to counteract EV impacts) requires ``smart'' coordination mechanisms.
+Since the expected uptake of distributed LCTs and DERs through proliferation of household-connected storage solutions (for example to support PV integration or to counteract EV impacts) requires ``smart'' coordination mechanisms.
 When requiring communication to implement this smart coordination, another challenge exists in developing algorithms that function despite communication disturbances (i.e. through message desynchronisation).
-Lastly, in the case where communication-less coordination of distributed devices is sought, the challenge of assuring equal device usage whilst providing network support (\hlrem{e.g.}\hladd{for example} to guarantee a minimum lifetime) has also been identified.
+Lastly, in the case where communication-less coordination of distributed devices is sought, the challenge of assuring equal device usage whilst providing network support (for example to guarantee a minimum lifetime) has also been identified.
 
 These research challenges are extensively reviewed in the literature review in Chapter \ref{ch-literature}, and in accordance to these identified key challenges that motivate the conducted research, a set of objectives is presented in order to achieve the aim of contributing to the existing field:
 
@@ -21,9 +21,9 @@ style=multiline,
 leftmargin=*,
 label=\textbf{Objective~\arabic*}
 ]
-	\item \label{objective-1} Develop a control mechanism for a single BESS to further improve three-phase network operation without \hlrem{deviating from its predetermined BESS}\hladd{changing the half-hourly real power} schedule by adjusting BESS power phasors and reactive power injection.
-	\item \label{objective-2} Develop a control mechanism that dynamically adjusts half-hourly \hlrem{BESS }schedules on a sub-half-hourly basis\hladd{, hence modifying the half-hourly schedule}\hlrem{ in order} to reduce daily load peaks by combining control elements from both off-line and on-line control.
+	\item \label{objective-1} Develop a control mechanism for a single BESS to further improve three-phase network operation without changing the half-hourly real power schedule by adjusting BESS power phasors and reactive power injection.
+	\item \label{objective-2} Develop a control mechanism that dynamically adjusts half-hourly schedules on a sub-half-hourly basis, hence modifying the half-hourly schedule to reduce daily load peaks by combining control elements from both off-line and on-line control.
 	\item \label{objective-3} Develop and compare operation of a scheduling algorithm that manages the charging behaviour of multiple BESS by submitting it to performance analysis in a synchronised and desynchronised communication environment.
-	\item \label{objective-4} Develop a communication less control strategy for distributed BESS by \hlrem{extending}\hladd{modifying} the traditional and robust Additive Increase Multiplicative Decrease (AIMD) algorithm \hladd{by introducing a threshold dependent scaling of the additive term }and \hladd{by }individually assigning control parameters.
+	\item \label{objective-4} Develop a communication less control strategy for distributed BESS by modifying the traditional and robust Additive Increase Multiplicative Decrease (AIMD) algorithm by introducing a threshold dependent scaling of the additive term and by individually assigning control parameters.
 \end{enumerate}
 
