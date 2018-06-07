@@ -16,7 +16,7 @@
     node [box, fill=green!20, below left of=battery, yshift=-20mm, xshift=-10mm](pid_soc) {PID$_1$}
     node [box, fill=green!20, below right of=battery, yshift=-20mm, xshift=10mm](pid_p) {PID$_2$}
     node [box, fill=blue!20, below of=pid_soc, yshift=-15mm](schedule) {Schedule}
-    node [box, fill=green!20, below of=pid_p, yshift=-15mm](mpc) {\hladd{predictor}\hlrem{MPC}};
+    node [box, fill=green!20, below of=pid_p, yshift=-15mm](mpc) {predictor};
 	% Draw lines
 	\draw [->] (battery) to (network);
 	\draw [->, bend right] (pid_soc) to node[left, pos=0.4, xshift=-1mm] {$p_{1}(t+\Delta t)$} (battery);

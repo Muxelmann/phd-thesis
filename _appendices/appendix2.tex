@@ -58,7 +58,7 @@ In Chapter~\ref{ch3}, the data that is sent in the \textit{inform} messages incl
 The brokering protocol, as shown in Figure~\ref{appx-b:fig:fipa-brokering}, is used to delegate an agents task to a different agent in order to free up its own computational resources.
 In Chapter~\ref{ch3} for instance, the load agents never communicate with the energy supplier directly, since the applying and undoing of power profiles is delegated to their brokering agents.
 The protocol is initiated by assigning a broker to a load agent by sending a ``\textit{proxy}'' message.
-This message contains the required information for the broker, \hlrem{e.g.}\hladd{like} the power profile a buying broker should apply.
+This message contains the required information for the broker, like the power profile a buying broker should apply.
 If the broker can fulfil this request, then an ``\textit{agree}'' message is sent, otherwise a ``\textit{refuse}'' message is sent.
 The broker uses the FIPA Query protocol, as explained in Section~\ref{appx-b:subsec:fipa-query-protocol}, to obtain a list of broker agents that are linked to energy suppliers, which can be used to apply the load's demand profile.
 However, if no such broker is found, then a ``\textit{failure}'' (i.e. ``no match'') message is sent.
@@ -76,7 +76,7 @@ Figure~\ref{appx-b:fig:fipa-contract-net} shows the FIPA ContractNet Protocol th
 After executing this dual handshake protocol, all contract participants are informed about the final contract decision and no information is lost during the message exchange.
 The protocol is initiated by an ``\textit{Initiator}'', who sends a ``\textit{Call For Proposal}'' (\textit{cfp}) to $m$ ``\textit{Participant}s''.
 This \textit{cfp} contains a deadline within which all agents that do want to participate should reply.
-They can reject their participation by sending a ``\textit{refuse}'' message, or acknowledge their participation by sending a ``\textit{propose}'' message that also contains proposition information (\hlrem{e.g.}\hladd{for example} pricing information).
+They can reject their participation by sending a ``\textit{refuse}'' message, or acknowledge their participation by sending a ``\textit{propose}'' message that also contains proposition information (for example pricing information).
 Once all participants have replied or the deadline has expired, the \textit{initiator} continues executing.
 It collects and assesses all proposals, choses the accepted and rejected ones and, respectively, issues ``\textit{accept}'' and ``\textit{reject}'' notifications.
 The participating agents reply with an ``\textit{inform}'' message if they acknowledge the ``accept`` or ``reject'' message, and in case of an error, they reply with a ``failure'' message.

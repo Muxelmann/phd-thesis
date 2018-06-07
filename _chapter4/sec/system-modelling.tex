@@ -40,9 +40,9 @@ An empirical EV model was developed to capture the underlying driving behaviour 
 This dataset contained three parts: the probability of starting a trip, $n_{s}(t)$, the probability of a weekday trip being of a certain distance, $w_{wd}(t)$, and the probability of a weekend trip being of a certain distance, $w_{we}(t)$.
 Both probabilities are at a 15 minutely period.
 The probability of starting a trip (i.e. $n_{s}(t)$) is approximated by three continuous normal distribution functions since it is assumed that driver behaviour is distributed normally around three key times throughout the day.
-\hladd{These three key times are: morning time to leave home to drive to work; lunchtime to leave home to run errands; and evening time to return home.
-It should be noted that the naming is purely for exemplification and that this choice of three normal distributions reflects the average vehicle usage determined in the dataset }\cite{MiD2008}\hladd{ although individual driving behaviour may differ from these three events.
-Therefore, and to avoid splitting the dataset into an arbitrarily large number of approximating distributions, these three daily events are chosen as a basis for the subsequent work, and }\hlrem{E}\hladd{e}ach distribution is based on the subsequent equation of a normal distribution:
+These three key times are: morning time to leave home to drive to work; lunchtime to leave home to run errands; and evening time to return home.
+It should be noted that the naming is purely for exemplification and that this choice of three normal distributions reflects the average vehicle usage determined in the dataset \cite{MiD2008} although individual driving behaviour may differ from these three events.
+Therefore, and to avoid splitting the dataset into an arbitrarily large number of approximating distributions, these three daily events are chosen as a basis for the subsequent work, and each distribution is based on the subsequent equation of a normal distribution:
 
 \input{_chapter4/equ/normal-distribution}
 
@@ -85,12 +85,12 @@ Furthermore, their resulting probability distributions are plotted in comparison
 
 \input{_chapter4/fig/trip-distance-probability}
  
-In addition to these probabilities an average driving speed of 56 kmh \hlrem{(}\hladd{ or} 35 mph\hlrem{) and an average driving energy efficiency of 0.1305 kWh/kmh (0.21 kWh/mph) are}\hladd{ is} taken from the \textit{UK Government Digital Service} dataset \cite{UKGovernmentDigitalService2013}\hladd{ and an average driving energy consumption of 0.1305 kWh/km or 0.21 kWh per mile is used, based on a BMW i3 energy demand measured during its \textit{New European Driving Cycle} (NEDC) }\cite{BMW_press_i3}.
-Using the predicted driving distance and\hlrem{ average driving speed with the} driving energy efficiency, it is possible to estimate an EV's energy demand upon arrival.
+In addition to these probabilities an average driving speed of 56 kmh  or 35 mph is taken from the \textit{UK Government Digital Service} dataset \cite{UKGovernmentDigitalService2013} and an average driving energy consumption of 0.1305 kWh/km or 0.21 kWh per mile is used, based on a BMW i3 energy demand measured during its \textit{New European Driving Cycle} (NEDC) \cite{BMW_press_i3}.
+Using the predicted driving distance and driving energy efficiency, it is possible to estimate an EV's energy demand upon arrival.
 A single EV charging profile is then estimated by starting to charge from the EV's predicted arrival time until the energy demand has been met.
 To do so a maximum charging power of the UK's average household circuit rating (i.e. 7.4kW) and an immediate disconnection of the EV upon charge completion were assumed to comply with the guidance of the UK's \textit{Electric Vehicle Home Charging Scheme} \cite{EVHomeCharging}.
-\hladd{It is worth mentioning, that a more homogeneous energy demand may be estimated when using different polynomial efficiency functions.
-However, to provice a general estimate of charging demand, using the data from a field tested vehicle is assumed sufficient for the work presented here.}
+It is worth mentioning, that a more homogeneous energy demand may be estimated when using different polynomial efficiency functions.
+However, to provice a general estimate of charging demand, using the data from a field tested vehicle is assumed sufficient for the work presented here.
 
 \input{_chapter4/fig/aggregated-ev-power}
 

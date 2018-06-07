@@ -28,7 +28,7 @@ An AIMD scenario in which EV uptake is 100\% and each household has a battery en
 Here each battery was controlled using the AIMD algorithm using a fixed voltage threshold.
 \item \label{ch4:case-d}
 An AIMD+ scenario in which EV uptake is 100\% and each household has a battery energy storage device.
-Here each battery was controlled using the AIMD+ algorithm using the \hlrem{optimised }reference voltage profile.
+Here each battery was controlled using the AIMD+ algorithm using the reference voltage profile.
 \end{enumerate}
 
 An EV uptake of 100\% was adopted to represent the worst case scenario.
@@ -41,7 +41,7 @@ In order to compare the network's performance during execution of the predefined
 These metrics capture, respectively, the improvements in voltage violation mitigation, line overload reduction and the equality of battery usage.
 They are derived from the Probability Distribution (PD) of the underlying measurements and thus allow an comparison of the four scenarios.
 Each PD is generated using the standard kernel density estimation.
-In the following sections, all subscripts of the metrics notate which scenario they represent (\hlrem{e.g.}\hladd{for example} $\zeta_\textbf{C}^{**}$ represents results from \ref{ch4:case-c} and $\zeta_\textbf{D}^{*}$ represents results from \ref{ch4:case-d}).
+In the following sections, all subscripts of the metrics notate which scenario they represent (for example $\zeta_\textbf{C}^{**}$ represents results from \ref{ch4:case-c} and $\zeta_\textbf{D}^{*}$ represents results from \ref{ch4:case-d}).
 For reproducibility, all excerpts to showcase the performance metrics were generated from simulations based on the IEEE EU LV Test feeder.
 Only the full set of simulations is based on the combination of all network models.
 
@@ -100,10 +100,10 @@ The resulting scaling effect thus amplifies the impact of line current reduction
 For the work presented in this chapter, the value for this modifier is set to $0.5$ since only line utilisation improvements above $0.5$ per unit are considered noteworthy.
 In summary, a reduction in line overloads would give a negative $\zeta^{**}_\textbf{C}$ or $\zeta^{**}_\textbf{D}$, whereas a positive value implies a higher line utilisation or worse network operation.
 
-\hladd{It should be noted, that maximised asset utilisation may be of benefit to the DNO since such a state would reflect a best return for the investment.
+It should be noted, that maximised asset utilisation may be of benefit to the DNO since such a state would reflect a best return for the investment.
 Different ownership of the support asset would therefore reflect different incentives for using the asset.
 Therefore, in scenarios where a longevity of BESS whilst providing network support is of importance, the above metric is used.
-Nonetheless, different usage and ownership scenarios are discussed in Section}~\ref{ch-conclusions:sec:research-limits-and-future-work}\hladd{ of this thesis.}
+Nonetheless, different usage and ownership scenarios are discussed in Section~\ref{ch-conclusions:sec:future-work} of this thesis.
 
 \subsubsection{Parameter for the Improvement of Battery Cycling}
 

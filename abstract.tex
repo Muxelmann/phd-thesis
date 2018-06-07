@@ -21,52 +21,16 @@ sub-half-hourly volatility in demand. Consequently, improving LV network operati
 mainly considers the reduction of peak power flow, but also includes reducing\linebreak
 energy losses, voltage deviation, the magnitude of neutral currents and phase un-\linebreak
 balance. Without these methods, DNOs would have to rely on traditional network re-\linebreak
-enforcements so that LV networks are kept within statutory voltage bands, \hladd{for\linebreak
-example}. Extending current literature with methods to control a single energy\linebreak
+enforcements so that LV networks are kept within statutory voltage bands, for\linebreak
+example. Extending current literature with methods to control a single energy\linebreak
 resource and a distributed BESS - whilst considering requirements for communication\linebreak
 systems that may effect BESS control - is the main contribution of this thesis.
 
-%% version 2
-%British national low-carbon targets have resulted in a transition within the UK\linebreak
-%energy and transport sectors. This transition entails the development and uptake of\linebreak
-%new Low-Carbon Technologies (LCTs). Some technologies (\hlrem{e.g.}\hladd{for example} photovoltaic) can\linebreak
-%offer demand alleviating services since they can supply electricity to the grid,\linebreak
-%whilst others (\hlrem{e.g.}\hladd{for example} Electric Vehicles - EVs) will increase demand for grid supplied\linebreak
-%electricity. Distribution System Operators (DNOs), having to keep the distribution\linebreak
-%system within statutory constraints, are thus facing significant challenges like\linebreak
-%more volatility in demand, higher voltage deviation and larger phase unbalance.\linebreak
-%Energy storage devices can be a feasible alternative to conventional reinforcement\linebreak
-%activities, since they can be managed actively. Developing novel control for\linebreak
-%Battery Energy Storage Solutions (BESS) is thus the main focus of this thesis.\linebreak
-%Extending current literature by developing control algorithms for a single \linebreak
-%energy system and distributed BESS whilst taking into account the communication\linebreak
-%requirements for effective control is its main contribution.
-
-%% version 1
-%Beginning the transition of UK energy systems to reach national low-carbon\linebreak
-%economy targets is expected to put significant strain onto the existing power\linebreak
-%networks. Reinforcing the Low-Voltage (LV) distribution network, to assure its\linebreak
-%operation remains within statutory constraints, will become essential and necessary\linebreak
-%when e.g. Low-Carbon Technologies (LCTs) like heat pumps, photovoltaic panels or\linebreak
-%Electric Vehicles (EVs) begin penetrating the network. The expected impact\linebreak
-%such as higher voltage deviation, phase unbalance, neutral current and larger\linebreak
-%mean power flow, will make the Distribution Network Operator's (DNO's) role of\linebreak
-%ensuring their LV networks remain within the aforementioned statutory limits \linebreak
-%a significant challenge. The deployment of Battery Energy Storage Solution \linebreak
-%(BESS) is seen as a feasible alternative to conventional network reinforcement.\linebreak
-%Energy storage control, for both single, DNO owned and multiple, privately owned\linebreak
-%energy storage devices, to improve LV network operation without the need for any\linebreak
-%reinforcement, is the main contribution of this thesis.
-
-The \hlrem{first} BESS control algorithm\hlrem{s} developed in this thesis \hlrem{are}\hladd{is} designed to incorporate \hlrem{both} half-hourly forecasts and sub-half-hourly load volatility\hlrem{ in order to take into account both the long term demand trends and its high volatility}.
-\hlrem{As a result,}\hladd{Resulting} key network parameters and their interplay \hlrem{could be}\hladd{are} identified and daily load peaks\hlrem{ that are}\hladd{,} caused by load volatility\hladd{,} could \hlrem{on average }be reduced by an \hlrem{additional}\hladd{average of} 3.8kW \hladd{(from 45kW)}\hlrem{, even when the underlying demand forecast was erroneous}.
-\hlrem{These m}\hladd{M}ethods are developed and address challenges for controlling a single \hlrem{(i.e. DNO owned) }BESS\hlrem{ - hence neglecting the challenges that are based on inter-device communication}.
-\hlrem{Those n}\hladd{N}eglected challenges are addressed in the subsequent BESS control methods where a desynchronised Multi-Agent Network (MAS) and communication-less BESS control fill this gap.
+The BESS control algorithm developed in this thesis is designed to incorporate half-hourly forecasts and sub-half-hourly load volatility.
+Resulting key network parameters and their interplay are identified and daily load peaks, caused by load volatility, could be reduced by an average of 3.8kW (from 45kW).
+Methods are developed and address challenges for controlling a single BESS.
+Neglected challenges are addressed in the subsequent BESS control methods where a desynchronised Multi-Agent Network (MAS) and communication-less BESS control fill this gap.
 Results show how internal algorithm behaviour changes when desynchronising the communication environment, but without impacting the global performance of the distributed BESS.
-Also, real-time performance of the communication less control algorithm is studied on \hlrem{a time-series and statistical}\hladd{different} basis \hlrem{and}\hladd{to} show\hlrem{s} how effects from uncoordinated Low-Carbon Technologies (LTCs) \hlrem{i.e.}\hladd{like} Electric Vehicle (EV) charging, can be successfully mitigated.
-All \hlrem{key} objectives \hlrem{that} align\hladd{ing} with the aforementioned achievements have been met \hlrem{for each of the presented contribution} and the comparable storage control techniques in literature are either met or exceeded in performance when subjected to the available datasets.
+Also, real-time performance of the communication less control algorithm is studied on different basis to show how effects from uncoordinated Low-Carbon Technologies (LTCs) like Electric Vehicle (EV) charging, can be successfully mitigated.
+All objectives aligning with the aforementioned achievements have been met and the comparable storage control techniques in literature are either met or exceeded in performance when subjected to the available datasets.
  
- 
-\begin{flushright}
-	\hlrem{Word count: \textbf{328}}
-\end{flushright}
