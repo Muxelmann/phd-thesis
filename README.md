@@ -24,6 +24,12 @@ The viva is over and I passed with **minor corrections**. Now These corrections 
 	- The proposed changes to the conclusion/discussion section will be drafted
 	- Proof of corrections is included in the [`README/post-viva`](https://github.com/Muxelmann/phd-thesis/tree/master/README/post-viva), too
 
+3. Applied further corrections to chapter 7 - `7 June 2018`
+	- I found some mistakes and typos throughout the chapter -> corrected
+	- Long sentences in 7.3 and 7.4 are shortened to avoid obscure language
+	- Paragraphs relating to the same topic in 7.4 are combined
+	- The PDF is backed up on Dropbox **but is still subject to change**
+
 ## Thesis structure
 
 ### Main Chapters
