@@ -1,60 +1,60 @@
 \section{Future Work}
 \label{ch-conclusions:sec:future-work}
 
-\hladd{The models, algorithms and control methods presented in this thesis provide a first step of assessing the impact of BESS on LV distribution networks.
-Regarding the limitations outlined in Section~}\ref{ch-conclusions:sec:research-limits}\hladd{ it is worth considering possible steps to improve the models from an academic point of view and eventually make them ``industry ready''.
-These two considerations are discussed in the subsequent subchapters before concluding on the entire work presented in this thesis.}
+The models, algorithms and control methods presented in this thesis provide a first step of assessing the impact of BESS on LV distribution networks in the UK.
+Regarding the limitations outlined in Section~\ref{ch-conclusions:sec:research-limits} it is worth discussing the next steps for improving the models from an academic standpoint to eventually make them ``industry ready''.
+These considerations are discussed in the subsequent subsections before concluding on the entire work presented in this thesis.
 
 \subsection{Modelling}
 
-\hladd{As mentioned before, the used data driven models have their limitations and it is worth considering the possible next steps to bring them closer to reality.
-The developed BESS model for example did perform well enough to accurately schedule the ESMU operation during the field trials of the \textit{NTVV} project.
-However, there are still certain enhancements that may be considered in future research to extend this BESS model.
-The non-linearity regarding the battery's charging behaviour for instance may be included since more battery characteristics have been discovered over the recent past.
-Characteristics regarding constant-current constant-voltage charging paradigms, temperature and battery condition have become better understood.
-Also, from the preliminary lessons learnt during the field trials, safety mechanisms that operate independent of the BESS instructions (i.e. instructions sent from a control centre) might be included into the model.
-After all, it was found that those safety mechanisms limited BESS operation without any warning.
-Predicting when these mechanisms may activate would allow a more schedule generation.
-The data collected during this field trial is therefore a great starting point to continue the research and better the BESS model.
-In future work, such data could also aid the simulation battery control algorithms, since could also take into account the battery conditions itself to maximise its lifetime.
-However, since the research aim of this thesis was on the development of BESS control methods and not on the development of better BESS models, this endeavour lies outside the research scope.}
+The developed BESS model did perform to accurately schedule the ESMU operation during the field trials of the \textit{NTVV} project.
+However, there are still certain enhancements that should be considered in future research to extend this BESS model.
+The non-linearity regarding the battery's charging behaviour for instance should be included since a better understanding of battery characteristics has been established over the recent past.
+This is partially due to the increased number of EVs where battery information is continuously fed back to the manufacturer, but also due to the increased industrial demand for better batteries.
+Constant-current constant-voltage charging paradigms, temperature, mechanical integrity, degradation and battery conditioning are only some examples of battery characteristics that have become better understood.
+Additionally, from the lessons learnt during the \textit{NTVV} field trials, safety mechanisms, operating independent of the BESS instructions (i.e. instructions sent from a control centre) should also be included into the model.
+After all, it were those safety mechanisms that limited BESS to operate as scheduled; and this limitation occurred without warning.
+Predicting when these safety mechanisms will activate will allow a better schedule generation.
+For example, taking into account temperature increase allows a better prediction of when the safety mechanism may disconnect the battery and a more strategic charging profile can be produced.
+The data collected during the field trials is therefore a great starting point to continue the research and better the BESS model.
+In future work, such data does not only highlight unconsidered issues, but also aids the simulation battery control algorithms since it could also take into account the battery conditions itself, maximising its lifetime.
 
-\hladd{Equally, the EV model where it is assumed that vehicles charge at home and begin their charging process immediately after being connected may be considered already outdated.
-This so called ``dumb-charging'' may still be seen as the baseline when assessing the impact of EVs on power networks, but more sophisticated and coordinated charging mechanisms (like the one hinted at in Chapter~}\ref{ch3}\hladd{) would certainly mitigate the EV impact.
-Therefore, the inclusion of smart charging is seen as a future work, since the implementation, validation and extension of available smart-charging schemes currently lies beyond the scope of this thesis.}
+Equally, the EV model where it is assumed that vehicles charge at home and begin doing so immediately after being connected is considered an outdated assumption.
+Although this so called ``dumb-charging'' is still seen as the baseline when determining the worst impact of EVs on power networks, more sophisticated and coordinated charging mechanisms (like the one hinted at in Chapter~\ref{ch3}) do certainly mitigate the impact of EV charging.
+Therefore, the inclusion of smart charging is a future work.
+However, the implementation, validation and extension of available smart-charging schemes currently lies beyond the scope of this thesis.
 
-\hladd{Regarding the use of network models to assess the impact on the LV network, and maybe even use real-time simulations to support control, is also a hot topic to consider as future work.
-After all, power flow solvers like OpenDSS, PowerSim, GridLab-D or similar tools are frequently used throughout literature to create accurate network assessments.
-Having learnt the standardised network model structure that is specified by the IEEE will allow any future work to utilise the updated collection of network models in an IEEE compliant manner.
-Such compliance would not only allow a better comparative assessment of network power flow solutions, but also of network failures, harmonic studies and islanded operation - previously this would not have easily been possible.
-Furthermore, with improved and updated network information, simulation tools would also give more accurate results (for example regarding the location and scaling of LV assets).}
-
-\hladd{In fact, private correspondence with employers at the Electric Power Research Institute (EPRI) and the National Energy Research Laboratory (NERL) in the United States have become possible as a result of this doctoral research and a cooperative development to extend OpenDSS for multiple platforms is currently ongoing.
+Regarding the use of network models to assess the impact on the LV network is also a hot topic to consider as future work.
+It is even considered to use real-time simulations in order to support BESS control.
+After all, power flow solvers like OpenDSS, PowerSim, GridLab-D or similar tools are frequently used throughout literature to create accurate network assessments and are being continuously improved.
+Using such faster and more accurate tools allows real-time response to system changes that were not possible at the beginning of the presented doctoral research.
+OpenDSS for example only recently became multi-threaded and opened its repository for multi-platform deployment.
+Also, having learnt how the standardised IEEE network model is structured allows the future work to fully utilise the updated collection of network models in an IEEE compliant manner.
+Such compliance does not only allow a better comparative studies, but with the updated tools enables assessment of network failures, harmonics and islanded operation.
+Furthermore, with improved and updated network information that is provided by SSEN, simulations will give more realistic results regarding the location and scaling of LV assets.
+In fact, private correspondence with researchers at the Electric Power Research Institute (EPRI) and the National Energy Research Laboratory (NERL) in the United States has become possible as a result of this doctoral research.
+As a result, a cooperative development to extend OpenDSS for multiple platforms is currently ongoing.
 This cooperation entails the acceleration of simulations of network models by parallelising the power flow solver and porting the execution to different programming languages.
-Therefore the possibility of extending the number of simulated trials would better the certainty of performance before committing to field trials.
-However, for the scope of the conducted research, the number and variety of network models is sufficient.
-After all the industrial partner (i.e. SSEN) assured the model's accuracy and ability to qualify as ``typical UK distribution networks''.}
+Therefore the possibility of extending the number of simulated trials would improve the certainty of BESS performance before committing it to further field trials.
+However, for the scope of the conducted research and time limitation required the improvement of network models and simulation tools to be part of the future work.
 
 \subsection{Realisation considerations for DNO}
 
-\hladd{Beside the already mentioned safety aspect and improved modelling to establish a foundation for field trials, DNOs need to consider aspects of ownership, data privacy and data security, too.
-Who will own the BESS and operate it is a frequently discussed issue.
-After all, if the DNO owned the BESS, they would most likely want it to operate at maximum power to fully utilise the asset and get the largest return for their investment.
-If BESS was owned by private households on the other hand, a reduction of the electricity bill would be more welcome than providing network support.
-Establishing means to compensate or pay private owners for providing network support or using variable energy prices is considered as an incentive so that private owners partake in network support.
-National (or international) legislation to enable such transactions is still missing, but would certainly provide a framework for cooperation between DNOs and households.
-Also, restrictions to assure that the scale of network support assets does not exceed the requirements would need to be established, too.
-In order to address this issue, DNOs may want to enquire how much households are willing to invest and get in return when providing network support using BESS.
-It would also be interesting to know whether network-independence or a lower carbon footprint is a better incentive to enter the network support market.}
+Beside the already mentioned safety aspect and improved modelling to establish a foundation for field trials, DNOs need to consider aspects of ownership, data privacy and data security, too.
+More specifically, who will own the BESS and who will operate and own the device is a frequently discussed issue.
+After all, if the DNO owned the BESS, they would want it to operate at maximum capacity to fully utilise the asset and produce the largest return for their investment.
+On the other hand, if BESS was owned by private households, a reduction of the electricity bill is more interesting than providing network support.
+Therefore, establishing means to compensate or pay private owners for providing network support is considered as an incentive for private owners to partake in network support.
+However, national (or international) legislation to enable such transactions is still missing, but will certainly provide a framework for cooperation between DNOs and households.
+In order to address this issue, DNOs should enquire how much households are willing to invest and get in return when providing network support using BESS.
+It is also in their interest to know whether network-independence or a lower carbon footprint is a better incentive to enter the network support market.
+After all, countries like Germany saw a higher PV panel uptake during the commitment of a national feed in tariff, but only until this money source ceased.
 
-\hladd{Although the topic of data privacy and security is not part of the presented research as such, it is still worth discussing possible considerations in light of era of big data with Industry 4.0 and the Internet of Things.
-The field of computer science being at the forefront of (especially by using example artificial intelligence - AI) evaluating big data has lead to the result that AI is also being used for controlling power network (at least in simulations).
-On may even say that this trend of computer based decision making and controlling is becoming increasingly popular in the area of power delivery.
-With the ever increasing abilities of computers, AI based control approaches are likely to outperform traditional deterministic and probabilistic methods.
-It is therefore worth stating that future work is very likely to include an AI aspects for controlling a network support asset.}
-
-\hladd{However, using large datasets of their customers requires DNOs to assure privacy of said customers.
-Although the rollout of smart-meters in the UK was envisioned to supply DNOs with more feedback data regarding customer behaviour, using this data correctly is a challenging topic, too.
-This is not only the case for privacy but also safety, especially when considering the issue of desynchronising message propagation as presented in this thesis.
-A new inter-disciplinary research category may potentially focus on power delivery, control systems and telecommunication issues particularly targeted at AI in power networks.
-However, these areas lie outside the scope of the work that was presented in this thesis.}
+Finally, although the topic of data privacy and security is not part of the presented research as such, it is still worth discussing possible considerations in light of era of big data with Industry 4.0 and the Internet of Things.
+The field of computer science has lead to the result that artificial intelligence (AI) is also being used for controlling power network (at least in simulations) and this trend of computer based decision making is also becoming increasingly popular in the field of power delivery.
+However, risks, privacy concerns and ethics associated with the ever increasing abilities of AI need to be considered, especially since AI is likely to outperform traditional deterministic and probabilistic control methods in the near future.
+After all, when using large datasets of their customers requires DNOs to assure the privacy of said customers.
+Not knowing how to deal with the situation of AI making a wrong or unethical control decision is also an issue (although philosophical rather than technical).
+For example, the rollout of smart-meters in the UK was envisioned to supply DNOs with accurate feedback data on customer behaviour, but using this data responsibly is a challenging by itself.
+This is not only the case for privacy but also for safety and performance (for example when considering desynchronised message propagation as done in this thesis).
+Therefore, an inter-disciplinary research category should focus on power delivery, control systems and telecommunication issues with particularly target of AI in power networks, and this should most certainly be part of the future work.
