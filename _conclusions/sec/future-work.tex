@@ -1,7 +1,7 @@
 \section{Future Work}
 \label{ch-conclusions:sec:future-work}
 
-The models, algorithms and control methods presented in this thesis provide a first step of assessing the impact of BESS on LV distribution networks in the UK.
+The models, algorithms and control methods presented in this thesis provide an assessment of the impact of BESS on LV distribution networks in the UK.
 Regarding the limitations outlined in Section~\ref{ch-conclusions:sec:research-limits} it is worth discussing the next steps for improving the models from an academic standpoint to eventually make them ``industry ready''.
 These considerations are discussed in the subsequent subsections before concluding on the entire work presented in this thesis.
 
@@ -19,9 +19,9 @@ For example, taking into account temperature increase allows a better prediction
 The data collected during the field trials is therefore a great starting point to continue the further research for enhanced BESS models.
 In future work, such data does not only highlight unconsidered issues, but also aids the simulation of battery control algorithms since it also takes into account the battery conditions itself.
 
-Equally, the EV model where it was assumed that vehicles charge at home and begin doing so immediately after being connected, is considered an outdated assumption.
+Equally, the EV demand model where it was assumed that vehicles charge at home and begin doing so immediately after being connected, is considered an outdated assumption.
 Although this so called ``dumb-charging'' is still seen as the baseline when determining the worst impact of EVs on power networks, more sophisticated and coordinated charging mechanisms (like the one hinted at in Chapter~\ref{ch3}) do certainly mitigate the impact of EV charging.
-Therefore, the inclusion of smart charging is a promising future work project.
+For example, the proposed AIMD+ algorithm can be run on EVs directly and such an inclusion of smart charging is a promising future work project.
 However, the implementation, validation and extension of available smart-charging schemes currently lies beyond the scope of this thesis.
 
 Regarding the use of network models to assess the impact on the LV network is also considered as future work.
@@ -39,21 +39,14 @@ However, for the scope of the conducted research and time limitation imposed, an
 
 \subsection{Realisation considerations for DNO}
 
-Beside the already mentioned safety aspect and improved modelling to establish a foundation for field trials, DNOs need to consider aspects of ownership, data privacy and data security, too.
-More specifically, who will own the BESS and who will operate and own the device is a frequently discussed issue.
+Regarding the industrial applicability, the main question to make BESS control algorithm viable depends on the ownership and revenue mechanisms.
+Future research work is therefore required to assess the monetary benefits of the proposed algorithms for BESS owner.
+Optimisation objectives under a range of the BESS ownership models and commercial arrangements should therefore be considered beside the  aspect regarding safety, improved modelling, data privacy and data security.
 After all, if the DNO owned the BESS, they would want it to operate at maximum capacity to fully utilise the asset and produce the largest return for their investment.
 On the other hand, if BESS was owned by private households, a reduction of the electricity bill would be more interesting than providing network support.
 Therefore, establishing means to compensate or pay private owners for providing network support is considered as an incentive for private owners to partake in network support.
-However, national (or international) legislation to enable such transactions is still missing, but would certainly provide a framework for cooperation between DNOs and households.
-In order to address this issue, DNOs should enquire how much households are willing to invest and get a return when providing network support using BESS.
-It is also in their interest to know whether network-independence or a lower carbon footprint is a better incentive to enter the network support market.
-After all, countries like Germany saw a higher PV panel uptake during the commitment of a national feed-in tariff, but only until this money source ceased.
 
 Finally, although the topic of data privacy and security is not part of the presented research as such, it is still worth discussing possible considerations in light of era of big data with Industry 4.0 and the Internet of Things.
-The field of computer science has lead to the result that artificial intelligence (AI) is also being used for controlling power network (at least in simulations) and this trend of computer based decision making is also becoming increasingly popular in the field of power delivery.
-However, risks, privacy concerns and ethics associated with the ever increasing abilities of AI need to be considered, especially since AI is likely to outperform traditional deterministic and probabilistic control methods in the near future.
-After all, using large datasets of their customers requires DNOs to assure the privacy of said customers.
-Not knowing how to deal with the situation of AI making a wrong or unethical control decision is also an issue (although philosophical rather than technical).
-For example, the rollout of smart-meters in the UK was envisioned to supply DNOs with accurate feedback data on customer behaviour, but using this data responsibly is a challenging in itself.
-This is not only the case for privacy but also for safety and performance (for example when considering desynchronised message propagation as done in this thesis).
-Therefore, an inter-disciplinary research category should focus on power delivery, control systems and telecommunication issues with particularly target of AI in power networks, and this should most certainly be part of the future work.
+Put briefly, because the trend of computer based decision making is also becoming increasingly popular in the field of power delivery, risks regarding privacy concerns and ethics associated with the decision making need to be considered.
+This is especially true since artificial intelligence is likely to outperform traditional deterministic and probabilistic control methods in the near future.
+In summary, an inter-disciplinary research category should focus on power delivery, control systems and telecommunication issues with particularly target of AI in power networks, and this should most certainly be part of the future work.
