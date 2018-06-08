@@ -30,6 +30,11 @@ The viva is over and I passed with **minor corrections**. Now These corrections 
 	- Paragraphs relating to the same topic in 7.4 are combined
 	- The PDF is backed up on Dropbox **but is still subject to change**
 
+4.	Further proofreading - `8 June 2018`
+	- Found several past tense vs present tense mistakes throughout chapter 7. Everything regarding the project is now past tense.
+	- Simplified more formulations in Section 7.3, 7.4 and 7.5.
+	- *Still awaiting Timur's remarks* (then I'll send it off to my Examiner)
+
 ## Thesis structure
 
 ### Main Chapters
