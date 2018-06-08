@@ -109,7 +109,7 @@ To not only increase the mean power or reduce peak power, the second cost functi
 
 Similar to the PAR this cost also reduces to zero when the resulting power profile is perfectly flat.
 Unlike the PAR however, this cost does not incentivise an increase of mean power.
-Minimising PAR by itself may result in unnecessary and potentially damaging battery cycling when trying to raise the mean power of the profile, yet this behaviour is avoided when $\zeta_\text{MMD}$ is included alongside $\zeta_\text{PAR}$.
+Minimising PAR by itself results in unnecessary and potentially damaging battery cycling when trying to raise the mean power of the profile, yet this behaviour is avoided when $\zeta_\text{MMD}$ is included alongside $\zeta_\text{PAR}$.
 Nonetheless, $\zeta_\text{PAR}$ and $\zeta_\text{MMD}$ only impact the fringes of the resulting half-hourly power profile and could lead to an erratic load profile.
 Therefore the third and final cost addresses the interim power volatility by aiming to minimise the largest possible power transient:
 
@@ -129,7 +129,7 @@ Subject to ESMU constraints, this global cost function is minimised using a stan
 \input{_chapter2/equ/cost-minimisation}
 
 In order to limit the control's flexibility a State Of Charge tolerance, $SOC_{tol}$, is included in this minimisation problem.
-$SOC_{tol}$ defines the maximum allowed deviation from the computed SOC profile without hitting operational limits (i.e. SOC of one or zero) and may take values in the form of $SOC_{tol} \in [0, 0.5)$ where 0 implies no tolerance and 0.5 implies complete flexibility as if no schedule were computed.
+$SOC_{tol}$ defines the maximum allowed deviation from the computed SOC profile without hitting operational limits (i.e. SOC of one or zero) and can take values in the form of $SOC_{tol} \in [0, 0.5)$ where 0 implies no tolerance and 0.5 implies complete flexibility as if no schedule were computed.
 For the work at hand a value of 0.1 was chosen to allow a $\pm$10\% energy tolerance band.
 
 \input{_chapter2/fig/cost-sample}

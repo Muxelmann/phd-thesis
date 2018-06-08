@@ -23,7 +23,7 @@ In order to simulate the fleet of charging EVs, $U$ where $U \in \mathbb{Z}^{>0}
 Unlike typical load profiles (for example household load profiles) EVs are modelled to not have a predetermined load profile.
 Instead they are flexible so they schedule their own demand, $p^\text{EV}_{u,n}(t)$ where $\textbf{p}^\text{EV}_{u,n} = (p^\text{EV}_{u,n}(t))$, at any moment time, $t$ where $t \in \mathbb{Z}^{\geq0}$.
 In other words, EVs can autonomously assign their own charging plan over the predetermined number of future time-slots, $T^\text{sch}$.
-Due to limitations in on-board power electronics each EV's maximum charge rate, $P^\text{max}_{u}$ where $P^\text{max}_{u} \in \mathbb{R}^{>0}$, is restricted and may not be exceeded.
+Due to limitations in on-board power electronics each EV's maximum charge rate, $P^\text{max}_{u}$ where $P^\text{max}_{u} \in \mathbb{R}^{>0}$, is restricted and must not be exceeded.
 In order to meet the EV's charging demand over the scheduling horizon, $T^\text{sch}$, a soft minimum charging power, $P^\text{min}_{u}$ where $P^\text{min}_{u} \in \mathbb{R}^{>0}$, is also introduced:
 
 \input{_chapter3/equ/power-charge-minimum}
@@ -120,7 +120,7 @@ Following the similar procedure as for the first iteration, $\hat{E}_{u,n}$ is t
 \nomenclature[K]{$\alpha$}{Undoing parameter to remove a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\alpha \in (0, 1]$}
 \nomenclature[K]{$\beta$}{Allocation parameter to assign a portion of the temporary energy demand, $\hat{E}_{u,n}$, where $\beta \in (0, 1]$}
 
-Here $\beta$ is the maximum ``allocation'' parameter, where $\beta \in (0, 1]$, and this parameter limits the power that may be allocated to any successive time-slot (i.e. $t-\Delta t$).
+Here $\beta$ is the maximum ``allocation'' parameter, where $\beta \in (0, 1]$, and this parameter limits the power that can be allocated to any successive time-slot (i.e. $t-\Delta t$).
 To not exceed the EV's maximum charging power any value in the charging vector, $\textbf{p}^\text{EV}_{u,n}$, is capped to $P^\text{max}_{u}$.
 If $\beta$ is chosen as one then the undone energy is allocated as quickly as possible, but this can lead to new power spikes and this slow the converging behaviour.
 For smaller values of $\beta$ on the other hand, the undone charge is reallocated in smaller portions and the old power spike is distributed gradually.

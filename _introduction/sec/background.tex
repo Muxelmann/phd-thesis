@@ -123,7 +123,7 @@ With the penetration of smart meters and communication-enabled devices in for ex
 Therefore ``smart control'' mechanisms can complement the traditional off-line and on-line control strategies and are of great research interest to enable the uptake of distributed LCTs since these strategies remove the single point of failure, reduce computational burden from centralised controllers and allow individual devices to respond intelligently and quickly to local events like sudden voltage drops or capacity notifications.
 
 For example the key term ``smart charging'' summarises EV charging mechanisms where the limited distribution network capacity causes multiple EVs to share the available resource amongst themselves \cite{Sortomme2011, Vaya2012, Garcia-Villalobos2014}.
-However without any network load information EV coordination may still exhaust the network's capacity, even when EVs are intelligently limiting their maximum charging rates.
+However without any network load information EV coordination still exhausts the network's capacity, even when EVs are intelligently limiting their maximum charging rates.
 Limiting their charge rates based upon the current network demand as well as their own energy needs is a more sophisticated control option \cite{Karfopoulos2013}.
 A similar key term is the ``smart grid'' where DER communicate and cooperate in order to, for example, shed load using Demand Side Response (DSR) or maintain microgrid operation in fault situations \cite{Samadi2012, Liu2014, Liang2014}.
 However, the fundamental requirement for the successful realisation of any such smart control method is the reliable exchange of information amongst the participating entities that physically operate within the power network.
@@ -132,14 +132,14 @@ Therefore smart control does not only require robust control mechanisms, but als
 In Section~\ref{ch-literature:subsec:centralised-and-distributed-control}, literature that reviews and compares centralised control methods with distributed control paradigms will show the implicit need to synchronise the coordination of multiple smart devices to achieve their promised benefits.
 It will be shown that all underlying control mechanisms dealing with the coordination of distributed energy resources either explicitly or implicitly assume a robust communication infrastructure where communication is synchronised.
 For instance, this requirement is assumed whenever messages are received and executed immediately (i.e. without delay) after they have been dispatched or whenever a single control instruction result in the synchronised reaction of all controlled entities.
-In reality however, the strength of the communication link may vary with weather or current network traffic, so that fixed message delays and exact device synchronisation can no longer be guaranteed.
+In reality however, the strength of the communication link does vary with weather or current network traffic, so that fixed message delays and exact device synchronisation can no longer be guaranteed.
 Therefore, not only smart control algorithms, but also their sensitivity to the strength of the underlying communication infrastructure is of interest.
 As a result the research question can be risen whether communication desynchronisation can result in equal or better coordination performance; i.e. in reducing peak load.
 
 The alternative to relying on telecommunication in order to coordinate DERs is to remove the requirement for device communication altogether.
 For instance, communication-less control of multiple power devices has been of particular interest in noisy environments like ships \cite{Baldwin2004} or islanded power networks that do not have strong telecommunication capabilities \cite{Diaz2017}.
 Whilst these control methods support network operation they have not been designed to take device operation into account.
-More specifically, in a network where devices like household-connected BESS are no longer owned by DNOs, the interest of guaranteeing a certain lifetime may surpass the need to provide network support operation.
+More specifically, in a network where devices like household-connected BESS are no longer owned by DNOs, the interest of guaranteeing a certain lifetime is likely to surpass the need to provide network support operation.
 Therefore distributed and communication-less control strategies need to assure a more equal device utilisation to spread to burden onto the entire collection of DERs.
 Otherwise, batteries situated at the end of the distribution network experience the largest voltage swing and are therefore likely to cycle more than those batteries located closer to the substation where voltages are more stable.
 Hence, following the review of several communication-less control methods in Section~\ref{ch-literature:subsec:communication-less-control}, an improved distributed and communication-less BESS control algorithm is proposed that takes this neglected network inequality into account.

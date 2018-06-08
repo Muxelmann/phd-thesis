@@ -74,7 +74,7 @@ As a result the following upper and lower threshold functions are subsequently d
 
 \input{_chapter1/equ/voltage-threshold-upper-lower}
 
-Substations may raise their voltage slightly above the nominal LV voltage level since voltage do typically drop continuously along a purely consumptive feeder.
+Substations can raise their voltage slightly above the nominal LV voltage level since voltage do typically drop continuously along a purely consumptive feeder.
 The impact on the cost function $\zeta_\text{voltage}(\textbf{v})$ when $V_\text{ss}$ is increased is shown in Figure~\ref{ch1:fig:voltage-deviation} (for simplicity a single-phase voltage vector is shown, i.e. $\Phi = 1$).
 
 \input{_chapter1/fig/voltage-deviation}
@@ -108,7 +108,7 @@ However monitoring those voltages to assure they lie within limits is unfeasible
 Therefore these voltages are unknown in reality.
 Nonetheless, in simulations all load voltages can easily be extracted and since ESMU can impact all voltage levels to some degree they are treated as theoretical key network parameters.
 
-To illustrate this load voltage drop a snapshot OpenDSS simulation was run on the used network model with all load consuming  8kW of power\footnote{Whilst historic and recent loads may reach values of this magnitude quite infrequently, future customer demand with the aggregated effect home-charging of EVs is expeceted to yield extreme scenarios like this.}.
+To illustrate this load voltage drop a snapshot OpenDSS simulation was run on the used network model with all load consuming  8kW of power\footnote{Whilst historic and recent loads reach values of this magnitude quite infrequently, future customer demand with the aggregated effect home-charging of EVs is expeceted to yield extreme scenarios like this.}.
 Figure~\ref{ch1:fig:voltage-drop-for-loads-along-feeder} then shows all load bus voltages against their distances to the substation.
 
 \input{_chapter1/fig/voltage-drop-for-loads-along-feeder}
@@ -141,7 +141,7 @@ Here, $i$ represents the customer number out of a total customer count $I$, and 
 
 Beside meeting voltage constraints DNOs need to assure that their distribution networks operates both in an efficient and hence ideal manner.
 How ideal a three-phase network operates is indicated by its phase unbalance.
-This disturbance due to unbalanced phase load may not have an immediate impact, but negative long term effects (for example asymmetric load on transformers, rotating machines and increased neutral current) do weaken network assets and cannot be neglected.
+This disturbance due to unbalanced phase load need not have an immediate impact, but negative long term effects (for example asymmetric load on transformers, rotating machines and increased neutral current) do weaken network assets and cannot be neglected.
 The approach by which UK customers are connected to the feeder increases the problem of phase unbalance even more because the single phase allocation is performed arbitrarily.
 Randomly assigning customers' phases was intended to distribute load evenly across all three phases which in theory should balance the three-phase network load.
 In reality however this is not the case.
@@ -158,7 +158,7 @@ The American National Standards Institute's (ANSI) definition of Unbalance Facto
 
 \input{_chapter1/equ/unbalance-equation}
 
-Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (for example $x_n$ may be voltage, current or power measurement per phase $n$).
+Here, $\textbf{x}$ can be an arbitrary vector, consisting of scalar values $x_n$ (for example $x_n$ is the voltage, current or power measurement per phase $n$).
 In this context $x_n$ is chosen to be the power flow into one of the network's phases.
 For clarity the notation of $\overline{\textbf{x}}$ is used to define the mean of the given vector, i.e.:
 
@@ -206,7 +206,7 @@ In a perfectly balanced scenario the summation results in no neutral power (i.e.
 Therefore this magnitude of the neutral's apparent power vector is computed which is then used as the resultant cost.
 
 In comparison to the losses of the HV electricity networks, losses in a LV distribution network are quantitatively small.
-After all, a single LV feeder may distribute up to 500kW of power, whilst HV networks transmit more than 60GW.
+After all, a single LV feeder can distribute up to 500kW of power, whilst HV networks transmit more than 60GW.
 Nonetheless the aggregate effect of reducing those losses could have a noticeable impact on both network efficiency and maximising profit margins (after all, energy suppliers cannot charge for undelivered energy).
 For example, in the high load scenario that was simulated in in Section~\ref{ch1:subsec:voltages-related-cost-functions} distribution losses were calculated as 58kW.
 This equates to 12\% of the total network power, but losses would be noticeably lower during normal network operation, for instance at a maximum of 5\%.
@@ -253,11 +253,11 @@ The red area indicates the region where current exceeds the fuse's nominal ratin
 \nomenclature[I]{$\textbf{i}_\text{line}(t)$}{Multi-phase line currents at time $t$, where $\textbf{i}_\text{line}(t) = (i_{\text{line},l,\phi}(t))$, and $\textbf{i}_\text{line}(t) \in \mathbb{R}^{L\times\Phi}$}
 \nomenclature[I]{$I_{\text{nom},l}$}{Nominal line current for line $l$, $I_{\text{nom},l} \in \mathbb{R}$}
 
-In addition to the currents flowing through the substation's fuse, currents flowing through all lines in the network may also be considered.
+In addition to the currents flowing through the substation's fuse, currents flowing through all lines in the network are also considered.
 Just like voltage levels at each customer, line currents are also seen as theoretical key network parameters since they cannot easily be obtained.
 Generally as the distance to the substation increases fewer ``down stream'' customers are connected to a radially expanding feeder and therefore cables can be scaled down (for example to save cost).
 However with the expected uptake of LCTs, feeders are expected to deliver increasingly larger currents throughout all lines.
-For smaller lines at the network edge these currents may increase to a magnitude larger than their nominal ratings.
+For smaller lines at the network edge these currents can increase to a magnitude larger than their nominal ratings.
 Therefore the fuse current cost is expanded to take into account all line currents, $i_{\text{line},l,\phi}(t)$, and their nominal ratings, $I_{\text{nom}, l}$.
 Here $l$ represents the line number and $\phi$ the phase of that line.
 Collecting them in $\textbf{i}_{line}(t)$ (where $\textbf{i}_\text{line}(t) = (i_{\text{line},l,\phi}(t))$) allows the formulation of an extended line utilisation cost, $\zeta_\text{line utilisation}(\textbf{i}_\text{line}(t))$, which is defined as follows:
