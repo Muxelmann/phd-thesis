@@ -41,9 +41,9 @@ For every of the containing 543 loads, this dataset consisted of 7392 demand rea
 A single scheduling horizon was defined as one day (i.e. $T^\text{sch}=48$ samples).
 
 In this MAS related context, each household dispatches its agents once to acquire the household's half-hourly energy demand for the entire day; thus making the assumption that demand foresight is available.
-It is worth mentioning that perfect demand foresight, especially for domestic loads, is difficult to realise.
+\hl{It is worth mentioning that perfect demand foresight, especially for domestic loads, is difficult to realise.
 Imperfect foresight would result in sub-optimal power profile allocation, for example.
-Therefore, and target the focus of this chapter on determining the difference between synchronised and desynchronised algorithm execution, the assumption of perfect foresight is made.
+Therefore, and target the focus of this chapter on determining the difference between synchronised and desynchronised algorithm execution, the assumption of perfect foresight is made.}
 After each household has acquired or reserved its daily demand by issuing an energy request, the entire network demand is known to the energy supplier and can be relayed to all EV agents when they query for the overall demand profile.
 This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
 More specifically, all EV's agents communicate with the supplier's agent to optimally embed their charging profiles (i.e. $p^\text{EV}_{u,n}(t)$) within this aggregated baseline load.
@@ -98,8 +98,8 @@ This spike is seen on an updated (i.e. temporary) demand profile, $\hat{\textbf{
 \nomenclature[K]{$\hat{p}^\text{EV}_{u, n}(t)$}{Temporary charging power during iteration number $n$, for EV $u$, at time $t$, where $\hat{p}^\text{EV}_{u, n}(t) \in \textbf{Z}^{\geq0}$}
 \nomenclature[K]{$\hat{\textbf{p}}^\text{EV}_{u, n}$}{Temporary charging vector during iteration number $n$, for EV $u$, where $\hat{p}^\text{EV}_{u, n}(t) \in \hat{\textbf{p}}^\text{EV}_{u, n}$}
 
-For the next iteration $n+1$ (for example Figure~\ref{ch3:subfig:valley-filling-2} where $n=2$) a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
-Subsequently, the spike in the resulting $\hat{\textbf{p}}^\text{base}_{n}$ is reduced, yet the energy that has been undone needs to be reallocated to meet the EVs' demands.
+\hl{For the next iteration $n+1$ (for example Figure~}\ref{ch3:subfig:valley-filling-2}\hl{ where $n=2$) a proportion of the previously scheduled power vector $\textbf{p}^\text{EV}_{n-1}$ is ``undone''.
+Subsequently, the spike in the resulting $\hat{\textbf{p}}^\text{base}_{n}$ is reduced, yet the energy that has been undone needs to be reallocated to meet the EVs' demands.}
 The amount by which $\textbf{p}^\text{EV}_{n-1}$ is reduced is determined by the ``\textit{undoing}'' parameter $\alpha$, where $\alpha \in [0, 1)$.
 A new reduced (i.e. temporary) charging vector $\hat{p}^\text{EV}_{u, n}(t)$ is therefore defined as:
 

@@ -42,8 +42,8 @@ Figure~\ref{ch3:subfig:all-sync-par} and Figure~\ref{ch3:subfig:all-sync-tra} sh
 This result coincides with the finding that hard reduction and reallocation lead to an oscillating behaviour of the algorithm.
 Similarly, the convergence of those two performance metrics, as shown in Figure~\ref{ch3:subfig:all-sync-par-conv} and Figure~\ref{ch3:subfig:all-sync-tra-conv}, was highest when $\alpha$ approached one and $\beta$ approached zero.
 This behaviour is by design since a larger value of $\alpha$ increases the rate at which the currently applied peak is reduced whilst a smaller value of $\beta$ limits the amount that can be reallocated for each time slot.
-Such clear behavioural differences for different pairs of $\alpha$ and $\beta$ indicate an optimal operation region of the algorithm within the top right quadrant of the plot.
-This quadrant indicates optimal operation since low $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are achieved (see Fig.~\ref{ch3:subfig:all-sync-par} and Fig.~\ref{ch3:subfig:all-sync-tra}) at a relatively high rate of convergence (see Fig.~\ref{ch3:subfig:all-sync-par-conv} and Fig.~\ref{ch3:subfig:all-sync-tra-conv}).
+\hl{Such a clear difference in behaviour for different pairs of $\alpha$ and $\beta$ indicates an optimal operation region of the algorithm within the top right quadrant of the plot.
+This quadrant indicates optimal operation since low $\zeta_\text{PAR}$ and $\zeta_\text{TRA}$ values are achieved (see Fig.~}\ref{ch3:subfig:all-sync-par}\hl{ and Fig.~}\ref{ch3:subfig:all-sync-tra}\hl{) at a relatively high rate of convergence (see Fig.~}\ref{ch3:subfig:all-sync-par-conv}\hl{ and Fig.~}\ref{ch3:subfig:all-sync-tra-conv}\hl{).}
 Whether the algorithm still performs in this way when introducing desynchronisation is answered in the subsequent section, Section~\ref{ch3:subsec:algorithm-performance-desynchronised-regular}.
 
 
@@ -56,9 +56,9 @@ Looking at the evolution of the time-series when desynchronising the algorithm's
 Figure~\ref{ch3:fig:time-series-desync} shows thie evolution for the same parameters as those chosen for Figure~\ref{ch3:fig:time-series}.
 The difference is however that the assignment of charging powers lead to a significantly lower demand spike at the very beginning of executing the algorithm.
 Subsequent iterations then reduce this spike much broader than it has been the case when executing the algorithm in a synchronised manner.
-Therefore, more demand troughs are filled and a smoother profile is obtained when compared to sub-optimal pairs of $\alpha$ and $\beta$.
-It should however be noted that the valley filling is not as effective, but much quicker, when compared to the synchronised case.
-After all, the initial power spike already reduced to below 100kW, whilst the synchronised cases always started at peaks above 200kW.
+\hl{Therefore, more demand troughs are filled and a smoother profile is obtained in comparison to sub-optimal pairs of $\alpha$ and $\beta$.
+It should however be noted that the valley filling is not as effective, but much quicker, when compared to the same synchronised case.
+After all, the initial power spike already reduced to below 100kW, whilst the synchronised cases always started at peaks above 200kW.}
 
 \input{_chapter3/fig/all-async-regular/all-async-regular}
 
