@@ -8,10 +8,10 @@ This is done in the following subsections.
 
 \subsection{Energy storage model}
 
-From an academic standpoint, modelling is seen as a first step to mathematically represent a system to simulate experiments that are conducted before investing in larger field trials.
+\hl{From an academic standpoint, modelling is seen as a first step to mathematically represent a system to simulate experiments that are conducted before investing in larger field trials.
 The energy store model that was developed during the \textit{NTVV} project with \textit{SSEN} is such an academic model since it was targeted at only representing the deployed BESS.
 Whilst this model did predict SOC behaviour, conversion and energy storage efficiencies, it did not take into account external effects, for example.
-For the assessment of BESS in a half-hourly and minutely environment, this model was adequately accurate since the power and time scales were sufficiently large so as to neglect small discrepancies.
+For the assessment of BESS in a half-hourly and minutely environment, this model was adequately accurate since the power and time scales were sufficiently large so as to neglect small discrepancies.}
 However, when taking into account external disturbances, more work needs to be done in the future.
 A possible extension should include the non-linear discharging behaviour as a result of battery stress or due to different operating temperatures since they have a noticeable impact on the battery operation.
 Nonetheless, having established the presented model for simulated experiments is the first step towards field testing BESS.
@@ -24,12 +24,12 @@ Although different battery models including RC-bridges, steady state systems or 
 
 \subsection{Electric vehicle charging}
 
-In Chapter~\ref{ch4} of this thesis a stochastic EV model was developed to simulate the predicted increase in electricity demand.
+\hl{In Chapter~}\ref{ch4}\hl{ of this thesis a stochastic EV model was developed to simulate the predicted increase in electricity demand.
 Being based on statistical data from 2008, this model does however bring inherent temporal limitations since driving behaviour most likely changed since then.
 Also, the typical commuter leaving home in the morning or lunch time and returning (or leaving work) in the evening has also seen changes.
 After all, fleet-cars, home-office and night-shifts can avoid commuting at those times and are reasonable possibilities impacting the driving behaviour.
 Therefore, assuming that charging will take place at home is an assumption necessary for the conducted work and valid at the time of formulating the research objective.
-However, charging stations or power sockets at work weaken this assumption since the necessity for home-based charging is being steadily removed.
+However, charging stations or power sockets at work weaken this assumption since the necessity for home-based charging is being steadily removed.}
 
 Therefore, one concludes that the EV demand model has noticeable limitations, but for the sake of academic research and focus on the problem of home-charging, a worst case assumption was still worth considering.
 After all, if co-located BESS is able to provide noticeable network support during the most extreme scenarios, then a proportionally larger impact can be achieved when the network is less stressed.
@@ -39,42 +39,42 @@ Possible extensions are therefore discussed in the Future Work section (Section~
 
 \subsection{Data}
 
-All findings throughout the presented work were generated from historic demand data.
+\hl{All findings throughout the presented work were generated from historic demand data.
 This data has both limitations in temporal resolution and data length, which therefore limit the ability to capture a number of load scenarios necessary to guarantee correct algorithm operation.
 After all, since the entire work presented in this thesis relies on carrying out data driven simulations, using these datasets with varying demand characteristics is of high importance.
 More specifically, the size of the used Irish dataset allows to cover such a range with high certainty, but it has a low temporal resolution of only half an hour.
-Using minutely data from the IEEE and the \textit{NTVV} project complemented this Irish dataset since they compensate for its temporal deficiencies.
+Using minutely data from the IEEE and the \textit{NTVV} project complemented this Irish dataset since they compensate for its temporal deficiencies.}
 It is worth mentioning, that obtaining domestic demand data is a challenge to begin with; partially due to privacy, but also due to IP issues.
 However, constructing models and stating the corresponding assumptions that validate their utilisation is sufficient for the development and testing of the presented BESS control methods.
 Needless to say, the scope of this thesis was put on the development of BESS control methods and not on development of load prediction mechanisms.
 
-By differentiating between measurable and theoretical data (for example data measurable at a substation and data only obtainable from simulations) motivations to develop targeted measurement systems are also better understood.
-For instance, measuring or better estimating feeder voltages is of larger interest that precise calculation of neutral currents since obtaining those network parameters in reality can only be done at significant financial cost or at unusable low resolution.
+\hl{By differentiating between measurable and theoretical data (for example data measurable at a substation and data only obtainable from simulations) motivations to develop targeted measurement systems are also better understood.
+For instance, measuring or better estimating feeder voltages is of larger interest that precise calculation of neutral currents since obtaining those network parameters in reality can only be done at significant financial cost or at unusable low resolution.}
 Substation monitoring and voltage measurements at the BESS were a certain prerequisite for most of the presented research and do not pose such financial issues.
 Therefore, being able to include data acquisition mechanisms that are comparable to reality (for example data acquisition through the deployment of smart-meters) would strengthen the validity of the findings.
 In cases where data acquisition is not possible, however, either due to the lack of measuring equipment or legal barriers to uphold customer privacy, endpoint data needs to be estimated instead.
 Developing a reliable method of estimating this endpoint data from a limited number of measuring points is still an open research challenge.
-This point is also briefly addressed in the Future Work section of this thesis (Section~\ref{ch-conclusions:sec:future-work}), but more emphasis is put on data handling and acquisition from an industrial point of view.
-All in all however, the domestic demand predictions and publicly available datasets do serve as a valid starting point for the conducted academic research.
+\hl{This point is also briefly addressed in the Future Work section of this thesis (Section~}\ref{ch-conclusions:sec:future-work}\hl{), but more emphasis is put on data handling and acquisition from an industrial point of view.
+All in all however, the domestic demand predictions and publicly available datasets do serve as a valid starting point for the conducted academic research.}
 
 \subsection{Network models and Power Flow Simulations}
 
 The dominant network model that was used throughout the research was a European LV model published by the IEEE.
 This so called ``LV Test Case'' complemented some of the in-house network models that were provided by SSEN - particularly since reproducibility of the findings can assured with the IEEE model.
-However, this model aims at presenting a typical European feeder, yet feeding two households per lateral on a single-phase basis is a characteristic shared by only by some distribution networks in the UK.
+\hl{However, this model aims at presenting a typical European feeder, yet feeding two households per lateral on a single-phase basis is a characteristic shared by only by some distribution networks in the UK.
 In the German distribution networks, each household is always connected to all three phases and specialised technicians aim to balance the three-phase load when connecting large domestic appliances in the house.
 Since the focus of the research is however targeted at supporting UK based networks to begin with, the use of models of several UK power networks is still valid.
-When, for example assessing whether the algorithms function where three-phase loads are connected, different models need to be considered.
+When, for example assessing whether the algorithms function where three-phase loads are connected, different models need to be considered.}
 
-The method of averaging the results from multiple simulations is only statistically valid if the number of network models is of sufficient size.
+\hl{The method of averaging the results from multiple simulations is only statistically valid if the number of network models is of sufficient size.
 After all, the correctness of the models cannot be guaranteed (for example due to degradation or misinformation).
 In conclusion, a higher number of detailed and accurate network models allows the proposed algorithms to be tested with larger network variety, which in turn improves certainty that the proposed algorithms functions correctly if deployed.
-This is also briefly addressed in the Future Work section.
+This is also briefly addressed in the Future Work section.}
 
 \subsection{Different Control Methods}
 
 So far, the selection of control methods was based on both literature recommendations and the scope of the presented research.
-As already stated in Chapters~\ref{ch2} and~\ref{ch4}, the modifications and tuning of the control methods was unconventional.
+\hl{As already stated in Chapters~}\ref{ch2}\hl{ and~}\ref{ch4}\hl{, the modifications and tuning of the control methods was unconventional.
 For a valid contribution in the field of control systems for example, a more formal approach would have to be formulated to assure stability and convergence of the proposed predictor.
 The complexity of the underlying network and battery models did however increase the difficulty of establishing this formal approach.
 This means that the associated work is certainly worth its own doctoral research and due to the time constraints a different solution was pursued instead.
@@ -82,14 +82,14 @@ Therefore, assuring stability and convergence for the used data was considered t
 This assumption goes hand in hand with the preceding discussion about data and number of used network models.
 After all, since this data captured sufficient load variation, findings are seen as valid.
 Further, since the stability and convergence can be guaranteed for this dataset, it is also reasonable to assume that the methods will operate similarly when deployed.
-Nonetheless, the above-mentioned formal approach would also proof stability and convergence mathematically, which is why this proof is indeed worth pursuing as part of the future work.
+Nonetheless, the above-mentioned formal approach would also proof stability and convergence mathematically, which is why this proof is indeed worth pursuing as part of the future work.}
 
 \subsection{Communication System}
 
 Lastly, Chapter~\ref{ch3} addressed the common assumption that control instructions propagate in a synchronised manner.
-However, other communication issues beside message desynchronisation do still remain an open research challenge.
+\hl{However, other communication issues beside message desynchronisation do still remain an open research challenge.
 As mentioned in the beginning of this section, the field trials during the \textit{NTVV} project found that delay and ``hidden'' safety systems increase the difficulty of providing scheduled BESS control.
 Also, a sudden loss of communication will result in a cluster of control devices, operating in a so called ``islanded'' or unsupervised manner (especially from an ICT point of view).
 However, the assumption made for assessing the effect of desynchronisation are valid, especially since the focus of the research had to be targeted at the known problem at hand.
 With the posterior knowledge regarding ESMU operation from the NTVV field trials, further studies regarding the communication system are worth pursuing.
-However, these further issues do lie beyond the scope of the presented research, but should be included in the future work.
+However, these further issues do lie beyond the scope of the presented research, but should be included in the future work.}

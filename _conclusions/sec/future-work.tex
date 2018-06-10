@@ -7,7 +7,7 @@ These considerations are discussed in the subsequent subsections before concludi
 
 \subsection{Modelling}
 
-The developed BESS model did perform to accurately schedule the ESMU operation during the field trials of the \textit{NTVV} project.
+\hl{The developed BESS model did perform to accurately schedule the ESMU operation during the field trials of the \textit{NTVV} project.
 However, there are still certain enhancements that should be considered in future research to extend this BESS model.
 The non-linearity regarding the battery's charging behaviour for instance should be included since a better understanding of battery characteristics has been established over the recent past.
 This is partially due to the increased number of EVs where battery information is continuously fed back to manufacturers, but also due to the increased industrial demand for improved battery cells.
@@ -17,14 +17,14 @@ After all, it were those safety mechanisms that physically limited BESS to opera
 Predicting when these safety mechanisms will allow a better schedule generation.
 For example, taking into account temperature increase allows a better prediction of when the safety mechanism will disconnect the battery and a more strategic charging profile can be generated in advance.
 The data collected during the field trials is therefore a great starting point to continue the further research for enhanced BESS models.
-In future work, such data does not only highlight unconsidered issues, but also aids the simulation of battery control algorithms since it also takes into account the battery conditions itself.
+In future work, such data does not only highlight unconsidered issues, but also aids the simulation of battery control algorithms since it also takes into account the battery conditions itself.}
 
-Equally, the EV demand model where it was assumed that vehicles charge at home and begin doing so immediately after being connected, is considered an outdated assumption.
-Although this so called ``dumb-charging'' is still seen as the baseline when determining the worst impact of EVs on power networks, more sophisticated and coordinated charging mechanisms (like the one hinted at in Chapter~\ref{ch3}) do certainly mitigate the impact of EV charging.
+\hl{Equally, the EV demand model where it was assumed that vehicles charge at home and begin doing so immediately after being connected, is considered an outdated assumption.
+Although this so called ``dumb-charging'' is still seen as the baseline when determining the worst impact of EVs on power networks, more sophisticated and coordinated charging mechanisms (like the one hinted at in Chapter~}\ref{ch3}\hl{) do certainly mitigate the impact of EV charging.
 For example, the proposed AIMD+ algorithm can be run on EVs directly and such an inclusion of smart charging is a promising future work project.
-However, the implementation, validation and extension of available smart-charging schemes currently lies beyond the scope of this thesis.
+However, the implementation, validation and extension of available smart-charging schemes currently lies beyond the scope of this thesis.}
 
-Regarding the use of network models to assess the impact on the LV network is also considered as future work.
+\hl{Regarding the use of network models to assess the impact on the LV network is also considered as future work.
 It is even contemplated to use real-time simulations in order to support BESS control.
 After all, power flow solvers like OpenDSS, PowerSim, GridLab-D or similar tools are frequently used throughout literature to create accurate assessments of network impact and they are being continuously improved, too.
 Using such faster and more accurate tools allows real-time response to system changes that were not possible at the beginning of the presented doctoral research.
@@ -35,18 +35,19 @@ Furthermore, with improved and updated network information that is provided by S
 In fact, private correspondence with researchers at the Electric Power Research Institute (EPRI) and the National Energy Research Laboratory (NERL) in the United States has become possible as a result of this doctoral research and a cooperative development to extend OpenDSS for multiple platforms is currently ongoing.
 This cooperation entails the acceleration of simulations of network models by parallelising the power flow solver and porting the execution to different programming languages.
 Therefore, the possibility of extending the number of simulated trials would improve the certainty of BESS performance before committing it to further field trials.
-However, for the scope of the conducted research and time limitation imposed, any improvements of network models and simulation tools will only be part of the future work.
+However, for the scope of the conducted research and time limitation imposed, any improvements of network models and simulation tools will only be part of the future work.}
 
 \subsection{Realisation considerations for DNO}
 
-Regarding the industrial applicability, the main question to make BESS control algorithm viable depends on the ownership and revenue mechanisms.
-Future research work is therefore required to assess the monetary benefits of the proposed algorithms for BESS owner.
-Optimisation objectives under a range of the BESS ownership models and commercial arrangements should therefore be considered beside the  aspect regarding safety, improved modelling, data privacy and data security.
-After all, if the DNO owned the BESS, they would want it to operate at maximum capacity to fully utilise the asset and produce the largest return for their investment.
-On the other hand, if BESS was owned by private households, a reduction of the electricity bill would be more interesting than providing network support.
-Therefore, establishing means to compensate or pay private owners for providing network support is considered as an incentive for private owners to partake in network support.
+\hl{Regarding industrial applicability, the main question to make BESS control algorithm viable depends on the ownership and revenue mechanisms.
+Future research work is therefore required to assess the monetary benefits of the proposed algorithms for BESS owners since they would not have invested into the asset, unless it generates them a profit.
+Optimisation objectives under a range of the BESS ownership models and commercial arrangements should therefore be considered beside the aspect regarding safety, improved modelling, data privacy and data security.
+After all, different owners prioritise different use cases for the asset.
+For example, if a DNO owned the BESS, they would want it to operate at maximum capacity to fully utilise the asset and produce the largest return for their investment.
+On the other hand, if BESS was owned by a household, a reduction of the electricity bill would be more interesting than providing network support.
+Therefore, establishing means to compensate or pay private owners for providing network support is considered as an incentive for private owners to partake in network support.}
 
-Finally, although the topic of data privacy and security is not part of the presented research as such, it is still worth discussing possible considerations in light of era of big data with Industry 4.0 and the Internet of Things.
+\hl{Finally, although the topic of data privacy and security is not part of the presented research as such, it is still worth discussing possible considerations in light of era of big data with Industry 4.0 and the Internet of Things.
 Put briefly, because the trend of computer based decision making is also becoming increasingly popular in the field of power delivery, risks regarding privacy concerns and ethics associated with the decision making need to be considered.
 This is especially true since artificial intelligence is likely to outperform traditional deterministic and probabilistic control methods in the near future.
-In summary, an inter-disciplinary research category should focus on power delivery, control systems and telecommunication issues with particularly target of AI in power networks, and this should most certainly be part of the future work.
+In summary, an inter-disciplinary research category should focus on power delivery, control systems and telecommunication issues with particularly target of AI in power networks, and this should most certainly be part of the future work.}
