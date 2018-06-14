@@ -56,7 +56,12 @@ Therefore, I spent the past days re-writing chapter 7 (again) and having it proo
 		- there are too many spelling errors
 		- there is too much equivocation
 		- the paragraph structure is not easy to follow
-	- Tomorrow I will sent the response email. 
+	- Tomorrow I will sent the response email.
+
+7. All done - `14 June 2018`
+	- I just received my Examiner's **OK** - *given that I fix one last sentence in section 5.2.2*
+	- I applied the amendment and removed all highlights (`\hl{...}` occurrences)
+	- Now my thesis is finished! It took me **3 years, 8 months, 24 days**.
 
 ## Thesis structure
 
