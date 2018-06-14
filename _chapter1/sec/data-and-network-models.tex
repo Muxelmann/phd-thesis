@@ -120,8 +120,8 @@ This is done with the synchronisation function $k(t)$ which links the original s
 \nomenclature[I]{$s^*_\text{net}(t)$}{Half-hourly network load, where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$ and $s^*_\text{net}(t) \in \mathbb{C}$}
 \nomenclature[I]{$\textbf{s}^*_\text{net}$}{Half-hourly network load, where $\textbf{s}^*_\text{net} \in \mathbb{C}^{\frac{T_\text{sch}}{K}}$}
 
-\hl{Here, $t$ is the same positive integer as before to indicate time in minutes, $\Delta t$ is the sub-half-hourly sampling period of the simulation at minutely time intervals (i.e. 1 minute in this case) and $K$ is the number of the half-hourly time-slot (or number of sub-half-hourly periods) within the half-hourly slot (i.e. 30 slots per minute in this case).
-It is worth mentioning that the minutely sampling period $\Delta t$ currently equates to one, yet for flexibility of this equation (for instance when using seconds as a base unit) it remains included.}
+Here, $t$ is the same positive integer as before to indicate time in minutes, $\Delta t$ is the sub-half-hourly sampling period of the simulation at minutely time intervals (i.e. 1 minute in this case) and $K$ is the number of the half-hourly time-slot (or number of sub-half-hourly periods) within the half-hourly slot (i.e. 30 slots per minute in this case).
+It is worth mentioning that the minutely sampling period $\Delta t$ currently equates to one, yet for flexibility of this equation (for instance when using seconds as a base unit) it remains included.
 It should be noted that the integer multiple of $K$ has to equate to the scheduling horizon's length, $T_\text{sch}$; i.e. $a := \frac{K}{T_\text{sch}} \text{ where } a \in \mathbb{Z}_{>0}$.
 Otherwise the sub-half-hourly profile cannot be divided into a set of equal length time-slots where each time-slot is of length $K\Delta t$.
 Therefore the resulting half-hourly network load, $s^{*}_\text{net}(t)$ (where $\textbf{s}^*_\text{net} = (s^*_\text{net}(t))$) is defined as follows:

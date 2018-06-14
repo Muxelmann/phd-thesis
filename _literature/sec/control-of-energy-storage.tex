@@ -39,8 +39,8 @@ SPC achieves this behaviour by measuring some properties of the power system (fo
 Droop control, as mentioned in Section~\ref{ch-literature:subsec:power-flow-management}, was one of the first control methods that followed the SPC paradigm.
 A single set-point is however not suitable for a network that changes dynamically which is why droop control was extended to become adaptive as done by Tayab et al. in \cite{Tayab2017}.
 Their research shows how conventional droop control runs the risk of allowing system frequency to drop to 48.4Hz (from a nominal 50Hz), whereas adaptive droop was capable of frequency restoration with little to no observable frequency variation.
-\hl{However, their solution relied on PV and gas turbines to provide active power injection and could only injected reactive power into the system when these are not available - a comparable scenario can occur when BESS completely discharges.
-Therefore, voltage compensation can still be realised, but frequency remains unchanged.}
+However, their solution relied on PV and gas turbines to provide active power injection and could only injected reactive power into the system when these are not available - a comparable scenario can occur when BESS completely discharges.
+Therefore, voltage compensation can still be realised, but frequency remains unchanged.
 Conventional droop control does therefore run the risk of reaching energy shortage or surplus if the set-points and system dynamics are chosen too low or high.
 Modifications like hysteresis control and ramp-rate control were proposed to yield an adaptive SPC \cite{Blaabjerg2006, Malesani1990, Xu2011a, Such2012}.
 Hysteresis control prevents the device from oscillating between different power states even when small changes in the network are detected and would otherwise trigger an SPC change.
