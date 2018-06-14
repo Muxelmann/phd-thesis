@@ -43,7 +43,7 @@ A single scheduling horizon was defined as one day (i.e. $T^\text{sch}=48$ sampl
 In this MAS related context, each household dispatches its agents once to acquire the household's half-hourly energy demand for the entire day; thus making the assumption that demand foresight is available.
 \hl{It is worth mentioning that perfect demand foresight, especially for domestic loads, is difficult to realise.
 Imperfect foresight would result in sub-optimal power profile allocation, for example.
-Therefore, and target the focus of this chapter on determining the difference between synchronised and desynchronised algorithm execution, the assumption of perfect foresight is made.}
+Therefore, due to the focus of this chapter (which is to determine the difference between synchronised and desynchronised algorithm execution) the assumption of perfect foresight is made.}
 After each household has acquired or reserved its daily demand by issuing an energy request, the entire network demand is known to the energy supplier and can be relayed to all EV agents when they query for the overall demand profile.
 This ability is exploited when scheduling and negotiating the unknown EV charging profiles.
 More specifically, all EV's agents communicate with the supplier's agent to optimally embed their charging profiles (i.e. $p^\text{EV}_{u,n}(t)$) within this aggregated baseline load.
